@@ -7,29 +7,35 @@ export default {
   theme: {
     extend: {
       colors: {
-        ocean: {
-          50: '#f0f9ff',
-          100: '#e0f2fe',
-          200: '#bae6fd',
-          300: '#7dd3fc',
-          400: '#38bdf8',
-          500: '#0ea5e9',
-          600: '#0284c7',
-          700: '#0369a1',
-          800: '#075985',
-          900: '#0c4a6e',
-          950: '#082f49',
+        marine: {
+          950: '#040d16',
+          900: '#071421',
+          850: '#0b1d2e',
+          800: '#0f263c',
+          750: '#14304c',
+          700: '#1a3c5e',
+          600: '#25517c',
         },
-        coral: {
-          50: '#fff1f2',
-          100: '#ffe4e6',
-          400: '#fb7185',
-          500: '#f43f5e',
-          600: '#e11d48',
+        gold: {
+          50: '#faf6ee',
+          100: '#f3e9d2',
+          200: '#e7d3a7',
+          300: '#d9b977',
+          400: '#cca251',
+          500: '#c5a059',
+          600: '#a7813a',
+          700: '#83612c',
         }
       },
       fontFamily: {
+        serif: ['Cormorant Garamond', 'Playfair Display', 'serif'],
+        cinzel: ['Cinzel', 'serif'],
+        playfair: ['Playfair Display', 'serif'],
         sans: ['Plus Jakarta Sans', 'Inter', 'system-ui', 'sans-serif'],
+      },
+      backgroundImage: {
+        'marble-radial': 'radial-gradient(circle at 75% 35%, rgba(18, 52, 82, 0.45) 0%, rgba(7, 20, 33, 0.95) 75%, #050d16 100%)',
+        'gold-gradient': 'linear-gradient(135deg, #f3e9d2 0%, #dfb76c 50%, #b88b39 100%)',
       }
     },
   },

@@ -1,155 +1,168 @@
 import React from 'react';
-import { ShieldCheck, Snowflake, Clock, Sparkles, ArrowRight, Anchor, Award } from 'lucide-react';
+import { ArrowDown, Plus, Sparkles, Utensils, Wine } from 'lucide-react';
 
-export default function Hero({ onExploreClick, onOpenTracker }) {
+export default function Hero({ onOpenMenu, onOpenDish, onOpenBookTable, onQuickAdd }) {
   return (
-    <div className="relative overflow-hidden bg-gradient-to-b from-ocean-950 via-ocean-900 to-slate-900 text-white py-16 sm:py-24">
-      {/* Background Graphic Patterns */}
-      <div className="absolute inset-0 opacity-15 pointer-events-none">
-        <svg className="w-full h-full" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%">
-          <defs>
-            <pattern id="ocean-pattern" width="40" height="40" patternUnits="userSpaceOnUse">
-              <path d="M0 20 Q 10 10, 20 20 T 40 20" fill="none" stroke="currentColor" strokeWidth="1" />
-            </pattern>
-          </defs>
-          <rect width="100%" height="100%" fill="url(#ocean-pattern)" />
-        </svg>
+    <section className="relative overflow-hidden bg-[#071421] text-slate-100 min-h-[calc(100vh-6rem)] flex items-center">
+      {/* High-Resolution Hero Canvas for Desktop / Large Displays */}
+      <div className="absolute inset-0 hidden md:block">
+        <img
+          src="/hero-art.png"
+          alt="SEACLUB Fish Restaurant"
+          className="w-full h-full object-cover object-center filter brightness-95"
+        />
+        {/* Soft edge vignette & gradient blending */}
+        <div className="absolute inset-0 bg-gradient-to-r from-[#071421]/90 via-transparent to-[#071421]/80"></div>
+        <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-[#071421] to-transparent"></div>
       </div>
 
-      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-          {/* Left Column: Hero Text */}
-          <div className="lg:col-span-7 space-y-6 text-center lg:text-left">
-            <div className="inline-flex items-center space-x-2 bg-ocean-500/20 border border-ocean-400/30 text-ocean-200 px-3.5 py-1.5 rounded-full text-xs font-semibold tracking-wide uppercase shadow-sm">
-              <Sparkles className="w-3.5 h-3.5 text-cyan-300" />
-              <span>Harbor-Fresh Seafood Guaranteed</span>
+      {/* Interactive Desktop Hotspots & Layered Content */}
+      <div className="relative max-w-7xl mx-auto px-6 sm:px-10 py-16 sm:py-24 w-full z-10">
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
+          {/* Left Column: Typography & Action */}
+          <div className="md:col-span-6 space-y-6 md:space-y-8">
+            {/* seafood + wine */}
+            <div className="inline-block">
+              <span className="font-serif italic text-2xl sm:text-3xl text-gold-300 tracking-wider">
+                seafood + wine
+              </span>
             </div>
 
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight leading-[1.1]">
-              Wild-Caught & Ocean-Fresh Seafood,{' '}
-              <span className="bg-gradient-to-r from-cyan-300 via-sky-300 to-ocean-400 bg-clip-text text-transparent">
-                Delivered in 2 Hours.
-              </span>
+            {/* Main Title: FISH RESTAURANT */}
+            <h1 className="font-serif text-5xl sm:text-6xl lg:text-7xl xl:text-8xl tracking-tight text-white font-normal uppercase leading-[1.05]">
+              FISH<br />
+              <span className="tracking-wide">RESTAURANT</span>
             </h1>
 
-            <p className="text-base sm:text-lg text-slate-300 max-w-2xl leading-relaxed mx-auto lg:mx-0">
-              Skip the grocery store seafood counter. We source directly from day-boat fishermen, 
-              custom fillet to your specifications for free, and deliver ice-packed at 0°C to preserve 
-              restaurant-grade sashimi quality and ocean sweetness.
+            {/* Tagline */}
+            <p className="text-slate-300 font-light text-base sm:text-lg tracking-wide max-w-md">
+              Delicious food and fine wine
             </p>
 
-            {/* CTAs */}
-            <div className="pt-2 flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4">
+            {/* Menu Button - Exactly styled as provided */}
+            <div className="pt-2 flex flex-wrap items-center gap-4">
               <a
-                href="#catalog"
-                onClick={onExploreClick}
-                className="w-full sm:w-auto inline-flex items-center justify-center space-x-2 bg-gradient-to-r from-ocean-500 to-cyan-500 hover:from-ocean-600 hover:to-cyan-600 text-white font-bold px-8 py-3.5 rounded-full shadow-lg shadow-ocean-500/30 hover:shadow-ocean-500/50 transition-all duration-200 active:scale-95"
+                href="#menu"
+                onClick={onOpenMenu}
+                className="inline-flex items-center justify-center px-10 py-3.5 border border-gold-400/80 hover:border-gold-300 text-gold-200 hover:text-white font-serif text-base tracking-[0.2em] uppercase transition duration-300 bg-[#071421]/40 hover:bg-gold-500/10 backdrop-blur-sm group"
               >
-                <span>Shop Today's Catch</span>
-                <ArrowRight className="w-5 h-5" />
+                <span>Menu</span>
               </a>
 
               <button
-                onClick={onOpenTracker}
-                className="w-full sm:w-auto inline-flex items-center justify-center space-x-2 bg-slate-800/80 hover:bg-slate-700/80 text-slate-200 hover:text-white font-semibold px-6 py-3.5 rounded-full border border-slate-700 transition active:scale-95"
+                onClick={onOpenBookTable}
+                className="inline-flex items-center justify-center px-8 py-3.5 bg-gradient-to-r from-gold-600 to-gold-500 hover:from-gold-500 hover:to-gold-400 text-slate-950 font-semibold text-xs tracking-[0.2em] uppercase transition duration-300 shadow-lg shadow-gold-500/10 active:scale-95"
               >
-                <Anchor className="w-4 h-4 text-cyan-400" />
-                <span>Track Active Order</span>
+                <span>Reserve Table</span>
               </button>
             </div>
 
-            {/* Quick Benefits Ticker */}
-            <div className="pt-6 grid grid-cols-3 gap-3 border-t border-slate-800/80 text-left">
-              <div className="flex items-start space-x-2.5">
-                <div className="p-2 rounded-lg bg-ocean-500/10 text-cyan-400 border border-ocean-500/20">
-                  <Snowflake className="w-5 h-5" />
-                </div>
-                <div>
-                  <h4 className="text-xs font-bold text-white uppercase tracking-wider">Sub-Zero Chilled</h4>
-                  <p className="text-xs text-slate-400 mt-0.5">Gel-ice boxes at 0–2°C</p>
-                </div>
-              </div>
-
-              <div className="flex items-start space-x-2.5">
-                <div className="p-2 rounded-lg bg-ocean-500/10 text-cyan-400 border border-ocean-500/20">
-                  <Clock className="w-5 h-5" />
-                </div>
-                <div>
-                  <h4 className="text-xs font-bold text-white uppercase tracking-wider">Under 2 Hours</h4>
-                  <p className="text-xs text-slate-400 mt-0.5">Fast local cold-delivery</p>
-                </div>
-              </div>
-
-              <div className="flex items-start space-x-2.5">
-                <div className="p-2 rounded-lg bg-ocean-500/10 text-cyan-400 border border-ocean-500/20">
-                  <ShieldCheck className="w-5 h-5" />
-                </div>
-                <div>
-                  <h4 className="text-xs font-bold text-white uppercase tracking-wider">100% Guaranteed</h4>
-                  <p className="text-xs text-slate-400 mt-0.5">Free replacement or refund</p>
-                </div>
-              </div>
+            {/* Bottom Culinary Note (Mobile / Accessible) */}
+            <div className="pt-6 border-t border-slate-800/80 max-w-sm hidden sm:block">
+              <p className="text-xs text-slate-400 leading-relaxed font-light">
+                Wild morning catch landed directly at our private harbor dock. Expertly prepared by Executive Chef Anthony Laurent.
+              </p>
             </div>
           </div>
 
-          {/* Right Column: Visual Showcase Feature Card */}
-          <div className="lg:col-span-5">
-            <div className="relative mx-auto max-w-md lg:max-w-none">
-              {/* Outer decorative glow */}
-              <div className="absolute -inset-1.5 bg-gradient-to-r from-ocean-500 to-cyan-400 rounded-3xl blur-xl opacity-30 group-hover:opacity-100 transition duration-1000"></div>
-
-              <div className="relative rounded-2xl overflow-hidden bg-slate-800/90 border border-slate-700/80 shadow-2xl">
-                {/* Hero Showcase Image */}
-                <div className="relative h-64 sm:h-72 overflow-hidden">
-                  <img
-                    src="https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?auto=format&fit=crop&w=800&q=80"
-                    alt="Wild Alaskan King Salmon"
-                    className="w-full h-full object-cover transform hover:scale-105 transition-transform duration-700"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-transparent to-transparent"></div>
-
-                  <div className="absolute top-4 left-4">
-                    <span className="inline-flex items-center space-x-1.5 bg-emerald-500 text-white text-xs font-bold px-3 py-1 rounded-full shadow-md">
-                      <span className="w-1.5 h-1.5 rounded-full bg-white animate-pulse"></span>
-                      <span>Arrived 45 mins ago</span>
-                    </span>
-                  </div>
-
-                  <div className="absolute bottom-4 left-4 right-4 flex items-end justify-between">
-                    <div>
-                      <span className="text-cyan-400 text-xs font-bold uppercase tracking-wider">Catch of the Day</span>
-                      <h3 className="text-xl font-bold text-white">Wild Alaskan King Salmon</h3>
-                      <p className="text-xs text-slate-300">Bristol Bay • Sashimi Grade Cut</p>
-                    </div>
-                    <div className="text-right">
-                      <span className="text-xs text-slate-400 line-through">$39.99</span>
-                      <div className="text-2xl font-extrabold text-cyan-300">$34.99<span className="text-xs text-slate-300 font-normal">/kg</span></div>
-                    </div>
-                  </div>
+          {/* Right Column: Interactive Hotspots on Desktop / Cards on Mobile */}
+          <div className="md:col-span-6 relative h-96 md:h-[520px] flex items-center justify-center">
+            {/* Mobile Showcase Cards when hero background image is not active */}
+            <div className="md:hidden w-full space-y-4">
+              <div className="bg-[#0b1d2e]/90 border border-gold-500/30 rounded-2xl p-4 flex items-center space-x-4">
+                <img
+                  src="https://images.unsplash.com/photo-1559742811-82286364ceaf?auto=format&fit=crop&w=400&q=80"
+                  alt="Dressed Oysters"
+                  className="w-20 h-20 rounded-xl object-cover border border-gold-500/40"
+                />
+                <div className="flex-1 min-w-0">
+                  <span className="text-[10px] text-gold-400 uppercase tracking-widest font-serif">Signature Raw Bar</span>
+                  <h3 className="font-serif text-lg text-white font-medium">Dressed Oysters</h3>
+                  <p className="text-xs text-slate-400">Fresh Fine de Claire on glacier ice</p>
+                  <div className="text-gold-300 font-serif font-bold text-base mt-1">25 $</div>
                 </div>
+                <button
+                  onClick={() => onQuickAdd('dish-1')}
+                  className="p-2.5 rounded-full bg-gold-500 text-slate-950 hover:bg-gold-400 transition"
+                  title="Add to order"
+                >
+                  <Plus className="w-4 h-4" />
+                </button>
+              </div>
 
-                {/* Highlights List */}
-                <div className="p-5 space-y-3 bg-slate-850">
-                  <div className="flex items-center justify-between text-xs py-1 border-b border-slate-700/50">
-                    <span className="text-slate-400">Omega-3 Healthy Fats:</span>
-                    <span className="text-white font-semibold">2,500 mg / 100g</span>
-                  </div>
-                  <div className="flex items-center justify-between text-xs py-1 border-b border-slate-700/50">
-                    <span className="text-slate-400">Fillet Preference:</span>
-                    <span className="text-cyan-300 font-semibold">Skin-on, Steaks or Sashimi</span>
-                  </div>
-                  <div className="flex items-center justify-between text-xs py-1">
-                    <span className="text-slate-400">Live Cold-Storage:</span>
-                    <span className="text-emerald-400 font-semibold flex items-center gap-1">
-                      <span className="w-2 h-2 rounded-full bg-emerald-400"></span> 28 kg remaining in stock
+              <div className="bg-[#0b1d2e]/90 border border-gold-500/30 rounded-2xl p-4 flex items-center space-x-4">
+                <img
+                  src="https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?auto=format&fit=crop&w=400&q=80"
+                  alt="Tignanello 2019"
+                  className="w-20 h-20 rounded-xl object-cover border border-gold-500/40"
+                />
+                <div className="flex-1 min-w-0">
+                  <span className="text-[10px] text-gold-400 uppercase tracking-widest font-serif">Sommelier Reserve</span>
+                  <h3 className="font-serif text-lg text-white font-medium">Tignanello 2019</h3>
+                  <p className="text-xs text-slate-400">Marchesi Antinori • Toscana IGT</p>
+                  <div className="text-gold-300 font-serif font-bold text-base mt-1">300 $</div>
+                </div>
+                <button
+                  onClick={() => onQuickAdd('dish-10')}
+                  className="p-2.5 rounded-full bg-gold-500 text-slate-950 hover:bg-gold-400 transition"
+                  title="Add to order"
+                >
+                  <Plus className="w-4 h-4" />
+                </button>
+              </div>
+            </div>
+
+            {/* Desktop Clickable Hotspots overlaying the photo */}
+            <div className="hidden md:block w-full h-full relative">
+              {/* Hotspot 1: Dressed Oysters Platter */}
+              <div
+                onClick={() => onOpenDish('dish-1')}
+                className="absolute top-1/2 left-[18%] -translate-y-1/2 cursor-pointer group"
+                title="Click to view Dressed Oysters"
+              >
+                <div className="relative">
+                  <div className="bg-[#071421]/80 backdrop-blur-md border border-gold-400/50 hover:border-gold-300 px-4 py-2 rounded-xl transition-all duration-300 group-hover:scale-105 shadow-xl">
+                    <span className="block font-serif text-sm tracking-wide text-slate-200 group-hover:text-gold-200">
+                      Dressed Oysters
+                    </span>
+                    <span className="block font-serif text-gold-400 text-base font-bold">
+                      25 $
                     </span>
                   </div>
+                  <span className="absolute -top-1 -right-1 w-3 h-3 bg-gold-400 rounded-full animate-ping opacity-75"></span>
+                  <span className="absolute -top-1 -right-1 w-3 h-3 bg-gold-400 rounded-full"></span>
+                </div>
+              </div>
+
+              {/* Hotspot 2: Tignanello Wine Bottle */}
+              <div
+                onClick={() => onOpenDish('dish-10')}
+                className="absolute bottom-16 right-4 cursor-pointer group"
+                title="Click to view Tignanello 2019"
+              >
+                <div className="relative">
+                  <div className="bg-[#071421]/80 backdrop-blur-md border border-gold-400/50 hover:border-gold-300 px-4 py-2 rounded-xl transition-all duration-300 group-hover:scale-105 shadow-xl">
+                    <span className="block font-serif text-sm tracking-wide text-slate-200 group-hover:text-gold-200">
+                      Tignanello
+                    </span>
+                    <span className="block font-serif text-gold-400 text-base font-bold">
+                      300 $
+                    </span>
+                  </div>
+                  <span className="absolute -top-1 -right-1 w-3 h-3 bg-gold-400 rounded-full animate-ping opacity-75"></span>
+                  <span className="absolute -top-1 -right-1 w-3 h-3 bg-gold-400 rounded-full"></span>
                 </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
+
+      {/* Subtle Scroll Down Prompt */}
+      <div className="absolute bottom-4 left-1/2 -translate-x-1/2 text-slate-400 text-[11px] uppercase tracking-[0.25em] flex flex-col items-center space-y-1.5 opacity-60 hover:opacity-100 transition z-10">
+        <span>Explore Menu</span>
+        <ArrowDown className="w-3.5 h-3.5 animate-bounce text-gold-400" />
+      </div>
+    </section>
   );
 }
