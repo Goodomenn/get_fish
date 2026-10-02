@@ -26,72 +26,82 @@ export default function Hero({
 
   return (
     <section className="relative w-full bg-[#050e17] overflow-hidden select-none">
-      {/* Container maintaining the exact 1024:685 aspect ratio with zero distortion */}
-      <div className="relative w-full max-w-[1536px] mx-auto aspect-[1024/685] bg-[#071421] shadow-2xl">
-        {/* Clean Pristine Canvas (Background dark marble, oyster platter, wine bottle, and pasta WITHOUT baked text) */}
+      {/* Container maintaining the exact 1024:686 aspect ratio of the user's background image */}
+      <div className="relative w-full max-w-[1536px] mx-auto aspect-[1024/686] bg-[#071421] shadow-2xl">
+        {/* High-Resolution User-Provided Clean Background Canvas */}
         <img
-          src="/hero-clean.jpg"
+          src="/hero-bg.jpg"
           alt="SEACLUB Fish Restaurant & Fine Wine"
           className="w-full h-full object-contain object-center block"
           style={{ imageRendering: '-webkit-optimize-contrast' }}
         />
 
         {/* ========================================================================= */}
+        {/* TOP NAVIGATION HOTSPOTS & HOVER OVERLAY                                  */}
+        {/* ========================================================================= */}
+
+        {/* 1. SEACLUB Logo (Top Left) */}
+        <button
+          onClick={() => {
+            handleNav('home');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+          }}
+          className="absolute left-[2.5%] top-[2.8%] w-[13.5%] h-[6.5%] rounded-lg hover:bg-gold-500/10 transition cursor-pointer z-30"
+          title="SEACLUB Home"
+          aria-label="SEACLUB Home"
+        />
+
+        {/* 2. Top Nav: Menu */}
+        <button
+          onClick={() => handleNav('menu')}
+          className="absolute left-[30.5%] top-[2.8%] w-[6.5%] h-[6.5%] rounded-lg hover:bg-gold-500/15 transition cursor-pointer z-30"
+          title="Explore Restaurant Menu"
+          aria-label="Menu"
+        />
+
+        {/* 3. Top Nav: About */}
+        <button
+          onClick={() => handleNav('about')}
+          className="absolute left-[38.5%] top-[2.8%] w-[6%] h-[6.5%] rounded-lg hover:bg-gold-500/15 transition cursor-pointer z-30"
+          title="About SEACLUB Fish Restaurant"
+          aria-label="About"
+        />
+
+        {/* 4. Top Nav: Events */}
+        <button
+          onClick={() => handleNav('events')}
+          className="absolute left-[45.5%] top-[2.8%] w-[6.5%] h-[6.5%] rounded-lg hover:bg-gold-500/15 transition cursor-pointer z-30"
+          title="Gastronomic Events & Masterclasses"
+          aria-label="Events"
+        />
+
+        {/* 5. Top Nav: Contacts */}
+        <button
+          onClick={() => handleNav('contacts')}
+          className="absolute left-[53.5%] top-[2.8%] w-[7.8%] h-[6.5%] rounded-lg hover:bg-gold-500/15 transition cursor-pointer z-30"
+          title="Location & Valet Contacts"
+          aria-label="Contacts"
+        />
+
+        {/* 6. Top Nav: Book a Table (Top Right) */}
+        <button
+          onClick={onOpenBookTable}
+          className="absolute right-[2.5%] top-[2.5%] w-[15.5%] h-[7%] rounded-lg hover:bg-gold-500/20 transition cursor-pointer z-30 group"
+          title="Book a Table at SEACLUB"
+          aria-label="Book a Table"
+        >
+          <span className="sr-only">Book a Table</span>
+          <span className="opacity-0 group-hover:opacity-100 absolute -bottom-5 right-0 text-[10px] text-gold-300 font-serif tracking-widest uppercase transition whitespace-nowrap bg-black/85 px-2 py-0.5 rounded shadow">
+            Click to Reserve Table
+          </span>
+        </button>
+
+        {/* ========================================================================= */}
         {/* REAL HTML / CSS TYPOGRAPHY OVERLAY (NOT EMBEDDED IN IMAGE)                */}
         {/* ========================================================================= */}
 
-        {/* 1. TOP NAVIGATION BAR (Real HTML) */}
-        <div className="absolute top-[3%] inset-x-[3%] flex items-center justify-between z-30 pointer-events-auto">
-          {/* Brand Logo */}
-          <button
-            onClick={() => {
-              handleNav('home');
-              window.scrollTo({ top: 0, behavior: 'smooth' });
-            }}
-            className="font-serif tracking-[0.28em] text-sm sm:text-lg lg:text-xl font-bold uppercase text-white hover:text-gold-300 transition duration-300"
-          >
-            SEACLUB
-          </button>
-
-          {/* Center Links */}
-          <nav className="hidden sm:flex items-center space-x-6 md:space-x-10 text-[10px] sm:text-xs tracking-[0.18em] font-serif uppercase text-slate-200">
-            <button
-              onClick={() => handleNav('menu')}
-              className="hover:text-gold-300 transition duration-200"
-            >
-              Menu
-            </button>
-            <button
-              onClick={() => handleNav('about')}
-              className="hover:text-gold-300 transition duration-200"
-            >
-              About
-            </button>
-            <button
-              onClick={() => handleNav('events')}
-              className="hover:text-gold-300 transition duration-200"
-            >
-              Events
-            </button>
-            <button
-              onClick={() => handleNav('contacts')}
-              className="hover:text-gold-300 transition duration-200"
-            >
-              Contacts
-            </button>
-          </nav>
-
-          {/* Book a table link */}
-          <button
-            onClick={onOpenBookTable}
-            className="font-serif text-[10px] sm:text-xs tracking-[0.16em] uppercase text-gold-200 hover:text-white transition duration-300 pb-0.5 border-b border-gold-500/80"
-          >
-            Book a table
-          </button>
-        </div>
-
-        {/* 2. HERO LEFT TEXT BLOCK: Real HTML matching media_1790931516274.png */}
-        <div className="absolute left-[6.5%] top-[19%] max-w-[42%] z-20 flex flex-col items-start select-text text-left">
+        {/* HERO LEFT TEXT BLOCK: Real HTML matching media_1790931516274.png */}
+        <div className="absolute left-[5.5%] top-[20%] max-w-[42%] z-20 flex flex-col items-start select-text text-left">
           {/* seafood + wine */}
           <span className="font-serif italic text-gold-300 text-sm sm:text-2xl lg:text-3xl tracking-wide mb-1 sm:mb-2 block drop-shadow-md">
             seafood + wine
@@ -110,16 +120,16 @@ export default function Hero({
           {/* Menu Button (Outlined Gold Box) */}
           <button
             onClick={() => handleNav('menu')}
-            className="px-4 sm:px-9 py-1.5 sm:py-3 border border-gold-400/90 hover:border-gold-300 text-gold-300 hover:text-white font-serif text-[9px] sm:text-xs tracking-[0.25em] uppercase transition duration-300 bg-[#071421]/50 hover:bg-gold-500/20 shadow-xl backdrop-blur-sm cursor-pointer"
+            className="px-4 sm:px-9 py-1.5 sm:py-3 border border-gold-400 hover:border-gold-300 text-gold-300 hover:text-white font-serif text-[9px] sm:text-xs tracking-[0.25em] uppercase transition duration-300 bg-[#071421]/50 hover:bg-gold-500/20 shadow-xl backdrop-blur-sm cursor-pointer active:scale-95"
           >
             Menu
           </button>
         </div>
 
-        {/* 3. DRESSED OYSTERS TAG: Real HTML matching media_1790931549564.png */}
+        {/* DRESSED OYSTERS TAG: Real HTML matching media_1790931549564.png */}
         <div
           onClick={() => scrollToSection('dressed-oysters')}
-          className="absolute left-[47.5%] top-[66.5%] z-20 cursor-pointer group text-left select-text"
+          className="absolute left-[47%] top-[66%] z-20 cursor-pointer group text-left select-text"
           title="Explore Dressed Oysters Section (25 $)"
         >
           <div className="font-serif text-white text-[11px] sm:text-base lg:text-lg font-normal tracking-wide group-hover:text-gold-300 transition drop-shadow">
@@ -138,10 +148,10 @@ export default function Hero({
           title="Dressed Fine de Claire Oysters (Click to View Section)"
         />
 
-        {/* 4. TIGNANELLO TAG: Real HTML matching media_1790931563676.png */}
+        {/* TIGNANELLO TAG: Real HTML matching media_1790931563676.png */}
         <div
           onClick={() => scrollToSection('tignanello')}
-          className="absolute left-[78%] top-[79%] z-20 cursor-pointer group text-left select-text"
+          className="absolute left-[77%] top-[78%] z-20 cursor-pointer group text-left select-text"
           title="Explore Tignanello Wine Section (300 $)"
         >
           <div className="font-serif text-white text-[11px] sm:text-base lg:text-lg font-normal tracking-wide group-hover:text-gold-300 transition drop-shadow">
@@ -160,7 +170,7 @@ export default function Hero({
           title="Tignanello 2019 (Click to View Section)"
         />
 
-        {/* 5. SQUID INK PASTA TAG (Bottom Left) */}
+        {/* SQUID INK PASTA TAG (Bottom Left) */}
         <div
           onClick={() => onOpenDish('dish-7')}
           className="absolute left-[2%] bottom-[3%] z-20 cursor-pointer group text-left select-text"
