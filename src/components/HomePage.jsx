@@ -1,5 +1,7 @@
 import React from 'react';
 import Hero from './Hero';
+import DressedOystersSection from './DressedOystersSection';
+import TignanelloSection from './TignanelloSection';
 import {
   Sparkles,
   Fish,
@@ -30,7 +32,7 @@ export default function HomePage({
 }) {
   // Curated Signature Dishes to display on the Home Page
   const featuredDishes = RESTAURANT_DISHES.filter(
-    (d) => d.isHeroFeatured || d.badge === "Chef's Masterpiece" || d.badge === 'Signature Platter' || d.badge === 'Best Seller'
+    (d) => d.badge === "Chef's Masterpiece" || d.badge === 'Signature Platter' || d.badge === 'Best Seller' || d.id === 'dish-4' || d.id === 'dish-6' || d.id === 'dish-7'
   ).slice(0, 6);
 
   // Dining Spaces
@@ -71,28 +73,41 @@ export default function HomePage({
 
   return (
     <div className="w-full bg-[#050e17] text-slate-100">
-      {/* 1. HERO BANNER: Exact Reference Image & Hotspots */}
+      {/* 1. HERO BANNER: Real HTML text overlay on clean dark-marble & seafood canvas */}
       <Hero
         onOpenMenu={onOpenMenu}
         onOpenDish={onOpenDish}
         onOpenBookTable={() => onOpenBookTable()}
         onOpenCart={onOpenCart}
         cartCount={cartCount}
+        onNavigate={onNavigate}
       />
 
-      {/* 2. WELCOME & CULINARY HERITAGE */}
-      <section className="py-20 sm:py-28 bg-[#071421] relative overflow-hidden border-b border-slate-800/80">
+      {/* 2. DEDICATED SECTION: Dressed Oysters (25 $) */}
+      <DressedOystersSection
+        onAddToCart={onAddToCart}
+        onOpenDishDetail={onOpenDish}
+      />
+
+      {/* 3. DEDICATED SECTION: Tignanello 2019 (300 $) */}
+      <TignanelloSection
+        onAddToCart={onAddToCart}
+        onOpenDishDetail={onOpenDish}
+      />
+
+      {/* 4. WELCOME & CULINARY HERITAGE */}
+      <section className="py-20 sm:py-28 bg-[#050e17] relative overflow-hidden border-t border-slate-800">
         <div className="max-w-7xl mx-auto px-6 sm:px-10">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
             {/* Visual Column */}
             <div className="lg:col-span-6 relative">
               <div className="relative rounded-3xl overflow-hidden border border-gold-500/30 shadow-2xl group">
                 <img
-                  src="https://images.unsplash.com/photo-1559742811-82286364ceaf?auto=format&fit=crop&w=900&q=80"
+                  src="https://images.unsplash.com/photo-1534422298391-e4f8c172dddb?auto=format&fit=crop&w=900&q=80"
                   alt="SEACLUB Master Fish Craft"
                   className="w-full h-[460px] object-cover group-hover:scale-105 transition duration-700"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#071421] via-transparent to-transparent opacity-80" />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#050e17] via-transparent to-transparent opacity-80" />
                 <div className="absolute bottom-6 left-6 right-6 p-5 bg-[#091b2c]/90 backdrop-blur-md rounded-2xl border border-gold-500/30">
                   <div className="flex items-center space-x-2 text-gold-400 text-xs font-serif uppercase tracking-widest mb-1">
                     <Sparkles className="w-3.5 h-3.5" />
@@ -169,8 +184,8 @@ export default function HomePage({
         </div>
       </section>
 
-      {/* 3. CHEF'S SIGNATURE FISH SPECIALTIES (CURATED SHOWCASE) */}
-      <section className="py-24 bg-[#050e17] relative">
+      {/* 5. CHEF'S SIGNATURE FISH SPECIALTIES */}
+      <section className="py-24 bg-[#071421] relative border-t border-slate-800">
         <div className="max-w-7xl mx-auto px-6 sm:px-10">
           <div className="flex flex-col md:flex-row md:items-end justify-between mb-14">
             <div>
@@ -197,7 +212,7 @@ export default function HomePage({
             {featuredDishes.map((dish) => (
               <div
                 key={dish.id}
-                className="bg-[#071421] border border-slate-800 hover:border-gold-500/50 rounded-2xl overflow-hidden transition-all duration-300 flex flex-col group hover:-translate-y-1 shadow-xl"
+                className="bg-[#050e17] border border-slate-800 hover:border-gold-500/50 rounded-2xl overflow-hidden transition-all duration-300 flex flex-col group hover:-translate-y-1 shadow-xl"
               >
                 {/* Dish Photo */}
                 <div
@@ -209,16 +224,14 @@ export default function HomePage({
                     alt={dish.name}
                     className="w-full h-full object-cover group-hover:scale-105 transition duration-500"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#071421] via-transparent to-transparent opacity-80" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#050e17] via-transparent to-transparent opacity-80" />
 
-                  {/* Badge */}
                   {dish.badge && (
                     <span className="absolute top-3 left-3 bg-[#091b2c]/90 border border-gold-500/40 text-gold-300 px-3 py-1 rounded-full text-[10px] font-serif uppercase tracking-wider backdrop-blur-sm">
                       {dish.badge}
                     </span>
                   )}
 
-                  {/* Price */}
                   <div className="absolute bottom-3 right-3 bg-black/80 border border-gold-400/40 text-gold-300 px-3 py-1 rounded-lg text-sm font-serif font-bold">
                     ${dish.price.toFixed(2)}
                   </div>
@@ -241,15 +254,13 @@ export default function HomePage({
                     </p>
                   </div>
 
-                  {/* Sommelier Pairing Snippet */}
                   {dish.pairingWine && (
-                    <div className="bg-[#050e17] p-2.5 rounded-lg border border-slate-800 text-[11px] text-slate-300 flex items-center space-x-2">
+                    <div className="bg-[#071421] p-2.5 rounded-lg border border-slate-800 text-[11px] text-slate-300 flex items-center space-x-2">
                       <Wine className="w-3.5 h-3.5 text-gold-400 shrink-0" />
                       <span className="truncate italic">Pairing: {dish.pairingWine}</span>
                     </div>
                   )}
 
-                  {/* Actions */}
                   <div className="flex items-center space-x-3 pt-2">
                     <button
                       onClick={() => onAddToCart(dish)}
@@ -261,7 +272,6 @@ export default function HomePage({
                     <button
                       onClick={() => onOpenDish(dish)}
                       className="px-3.5 py-2.5 border border-slate-700 hover:border-gold-400 text-slate-300 hover:text-white rounded-lg text-xs font-serif transition"
-                      title="View Ingredients & Prep"
                     >
                       Details
                     </button>
@@ -270,77 +280,11 @@ export default function HomePage({
               </div>
             ))}
           </div>
-
-          {/* Bottom Menu Banner CTA */}
-          <div className="mt-14 p-8 rounded-2xl bg-gradient-to-r from-[#091b2c] via-[#071421] to-[#091b2c] border border-gold-500/30 flex flex-col md:flex-row items-center justify-between gap-6 shadow-2xl">
-            <div className="space-y-1 text-center md:text-left">
-              <span className="text-xs uppercase font-serif tracking-[0.2em] text-gold-400">Complete Degustation</span>
-              <h3 className="font-serif text-xl sm:text-2xl text-white">Explore Raw Bar Oysters, Dover Sole & Rare Caviar</h3>
-              <p className="text-xs text-slate-400 font-light">Custom sommelier pairings and dietary accommodations available for every course.</p>
-            </div>
-            <button
-              onClick={() => onNavigate('menu')}
-              className="px-8 py-3.5 bg-gradient-to-r from-gold-600 to-gold-500 hover:from-gold-500 hover:to-gold-400 text-slate-950 font-serif text-xs font-bold tracking-[0.2em] uppercase rounded-none transition shadow-xl shrink-0"
-            >
-              Browse Full Menu →
-            </button>
-          </div>
         </div>
       </section>
 
-      {/* 4. SOMMELIER CELLAR HIGHLIGHT (TIGNANELLO & GRAND CRUS) */}
-      <section className="py-20 bg-[#071421] relative overflow-hidden border-y border-slate-800">
-        <div className="max-w-7xl mx-auto px-6 sm:px-10">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-            {/* Left Narrative */}
-            <div className="lg:col-span-6 space-y-6">
-              <span className="font-serif italic text-gold-300 text-lg tracking-wider block">
-                the sommelier cellar
-              </span>
-              <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl text-white tracking-tight uppercase leading-[1.15]">
-                TIGNANELLO & RARE CELLAR ALLOCATIONS
-              </h2>
-              <div className="w-16 h-0.5 bg-gold-500/70" />
-              <p className="text-slate-300 text-sm leading-relaxed font-light">
-                As featured in our flagship presentation, our cellar houses over 1,200 bottles of premier crus, 
-                super Tuscans, and boutique grower champagnes. Each vintage is stored at strictly calibrated humidity 
-                and temperature to elevate the delicate sweetness and savory smoke of wild fish.
-              </p>
-              <div className="bg-[#050e17] p-5 rounded-2xl border border-gold-500/20 space-y-3">
-                <div className="flex items-center justify-between">
-                  <span className="font-serif text-gold-300 font-bold text-sm">Featured Pairing: Tignanello 2019</span>
-                  <span className="text-xs text-gold-400 font-serif">$300 • 750ml</span>
-                </div>
-                <p className="text-xs text-slate-400 font-light">
-                  Marchesi Antinori’s benchmark Super Tuscan: deep black cherry, spiced cedar, and silky tannins that contrast brilliantly with freshly shucked oysters and wood-fired branzino.
-                </p>
-              </div>
-              <div>
-                <button
-                  onClick={() => onNavigate('wine')}
-                  className="px-7 py-3 border border-gold-500/70 hover:border-gold-300 text-gold-200 hover:text-white font-serif text-xs tracking-[0.2em] uppercase transition"
-                >
-                  Explore Wine Cellar →
-                </button>
-              </div>
-            </div>
-
-            {/* Right Visual */}
-            <div className="lg:col-span-6 relative">
-              <div className="rounded-3xl overflow-hidden border border-gold-500/30 shadow-2xl">
-                <img
-                  src="https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?auto=format&fit=crop&w=900&q=80"
-                  alt="SEACLUB Wine Cellar"
-                  className="w-full h-[400px] object-cover"
-                />
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* 5. THE FOUR DINING ATMOSPHERES */}
-      <section className="py-24 bg-[#050e17] relative">
+      {/* 6. FOUR UNIQUE DINING SALONS */}
+      <section className="py-24 bg-[#050e17] relative border-t border-slate-800">
         <div className="max-w-7xl mx-auto px-6 sm:px-10">
           <div className="text-center max-w-2xl mx-auto mb-16 space-y-3">
             <span className="font-serif italic text-gold-300 text-lg tracking-wider">
@@ -399,7 +343,7 @@ export default function HomePage({
         </div>
       </section>
 
-      {/* 6. DAY-BOAT SOURCING TIMELINE */}
+      {/* 7. DAY-BOAT SOURCING TIMELINE */}
       <section className="py-20 bg-[#071421] border-t border-slate-800">
         <div className="max-w-7xl mx-auto px-6 sm:px-10">
           <div className="text-center max-w-xl mx-auto mb-14 space-y-3">
@@ -448,7 +392,7 @@ export default function HomePage({
         </div>
       </section>
 
-      {/* 7. CRITIC ACCLAIM & REVIEWS */}
+      {/* 8. CRITIC ACCLAIM */}
       <section className="py-20 bg-[#050e17] border-t border-slate-800">
         <div className="max-w-7xl mx-auto px-6 sm:px-10">
           <div className="text-center max-w-xl mx-auto mb-14 space-y-2">
@@ -508,7 +452,7 @@ export default function HomePage({
         </div>
       </section>
 
-      {/* 8. FAST TABLE RESERVATION CTA */}
+      {/* 9. FAST TABLE RESERVATION CTA */}
       <section className="py-20 bg-gradient-to-b from-[#071421] to-[#050e17] border-t border-slate-800 text-center relative overflow-hidden">
         <div className="max-w-4xl mx-auto px-6 relative z-10 space-y-6">
           <span className="font-serif italic text-gold-300 text-xl tracking-wider block">
