@@ -1,167 +1,189 @@
 import React from 'react';
-import { ArrowDown, Plus, Sparkles, Utensils, Wine } from 'lucide-react';
+import { ShoppingBag, Calendar, ExternalLink } from 'lucide-react';
 
-export default function Hero({ onOpenMenu, onOpenDish, onOpenBookTable, onQuickAdd }) {
+export default function Hero({
+  onOpenMenu,
+  onOpenDish,
+  onOpenBookTable,
+  onOpenCart,
+  cartCount
+}) {
   return (
-    <section className="relative overflow-hidden bg-[#071421] text-slate-100 min-h-[calc(100vh-6rem)] flex items-center">
-      {/* High-Resolution Hero Canvas for Desktop / Large Displays */}
-      <div className="absolute inset-0 hidden md:block">
+    <section className="relative w-full bg-[#050e17] overflow-hidden select-none">
+      {/* Container maintaining the exact 1024:685 aspect ratio with zero distortion */}
+      <div className="relative w-full max-w-[1536px] mx-auto aspect-[1024/685] bg-[#071421] shadow-2xl">
+        {/* High-Resolution Pristine Hero Canvas */}
         <img
-          src="/hero-art.png"
-          alt="SEACLUB Fish Restaurant"
-          className="w-full h-full object-cover object-center filter brightness-95"
+          src="/hero-hd.jpg"
+          alt="SEACLUB Fish Restaurant - Delicious food and fine wine"
+          className="w-full h-full object-contain object-center block"
+          style={{ imageRendering: '-webkit-optimize-contrast' }}
         />
-        {/* Soft edge vignette & gradient blending */}
-        <div className="absolute inset-0 bg-gradient-to-r from-[#071421]/90 via-transparent to-[#071421]/80"></div>
-        <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-[#071421] to-transparent"></div>
-      </div>
 
-      {/* Interactive Desktop Hotspots & Layered Content */}
-      <div className="relative max-w-7xl mx-auto px-6 sm:px-10 py-16 sm:py-24 w-full z-10">
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
-          {/* Left Column: Typography & Action */}
-          <div className="md:col-span-6 space-y-6 md:space-y-8">
-            {/* seafood + wine */}
-            <div className="inline-block">
-              <span className="font-serif italic text-2xl sm:text-3xl text-gold-300 tracking-wider">
-                seafood + wine
-              </span>
-            </div>
+        {/* ========================================================================= */}
+        {/* INTERACTIVE HOTSPOTS OVER THE EXACT DESIGN COORDINATES                    */}
+        {/* ========================================================================= */}
 
-            {/* Main Title: FISH RESTAURANT */}
-            <h1 className="font-serif text-5xl sm:text-6xl lg:text-7xl xl:text-8xl tracking-tight text-white font-normal uppercase leading-[1.05]">
-              FISH<br />
-              <span className="tracking-wide">RESTAURANT</span>
-            </h1>
+        {/* 1. SEACLUB Logo (Top Left) */}
+        <a
+          href="#"
+          className="absolute left-[2.5%] top-[2.5%] w-[13%] h-[7%] rounded-lg hover:bg-gold-500/10 transition cursor-pointer z-20"
+          title="SEACLUB Home"
+          aria-label="SEACLUB Home"
+        />
 
-            {/* Tagline */}
-            <p className="text-slate-300 font-light text-base sm:text-lg tracking-wide max-w-md">
-              Delicious food and fine wine
-            </p>
+        {/* 2. Top Nav: Menu */}
+        <a
+          href="#menu"
+          onClick={(e) => {
+            e.preventDefault();
+            onOpenMenu();
+          }}
+          className="absolute left-[30.2%] top-[3.2%] w-[6%] h-[6%] rounded-lg hover:bg-gold-500/15 transition cursor-pointer z-20"
+          title="Explore Restaurant Menu"
+          aria-label="Menu"
+        />
 
-            {/* Menu Button - Exactly styled as provided */}
-            <div className="pt-2 flex flex-wrap items-center gap-4">
-              <a
-                href="#menu"
-                onClick={onOpenMenu}
-                className="inline-flex items-center justify-center px-10 py-3.5 border border-gold-400/80 hover:border-gold-300 text-gold-200 hover:text-white font-serif text-base tracking-[0.2em] uppercase transition duration-300 bg-[#071421]/40 hover:bg-gold-500/10 backdrop-blur-sm group"
-              >
-                <span>Menu</span>
-              </a>
+        {/* 3. Top Nav: About */}
+        <a
+          href="#about"
+          className="absolute left-[37.2%] top-[3.2%] w-[6%] h-[6%] rounded-lg hover:bg-gold-500/15 transition cursor-pointer z-20"
+          title="About SEACLUB Fish Restaurant"
+          aria-label="About"
+        />
 
-              <button
-                onClick={onOpenBookTable}
-                className="inline-flex items-center justify-center px-8 py-3.5 bg-gradient-to-r from-gold-600 to-gold-500 hover:from-gold-500 hover:to-gold-400 text-slate-950 font-semibold text-xs tracking-[0.2em] uppercase transition duration-300 shadow-lg shadow-gold-500/10 active:scale-95"
-              >
-                <span>Reserve Table</span>
-              </button>
-            </div>
+        {/* 4. Top Nav: Events */}
+        <a
+          href="#events"
+          className="absolute left-[44.8%] top-[3.2%] w-[6.5%] h-[6%] rounded-lg hover:bg-gold-500/15 transition cursor-pointer z-20"
+          title="Gastronomic Events & Masterclasses"
+          aria-label="Events"
+        />
 
-            {/* Bottom Culinary Note (Mobile / Accessible) */}
-            <div className="pt-6 border-t border-slate-800/80 max-w-sm hidden sm:block">
-              <p className="text-xs text-slate-400 leading-relaxed font-light">
-                Wild morning catch landed directly at our private harbor dock. Expertly prepared by Executive Chef Anthony Laurent.
-              </p>
-            </div>
-          </div>
+        {/* 5. Top Nav: Contacts */}
+        <a
+          href="#contacts"
+          className="absolute left-[52.5%] top-[3.2%] w-[7.8%] h-[6%] rounded-lg hover:bg-gold-500/15 transition cursor-pointer z-20"
+          title="Location & Valet Contacts"
+          aria-label="Contacts"
+        />
 
-          {/* Right Column: Interactive Hotspots on Desktop / Cards on Mobile */}
-          <div className="md:col-span-6 relative h-96 md:h-[520px] flex items-center justify-center">
-            {/* Mobile Showcase Cards when hero background image is not active */}
-            <div className="md:hidden w-full space-y-4">
-              <div className="bg-[#0b1d2e]/90 border border-gold-500/30 rounded-2xl p-4 flex items-center space-x-4">
-                <img
-                  src="https://images.unsplash.com/photo-1559742811-82286364ceaf?auto=format&fit=crop&w=400&q=80"
-                  alt="Dressed Oysters"
-                  className="w-20 h-20 rounded-xl object-cover border border-gold-500/40"
-                />
-                <div className="flex-1 min-w-0">
-                  <span className="text-[10px] text-gold-400 uppercase tracking-widest font-serif">Signature Raw Bar</span>
-                  <h3 className="font-serif text-lg text-white font-medium">Dressed Oysters</h3>
-                  <p className="text-xs text-slate-400">Fresh Fine de Claire on glacier ice</p>
-                  <div className="text-gold-300 font-serif font-bold text-base mt-1">25 $</div>
-                </div>
-                <button
-                  onClick={() => onQuickAdd('dish-1')}
-                  className="p-2.5 rounded-full bg-gold-500 text-slate-950 hover:bg-gold-400 transition"
-                  title="Add to order"
-                >
-                  <Plus className="w-4 h-4" />
-                </button>
-              </div>
+        {/* 6. Top Nav: Book a Table (Top Right) */}
+        <button
+          onClick={onOpenBookTable}
+          className="absolute right-[2.8%] top-[2.8%] w-[15%] h-[7%] rounded-lg hover:bg-gold-500/20 transition cursor-pointer z-20 group"
+          title="Book a Table at SEACLUB"
+          aria-label="Book a Table"
+        >
+          <span className="sr-only">Book a Table</span>
+          <span className="opacity-0 group-hover:opacity-100 absolute -bottom-5 right-0 text-[10px] text-gold-300 font-serif tracking-widest uppercase transition whitespace-nowrap bg-black/80 px-2 py-0.5 rounded">
+            Click to Reserve
+          </span>
+        </button>
 
-              <div className="bg-[#0b1d2e]/90 border border-gold-500/30 rounded-2xl p-4 flex items-center space-x-4">
-                <img
-                  src="https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?auto=format&fit=crop&w=400&q=80"
-                  alt="Tignanello 2019"
-                  className="w-20 h-20 rounded-xl object-cover border border-gold-500/40"
-                />
-                <div className="flex-1 min-w-0">
-                  <span className="text-[10px] text-gold-400 uppercase tracking-widest font-serif">Sommelier Reserve</span>
-                  <h3 className="font-serif text-lg text-white font-medium">Tignanello 2019</h3>
-                  <p className="text-xs text-slate-400">Marchesi Antinori • Toscana IGT</p>
-                  <div className="text-gold-300 font-serif font-bold text-base mt-1">300 $</div>
-                </div>
-                <button
-                  onClick={() => onQuickAdd('dish-10')}
-                  className="p-2.5 rounded-full bg-gold-500 text-slate-950 hover:bg-gold-400 transition"
-                  title="Add to order"
-                >
-                  <Plus className="w-4 h-4" />
-                </button>
-              </div>
-            </div>
+        {/* 7. Menu Button (Outlined Rectangle on Left) */}
+        <a
+          href="#menu"
+          onClick={(e) => {
+            e.preventDefault();
+            onOpenMenu();
+          }}
+          className="absolute left-[11.8%] top-[57.6%] w-[14.2%] h-[6.5%] rounded-md hover:bg-gold-500/20 hover:border hover:border-gold-300/60 transition cursor-pointer z-20 group"
+          title="Browse Full Menu"
+          aria-label="Menu Button"
+        >
+          <span className="sr-only">Menu</span>
+        </a>
 
-            {/* Desktop Clickable Hotspots overlaying the photo */}
-            <div className="hidden md:block w-full h-full relative">
-              {/* Hotspot 1: Dressed Oysters Platter */}
-              <div
-                onClick={() => onOpenDish('dish-1')}
-                className="absolute top-1/2 left-[18%] -translate-y-1/2 cursor-pointer group"
-                title="Click to view Dressed Oysters"
-              >
-                <div className="relative">
-                  <div className="bg-[#071421]/80 backdrop-blur-md border border-gold-400/50 hover:border-gold-300 px-4 py-2 rounded-xl transition-all duration-300 group-hover:scale-105 shadow-xl">
-                    <span className="block font-serif text-sm tracking-wide text-slate-200 group-hover:text-gold-200">
-                      Dressed Oysters
-                    </span>
-                    <span className="block font-serif text-gold-400 text-base font-bold">
-                      25 $
-                    </span>
-                  </div>
-                  <span className="absolute -top-1 -right-1 w-3 h-3 bg-gold-400 rounded-full animate-ping opacity-75"></span>
-                  <span className="absolute -top-1 -right-1 w-3 h-3 bg-gold-400 rounded-full"></span>
-                </div>
-              </div>
+        {/* 8. Dressed Oysters Platter & Price Label */}
+        {/* Platter hotspot */}
+        <div
+          onClick={() => onOpenDish('dish-1')}
+          className="absolute left-[50%] top-[20%] w-[38%] h-[53%] rounded-full hover:ring-2 hover:ring-gold-400/40 transition cursor-pointer z-20 group"
+          title="View Dressed Oysters Platter"
+        >
+          <span className="opacity-0 group-hover:opacity-100 absolute top-4 left-1/2 -translate-x-1/2 bg-black/85 border border-gold-500/40 text-gold-300 px-3 py-1 rounded-full text-xs font-serif tracking-wider uppercase transition shadow-xl pointer-events-none whitespace-nowrap">
+            Dressed Fine de Claire • 25 $
+          </span>
+        </div>
 
-              {/* Hotspot 2: Tignanello Wine Bottle */}
-              <div
-                onClick={() => onOpenDish('dish-10')}
-                className="absolute bottom-16 right-4 cursor-pointer group"
-                title="Click to view Tignanello 2019"
-              >
-                <div className="relative">
-                  <div className="bg-[#071421]/80 backdrop-blur-md border border-gold-400/50 hover:border-gold-300 px-4 py-2 rounded-xl transition-all duration-300 group-hover:scale-105 shadow-xl">
-                    <span className="block font-serif text-sm tracking-wide text-slate-200 group-hover:text-gold-200">
-                      Tignanello
-                    </span>
-                    <span className="block font-serif text-gold-400 text-base font-bold">
-                      300 $
-                    </span>
-                  </div>
-                  <span className="absolute -top-1 -right-1 w-3 h-3 bg-gold-400 rounded-full animate-ping opacity-75"></span>
-                  <span className="absolute -top-1 -right-1 w-3 h-3 bg-gold-400 rounded-full"></span>
-                </div>
-              </div>
-            </div>
-          </div>
+        {/* Dressed Oysters Text Label hotspot */}
+        <div
+          onClick={() => onOpenDish('dish-1')}
+          className="absolute left-[47%] top-[68.5%] w-[13.5%] h-[8%] rounded-lg hover:bg-gold-500/15 transition cursor-pointer z-20 group"
+          title="Dressed Oysters (25 $)"
+        >
+          <span className="sr-only">Dressed Oysters 25 $</span>
+        </div>
+
+        {/* 9. Tignanello Wine Bottle & Price Label */}
+        <div
+          onClick={() => onOpenDish('dish-10')}
+          className="absolute right-[1.5%] top-[34%] w-[18%] h-[58%] rounded-2xl hover:ring-2 hover:ring-gold-400/40 transition cursor-pointer z-20 group"
+          title="View Tignanello 2019 (300 $)"
+        >
+          <span className="opacity-0 group-hover:opacity-100 absolute bottom-12 left-1/2 -translate-x-1/2 bg-black/85 border border-gold-500/40 text-gold-300 px-3 py-1 rounded-full text-xs font-serif tracking-wider uppercase transition shadow-xl pointer-events-none whitespace-nowrap">
+            Tignanello 2019 • 300 $
+          </span>
+        </div>
+
+        {/* Tignanello Label hotspot */}
+        <div
+          onClick={() => onOpenDish('dish-10')}
+          className="absolute right-[19%] top-[81%] w-[11.5%] h-[9%] rounded-lg hover:bg-gold-500/15 transition cursor-pointer z-20 group"
+          title="Tignanello 300 $"
+        >
+          <span className="sr-only">Tignanello 300 $</span>
+        </div>
+
+        {/* 10. Bottom Left Dish (Squid Ink Pasta with Prawns) */}
+        <div
+          onClick={() => onOpenDish('dish-7')}
+          className="absolute left-[0%] bottom-[0%] w-[17%] h-[26%] rounded-tr-3xl hover:ring-2 hover:ring-gold-400/40 transition cursor-pointer z-20 group"
+          title="Squid Ink Tagliolini with Scallops & Colossal Prawns (36 $)"
+        >
+          <span className="opacity-0 group-hover:opacity-100 absolute top-4 left-6 bg-black/85 border border-gold-500/40 text-gold-300 px-3 py-1 rounded-full text-xs font-serif tracking-wider uppercase transition shadow-xl pointer-events-none whitespace-nowrap">
+            Squid Ink Tagliolini • 36 $
+          </span>
         </div>
       </div>
 
-      {/* Subtle Scroll Down Prompt */}
-      <div className="absolute bottom-4 left-1/2 -translate-x-1/2 text-slate-400 text-[11px] uppercase tracking-[0.25em] flex flex-col items-center space-y-1.5 opacity-60 hover:opacity-100 transition z-10">
-        <span>Explore Menu</span>
-        <ArrowDown className="w-3.5 h-3.5 animate-bounce text-gold-400" />
+      {/* Floating Action Controls on Top Right for quick cart & reservation */}
+      <div className="fixed top-6 right-6 z-50 flex items-center space-x-3">
+        {/* Table Booking Quick Pill */}
+        <button
+          onClick={onOpenBookTable}
+          className="hidden sm:inline-flex items-center space-x-2 bg-[#091b2c]/90 hover:bg-[#091b2c] border border-gold-500/50 hover:border-gold-300 text-gold-200 px-4 py-2 rounded-full text-xs font-serif tracking-widest uppercase transition shadow-xl backdrop-blur-md active:scale-95"
+        >
+          <Calendar className="w-3.5 h-3.5 text-gold-400" />
+          <span>Book a Table</span>
+        </button>
+
+        {/* Cart Quick Pill */}
+        <button
+          onClick={onOpenCart}
+          className="relative inline-flex items-center space-x-2 bg-gradient-to-r from-gold-600 to-gold-500 hover:from-gold-500 hover:to-gold-400 text-slate-950 px-4 py-2 rounded-full text-xs font-serif font-bold tracking-widest uppercase transition shadow-xl active:scale-95"
+          title="View Order Ticket"
+        >
+          <ShoppingBag className="w-4 h-4" />
+          <span>Ticket</span>
+          {cartCount > 0 && (
+            <span className="w-4 h-4 rounded-full bg-slate-950 text-gold-300 text-[10px] font-bold flex items-center justify-center -mr-1">
+              {cartCount}
+            </span>
+          )}
+        </button>
+
+        {/* Admin Link */}
+        <a
+          href="http://localhost:5174"
+          target="_blank"
+          rel="noreferrer"
+          className="p-2 rounded-full bg-[#071421]/90 border border-slate-700 hover:border-gold-400 text-slate-300 hover:text-gold-300 transition shadow-lg backdrop-blur-md"
+          title="Open Admin Management Portal"
+        >
+          <ExternalLink className="w-3.5 h-3.5" />
+        </a>
       </div>
     </section>
   );

@@ -11,11 +11,12 @@ import BookTableModal from './components/BookTableModal';
 import DishDetailModal from './components/DishDetailModal';
 import CartDrawer from './components/CartDrawer';
 import { apiService } from './services/apiService';
-import { CheckCircle2, Sparkles, Wine, Calendar } from 'lucide-react';
+import { CheckCircle2 } from 'lucide-react';
 
 export default function App() {
   const [dishes, setDishes] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [isScrolled, setIsScrolled] = useState(false);
 
   // Cart State (persisted in localStorage)
   const [cartItems, setCartItems] = useState(() => {
@@ -43,6 +44,14 @@ export default function App() {
   useEffect(() => {
     localStorage.setItem('seaclub_cart', JSON.stringify(cartItems));
   }, [cartItems]);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 220);
+    };
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   const loadDishes = async () => {
     try {
@@ -90,13 +99,6 @@ export default function App() {
     showToast('Item removed from order ticket', 'info');
   };
 
-  const handleQuickAddById = (id) => {
-    const dish = dishes.find(d => d.id === id);
-    if (dish) {
-      handleAddToCart(dish);
-    }
-  };
-
   const handleOpenDishById = (id) => {
     const dish = dishes.find(d => d.id === id);
     if (dish) {
@@ -123,7 +125,7 @@ export default function App() {
   const totalCartCount = cartItems.reduce((acc, item) => acc + item.quantity, 0);
 
   return (
-    <div className="min-h-screen bg-[#071421] text-slate-100 flex flex-col selection:bg-gold-500 selection:text-black">
+    <div className="min-h-screen bg-[#050e17] text-slate-100 flex flex-col selection:bg-gold-500 selection:text-black">
       {/* Toast Alert */}
       {toast && (
         <div className="fixed bottom-6 right-6 z-50 animate-in slide-in-from-bottom-5 duration-300">
@@ -134,14 +136,15 @@ export default function App() {
         </div>
       )}
 
-      {/* Top Header */}
+      {/* Sticky Scroll-Aware Header (slides down when scrolling past the hero) */}
       <Header
         cartCount={totalCartCount}
         onOpenCart={() => setIsCartOpen(true)}
         onOpenBookTable={() => setIsBookTableOpen(true)}
+        isVisible={isScrolled}
       />
 
-      {/* Hero Section matching exact screenshot */}
+      {/* Hero Section: Exact Resolution & High-Definition Image */}
       <Hero
         onOpenMenu={() => {
           const el = document.getElementById('menu');
@@ -149,7 +152,8 @@ export default function App() {
         }}
         onOpenDish={handleOpenDishById}
         onOpenBookTable={() => setIsBookTableOpen(true)}
-        onQuickAdd={handleQuickAddById}
+        onOpenCart={() => setIsCartOpen(true)}
+        cartCount={totalCartCount}
       />
 
       {/* Restaurant Menu Section */}
