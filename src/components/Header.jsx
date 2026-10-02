@@ -5,9 +5,27 @@ export default function Header({
   cartCount,
   onOpenCart,
   onOpenBookTable,
+  currentPage = 'home',
+  onNavigate,
   isVisible = false
 }) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+  const navItems = [
+    { id: 'home', label: 'Home' },
+    { id: 'menu', label: 'Menu' },
+    { id: 'wine', label: 'Wine Cellar' },
+    { id: 'about', label: 'About' },
+    { id: 'events', label: 'Events' },
+    { id: 'contacts', label: 'Contacts' }
+  ];
+
+  const handleNavClick = (pageId) => {
+    if (onNavigate) {
+      onNavigate(pageId);
+    }
+    setMobileMenuOpen(false);
+  };
 
   return (
     <header
@@ -20,27 +38,37 @@ export default function Header({
       <div className="max-w-7xl mx-auto px-6 sm:px-10 h-20 flex items-center justify-between">
         {/* Brand Logo - "SEACLUB" */}
         <div className="flex items-center space-x-6">
-          <a href="#" className="flex items-center space-x-3 group">
+          <button
+            onClick={() => handleNavClick('home')}
+            className="flex items-center space-x-3 group text-left cursor-pointer"
+          >
             <span className="font-serif tracking-[0.28em] text-xl font-bold uppercase text-slate-100 group-hover:text-gold-300 transition duration-300">
               SEACLUB
             </span>
-          </a>
+          </button>
         </div>
 
         {/* Center Navigation */}
-        <nav className="hidden md:flex items-center space-x-10 text-xs tracking-[0.15em] font-serif uppercase text-slate-300">
-          <a href="#menu" className="hover:text-gold-300 transition duration-200">
-            Menu
-          </a>
-          <a href="#about" className="hover:text-gold-300 transition duration-200">
-            About
-          </a>
-          <a href="#events" className="hover:text-gold-300 transition duration-200">
-            Events
-          </a>
-          <a href="#contacts" className="hover:text-gold-300 transition duration-200">
-            Contacts
-          </a>
+        <nav className="hidden md:flex items-center space-x-8 lg:space-x-10 text-xs tracking-[0.15em] font-serif uppercase">
+          {navItems.map((item) => {
+            const isActive = currentPage === item.id;
+            return (
+              <button
+                key={item.id}
+                onClick={() => handleNavClick(item.id)}
+                className={`transition duration-200 py-1 cursor-pointer relative ${
+                  isActive
+                    ? 'text-gold-300 font-bold'
+                    : 'text-slate-300 hover:text-gold-300'
+                }`}
+              >
+                <span>{item.label}</span>
+                {isActive && (
+                  <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-gold-400 rounded-full" />
+                )}
+              </button>
+            );
+          })}
         </nav>
 
         {/* Right CTA */}
@@ -76,35 +104,21 @@ export default function Header({
 
       {/* Mobile Drawer */}
       {mobileMenuOpen && (
-        <div className="md:hidden bg-[#071421] border-b border-slate-800 px-6 py-6 space-y-4 animate-in slide-in-from-top duration-200 text-xs tracking-widest uppercase font-serif">
-          <a
-            href="#menu"
-            onClick={() => setMobileMenuOpen(false)}
-            className="block py-2 text-slate-200 hover:text-gold-300"
-          >
-            Menu
-          </a>
-          <a
-            href="#about"
-            onClick={() => setMobileMenuOpen(false)}
-            className="block py-2 text-slate-200 hover:text-gold-300"
-          >
-            About
-          </a>
-          <a
-            href="#events"
-            onClick={() => setMobileMenuOpen(false)}
-            className="block py-2 text-slate-200 hover:text-gold-300"
-          >
-            Events
-          </a>
-          <a
-            href="#contacts"
-            onClick={() => setMobileMenuOpen(false)}
-            className="block py-2 text-slate-200 hover:text-gold-300"
-          >
-            Contacts
-          </a>
+        <div className="md:hidden bg-[#071421] border-b border-slate-800 px-6 py-6 space-y-3 animate-in slide-in-from-top duration-200 text-xs tracking-widest uppercase font-serif">
+          {navItems.map((item) => {
+            const isActive = currentPage === item.id;
+            return (
+              <button
+                key={item.id}
+                onClick={() => handleNavClick(item.id)}
+                className={`block w-full text-left py-2 transition ${
+                  isActive ? 'text-gold-300 font-bold' : 'text-slate-200 hover:text-gold-300'
+                }`}
+              >
+                {item.label}
+              </button>
+            );
+          })}
           <button
             onClick={() => {
               setMobileMenuOpen(false);

@@ -13,7 +13,7 @@ const TIME_SLOTS = [
   '17:30', '18:00', '18:30', '19:00', '19:30', '20:00', '20:30', '21:00', '21:30'
 ];
 
-export default function BookTableModal({ isOpen, onClose, onBookingCompleted }) {
+export default function BookTableModal({ isOpen, onClose, onBookingCompleted, initialSeatingArea = 'Ocean Terrace' }) {
   if (!isOpen) return null;
 
   const [form, setForm] = useState({
@@ -23,9 +23,15 @@ export default function BookTableModal({ isOpen, onClose, onBookingCompleted }) 
     partySize: 2,
     date: 'Tonight',
     time: '19:30',
-    seatingArea: 'Ocean Terrace',
+    seatingArea: initialSeatingArea || 'Ocean Terrace',
     notes: ''
   });
+
+  React.useEffect(() => {
+    if (initialSeatingArea) {
+      setForm(prev => ({ ...prev, seatingArea: initialSeatingArea }));
+    }
+  }, [initialSeatingArea]);
 
   const [submitting, setSubmitting] = useState(false);
   const [confirmedReservation, setConfirmedReservation] = useState(null);

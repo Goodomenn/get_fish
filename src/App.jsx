@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Header from './components/Header';
-import Hero from './components/Hero';
+import HomePage from './components/HomePage';
 import MenuSection from './components/MenuSection';
 import WineSection from './components/WineSection';
 import AboutSection from './components/AboutSection';
@@ -11,9 +11,16 @@ import BookTableModal from './components/BookTableModal';
 import DishDetailModal from './components/DishDetailModal';
 import CartDrawer from './components/CartDrawer';
 import { apiService } from './services/apiService';
-import { CheckCircle2 } from 'lucide-react';
+import { CheckCircle2, ChevronRight, Home, ArrowLeft } from 'lucide-react';
 
 export default function App() {
+  // Page Routing State ('home' | 'menu' | 'wine' | 'about' | 'events' | 'contacts')
+  const [currentPage, setCurrentPage] = useState(() => {
+    const hash = window.location.hash.replace('#', '').toLowerCase();
+    const validPages = ['home', 'menu', 'wine', 'about', 'events', 'contacts'];
+    return validPages.includes(hash) ? hash : 'home';
+  });
+
   const [dishes, setDishes] = useState([]);
   const [loading, setLoading] = useState(true);
   const [isScrolled, setIsScrolled] = useState(false);
@@ -31,6 +38,7 @@ export default function App() {
   // Modals state
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [isBookTableOpen, setIsBookTableOpen] = useState(false);
+  const [selectedSeatingArea, setSelectedSeatingArea] = useState('Ocean Terrace');
   const [activeDetailDish, setActiveDetailDish] = useState(null);
 
   // Toast Notification
@@ -52,6 +60,30 @@ export default function App() {
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  // Listen for browser back/forward or hash changes
+  useEffect(() => {
+    const handleHashChange = () => {
+      const hash = window.location.hash.replace('#', '').toLowerCase();
+      const validPages = ['home', 'menu', 'wine', 'about', 'events', 'contacts'];
+      if (validPages.includes(hash)) {
+        setCurrentPage(hash);
+      }
+    };
+    window.addEventListener('hashchange', handleHashChange);
+    return () => window.removeEventListener('hashchange', handleHashChange);
+  }, []);
+
+  const handleNavigate = (page) => {
+    setCurrentPage(page);
+    window.location.hash = `#${page}`;
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  const handleOpenBookTableWithArea = (area = 'Ocean Terrace') => {
+    setSelectedSeatingArea(area);
+    setIsBookTableOpen(true);
+  };
 
   const loadDishes = async () => {
     try {
@@ -124,6 +156,39 @@ export default function App() {
 
   const totalCartCount = cartItems.reduce((acc, item) => acc + item.quantity, 0);
 
+  // Subpage Banner Helper
+  const renderSubpageBanner = (title, subtitle) => (
+    <div className="pt-28 pb-12 px-6 sm:px-10 bg-gradient-to-b from-[#091b2c] to-[#050e17] border-b border-slate-800">
+      <div className="max-w-7xl mx-auto flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+        <div>
+          <div className="flex items-center space-x-2 text-xs font-serif text-slate-400 mb-2">
+            <button
+              onClick={() => handleNavigate('home')}
+              className="hover:text-gold-300 transition flex items-center space-x-1"
+            >
+              <Home className="w-3.5 h-3.5" />
+              <span>Home</span>
+            </button>
+            <ChevronRight className="w-3 h-3 text-slate-600" />
+            <span className="text-gold-300 uppercase tracking-widest">{title}</span>
+          </div>
+          <h1 className="font-serif text-3xl sm:text-4xl text-white tracking-tight uppercase">
+            {title}
+          </h1>
+          <p className="text-xs sm:text-sm text-slate-400 font-light mt-1">{subtitle}</p>
+        </div>
+
+        <button
+          onClick={() => handleNavigate('home')}
+          className="self-start sm:self-auto inline-flex items-center space-x-2 px-4 py-2 border border-slate-700 hover:border-gold-400 text-slate-300 hover:text-white rounded-lg text-xs font-serif uppercase tracking-wider transition"
+        >
+          <ArrowLeft className="w-3.5 h-3.5" />
+          <span>Back to Home</span>
+        </button>
+      </div>
+    </div>
+  );
+
   return (
     <div className="min-h-screen bg-[#050e17] text-slate-100 flex flex-col selection:bg-gold-500 selection:text-black">
       {/* Toast Alert */}
@@ -136,56 +201,112 @@ export default function App() {
         </div>
       )}
 
-      {/* Sticky Scroll-Aware Header (slides down when scrolling past the hero) */}
+      {/* Header with Home nav tab and routing */}
       <Header
         cartCount={totalCartCount}
         onOpenCart={() => setIsCartOpen(true)}
-        onOpenBookTable={() => setIsBookTableOpen(true)}
-        isVisible={isScrolled}
+        onOpenBookTable={() => handleOpenBookTableWithArea('Ocean Terrace')}
+        currentPage={currentPage}
+        onNavigate={handleNavigate}
+        isVisible={currentPage !== 'home' || isScrolled}
       />
 
-      {/* Hero Section: Exact Resolution & High-Definition Image */}
-      <Hero
-        onOpenMenu={() => {
-          const el = document.getElementById('menu');
-          if (el) el.scrollIntoView({ behavior: 'smooth' });
-        }}
-        onOpenDish={handleOpenDishById}
-        onOpenBookTable={() => setIsBookTableOpen(true)}
-        onOpenCart={() => setIsCartOpen(true)}
-        cartCount={totalCartCount}
+      {/* Main Content Router */}
+      <main className="flex-1">
+        {/* 1. DEDICATED HOME PAGE */}
+        {currentPage === 'home' && (
+          <HomePage
+            onOpenMenu={() => handleNavigate('menu')}
+            onOpenDish={setActiveDetailDish}
+            onAddToCart={handleAddToCart}
+            onOpenBookTable={handleOpenBookTableWithArea}
+            onOpenCart={() => setIsCartOpen(true)}
+            cartCount={totalCartCount}
+            onNavigate={handleNavigate}
+          />
+        )}
+
+        {/* 2. DEDICATED MENU PAGE */}
+        {currentPage === 'menu' && (
+          <div>
+            {renderSubpageBanner(
+              'Restaurant Fish Menu & Raw Bar',
+              'Day-boat line-caught wild sea fish, raw bar platters, and handmade seafood pasta'
+            )}
+            <MenuSection
+              dishes={dishes}
+              onAddToCart={handleAddToCart}
+              onOpenDishDetail={setActiveDetailDish}
+            />
+          </div>
+        )}
+
+        {/* 3. DEDICATED WINE CELLAR PAGE */}
+        {currentPage === 'wine' && (
+          <div>
+            {renderSubpageBanner(
+              'The Sommelier Wine Cellar',
+              'Rare allocations, Super Tuscans, Grand Cru Chablis, and vintage champagnes'
+            )}
+            <WineSection
+              onAddToCart={handleAddToCart}
+              onOpenDishDetail={setActiveDetailDish}
+            />
+          </div>
+        )}
+
+        {/* 4. DEDICATED ABOUT PAGE */}
+        {currentPage === 'about' && (
+          <div>
+            {renderSubpageBanner(
+              'About SEACLUB',
+              'Our culinary heritage, day-boat sustainability ethics, and master craftsmanship'
+            )}
+            <AboutSection
+              onOpenBookTable={() => handleOpenBookTableWithArea('Ocean Terrace')}
+            />
+          </div>
+        )}
+
+        {/* 5. DEDICATED EVENTS PAGE */}
+        {currentPage === 'events' && (
+          <div>
+            {renderSubpageBanner(
+              'Gastronomic Events & Masterclasses',
+              'Oyster shucking workshops, winemaker galas, and seaside acoustic jazz brunches'
+            )}
+            <EventsSection
+              onOpenBookTable={() => handleOpenBookTableWithArea('Ocean Terrace')}
+            />
+          </div>
+        )}
+
+        {/* 6. DEDICATED CONTACTS PAGE */}
+        {currentPage === 'contacts' && (
+          <div>
+            {renderSubpageBanner(
+              'Location, Hours & Valet Contacts',
+              'Pier 24 Marina Boulevard, private yacht tender docking, and service hours'
+            )}
+            <ContactsSection
+              onOpenBookTable={() => handleOpenBookTableWithArea('Ocean Terrace')}
+            />
+          </div>
+        )}
+      </main>
+
+      {/* Luxury Footer with Home link and routing */}
+      <Footer
+        onOpenBookTable={() => handleOpenBookTableWithArea('Ocean Terrace')}
+        onNavigate={handleNavigate}
       />
-
-      {/* Restaurant Menu Section */}
-      <MenuSection
-        dishes={dishes}
-        onAddToCart={handleAddToCart}
-        onOpenDishDetail={setActiveDetailDish}
-      />
-
-      {/* Sommelier Wine Pairings */}
-      <WineSection
-        onAddToCart={handleAddToCart}
-        onOpenDishDetail={setActiveDetailDish}
-      />
-
-      {/* About The Fish Restaurant */}
-      <AboutSection onOpenBookTable={() => setIsBookTableOpen(true)} />
-
-      {/* Gastronomic Events & Masterclasses */}
-      <EventsSection onOpenBookTable={() => setIsBookTableOpen(true)} />
-
-      {/* Location & Contacts */}
-      <ContactsSection onOpenBookTable={() => setIsBookTableOpen(true)} />
-
-      {/* Luxury Footer */}
-      <Footer onOpenBookTable={() => setIsBookTableOpen(true)} />
 
       {/* Modals & Drawers */}
       <BookTableModal
         isOpen={isBookTableOpen}
         onClose={() => setIsBookTableOpen(false)}
         onBookingCompleted={handleBookingCompleted}
+        initialSeatingArea={selectedSeatingArea}
       />
 
       <DishDetailModal

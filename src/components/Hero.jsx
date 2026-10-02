@@ -6,8 +6,17 @@ export default function Hero({
   onOpenDish,
   onOpenBookTable,
   onOpenCart,
-  cartCount
+  cartCount,
+  onNavigate
 }) {
+  const handleNav = (target) => {
+    if (onNavigate) {
+      onNavigate(target);
+    } else if (target === 'menu' && onOpenMenu) {
+      onOpenMenu();
+    }
+  };
+
   return (
     <section className="relative w-full bg-[#050e17] overflow-hidden select-none">
       {/* Container maintaining the exact 1024:685 aspect ratio with zero distortion */}
@@ -24,45 +33,44 @@ export default function Hero({
         {/* INTERACTIVE HOTSPOTS OVER THE EXACT DESIGN COORDINATES                    */}
         {/* ========================================================================= */}
 
-        {/* 1. SEACLUB Logo (Top Left) */}
-        <a
-          href="#"
+        {/* 1. SEACLUB Logo (Top Left) -> Go to Home */}
+        <button
+          onClick={() => {
+            handleNav('home');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+          }}
           className="absolute left-[2.5%] top-[2.5%] w-[13%] h-[7%] rounded-lg hover:bg-gold-500/10 transition cursor-pointer z-20"
           title="SEACLUB Home"
           aria-label="SEACLUB Home"
         />
 
         {/* 2. Top Nav: Menu */}
-        <a
-          href="#menu"
-          onClick={(e) => {
-            e.preventDefault();
-            onOpenMenu();
-          }}
+        <button
+          onClick={() => handleNav('menu')}
           className="absolute left-[30.2%] top-[3.2%] w-[6%] h-[6%] rounded-lg hover:bg-gold-500/15 transition cursor-pointer z-20"
           title="Explore Restaurant Menu"
           aria-label="Menu"
         />
 
         {/* 3. Top Nav: About */}
-        <a
-          href="#about"
+        <button
+          onClick={() => handleNav('about')}
           className="absolute left-[37.2%] top-[3.2%] w-[6%] h-[6%] rounded-lg hover:bg-gold-500/15 transition cursor-pointer z-20"
           title="About SEACLUB Fish Restaurant"
           aria-label="About"
         />
 
         {/* 4. Top Nav: Events */}
-        <a
-          href="#events"
+        <button
+          onClick={() => handleNav('events')}
           className="absolute left-[44.8%] top-[3.2%] w-[6.5%] h-[6%] rounded-lg hover:bg-gold-500/15 transition cursor-pointer z-20"
           title="Gastronomic Events & Masterclasses"
           aria-label="Events"
         />
 
         {/* 5. Top Nav: Contacts */}
-        <a
-          href="#contacts"
+        <button
+          onClick={() => handleNav('contacts')}
           className="absolute left-[52.5%] top-[3.2%] w-[7.8%] h-[6%] rounded-lg hover:bg-gold-500/15 transition cursor-pointer z-20"
           title="Location & Valet Contacts"
           aria-label="Contacts"
@@ -82,18 +90,14 @@ export default function Hero({
         </button>
 
         {/* 7. Menu Button (Outlined Rectangle on Left) */}
-        <a
-          href="#menu"
-          onClick={(e) => {
-            e.preventDefault();
-            onOpenMenu();
-          }}
+        <button
+          onClick={() => handleNav('menu')}
           className="absolute left-[11.8%] top-[57.6%] w-[14.2%] h-[6.5%] rounded-md hover:bg-gold-500/20 hover:border hover:border-gold-300/60 transition cursor-pointer z-20 group"
           title="Browse Full Menu"
           aria-label="Menu Button"
         >
           <span className="sr-only">Menu</span>
-        </a>
+        </button>
 
         {/* 8. Dressed Oysters Platter & Price Label */}
         {/* Platter hotspot */}
