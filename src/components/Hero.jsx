@@ -1,5 +1,5 @@
 import React from 'react';
-import { ShoppingBag, Calendar, ExternalLink } from 'lucide-react';
+import { ShoppingBag, ExternalLink } from 'lucide-react';
 
 export default function Hero({
   onOpenMenu,
@@ -7,6 +7,7 @@ export default function Hero({
   onOpenBookTable,
   onOpenCart,
   cartCount,
+  currentPage = 'home',
   onNavigate
 }) {
   const handleNav = (target) => {
@@ -24,6 +25,15 @@ export default function Hero({
     }
   };
 
+  const navItems = [
+    { id: 'home', label: 'Home' },
+    { id: 'menu', label: 'Menu' },
+    { id: 'wine', label: 'Wine Cellar' },
+    { id: 'about', label: 'About' },
+    { id: 'events', label: 'Events' },
+    { id: 'contacts', label: 'Contacts' }
+  ];
+
   return (
     <section className="relative w-full bg-[#050e17] overflow-hidden select-none">
       {/* Container maintaining the exact 1024:686 aspect ratio of the clean background image */}
@@ -38,6 +48,7 @@ export default function Hero({
 
         {/* ========================================================================= */}
         {/* 1. ULTRA-CRISP TRANSPARENT TOP NAVIGATION BAR                             */}
+        {/* Holds Home, Menu, Wine Cellar, About, Events, Contacts                    */}
         {/* ========================================================================= */}
         <div className="absolute top-0 inset-x-0 h-[10%] px-[3%] sm:px-[4%] flex items-center justify-between z-30 pointer-events-auto bg-transparent">
           {/* Brand Logo - "SEACLUB" in crisp luxury gold serif */}
@@ -51,42 +62,66 @@ export default function Hero({
             SEACLUB
           </button>
 
-          {/* Center Navigation Links */}
-          <nav className="hidden sm:flex items-center space-x-6 sm:space-x-10 lg:space-x-14 text-xs sm:text-sm tracking-[0.2em] font-serif uppercase text-slate-100">
-            <button
-              onClick={() => handleNav('menu')}
-              className="hover:text-gold-300 transition duration-200 cursor-pointer drop-shadow-sm"
-            >
-              Menu
-            </button>
-            <button
-              onClick={() => handleNav('about')}
-              className="hover:text-gold-300 transition duration-200 cursor-pointer drop-shadow-sm"
-            >
-              About
-            </button>
-            <button
-              onClick={() => handleNav('events')}
-              className="hover:text-gold-300 transition duration-200 cursor-pointer drop-shadow-sm"
-            >
-              Events
-            </button>
-            <button
-              onClick={() => handleNav('contacts')}
-              className="hover:text-gold-300 transition duration-200 cursor-pointer drop-shadow-sm"
-            >
-              Contacts
-            </button>
+          {/* Center Navigation Links: exact items matching Image 2 */}
+          <nav className="hidden md:flex items-center space-x-6 lg:space-x-10 text-xs sm:text-sm tracking-[0.18em] font-serif uppercase">
+            {navItems.map((item) => {
+              const isActive = currentPage === item.id;
+              return (
+                <button
+                  key={item.id}
+                  onClick={() => handleNav(item.id)}
+                  className={`transition duration-200 py-1 cursor-pointer relative drop-shadow-sm ${
+                    isActive
+                      ? 'text-gold-300 font-bold'
+                      : 'text-slate-200 hover:text-gold-300'
+                  }`}
+                >
+                  <span>{item.label}</span>
+                  {isActive && (
+                    <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-gold-400 rounded-full" />
+                  )}
+                </button>
+              );
+            })}
           </nav>
 
-          {/* Right Action: "Book a Table —" in gold with trailing accent line */}
-          <button
-            onClick={onOpenBookTable}
-            className="flex items-center space-x-2 sm:space-x-3 text-gold-300 hover:text-white font-serif text-xs sm:text-sm tracking-[0.16em] uppercase transition duration-300 cursor-pointer group drop-shadow-md"
-          >
-            <span>Book a Table</span>
-            <span className="w-5 sm:w-8 h-0.5 bg-gold-400 group-hover:w-12 transition-all duration-300" />
-          </button>
+          {/* Right Action Group: Single clean set of actions (NO overlapping floating pills) */}
+          <div className="flex items-center space-x-4 sm:space-x-6">
+            {/* Book a Table — */}
+            <button
+              onClick={onOpenBookTable}
+              className="flex items-center space-x-2 sm:space-x-3 text-gold-300 hover:text-white font-serif text-xs sm:text-sm tracking-[0.16em] uppercase transition duration-300 cursor-pointer group drop-shadow-md"
+            >
+              <span>Book a Table</span>
+              <span className="w-5 sm:w-8 h-0.5 bg-gold-400 group-hover:w-12 transition-all duration-300" />
+            </button>
+
+            {/* Ticket / Cart Button */}
+            <button
+              onClick={onOpenCart}
+              className="relative p-2 text-slate-200 hover:text-gold-300 transition duration-200 cursor-pointer flex items-center space-x-1.5"
+              title="View Order Ticket"
+            >
+              <ShoppingBag className="w-4 h-4 text-gold-400" />
+              <span className="hidden lg:inline font-serif text-xs tracking-wider uppercase text-slate-200">Ticket</span>
+              {cartCount > 0 && (
+                <span className="w-4 h-4 rounded-full bg-gold-500 text-slate-950 font-bold text-[10px] flex items-center justify-center -mr-1">
+                  {cartCount}
+                </span>
+              )}
+            </button>
+
+            {/* Admin portal link */}
+            <a
+              href="http://localhost:5174"
+              target="_blank"
+              rel="noreferrer"
+              className="p-1.5 text-slate-400 hover:text-gold-300 transition"
+              title="Admin Management Portal"
+            >
+              <ExternalLink className="w-3.5 h-3.5" />
+            </a>
+          </div>
         </div>
 
         {/* ========================================================================= */}
@@ -181,44 +216,6 @@ export default function Hero({
             36 $
           </div>
         </div>
-      </div>
-
-      {/* Floating Action Controls on Top Right for quick cart & reservation */}
-      <div className="fixed top-6 right-6 z-50 flex items-center space-x-3">
-        {/* Table Booking Quick Pill */}
-        <button
-          onClick={onOpenBookTable}
-          className="hidden sm:inline-flex items-center space-x-2 bg-[#091b2c]/90 hover:bg-[#091b2c] border border-gold-500/50 hover:border-gold-300 text-gold-200 px-4 py-2 rounded-full text-xs font-serif tracking-widest uppercase transition shadow-xl backdrop-blur-md active:scale-95"
-        >
-          <Calendar className="w-3.5 h-3.5 text-gold-400" />
-          <span>Book a Table</span>
-        </button>
-
-        {/* Cart Quick Pill */}
-        <button
-          onClick={onOpenCart}
-          className="relative inline-flex items-center space-x-2 bg-gradient-to-r from-gold-600 to-gold-500 hover:from-gold-500 hover:to-gold-400 text-slate-950 px-4 py-2 rounded-full text-xs font-serif font-bold tracking-widest uppercase transition shadow-xl active:scale-95"
-          title="View Order Ticket"
-        >
-          <ShoppingBag className="w-4 h-4" />
-          <span>Ticket</span>
-          {cartCount > 0 && (
-            <span className="w-4 h-4 rounded-full bg-slate-950 text-gold-300 text-[10px] font-bold flex items-center justify-center -mr-1">
-              {cartCount}
-            </span>
-          )}
-        </button>
-
-        {/* Admin Link */}
-        <a
-          href="http://localhost:5174"
-          target="_blank"
-          rel="noreferrer"
-          className="p-2 rounded-full bg-[#071421]/90 border border-slate-700 hover:border-gold-400 text-slate-300 hover:text-gold-300 transition shadow-lg backdrop-blur-md"
-          title="Open Admin Management Portal"
-        >
-          <ExternalLink className="w-3.5 h-3.5" />
-        </a>
       </div>
     </section>
   );

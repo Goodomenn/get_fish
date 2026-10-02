@@ -28,6 +28,7 @@ export default function HomePage({
   onOpenBookTable,
   onOpenCart,
   cartCount,
+  currentPage = 'home',
   onNavigate
 }) {
   // Curated Signature Dishes to display on the Home Page
@@ -80,6 +81,7 @@ export default function HomePage({
         onOpenBookTable={() => onOpenBookTable()}
         onOpenCart={onOpenCart}
         cartCount={cartCount}
+        currentPage={currentPage}
         onNavigate={onNavigate}
       />
 

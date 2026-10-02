@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ShoppingBag, Menu, X, ExternalLink, Calendar } from 'lucide-react';
+import { ShoppingBag, Menu, X, ExternalLink } from 'lucide-react';
 
 export default function Header({
   cartCount,
@@ -42,14 +42,14 @@ export default function Header({
             onClick={() => handleNavClick('home')}
             className="flex items-center space-x-3 group text-left cursor-pointer"
           >
-            <span className="font-serif tracking-[0.28em] text-xl font-bold uppercase text-slate-100 group-hover:text-gold-300 transition duration-300">
+            <span className="font-serif tracking-[0.28em] text-xl font-bold uppercase text-gold-300 hover:text-white transition duration-300">
               SEACLUB
             </span>
           </button>
         </div>
 
         {/* Center Navigation */}
-        <nav className="hidden md:flex items-center space-x-8 lg:space-x-10 text-xs tracking-[0.15em] font-serif uppercase">
+        <nav className="hidden md:flex items-center space-x-6 lg:space-x-10 text-xs sm:text-sm tracking-[0.18em] font-serif uppercase">
           {navItems.map((item) => {
             const isActive = currentPage === item.id;
             return (
@@ -72,30 +72,46 @@ export default function Header({
         </nav>
 
         {/* Right CTA */}
-        <div className="flex items-center space-x-4">
+        <div className="flex items-center space-x-4 sm:space-x-6">
+          {/* Book a Table — */}
           <button
             onClick={onOpenBookTable}
-            className="font-serif text-xs tracking-[0.15em] uppercase text-gold-200 hover:text-white transition duration-300 py-1 border-b border-gold-500/70"
+            className="flex items-center space-x-2 sm:space-x-3 text-gold-300 hover:text-white font-serif text-xs sm:text-sm tracking-[0.16em] uppercase transition duration-300 cursor-pointer group"
           >
-            Book a table
+            <span>Book a table</span>
+            <span className="w-4 sm:w-6 h-0.5 bg-gold-400 group-hover:w-10 transition-all duration-300" />
           </button>
 
+          {/* Ticket / Cart Button */}
           <button
             onClick={onOpenCart}
-            className="relative p-2 rounded-full text-slate-300 hover:text-gold-300 hover:bg-slate-800 transition"
+            className="relative p-2 text-slate-200 hover:text-gold-300 transition duration-200 cursor-pointer flex items-center space-x-1.5"
             title="View Order Ticket"
           >
-            <ShoppingBag className="w-5 h-5" />
+            <ShoppingBag className="w-4 h-4 text-gold-400" />
+            <span className="hidden lg:inline font-serif text-xs tracking-wider uppercase text-slate-200">Ticket</span>
             {cartCount > 0 && (
-              <span className="absolute -top-1 -right-1 w-4 h-4 rounded-full bg-gold-500 text-slate-950 font-bold text-[10px] flex items-center justify-center">
+              <span className="w-4 h-4 rounded-full bg-gold-500 text-slate-950 font-bold text-[10px] flex items-center justify-center -mr-1">
                 {cartCount}
               </span>
             )}
           </button>
 
+          {/* Admin portal link */}
+          <a
+            href="http://localhost:5174"
+            target="_blank"
+            rel="noreferrer"
+            className="p-1.5 text-slate-400 hover:text-gold-300 transition"
+            title="Admin Management Portal"
+          >
+            <ExternalLink className="w-3.5 h-3.5" />
+          </a>
+
+          {/* Mobile Menu Hamburger */}
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="md:hidden p-2 text-slate-300 hover:text-white"
+            className="md:hidden p-2 text-slate-300 hover:text-white cursor-pointer"
           >
             {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
           </button>

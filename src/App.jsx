@@ -222,6 +222,7 @@ export default function App() {
             onOpenBookTable={handleOpenBookTableWithArea}
             onOpenCart={() => setIsCartOpen(true)}
             cartCount={totalCartCount}
+            currentPage={currentPage}
             onNavigate={handleNavigate}
           />
         )}
