@@ -1,4 +1,15 @@
 import { RESTAURANT_DISHES, INITIAL_RESERVATIONS } from '../data/restaurantData';
+import { db, isFirebaseConfigured } from '../firebase';
+import {
+  collection,
+  getDocs,
+  doc,
+  setDoc,
+  addDoc,
+  onSnapshot,
+  query,
+  orderBy
+} from 'firebase/firestore';
 
 const BACKEND_URL = 'http://localhost:5000/api';
 const LOCAL_STORAGE_DISHES = 'seaclub_dishes_v2';
@@ -9,17 +20,23 @@ const LOCAL_STORAGE_FEEDBACK = 'seaclub_feedback_v2';
 class ApiService {
   constructor() {
     this.isBackendAvailable = false;
+    this.isFirestoreAvailable = isFirebaseConfigured && db !== null;
     this.subscribers = new Set();
     this.eventSource = null;
+    this.firestoreUnsubscribes = [];
     this.init();
   }
 
   async init() {
-    await this.checkBackend();
     this.initLocalStorage();
 
-    if (this.isBackendAvailable) {
-      this.initSSE();
+    if (this.isFirestoreAvailable) {
+      this.initFirestoreListeners();
+    } else {
+      await this.checkBackend();
+      if (this.isBackendAvailable) {
+        this.initSSE();
+      }
     }
 
     if (typeof window !== 'undefined') {
@@ -33,6 +50,29 @@ class ApiService {
           this.notifySubscribers();
         }
       });
+    }
+  }
+
+  initFirestoreListeners() {
+    try {
+      // Real-time listener for dishes menu
+      const dishesRef = collection(db, 'dishes');
+      const unsubDishes = onSnapshot(dishesRef, (snapshot) => {
+        if (!snapshot.empty) {
+          const list = snapshot.docs.map((docSnap) => ({
+            id: docSnap.id,
+            ...docSnap.data()
+          }));
+          localStorage.setItem(LOCAL_STORAGE_DISHES, JSON.stringify(list));
+        }
+        this.notifySubscribers();
+      }, (err) => {
+        console.warn('[Firestore] Real-time dishes listener warning:', err);
+      });
+
+      this.firestoreUnsubscribes.push(unsubDishes);
+    } catch (err) {
+      console.warn('[Firestore] Failed to attach listeners:', err);
     }
   }
 
@@ -106,7 +146,29 @@ class ApiService {
     }
   }
 
+  // =========================================================================
+  // 1. DISHES & MENU
+  // =========================================================================
   async getDishes() {
+    // A. Firestore Cloud Database
+    if (this.isFirestoreAvailable) {
+      try {
+        const dishesRef = collection(db, 'dishes');
+        const snapshot = await getDocs(dishesRef);
+        if (!snapshot.empty) {
+          const list = snapshot.docs.map((d) => ({ id: d.id, ...d.data() }));
+          localStorage.setItem(LOCAL_STORAGE_DISHES, JSON.stringify(list));
+          return list;
+        } else {
+          // Auto-seed initial dishes to Firestore if collection is brand new
+          await this.seedInitialFirestoreDishes();
+        }
+      } catch (err) {
+        console.warn('[Firestore] Falling back to local cache:', err);
+      }
+    }
+
+    // B. Local Express Backend
     if (this.isBackendAvailable) {
       try {
         const res = await fetch(`${BACKEND_URL}/dishes`);
@@ -120,10 +182,27 @@ class ApiService {
       }
     }
 
+    // C. Fallback: Local Storage
     const raw = localStorage.getItem(LOCAL_STORAGE_DISHES);
     return raw ? JSON.parse(raw) : RESTAURANT_DISHES;
   }
 
+  async seedInitialFirestoreDishes() {
+    if (!this.isFirestoreAvailable) return;
+    try {
+      for (const dish of RESTAURANT_DISHES) {
+        const dishRef = doc(db, 'dishes', dish.id);
+        await setDoc(dishRef, dish, { merge: true });
+      }
+      console.log('[Firestore] Seeded initial restaurant dishes to Cloud Firestore.');
+    } catch (err) {
+      console.warn('[Firestore] Dish seed error:', err);
+    }
+  }
+
+  // =========================================================================
+  // 2. TABLE RESERVATIONS
+  // =========================================================================
   async bookTable(reservationData) {
     const randomNum = Math.floor(1000 + Math.random() * 9000);
     const newReservation = {
@@ -133,6 +212,19 @@ class ApiService {
       ...reservationData
     };
 
+    // A. Firestore Cloud Database
+    if (this.isFirestoreAvailable) {
+      try {
+        const docRef = doc(db, 'reservations', newReservation.id);
+        await setDoc(docRef, newReservation);
+        this.notifySubscribers();
+        return newReservation;
+      } catch (err) {
+        console.warn('[Firestore] Reservation write error, saving locally:', err);
+      }
+    }
+
+    // B. Local Express Backend
     if (this.isBackendAvailable) {
       try {
         const res = await fetch(`${BACKEND_URL}/reservations`, {
@@ -150,6 +242,7 @@ class ApiService {
       }
     }
 
+    // C. Fallback: Local Storage
     const raw = localStorage.getItem(LOCAL_STORAGE_RESERVATIONS);
     const list = raw ? JSON.parse(raw) : [...INITIAL_RESERVATIONS];
     list.unshift(newReservation);
@@ -158,6 +251,9 @@ class ApiService {
     return newReservation;
   }
 
+  // =========================================================================
+  // 3. KITCHEN ORDERS
+  // =========================================================================
   async placeOrder(orderData) {
     const randomNum = Math.floor(1000 + Math.random() * 9000);
     const newOrder = {
@@ -167,6 +263,19 @@ class ApiService {
       ...orderData
     };
 
+    // A. Firestore Cloud Database
+    if (this.isFirestoreAvailable) {
+      try {
+        const docRef = doc(db, 'orders', newOrder.id);
+        await setDoc(docRef, newOrder);
+        this.notifySubscribers();
+        return newOrder;
+      } catch (err) {
+        console.warn('[Firestore] Order write error, saving locally:', err);
+      }
+    }
+
+    // B. Local Express Backend
     if (this.isBackendAvailable) {
       try {
         const res = await fetch(`${BACKEND_URL}/orders`, {
@@ -184,6 +293,7 @@ class ApiService {
       }
     }
 
+    // C. Fallback: Local Storage
     const raw = localStorage.getItem(LOCAL_STORAGE_ORDERS);
     const list = raw ? JSON.parse(raw) : [];
     list.unshift(newOrder);
@@ -192,6 +302,9 @@ class ApiService {
     return newOrder;
   }
 
+  // =========================================================================
+  // 4. GUEST INQUIRIES & COMPLAINTS
+  // =========================================================================
   async submitFeedback(feedbackData) {
     const randomNum = Math.floor(1000 + Math.random() * 9000);
     const newFeedback = {
@@ -201,6 +314,19 @@ class ApiService {
       ...feedbackData
     };
 
+    // A. Firestore Cloud Database
+    if (this.isFirestoreAvailable) {
+      try {
+        const docRef = doc(db, 'feedback', newFeedback.id);
+        await setDoc(docRef, newFeedback);
+        this.notifySubscribers();
+        return newFeedback;
+      } catch (err) {
+        console.warn('[Firestore] Feedback write error, saving locally:', err);
+      }
+    }
+
+    // B. Local Express Backend
     if (this.isBackendAvailable) {
       try {
         const res = await fetch(`${BACKEND_URL}/feedback`, {
@@ -218,6 +344,7 @@ class ApiService {
       }
     }
 
+    // C. Fallback: Local Storage
     const raw = localStorage.getItem(LOCAL_STORAGE_FEEDBACK);
     const list = raw ? JSON.parse(raw) : [];
     list.unshift(newFeedback);
@@ -227,6 +354,17 @@ class ApiService {
   }
 
   async getFeedback() {
+    if (this.isFirestoreAvailable) {
+      try {
+        const ref = collection(db, 'feedback');
+        const snapshot = await getDocs(ref);
+        if (!snapshot.empty) {
+          return snapshot.docs.map((d) => ({ id: d.id, ...d.data() }));
+        }
+      } catch (err) {
+        console.warn('[Firestore] Feedback fetch error:', err);
+      }
+    }
     const raw = localStorage.getItem(LOCAL_STORAGE_FEEDBACK);
     return raw ? JSON.parse(raw) : [];
   }
