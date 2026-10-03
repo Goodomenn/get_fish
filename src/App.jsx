@@ -295,6 +295,7 @@ export default function App() {
             />
             <ContactsSection
               onOpenBookTable={() => handleOpenBookTableWithArea('Ocean Terrace')}
+              showToast={showToast}
             />
           </div>
         )}

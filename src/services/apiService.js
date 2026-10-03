@@ -4,6 +4,7 @@ const BACKEND_URL = 'http://localhost:5000/api';
 const LOCAL_STORAGE_DISHES = 'seaclub_dishes_v2';
 const LOCAL_STORAGE_RESERVATIONS = 'seaclub_reservations_v2';
 const LOCAL_STORAGE_ORDERS = 'seaclub_orders_v2';
+const LOCAL_STORAGE_FEEDBACK = 'seaclub_feedback_v2';
 
 class ApiService {
   constructor() {
@@ -26,7 +27,8 @@ class ApiService {
         if (
           e.key === LOCAL_STORAGE_DISHES ||
           e.key === LOCAL_STORAGE_RESERVATIONS ||
-          e.key === LOCAL_STORAGE_ORDERS
+          e.key === LOCAL_STORAGE_ORDERS ||
+          e.key === LOCAL_STORAGE_FEEDBACK
         ) {
           this.notifySubscribers();
         }
@@ -57,6 +59,9 @@ class ApiService {
     }
     if (!localStorage.getItem(LOCAL_STORAGE_ORDERS)) {
       localStorage.setItem(LOCAL_STORAGE_ORDERS, JSON.stringify([]));
+    }
+    if (!localStorage.getItem(LOCAL_STORAGE_FEEDBACK)) {
+      localStorage.setItem(LOCAL_STORAGE_FEEDBACK, JSON.stringify([]));
     }
   }
 
@@ -185,6 +190,45 @@ class ApiService {
     localStorage.setItem(LOCAL_STORAGE_ORDERS, JSON.stringify(list));
     this.notifySubscribers();
     return newOrder;
+  }
+
+  async submitFeedback(feedbackData) {
+    const randomNum = Math.floor(1000 + Math.random() * 9000);
+    const newFeedback = {
+      id: `FB-${randomNum}`,
+      submittedAt: new Date().toISOString(),
+      status: 'Pending Review',
+      ...feedbackData
+    };
+
+    if (this.isBackendAvailable) {
+      try {
+        const res = await fetch(`${BACKEND_URL}/feedback`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(newFeedback)
+        });
+        if (res.ok) {
+          const created = await res.json();
+          this.notifySubscribers();
+          return created;
+        }
+      } catch (err) {
+        this.isBackendAvailable = false;
+      }
+    }
+
+    const raw = localStorage.getItem(LOCAL_STORAGE_FEEDBACK);
+    const list = raw ? JSON.parse(raw) : [];
+    list.unshift(newFeedback);
+    localStorage.setItem(LOCAL_STORAGE_FEEDBACK, JSON.stringify(list));
+    this.notifySubscribers();
+    return newFeedback;
+  }
+
+  async getFeedback() {
+    const raw = localStorage.getItem(LOCAL_STORAGE_FEEDBACK);
+    return raw ? JSON.parse(raw) : [];
   }
 }
 
