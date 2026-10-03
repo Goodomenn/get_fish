@@ -265,6 +265,7 @@ export default function App() {
             )}
             <AboutSection
               onOpenBookTable={() => handleOpenBookTableWithArea('Ocean Terrace')}
+              onNavigate={handleNavigate}
             />
           </div>
         )}

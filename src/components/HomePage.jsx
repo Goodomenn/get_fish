@@ -17,7 +17,8 @@ import {
   Flame,
   MapPin,
   ArrowRight,
-  Plus
+  Plus,
+  BookOpen
 } from 'lucide-react';
 import { RESTAURANT_DISHES, RESTAURANT_INFO } from '../data/restaurantData';
 
@@ -97,90 +98,149 @@ export default function HomePage({
         onOpenDishDetail={onOpenDish}
       />
 
-      {/* 4. WELCOME & CULINARY HERITAGE */}
-      <section className="py-20 sm:py-28 bg-[#050e17] relative overflow-hidden border-t border-slate-800">
-        <div className="max-w-7xl mx-auto px-6 sm:px-10">
+      {/* 4. OUR STORY & THE STANDARD WE SET */}
+      <section id="our-story" className="py-20 sm:py-28 bg-[#050e17] relative overflow-hidden border-t border-slate-800">
+        <div className="max-w-7xl mx-auto px-6 sm:px-10 space-y-16">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
             {/* Visual Column */}
             <div className="lg:col-span-6 relative">
               <div className="relative rounded-3xl overflow-hidden border border-gold-500/30 shadow-2xl group">
                 <img
-                  src="https://images.unsplash.com/photo-1534422298391-e4f8c172dddb?auto=format&fit=crop&w=900&q=80"
-                  alt="SEACLUB Master Fish Craft"
+                  src="https://images.unsplash.com/photo-1534422298391-e4f8c172dddb?auto=format&fit=crop&w=900&q=85"
+                  alt="Tender Fire-Grilled Fresh Fish"
                   className="w-full h-[460px] object-cover group-hover:scale-105 transition duration-700"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-[#050e17] via-transparent to-transparent opacity-80" />
-                <div className="absolute bottom-6 left-6 right-6 p-5 bg-[#091b2c]/90 backdrop-blur-md rounded-2xl border border-gold-500/30">
+                <div className="absolute bottom-6 left-6 right-6 p-4 sm:p-5 bg-[#091b2c]/90 backdrop-blur-md rounded-2xl border border-gold-500/30">
                   <div className="flex items-center space-x-2 text-gold-400 text-xs font-serif uppercase tracking-widest mb-1">
-                    <Sparkles className="w-3.5 h-3.5" />
-                    <span>Wild Atlantic Line-Caught</span>
+                    <Flame className="w-3.5 h-3.5" />
+                    <span>Single-Craft Dedication</span>
                   </div>
                   <p className="text-xs text-slate-300 font-light leading-relaxed">
-                    Harvested at dawn by our partner day-boats, inspected by master fishmongers, and prepared table-side every evening.
+                    Every single filet given our kitchen's undivided attention, honoring the purest oceanic flavors.
                   </p>
                 </div>
               </div>
             </div>
 
-            {/* Narrative Column */}
+            {/* Narrative Column: Our Story */}
             <div className="lg:col-span-6 space-y-6">
               <span className="font-serif italic text-gold-300 text-lg sm:text-xl tracking-wider block">
-                welcome to seaclub
+                dedicated to one craft
               </span>
 
               <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl text-white tracking-tight uppercase leading-[1.15]">
-                A TEMPLE TO WILD SEA FISH & VINTAGE HARMONY
+                OUR STORY
               </h2>
 
-              <div className="w-16 h-0.5 bg-gold-500/70" />
+              <div className="w-16 h-0.5 bg-gold-400" />
+
+              <p className="text-slate-200 text-base sm:text-lg leading-relaxed font-light">
+                When we opened our doors, we had one clear vision: to celebrate the pure, unmatched flavor of fresh fish.
+              </p>
 
               <p className="text-slate-300 text-sm sm:text-base leading-relaxed font-light">
-                At SEACLUB, we celebrate the pure elegance of deep-sea gastronomy. We do not compromise: 
-                every whole fish, raw oyster, and seafood pasta is crafted exclusively from certified sustainable, 
-                wild-caught oceanic fish, never farmed.
+                By dedicating our entire kitchen to this single craft, we are able to give every single filet our undivided attention. 
+                We source the best daily catches and treat them with the respect they deserve. 
+                Whether you’re craving a crispy, golden-fried basket, a boldly spiced blackened cut, or a tender, fire-grilled catch, 
+                you are getting a meal prepared by true experts.
               </p>
 
-              <p className="text-slate-400 text-xs sm:text-sm leading-relaxed font-light">
-                From our raw bar shucking pristine Fine de Claire oysters to our 800° wood-fired oven caramelizing 
-                Mediterranean branzino, each dish is paired alongside allocations from our sommelier cellar, 
-                including iconic Super Tuscans like Tignanello 2019 and mineral Grand Cru Chablis.
+              {/* 3 Preparation Highlights */}
+              <div className="grid grid-cols-3 gap-3 pt-3 border-t border-slate-800">
+                <div className="p-3 bg-[#071421] rounded-xl border border-slate-800/80">
+                  <span className="font-serif text-xs font-bold text-gold-300 uppercase block mb-1">Golden-Fried</span>
+                  <p className="text-[11px] text-slate-400 font-light leading-snug">Crispy, light, perfectly textured</p>
+                </div>
+                <div className="p-3 bg-[#071421] rounded-xl border border-slate-800/80">
+                  <span className="font-serif text-xs font-bold text-gold-300 uppercase block mb-1">Blackened Cut</span>
+                  <p className="text-[11px] text-slate-400 font-light leading-snug">Boldly spiced with coastal heat</p>
+                </div>
+                <div className="p-3 bg-[#071421] rounded-xl border border-slate-800/80">
+                  <span className="font-serif text-xs font-bold text-gold-300 uppercase block mb-1">Fire-Grilled</span>
+                  <p className="text-[11px] text-slate-400 font-light leading-snug">Tender, flame-kissed with citrus</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* The Standard We Set Grid */}
+          <div className="pt-8 border-t border-slate-800/80 space-y-8">
+            <div className="text-center max-w-xl mx-auto space-y-2">
+              <span className="font-serif italic text-gold-300 text-sm sm:text-base tracking-wider">our pillars</span>
+              <h3 className="font-serif text-2xl sm:text-3xl text-white uppercase tracking-tight">THE STANDARD WE SET</h3>
+              <div className="w-12 h-0.5 bg-gold-400 mx-auto" />
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              <div className="bg-[#071421] border border-slate-800 rounded-2xl p-6 space-y-3 shadow-lg">
+                <div className="w-10 h-10 rounded-lg bg-gold-500/10 border border-gold-400/30 flex items-center justify-center text-gold-300">
+                  <Fish className="w-5 h-5" />
+                </div>
+                <h4 className="font-serif text-base font-bold text-white uppercase">The Freshest Catch</h4>
+                <p className="text-xs text-slate-300 font-light leading-relaxed">
+                  We partner directly with trusted sources to ensure that the fish on your plate is impeccably fresh, day in and day out.
+                </p>
+              </div>
+
+              <div className="bg-[#071421] border border-slate-800 rounded-2xl p-6 space-y-3 shadow-lg">
+                <div className="w-10 h-10 rounded-lg bg-gold-500/10 border border-gold-400/30 flex items-center justify-center text-gold-300">
+                  <Flame className="w-5 h-5" />
+                </div>
+                <h4 className="font-serif text-base font-bold text-white uppercase">Uncompromised Technique</h4>
+                <p className="text-xs text-slate-300 font-light leading-relaxed">
+                  Every species has its own unique texture and flavor profile. Our chefs use the exact cooking method designed to elevate that specific cut, never relying on a one-size-fits-all approach.
+                </p>
+              </div>
+
+              <div className="bg-[#071421] border border-slate-800 rounded-2xl p-6 space-y-3 shadow-lg">
+                <div className="w-10 h-10 rounded-lg bg-gold-500/10 border border-gold-400/30 flex items-center justify-center text-gold-300">
+                  <Sparkles className="w-5 h-5" />
+                </div>
+                <h4 className="font-serif text-base font-bold text-white uppercase">Bold, Clean Flavors</h4>
+                <p className="text-xs text-slate-300 font-light leading-relaxed">
+                  We believe high-quality fish doesn’t need to be hidden. We use bright, simple, and clean ingredients to let the natural flavor of the catch shine through.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          {/* Join Us at the Table Callout Box */}
+          <div className="rounded-2xl bg-gradient-to-r from-[#091b2c] via-[#071421] to-[#091b2c] border border-gold-500/30 p-6 sm:p-10 shadow-2xl flex flex-col lg:flex-row items-center justify-between gap-8">
+            <div className="space-y-3 text-center lg:text-left max-w-2xl">
+              <span className="font-serif italic text-gold-300 text-sm tracking-wider block">a seat for you</span>
+              <h3 className="font-serif text-2xl sm:text-3xl text-white uppercase tracking-tight">JOIN US AT THE TABLE</h3>
+              <p className="text-slate-300 text-xs sm:text-sm font-light leading-relaxed">
+                Whether you are a lifelong fish enthusiast looking for the perfect filet or simply in the mood for an unforgettable meal, 
+                there is a seat for you here. Come see what happens when a kitchen dedicates itself to doing one thing flawlessly.
               </p>
+            </div>
 
-              {/* 4 Pillars Grid */}
-              <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 pt-4 border-t border-slate-800">
-                <div className="space-y-1">
-                  <span className="font-serif text-2xl text-gold-300 font-bold block">100%</span>
-                  <p className="text-[11px] text-slate-400 uppercase tracking-wider font-serif">Wild Day-Boat</p>
-                </div>
-                <div className="space-y-1">
-                  <span className="font-serif text-2xl text-gold-300 font-bold block">450+</span>
-                  <p className="text-[11px] text-slate-400 uppercase tracking-wider font-serif">Cellar Bottles</p>
-                </div>
-                <div className="space-y-1">
-                  <span className="font-serif text-2xl text-gold-300 font-bold block">800°</span>
-                  <p className="text-[11px] text-slate-400 uppercase tracking-wider font-serif">Wood Stone Fire</p>
-                </div>
-                <div className="space-y-1">
-                  <span className="font-serif text-2xl text-gold-300 font-bold block">4</span>
-                  <p className="text-[11px] text-slate-400 uppercase tracking-wider font-serif">Dining Salons</p>
-                </div>
-              </div>
+            {/* Requested 3 Action Buttons */}
+            <div className="flex flex-wrap sm:flex-nowrap items-center gap-3 w-full lg:w-auto shrink-0 justify-center">
+              <button
+                onClick={() => onNavigate('menu')}
+                className="py-3 px-5 bg-gold-500 hover:bg-gold-400 text-slate-950 font-serif text-xs font-bold tracking-[0.15em] uppercase transition rounded-lg shadow-lg flex items-center space-x-1.5 cursor-pointer active:scale-95 whitespace-nowrap"
+              >
+                <BookOpen className="w-3.5 h-3.5" />
+                <span>View Our Menu</span>
+              </button>
 
-              {/* Action Buttons */}
-              <div className="pt-4 flex flex-wrap items-center gap-4">
-                <button
-                  onClick={() => onOpenBookTable()}
-                  className="px-7 py-3.5 bg-gradient-to-r from-gold-600 to-gold-500 hover:from-gold-500 hover:to-gold-400 text-slate-950 font-serif text-xs font-bold tracking-[0.2em] uppercase transition duration-300 shadow-xl"
-                >
-                  Reserve A Table
-                </button>
-                <button
-                  onClick={() => onNavigate('menu')}
-                  className="px-7 py-3.5 border border-gold-500/60 hover:border-gold-300 text-gold-200 hover:text-white font-serif text-xs tracking-[0.2em] uppercase transition duration-300 bg-[#091b2c]/60"
-                >
-                  Explore Full Menu →
-                </button>
-              </div>
+              <button
+                onClick={() => onOpenBookTable()}
+                className="py-3 px-5 border border-gold-400/80 hover:border-gold-300 text-gold-300 hover:text-white font-serif text-xs font-semibold tracking-[0.15em] uppercase transition rounded-lg bg-[#071421]/60 flex items-center space-x-1.5 cursor-pointer active:scale-95 whitespace-nowrap"
+              >
+                <Calendar className="w-3.5 h-3.5" />
+                <span>Book a Table</span>
+              </button>
+
+              <button
+                onClick={() => onNavigate('contacts')}
+                className="py-3 px-5 border border-slate-700 hover:border-slate-500 text-slate-300 hover:text-white font-serif text-xs tracking-[0.15em] uppercase transition rounded-lg bg-[#050e17]/80 flex items-center space-x-1.5 cursor-pointer active:scale-95 whitespace-nowrap"
+              >
+                <MapPin className="w-3.5 h-3.5 text-gold-400" />
+                <span>Get Directions</span>
+              </button>
             </div>
           </div>
         </div>
