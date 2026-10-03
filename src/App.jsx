@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Header from './components/Header';
+import Hero from './components/Hero';
 import HomePage from './components/HomePage';
 import MenuSection from './components/MenuSection';
 import WineSection from './components/WineSection';
@@ -55,7 +56,7 @@ export default function App() {
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 220);
+      setIsScrolled(window.scrollY > 180);
     };
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
@@ -156,37 +157,18 @@ export default function App() {
 
   const totalCartCount = cartItems.reduce((acc, item) => acc + item.quantity, 0);
 
-  // Subpage Banner Helper
-  const renderSubpageBanner = (title, subtitle) => (
-    <div className="pt-28 pb-12 px-6 sm:px-10 bg-gradient-to-b from-[#091b2c] to-[#050e17] border-b border-slate-800">
-      <div className="max-w-7xl mx-auto flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-        <div>
-          <div className="flex items-center space-x-2 text-xs font-serif text-slate-400 mb-2">
-            <button
-              onClick={() => handleNavigate('home')}
-              className="hover:text-gold-300 transition flex items-center space-x-1"
-            >
-              <Home className="w-3.5 h-3.5" />
-              <span>Home</span>
-            </button>
-            <ChevronRight className="w-3 h-3 text-slate-600" />
-            <span className="text-gold-300 uppercase tracking-widest">{title}</span>
-          </div>
-          <h1 className="font-serif text-3xl sm:text-4xl text-white tracking-tight uppercase">
-            {title}
-          </h1>
-          <p className="text-xs sm:text-sm text-slate-400 font-light mt-1">{subtitle}</p>
-        </div>
-
-        <button
-          onClick={() => handleNavigate('home')}
-          className="self-start sm:self-auto inline-flex items-center space-x-2 px-4 py-2 border border-slate-700 hover:border-gold-400 text-slate-300 hover:text-white rounded-lg text-xs font-serif uppercase tracking-wider transition"
-        >
-          <ArrowLeft className="w-3.5 h-3.5" />
-          <span>Back to Home</span>
-        </button>
-      </div>
-    </div>
+  // Common Props for the 30% Image Section across all pages
+  const renderSharedHero = (badge) => (
+    <Hero
+      onOpenMenu={() => handleNavigate('menu')}
+      onOpenDish={setActiveDetailDish}
+      onOpenBookTable={() => handleOpenBookTableWithArea('Ocean Terrace')}
+      onOpenCart={() => setIsCartOpen(true)}
+      cartCount={totalCartCount}
+      currentPage={currentPage}
+      onNavigate={handleNavigate}
+      pageBadge={badge}
+    />
   );
 
   return (
@@ -201,14 +183,14 @@ export default function App() {
         </div>
       )}
 
-      {/* Header with Home nav tab and routing */}
+      {/* Sticky Header: slides down smoothly once scrolled past the 30% image section */}
       <Header
         cartCount={totalCartCount}
         onOpenCart={() => setIsCartOpen(true)}
         onOpenBookTable={() => handleOpenBookTableWithArea('Ocean Terrace')}
         currentPage={currentPage}
         onNavigate={handleNavigate}
-        isVisible={currentPage !== 'home' || isScrolled}
+        isVisible={isScrolled}
       />
 
       {/* Main Content Router */}
@@ -230,10 +212,8 @@ export default function App() {
         {/* 2. DEDICATED MENU PAGE */}
         {currentPage === 'menu' && (
           <div>
-            {renderSubpageBanner(
-              'Restaurant Fish Menu & Raw Bar',
-              'Day-boat line-caught wild sea fish, raw bar platters, and handmade seafood pasta'
-            )}
+            {/* 30% Size Image Section */}
+            {renderSharedHero('Menu')}
             <MenuSection
               dishes={dishes}
               onAddToCart={handleAddToCart}
@@ -245,10 +225,8 @@ export default function App() {
         {/* 3. DEDICATED WINE CELLAR PAGE */}
         {currentPage === 'wine' && (
           <div>
-            {renderSubpageBanner(
-              'The Sommelier Wine Cellar',
-              'Rare allocations, Super Tuscans, Grand Cru Chablis, and vintage champagnes'
-            )}
+            {/* 30% Size Image Section */}
+            {renderSharedHero('Wine Cellar')}
             <WineSection
               onAddToCart={handleAddToCart}
               onOpenDishDetail={setActiveDetailDish}
@@ -259,10 +237,8 @@ export default function App() {
         {/* 4. DEDICATED ABOUT PAGE */}
         {currentPage === 'about' && (
           <div>
-            {renderSubpageBanner(
-              'About SEACLUB',
-              'Our culinary heritage, day-boat sustainability ethics, and master craftsmanship'
-            )}
+            {/* 30% Size Image Section */}
+            {renderSharedHero('About')}
             <AboutSection
               onOpenBookTable={() => handleOpenBookTableWithArea('Ocean Terrace')}
               onNavigate={handleNavigate}
@@ -273,10 +249,8 @@ export default function App() {
         {/* 5. DEDICATED EVENTS PAGE */}
         {currentPage === 'events' && (
           <div>
-            {renderSubpageBanner(
-              'Gastronomic Events & Masterclasses',
-              'Oyster shucking workshops, winemaker galas, and seaside acoustic jazz brunches'
-            )}
+            {/* 30% Size Image Section */}
+            {renderSharedHero('Events')}
             <EventsSection
               onOpenBookTable={() => handleOpenBookTableWithArea('Ocean Terrace')}
             />
@@ -286,10 +260,8 @@ export default function App() {
         {/* 6. DEDICATED CONTACTS PAGE */}
         {currentPage === 'contacts' && (
           <div>
-            {renderSubpageBanner(
-              'Location, Hours & Valet Contacts',
-              'Pier 24 Marina Boulevard, private yacht tender docking, and service hours'
-            )}
+            {/* 30% Size Image Section */}
+            {renderSharedHero('Contacts')}
             <ContactsSection
               onOpenBookTable={() => handleOpenBookTableWithArea('Ocean Terrace')}
             />
