@@ -1,12 +1,16 @@
 import React from 'react';
-import { ShoppingBag, ExternalLink } from 'lucide-react';
+import { ShoppingBag, ExternalLink, ChevronRight } from 'lucide-react';
 
 export default function Hero({
+  compact = false,
+  pageBadge = '',
+  pageTitle = '',
+  pageSubtitle = '',
   onOpenMenu,
   onOpenDish,
   onOpenBookTable,
   onOpenCart,
-  cartCount,
+  cartCount = 0,
   currentPage = 'home',
   onNavigate
 }) {
@@ -16,6 +20,7 @@ export default function Hero({
     } else if (target === 'menu' && onOpenMenu) {
       onOpenMenu();
     }
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   const scrollToSection = (id) => {
@@ -34,6 +39,142 @@ export default function Hero({
     { id: 'contacts', label: 'Contacts' }
   ];
 
+  // =========================================================================
+  // COMPACT VARIANT (30% HEIGHT): Applied to all subpages
+  // (Menu, Wine Cellar, About, Events, Contacts)
+  // =========================================================================
+  if (compact) {
+    return (
+      <section className="relative w-full bg-[#050e17] overflow-hidden select-none border-b border-slate-800">
+        {/* Compact Hero Container: exactly ~30% scale (~220px to 300px height) */}
+        <div className="relative w-full max-w-[1536px] mx-auto h-[220px] sm:h-[260px] md:h-[285px] lg:h-[300px] bg-[#071421] shadow-2xl overflow-hidden">
+          {/* Pristine Background Canvas cropped to luxury dark-marble & seafood top */}
+          <img
+            src="/hero-bg.jpg"
+            alt="SEACLUB Fish Restaurant & Fine Wine"
+            className="w-full h-full object-cover object-top block"
+            style={{ imageRendering: '-webkit-optimize-contrast' }}
+          />
+
+          {/* Luxury ambient dark gradient overlay for optimal typography readability */}
+          <div className="absolute inset-0 bg-gradient-to-b from-[#050e17]/85 via-[#050e17]/60 to-[#050e17]/95 pointer-events-none" />
+
+          {/* Transparent Top Navigation Bar */}
+          <div className="absolute top-0 inset-x-0 h-16 sm:h-20 px-6 sm:px-10 flex items-center justify-between z-30 pointer-events-auto bg-transparent">
+            {/* Brand Logo - "SEACLUB" */}
+            <button
+              onClick={() => handleNav('home')}
+              className="font-serif tracking-[0.28em] text-lg sm:text-xl lg:text-2xl font-bold uppercase text-gold-300 hover:text-white transition duration-300 cursor-pointer drop-shadow-md"
+            >
+              SEACLUB
+            </button>
+
+            {/* Center Navigation Links */}
+            <nav className="hidden md:flex items-center space-x-6 lg:space-x-10 text-xs sm:text-sm tracking-[0.18em] font-serif uppercase">
+              {navItems.map((item) => {
+                const isActive = currentPage === item.id;
+                return (
+                  <button
+                    key={item.id}
+                    onClick={() => handleNav(item.id)}
+                    className={`transition duration-200 py-1 cursor-pointer relative drop-shadow-sm ${
+                      isActive
+                        ? 'text-gold-300 font-bold'
+                        : 'text-slate-200 hover:text-gold-300'
+                    }`}
+                  >
+                    <span>{item.label}</span>
+                    {isActive && (
+                      <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-gold-400 rounded-full" />
+                    )}
+                  </button>
+                );
+              })}
+            </nav>
+
+            {/* Right Action Group */}
+            <div className="flex items-center space-x-4 sm:space-x-6">
+              <button
+                onClick={onOpenBookTable}
+                className="flex items-center space-x-2 sm:space-x-3 text-gold-300 hover:text-white font-serif text-xs sm:text-sm tracking-[0.16em] uppercase transition duration-300 cursor-pointer group drop-shadow-md"
+              >
+                <span>Book a Table</span>
+                <span className="w-4 sm:w-6 h-0.5 bg-gold-400 group-hover:w-10 transition-all duration-300" />
+              </button>
+
+              <button
+                onClick={onOpenCart}
+                className="relative p-2 text-slate-200 hover:text-gold-300 transition duration-200 cursor-pointer flex items-center space-x-1.5"
+                title="View Order Ticket"
+              >
+                <ShoppingBag className="w-4 h-4 text-gold-400" />
+                <span className="hidden lg:inline font-serif text-xs tracking-wider uppercase text-slate-200">Ticket</span>
+                {cartCount > 0 && (
+                  <span className="w-4 h-4 rounded-full bg-gold-500 text-slate-950 font-bold text-[10px] flex items-center justify-center -mr-1">
+                    {cartCount}
+                  </span>
+                )}
+              </button>
+
+              <a
+                href="http://localhost:5174"
+                target="_blank"
+                rel="noreferrer"
+                className="p-1.5 text-slate-400 hover:text-gold-300 transition cursor-pointer"
+                title="Admin Management Portal"
+              >
+                <ExternalLink className="w-3.5 h-3.5" />
+              </a>
+            </div>
+          </div>
+
+          {/* Subpage Breadcrumb & Header Typography Overlay */}
+          <div className="absolute inset-x-0 bottom-4 sm:bottom-6 px-6 sm:px-10 z-20">
+            <div className="max-w-7xl mx-auto flex flex-col sm:flex-row sm:items-end justify-between gap-3">
+              <div className="space-y-1">
+                {/* Breadcrumbs */}
+                <div className="flex items-center space-x-2 text-[11px] font-serif text-slate-400 tracking-wider">
+                  <button
+                    onClick={() => handleNav('home')}
+                    className="hover:text-gold-300 transition flex items-center space-x-1 cursor-pointer"
+                  >
+                    <span>Home</span>
+                  </button>
+                  <ChevronRight className="w-3 h-3 text-slate-600" />
+                  <span className="text-gold-400 uppercase font-semibold">{pageBadge || currentPage}</span>
+                </div>
+
+                {/* Subpage Title */}
+                <h1 className="font-serif text-2xl sm:text-3xl lg:text-4xl font-bold text-white uppercase tracking-tight drop-shadow-lg">
+                  {pageTitle}
+                </h1>
+
+                {/* Subtitle */}
+                {pageSubtitle && (
+                  <p className="text-xs sm:text-sm text-slate-300 font-light max-w-2xl drop-shadow">
+                    {pageSubtitle}
+                  </p>
+                )}
+              </div>
+
+              {/* Back to Home Button */}
+              <button
+                onClick={() => handleNav('home')}
+                className="hidden sm:inline-flex items-center space-x-1.5 px-4 py-2 border border-slate-700/80 hover:border-gold-400/80 bg-[#071421]/60 hover:bg-gold-500/10 text-slate-300 hover:text-white rounded-lg text-xs font-serif uppercase tracking-wider transition backdrop-blur-sm cursor-pointer"
+              >
+                <span>Back to Home</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+    );
+  }
+
+  // =========================================================================
+  // FULL-SIZE VARIANT (100% SCALE): Exclusively for the Home Page
+  // Maintains exact 1024:686 aspect ratio with all dishes & interactive tags
+  // =========================================================================
   return (
     <section className="relative w-full bg-[#050e17] overflow-hidden select-none">
       {/* Container maintaining the exact 1024:686 aspect ratio of the clean background image */}
@@ -53,10 +194,7 @@ export default function Hero({
         <div className="absolute top-0 inset-x-0 h-[10%] px-[3%] sm:px-[4%] flex items-center justify-between z-30 pointer-events-auto bg-transparent">
           {/* Brand Logo - "SEACLUB" in crisp luxury gold serif */}
           <button
-            onClick={() => {
-              handleNav('home');
-              window.scrollTo({ top: 0, behavior: 'smooth' });
-            }}
+            onClick={() => handleNav('home')}
             className="font-serif tracking-[0.28em] text-sm sm:text-xl lg:text-2xl font-bold uppercase text-gold-300 hover:text-white transition duration-300 cursor-pointer drop-shadow-md"
           >
             SEACLUB
@@ -85,7 +223,7 @@ export default function Hero({
             })}
           </nav>
 
-          {/* Right Action Group: Single clean set of actions (NO overlapping floating pills) */}
+          {/* Right Action Group: Single clean set of actions */}
           <div className="flex items-center space-x-4 sm:space-x-6">
             {/* Book a Table — */}
             <button
@@ -116,7 +254,7 @@ export default function Hero({
               href="http://localhost:5174"
               target="_blank"
               rel="noreferrer"
-              className="p-1.5 text-slate-400 hover:text-gold-300 transition"
+              className="p-1.5 text-slate-400 hover:text-gold-300 transition cursor-pointer"
               title="Admin Management Portal"
             >
               <ExternalLink className="w-3.5 h-3.5" />

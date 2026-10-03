@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Header from './components/Header';
+import Hero from './components/Hero';
 import HomePage from './components/HomePage';
 import MenuSection from './components/MenuSection';
 import WineSection from './components/WineSection';
@@ -11,7 +12,7 @@ import BookTableModal from './components/BookTableModal';
 import DishDetailModal from './components/DishDetailModal';
 import CartDrawer from './components/CartDrawer';
 import { apiService } from './services/apiService';
-import { CheckCircle2, ChevronRight, Home, ArrowLeft } from 'lucide-react';
+import { CheckCircle2 } from 'lucide-react';
 
 export default function App() {
   // Page Routing State ('home' | 'menu' | 'wine' | 'about' | 'events' | 'contacts')
@@ -156,39 +157,6 @@ export default function App() {
 
   const totalCartCount = cartItems.reduce((acc, item) => acc + item.quantity, 0);
 
-  // Subpage Banner Helper
-  const renderSubpageBanner = (title, subtitle) => (
-    <div className="pt-28 pb-12 px-6 sm:px-10 bg-gradient-to-b from-[#091b2c] to-[#050e17] border-b border-slate-800">
-      <div className="max-w-7xl mx-auto flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-        <div>
-          <div className="flex items-center space-x-2 text-xs font-serif text-slate-400 mb-2">
-            <button
-              onClick={() => handleNavigate('home')}
-              className="hover:text-gold-300 transition flex items-center space-x-1"
-            >
-              <Home className="w-3.5 h-3.5" />
-              <span>Home</span>
-            </button>
-            <ChevronRight className="w-3 h-3 text-slate-600" />
-            <span className="text-gold-300 uppercase tracking-widest">{title}</span>
-          </div>
-          <h1 className="font-serif text-3xl sm:text-4xl text-white tracking-tight uppercase">
-            {title}
-          </h1>
-          <p className="text-xs sm:text-sm text-slate-400 font-light mt-1">{subtitle}</p>
-        </div>
-
-        <button
-          onClick={() => handleNavigate('home')}
-          className="self-start sm:self-auto inline-flex items-center space-x-2 px-4 py-2 border border-slate-700 hover:border-gold-400 text-slate-300 hover:text-white rounded-lg text-xs font-serif uppercase tracking-wider transition"
-        >
-          <ArrowLeft className="w-3.5 h-3.5" />
-          <span>Back to Home</span>
-        </button>
-      </div>
-    </div>
-  );
-
   return (
     <div className="min-h-screen bg-[#050e17] text-slate-100 flex flex-col selection:bg-gold-500 selection:text-black">
       {/* Toast Alert */}
@@ -201,19 +169,19 @@ export default function App() {
         </div>
       )}
 
-      {/* Header with Home nav tab and routing */}
+      {/* Sticky Header with Home nav tab and routing (slides down upon scroll) */}
       <Header
         cartCount={totalCartCount}
         onOpenCart={() => setIsCartOpen(true)}
         onOpenBookTable={() => handleOpenBookTableWithArea('Ocean Terrace')}
         currentPage={currentPage}
         onNavigate={handleNavigate}
-        isVisible={currentPage !== 'home' || isScrolled}
+        isVisible={isScrolled}
       />
 
       {/* Main Content Router */}
       <main className="flex-1">
-        {/* 1. DEDICATED HOME PAGE */}
+        {/* 1. DEDICATED HOME PAGE (Full 100% Size Layout) */}
         {currentPage === 'home' && (
           <HomePage
             onOpenMenu={() => handleNavigate('menu')}
@@ -227,13 +195,20 @@ export default function App() {
           />
         )}
 
-        {/* 2. DEDICATED MENU PAGE */}
+        {/* 2. DEDICATED MENU PAGE (30% Scale Compact Hero Banner) */}
         {currentPage === 'menu' && (
           <div>
-            {renderSubpageBanner(
-              'Restaurant Fish Menu & Raw Bar',
-              'Day-boat line-caught wild sea fish, raw bar platters, and handmade seafood pasta'
-            )}
+            <Hero
+              compact={true}
+              pageBadge="Menu"
+              pageTitle="Restaurant Fish Menu & Raw Bar"
+              pageSubtitle="Day-boat line-caught wild sea fish, raw bar platters, and handmade seafood pasta"
+              currentPage={currentPage}
+              onNavigate={handleNavigate}
+              onOpenBookTable={() => handleOpenBookTableWithArea('Ocean Terrace')}
+              onOpenCart={() => setIsCartOpen(true)}
+              cartCount={totalCartCount}
+            />
             <MenuSection
               dishes={dishes}
               onAddToCart={handleAddToCart}
@@ -242,13 +217,20 @@ export default function App() {
           </div>
         )}
 
-        {/* 3. DEDICATED WINE CELLAR PAGE */}
+        {/* 3. DEDICATED WINE CELLAR PAGE (30% Scale Compact Hero Banner) */}
         {currentPage === 'wine' && (
           <div>
-            {renderSubpageBanner(
-              'The Sommelier Wine Cellar',
-              'Rare allocations, Super Tuscans, Grand Cru Chablis, and vintage champagnes'
-            )}
+            <Hero
+              compact={true}
+              pageBadge="Wine Cellar"
+              pageTitle="The Sommelier Wine Cellar"
+              pageSubtitle="Rare allocations, Super Tuscans, Grand Cru Chablis, and vintage champagnes"
+              currentPage={currentPage}
+              onNavigate={handleNavigate}
+              onOpenBookTable={() => handleOpenBookTableWithArea('Ocean Terrace')}
+              onOpenCart={() => setIsCartOpen(true)}
+              cartCount={totalCartCount}
+            />
             <WineSection
               onAddToCart={handleAddToCart}
               onOpenDishDetail={setActiveDetailDish}
@@ -256,13 +238,20 @@ export default function App() {
           </div>
         )}
 
-        {/* 4. DEDICATED ABOUT PAGE */}
+        {/* 4. DEDICATED ABOUT PAGE (30% Scale Compact Hero Banner) */}
         {currentPage === 'about' && (
           <div>
-            {renderSubpageBanner(
-              'About SEACLUB',
-              'Our culinary heritage, day-boat sustainability ethics, and master craftsmanship'
-            )}
+            <Hero
+              compact={true}
+              pageBadge="About"
+              pageTitle="About SEACLUB"
+              pageSubtitle="Our culinary heritage, day-boat sustainability ethics, and master craftsmanship"
+              currentPage={currentPage}
+              onNavigate={handleNavigate}
+              onOpenBookTable={() => handleOpenBookTableWithArea('Ocean Terrace')}
+              onOpenCart={() => setIsCartOpen(true)}
+              cartCount={totalCartCount}
+            />
             <AboutSection
               onOpenBookTable={() => handleOpenBookTableWithArea('Ocean Terrace')}
               onNavigate={handleNavigate}
@@ -270,26 +259,40 @@ export default function App() {
           </div>
         )}
 
-        {/* 5. DEDICATED EVENTS PAGE */}
+        {/* 5. DEDICATED EVENTS PAGE (30% Scale Compact Hero Banner) */}
         {currentPage === 'events' && (
           <div>
-            {renderSubpageBanner(
-              'Gastronomic Events & Masterclasses',
-              'Oyster shucking workshops, winemaker galas, and seaside acoustic jazz brunches'
-            )}
+            <Hero
+              compact={true}
+              pageBadge="Events"
+              pageTitle="Gastronomic Events & Masterclasses"
+              pageSubtitle="Oyster shucking workshops, winemaker galas, and seaside acoustic jazz brunches"
+              currentPage={currentPage}
+              onNavigate={handleNavigate}
+              onOpenBookTable={() => handleOpenBookTableWithArea('Ocean Terrace')}
+              onOpenCart={() => setIsCartOpen(true)}
+              cartCount={totalCartCount}
+            />
             <EventsSection
               onOpenBookTable={() => handleOpenBookTableWithArea('Ocean Terrace')}
             />
           </div>
         )}
 
-        {/* 6. DEDICATED CONTACTS PAGE */}
+        {/* 6. DEDICATED CONTACTS PAGE (30% Scale Compact Hero Banner) */}
         {currentPage === 'contacts' && (
           <div>
-            {renderSubpageBanner(
-              'Location, Hours & Valet Contacts',
-              'Pier 24 Marina Boulevard, private yacht tender docking, and service hours'
-            )}
+            <Hero
+              compact={true}
+              pageBadge="Contacts"
+              pageTitle="Location, Hours & Valet Contacts"
+              pageSubtitle="Pier 24 Marina Boulevard, private yacht tender docking, and service hours"
+              currentPage={currentPage}
+              onNavigate={handleNavigate}
+              onOpenBookTable={() => handleOpenBookTableWithArea('Ocean Terrace')}
+              onOpenCart={() => setIsCartOpen(true)}
+              cartCount={totalCartCount}
+            />
             <ContactsSection
               onOpenBookTable={() => handleOpenBookTableWithArea('Ocean Terrace')}
             />
