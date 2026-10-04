@@ -10,12 +10,13 @@ import { getFirestore } from 'firebase/firestore';
 // =========================================================================
 
 const firebaseConfig = {
-  apiKey: import.meta.env.VITE_FIREBASE_API_KEY || '',
-  authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN || '',
-  projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID || '',
-  storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET || '',
-  messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID || '',
-  appId: import.meta.env.VITE_FIREBASE_APP_ID || ''
+  apiKey: import.meta.env.VITE_FIREBASE_API_KEY || "AIzaSyDJf3F1JDF7c5bpXuPx7lIBVbxN9HNvLCk",
+  authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN || "getch-fish.firebaseapp.com",
+  projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID || "getch-fish",
+  storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET || "getch-fish.firebasestorage.app",
+  messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID || "186292837194",
+  appId: import.meta.env.VITE_FIREBASE_APP_ID || "1:186292837194:web:3aee8bd39a85bd53547fb3",
+  measurementId: import.meta.env.VITE_FIREBASE_MEASUREMENT_ID || "G-G4PNX6Z9VM"
 };
 
 export const isFirebaseConfigured = Boolean(
