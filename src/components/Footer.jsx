@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import {
   Fish,
   Wine,
@@ -8,33 +8,18 @@ import {
   Clock,
   ExternalLink,
   ArrowRight,
-  Check,
   ShieldCheck,
   Compass,
-  Sparkles
+  Navigation
 } from 'lucide-react';
 import { RESTAURANT_INFO } from '../data/restaurantData';
 
 export default function Footer({ onOpenBookTable, onNavigate }) {
-  const [email, setEmail] = useState('');
-  const [subscribed, setSubscribed] = useState(false);
-
   const handleNav = (page) => {
     if (onNavigate) {
       onNavigate(page);
     }
     window.scrollTo({ top: 0, behavior: 'smooth' });
-  };
-
-  const handleSubscribe = (e) => {
-    e.preventDefault();
-    if (email.trim()) {
-      setSubscribed(true);
-      setTimeout(() => {
-        setEmail('');
-        setSubscribed(false);
-      }, 4000);
-    }
   };
 
   return (
@@ -43,49 +28,117 @@ export default function Footer({ onOpenBookTable, onNavigate }) {
       <div className="absolute top-0 left-1/4 w-96 h-96 bg-blue-950/20 rounded-full blur-3xl pointer-events-none" />
       <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-gold-600/5 rounded-full blur-3xl pointer-events-none" />
 
-      {/* 1. VIP Cellar & Catch Club Newsletter Bar */}
-      <div className="border-b border-slate-800/80 bg-[#050e17]/80">
-        <div className="max-w-7xl mx-auto px-6 sm:px-10 py-10">
-          <div className="flex flex-col lg:flex-row items-center justify-between gap-6">
-            <div className="text-center lg:text-left space-y-1 max-w-xl">
-              <div className="flex items-center justify-center lg:justify-start space-x-2 text-gold-400 font-serif text-xs uppercase tracking-widest">
-                <Sparkles className="w-3.5 h-3.5" />
-                <span>The Private Cellar List</span>
+      {/* 1. Interactive Harbor Map & Docking Section */}
+      <div className="border-b border-slate-800/80 bg-[#050e17] relative">
+        {/* Top Header Strip */}
+        <div className="max-w-7xl mx-auto px-6 sm:px-10 py-6 border-b border-slate-800/60">
+          <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+            <div className="space-y-1">
+              <div className="flex items-center space-x-2 text-gold-400 font-serif text-xs uppercase tracking-widest">
+                <Compass className="w-3.5 h-3.5 text-gold-400" />
+                <span>Harbor Coordinates • 37°47'28"N 122°23'19"W</span>
               </div>
               <h3 className="font-serif text-xl sm:text-2xl text-white tracking-wide uppercase">
-                Receive Seasonal Catch & Vintage Allocations
+                Find Us on the Waterfront
               </h3>
               <p className="text-xs text-slate-400 font-light">
-                Join our private guest registry for notifications on rare day-boat arrivals, Super Tuscan cellar releases, and masterclass invitations.
+                {RESTAURANT_INFO.address} • Yacht Tender Slip 4B • Marina Gate 2 Valet
               </p>
             </div>
 
-            {/* Newsletter Form */}
-            <form onSubmit={handleSubscribe} className="w-full lg:w-auto flex-1 max-w-md">
-              {subscribed ? (
-                <div className="flex items-center justify-center space-x-2 px-6 py-3 bg-emerald-950/60 border border-emerald-500/40 rounded-xl text-emerald-300 text-xs font-serif tracking-wider">
-                  <Check className="w-4 h-4 text-emerald-400" />
-                  <span>Welcome to the SEACLUB Private Registry.</span>
+            <div className="flex flex-wrap items-center gap-3">
+              <a
+                href={`https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(RESTAURANT_INFO.address)}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center space-x-2 px-5 py-2.5 bg-gradient-to-r from-gold-600 to-gold-500 hover:from-gold-500 hover:to-gold-400 text-slate-950 font-serif font-bold text-xs uppercase tracking-wider rounded-xl transition shadow-lg cursor-pointer active:scale-95"
+              >
+                <Navigation className="w-3.5 h-3.5" />
+                <span>Get Directions</span>
+                <ExternalLink className="w-3 h-3 ml-0.5 opacity-80" />
+              </a>
+
+              <a
+                href={`tel:${RESTAURANT_INFO.phone}`}
+                className="inline-flex items-center space-x-2 px-4 py-2.5 bg-[#091b2c] hover:bg-[#0c2338] border border-slate-700 hover:border-gold-500/50 text-slate-200 hover:text-gold-300 font-serif text-xs uppercase tracking-wider rounded-xl transition"
+              >
+                <Phone className="w-3.5 h-3.5 text-gold-400" />
+                <span>Concierge Desk</span>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        {/* Map Container with Dark Stylized Map and Interactive Glassmorphism Overlay */}
+        <div className="relative w-full h-[320px] sm:h-[380px] md:h-[420px] bg-[#07131f] overflow-hidden">
+          {/* Embedded Map */}
+          <iframe
+            title="SEACLUB Harbor Location Map"
+            src="https://maps.google.com/maps?q=Pier%2024%20The%20Embarcadero%20San%20Francisco%20CA&t=&z=15&ie=UTF8&iwloc=&output=embed"
+            className="w-full h-full border-0 filter invert-[92%] hue-rotate-180 contrast-[1.15] brightness-[0.82] opacity-85 hover:opacity-100 transition-opacity duration-300"
+            loading="lazy"
+            allowFullScreen=""
+            referrerPolicy="no-referrer-when-downgrade"
+          />
+
+          {/* Floating Glassmorphism Location Card (Overlay) */}
+          <div className="absolute top-4 left-4 sm:top-6 sm:left-10 z-10 max-w-sm pointer-events-auto">
+            <div className="bg-[#050e17]/92 backdrop-blur-md border border-gold-500/30 p-5 rounded-2xl shadow-2xl space-y-3">
+              <div className="flex items-center justify-between">
+                <span className="inline-flex items-center space-x-1.5 px-2.5 py-0.5 rounded-full bg-gold-500/10 border border-gold-500/30 text-gold-300 font-serif text-[10px] uppercase tracking-widest">
+                  <MapPin className="w-3 h-3 text-gold-400" />
+                  <span>Harbor Front Pier 24</span>
+                </span>
+                <span className="text-[10px] text-emerald-400 font-mono tracking-wider flex items-center space-x-1">
+                  <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse inline-block mr-1"></span>
+                  OPEN FOR DINNER
+                </span>
+              </div>
+
+              <div>
+                <h4 className="font-serif text-base text-white font-bold tracking-wide">
+                  SEACLUB Restaurant & Cellar
+                </h4>
+                <p className="text-xs text-slate-300 font-light mt-0.5">
+                  Pier 24 Marina Blvd, Harbor View Harbor
+                </p>
+              </div>
+
+              <div className="pt-2 border-t border-slate-800/80 space-y-1.5 text-[11px] text-slate-400">
+                <div className="flex items-center space-x-2">
+                  <span className="w-1.5 h-1.5 rounded-full bg-gold-400"></span>
+                  <span><strong>Arriving by Car:</strong> Complimentary Valet at Gate 2</span>
                 </div>
-              ) : (
-                <div className="flex flex-col sm:flex-row gap-2">
-                  <input
-                    type="email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    placeholder="Enter your email address..."
-                    required
-                    className="flex-1 bg-[#091b2c] border border-slate-700 focus:border-gold-400 text-white placeholder-slate-500 text-xs px-4 py-3 rounded-xl outline-none transition"
-                  />
-                  <button
-                    type="submit"
-                    className="px-6 py-3 bg-gradient-to-r from-gold-600 to-gold-500 hover:from-gold-500 hover:to-gold-400 text-slate-950 font-serif font-bold text-xs uppercase tracking-wider rounded-xl transition duration-300 cursor-pointer shadow-lg active:scale-95 shrink-0"
-                  >
-                    Subscribe
-                  </button>
+                <div className="flex items-center space-x-2">
+                  <span className="w-1.5 h-1.5 rounded-full bg-gold-400"></span>
+                  <span><strong>Arriving by Yacht:</strong> Tender Slip 4B (VHF Ch. 68)</span>
                 </div>
-              )}
-            </form>
+              </div>
+
+              <div className="pt-2 flex items-center gap-2">
+                <a
+                  href={`https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(RESTAURANT_INFO.address)}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex-1 text-center py-2 bg-gradient-to-r from-gold-600 to-gold-500 hover:from-gold-500 hover:to-gold-400 text-slate-950 font-serif font-bold text-[11px] uppercase tracking-wider rounded-lg transition shadow cursor-pointer"
+                >
+                  Navigate Here
+                </a>
+                <button
+                  onClick={onOpenBookTable}
+                  className="px-3 py-2 bg-slate-800/80 hover:bg-slate-700/80 border border-slate-700 text-gold-300 font-serif text-[11px] uppercase tracking-wider rounded-lg transition cursor-pointer"
+                >
+                  Reserve Table
+                </button>
+              </div>
+            </div>
+          </div>
+
+          {/* Bottom Map Status Strip */}
+          <div className="absolute bottom-2 right-4 z-10 hidden sm:flex items-center space-x-3 px-3 py-1 bg-[#050e17]/80 backdrop-blur-sm border border-slate-800 rounded-lg text-[10px] text-slate-400 font-mono">
+            <span>Waterfront Dock Slip 4B</span>
+            <span>•</span>
+            <span>Harbor View San Francisco</span>
           </div>
         </div>
       </div>
