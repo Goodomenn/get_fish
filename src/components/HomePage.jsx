@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Hero from './Hero';
 import {
   Sparkles,
@@ -11,6 +11,7 @@ import {
   Award,
   Calendar,
   ChevronRight,
+  ChevronLeft,
   ShieldCheck,
   Flame,
   MapPin,
@@ -37,6 +38,41 @@ export default function HomePage({
       el.scrollIntoView({ behavior: 'smooth' });
     }
   };
+
+  // Critic reviews data for "What the Critics Say"
+  const criticReviews = [
+    {
+      id: 1,
+      rating: 5,
+      quote: "An extraordinary temple to wild oceanic fish. The wood-fired branzino and sommelier wine pairings set the gold standard on the harbor.",
+      author: "Michelin Guide",
+      tag: "2024 Gastronomic Selection"
+    },
+    {
+      id: 2,
+      rating: 5,
+      quote: "The squid ink tagliolini and Fine de Claire oysters are unforgettable. Accompanied by a 2019 Tignanello, it was pure culinary poetry.",
+      author: "The World's 50 Best",
+      tag: "Discovery Choice"
+    },
+    {
+      id: 3,
+      rating: 5,
+      quote: "Tableside Dover sole service executed with Parisian precision. The ocean terrace sunset view alone is worth the reservation.",
+      author: "Le Figaro Gastronomie",
+      tag: "Critic's Review"
+    }
+  ];
+
+  // Mobile slideshow state with 5-second auto-advancing loop
+  const [activeReviewIndex, setActiveReviewIndex] = useState(0);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setActiveReviewIndex((prev) => (prev + 1) % criticReviews.length);
+    }, 5000);
+    return () => clearInterval(timer);
+  }, [criticReviews.length]);
 
   // Curated Signature Dishes to display on the Home Page
   const featuredDishes = RESTAURANT_DISHES.filter(
@@ -578,50 +614,107 @@ export default function HomePage({
             <div className="w-16 h-0.5 bg-gold-500/70 mx-auto" />
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="p-8 rounded-2xl bg-[#071421] border border-slate-800 space-y-4">
-              <div className="flex text-gold-400 space-x-1">
-                {[...Array(5)].map((_, i) => (
-                  <Star key={i} className="w-4 h-4 fill-gold-400" />
-                ))}
+          {/* Desktop Grid Layout (Screens >= md) */}
+          <div className="hidden md:grid md:grid-cols-3 gap-8">
+            {criticReviews.map((review) => (
+              <div key={review.id} className="p-8 rounded-2xl bg-[#071421] border border-slate-800 space-y-4">
+                <div className="flex text-gold-400 space-x-1">
+                  {[...Array(review.rating)].map((_, i) => (
+                    <Star key={i} className="w-4 h-4 fill-gold-400" />
+                  ))}
+                </div>
+                <p className="text-xs sm:text-sm text-slate-300 italic font-light leading-relaxed">
+                  "{review.quote}"
+                </p>
+                <div className="pt-2 border-t border-slate-800">
+                  <span className="font-serif text-xs text-gold-300 uppercase tracking-widest block">
+                    {review.author}
+                  </span>
+                  <span className="text-[10px] text-slate-400">
+                    {review.tag}
+                  </span>
+                </div>
               </div>
-              <p className="text-xs sm:text-sm text-slate-300 italic font-light leading-relaxed">
-                "An extraordinary temple to wild oceanic fish. The wood-fired branzino and sommelier wine pairings set the gold standard on the harbor."
-              </p>
-              <div className="pt-2 border-t border-slate-800">
-                <span className="font-serif text-xs text-gold-300 uppercase tracking-widest block">Michelin Guide</span>
-                <span className="text-[10px] text-slate-400">2024 Gastronomic Selection</span>
-              </div>
+            ))}
+          </div>
+
+          {/* Mobile / Phone Slideshow Layout (Screens < md) */}
+          {/* Autoplays every 5 seconds, loops continuously, with gentle ease-in transition */}
+          <div className="block md:hidden">
+            <div className="relative min-h-[250px]">
+              {criticReviews.map((review, idx) => {
+                const isActive = idx === activeReviewIndex;
+                return (
+                  <div
+                    key={review.id}
+                    className={`transition-all duration-1000 ease-in-out transform ${
+                      isActive
+                        ? 'opacity-100 translate-y-0 scale-100 relative z-10 pointer-events-auto'
+                        : 'opacity-0 translate-y-3 scale-[0.98] absolute inset-0 pointer-events-none'
+                    }`}
+                  >
+                    <div className="p-7 rounded-2xl bg-[#071421] border border-slate-800 space-y-4 shadow-xl">
+                      <div className="flex items-center justify-between">
+                        <div className="flex text-gold-400 space-x-1">
+                          {[...Array(review.rating)].map((_, i) => (
+                            <Star key={i} className="w-4 h-4 fill-gold-400" />
+                          ))}
+                        </div>
+                        <span className="text-[10px] font-mono text-gold-400/90 bg-gold-500/10 px-2.5 py-0.5 rounded-full border border-gold-500/20">
+                          0{idx + 1} / 0{criticReviews.length}
+                        </span>
+                      </div>
+                      <p className="text-xs sm:text-sm text-slate-200 italic font-light leading-relaxed min-h-[70px]">
+                        "{review.quote}"
+                      </p>
+                      <div className="pt-3 border-t border-slate-800">
+                        <span className="font-serif text-xs text-gold-300 uppercase tracking-widest block">
+                          {review.author}
+                        </span>
+                        <span className="text-[10px] text-slate-400">
+                          {review.tag}
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                );
+              })}
             </div>
 
-            <div className="p-8 rounded-2xl bg-[#071421] border border-slate-800 space-y-4">
-              <div className="flex text-gold-400 space-x-1">
-                {[...Array(5)].map((_, i) => (
-                  <Star key={i} className="w-4 h-4 fill-gold-400" />
-                ))}
-              </div>
-              <p className="text-xs sm:text-sm text-slate-300 italic font-light leading-relaxed">
-                "The squid ink tagliolini and Fine de Claire oysters are unforgettable. Accompanied by a 2019 Tignanello, it was pure culinary poetry."
-              </p>
-              <div className="pt-2 border-t border-slate-800">
-                <span className="font-serif text-xs text-gold-300 uppercase tracking-widest block">The World's 50 Best</span>
-                <span className="text-[10px] text-slate-400">Discovery Choice</span>
-              </div>
-            </div>
+            {/* Mobile Slideshow Controls & 5s Loop Progress Dots */}
+            <div className="flex items-center justify-center space-x-4 mt-6">
+              <button
+                onClick={() => setActiveReviewIndex((prev) => (prev - 1 + criticReviews.length) % criticReviews.length)}
+                className="p-2 rounded-full bg-[#071421] border border-slate-800 text-slate-400 hover:text-gold-300 transition cursor-pointer"
+                title="Previous Review"
+                aria-label="Previous Review"
+              >
+                <ChevronLeft className="w-4 h-4" />
+              </button>
 
-            <div className="p-8 rounded-2xl bg-[#071421] border border-slate-800 space-y-4">
-              <div className="flex text-gold-400 space-x-1">
-                {[...Array(5)].map((_, i) => (
-                  <Star key={i} className="w-4 h-4 fill-gold-400" />
+              <div className="flex items-center space-x-2">
+                {criticReviews.map((_, idx) => (
+                  <button
+                    key={idx}
+                    onClick={() => setActiveReviewIndex(idx)}
+                    className={`h-1.5 rounded-full transition-all duration-700 cursor-pointer ${
+                      idx === activeReviewIndex
+                        ? 'w-7 bg-gold-400 shadow-[0_0_8px_rgba(204,162,81,0.5)]'
+                        : 'w-2 bg-slate-700 hover:bg-slate-500'
+                    }`}
+                    aria-label={`Go to slide ${idx + 1}`}
+                  />
                 ))}
               </div>
-              <p className="text-xs sm:text-sm text-slate-300 italic font-light leading-relaxed">
-                "Tableside Dover sole service executed with Parisian precision. The ocean terrace sunset view alone is worth the reservation."
-              </p>
-              <div className="pt-2 border-t border-slate-800">
-                <span className="font-serif text-xs text-gold-300 uppercase tracking-widest block">Le Figaro Gastronomie</span>
-                <span className="text-[10px] text-slate-400">Critic's Review</span>
-              </div>
+
+              <button
+                onClick={() => setActiveReviewIndex((prev) => (prev + 1) % criticReviews.length)}
+                className="p-2 rounded-full bg-[#071421] border border-slate-800 text-slate-400 hover:text-gold-300 transition cursor-pointer"
+                title="Next Review"
+                aria-label="Next Review"
+              >
+                <ChevronRight className="w-4 h-4" />
+              </button>
             </div>
           </div>
         </div>
