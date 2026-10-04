@@ -33,7 +33,7 @@ export default function WineSection({ onAddToCart, onOpenDishDetail }) {
   ];
 
   return (
-    <section className="py-24 bg-[#050d16] text-slate-100 border-t border-slate-800/80 relative">
+    <section className="py-24 bg-[#050d16] text-slate-100 border-t border-slate-800/80 relative overflow-hidden w-full">
       <div className="max-w-7xl mx-auto px-6 sm:px-10">
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-16">
           <div>

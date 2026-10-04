@@ -11,15 +11,13 @@ export default function Header({
 }) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
-  // Auto-close mobile drawer if viewport is resized to desktop width
+  // Close drawer on escape key
   useEffect(() => {
-    const handleResize = () => {
-      if (window.innerWidth >= 1024) {
-        setMobileMenuOpen(false);
-      }
+    const handleKeyDown = (e) => {
+      if (e.key === 'Escape') setMobileMenuOpen(false);
     };
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
   }, []);
 
   const navItems = [
@@ -46,7 +44,7 @@ export default function Header({
           : 'bg-gradient-to-b from-[#030910]/85 via-[#030910]/40 to-transparent backdrop-blur-[1px]'
       }`}
     >
-      <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-10 h-16 sm:h-20 flex items-center justify-between">
+      <div className="w-full max-w-7xl mx-auto px-3 sm:px-6 lg:px-10 h-16 sm:h-20 flex items-center justify-between">
         {/* Brand Logo - Crest Emblem + "SEACLUB" */}
         <div className="flex items-center space-x-3 shrink-0">
           <button
@@ -100,7 +98,7 @@ export default function Header({
         </nav>
 
         {/* Right CTA / Action Group */}
-        <div className="flex items-center space-x-2 sm:space-x-3.5 lg:space-x-5 shrink-0">
+        <div className="flex items-center space-x-2 sm:space-x-3 lg:space-x-4 shrink-0">
           {/* Book a Table — Icon on Mobile, Icon + Text on Desktop */}
           <button
             onClick={onOpenBookTable}
@@ -130,36 +128,43 @@ export default function Header({
             )}
           </button>
 
-          {/* Admin portal link */}
+          {/* Admin portal link (hidden on mobile < sm to keep header spacious) */}
           <a
             href="http://localhost:5174"
             target="_blank"
             rel="noreferrer"
-            className="p-1.5 text-slate-400 hover:text-gold-300 transition shrink-0"
+            className="hidden sm:inline-flex p-1.5 text-slate-400 hover:text-gold-300 transition shrink-0"
             title="Admin Management Portal"
             aria-label="Admin Portal"
           >
             <ExternalLink className="w-3.5 h-3.5" />
           </a>
 
-          {/* Mobile/Tablet Menu Hamburger Button - Always visible on < lg */}
+          {/* Burger Menu Button - Always present to choose where to go */}
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="lg:hidden p-1.5 sm:p-2 text-gold-300 hover:text-white cursor-pointer rounded-lg hover:bg-white/5 transition shrink-0"
+            className="p-1.5 sm:px-2.5 sm:py-1.5 text-gold-300 hover:text-white cursor-pointer rounded-xl border border-gold-500/40 bg-gold-500/10 hover:bg-gold-500/25 transition shrink-0 flex items-center space-x-1 shadow-sm active:scale-95"
             aria-label="Toggle navigation menu"
+            title="Choose where to go"
           >
             {mobileMenuOpen ? (
-              <X className="w-5 h-5 sm:w-6 sm:h-6 text-gold-400" />
+              <>
+                <X className="w-4 h-4 sm:w-5 sm:h-5 text-gold-400 shrink-0" />
+                <span className="hidden sm:inline font-serif text-xs uppercase tracking-wider text-gold-300 font-semibold">Close</span>
+              </>
             ) : (
-              <Menu className="w-5 h-5 sm:w-6 sm:h-6 text-gold-400" />
+              <>
+                <Menu className="w-4 h-4 sm:w-5 sm:h-5 text-gold-400 shrink-0" />
+                <span className="hidden sm:inline font-serif text-xs uppercase tracking-wider text-gold-300 font-semibold">Menu</span>
+              </>
             )}
           </button>
         </div>
       </div>
 
-      {/* Mobile / Tablet Drawer */}
+      {/* Navigation Drawer - Opens cleanly on any resolution */}
       {mobileMenuOpen && (
-        <div className="lg:hidden bg-[#071421]/98 backdrop-blur-xl border-b border-slate-800 px-6 py-6 space-y-4 animate-in slide-in-from-top-2 duration-200 text-xs sm:text-sm tracking-widest uppercase font-serif shadow-2xl">
+        <div className="bg-[#071421]/98 backdrop-blur-xl border-b border-slate-800 px-6 py-6 space-y-4 animate-in slide-in-from-top-2 duration-200 text-xs sm:text-sm tracking-widest uppercase font-serif shadow-2xl">
           {/* Drawer Brand Header with Crest Logo */}
           <div className="flex items-center space-x-3 pb-3 border-b border-slate-800/80">
             <div className="w-8 h-8 rounded-full overflow-hidden border border-gold-400/50 bg-[#050e17] shrink-0">

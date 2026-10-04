@@ -168,7 +168,7 @@ export default function App() {
   const totalCartCount = cartItems.reduce((acc, item) => acc + item.quantity, 0);
 
   return (
-    <div className="min-h-screen bg-[#050e17] text-slate-100 flex flex-col selection:bg-gold-500 selection:text-black">
+    <div className="min-h-screen bg-[#050e17] text-slate-100 flex flex-col selection:bg-gold-500 selection:text-black w-full overflow-x-hidden">
       {/* Toast Alert */}
       {toast && (
         <div className="fixed bottom-6 right-6 z-50 animate-in slide-in-from-bottom-5 duration-300">

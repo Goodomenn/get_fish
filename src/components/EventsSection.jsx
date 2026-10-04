@@ -4,7 +4,7 @@ import { Calendar, Clock, Sparkles, ArrowRight } from 'lucide-react';
 
 export default function EventsSection({ onOpenBookTable }) {
   return (
-    <section id="events" className="py-24 bg-[#071421] text-slate-100 border-t border-slate-800/80 relative">
+    <section id="events" className="py-24 bg-[#071421] text-slate-100 border-t border-slate-800/80 relative overflow-hidden w-full">
       <div className="max-w-7xl mx-auto px-6 sm:px-10">
         <div className="text-center max-w-2xl mx-auto space-y-4 mb-16">
           <span className="font-serif italic text-gold-300 text-xl tracking-wider block">

@@ -20,9 +20,9 @@ export default function MenuSection({
   });
 
   return (
-    <section id="menu" className="py-20 sm:py-28 bg-[#050d16] text-slate-100 relative">
+    <section id="menu" className="py-20 sm:py-28 bg-[#050d16] text-slate-100 relative overflow-hidden w-full">
       {/* Background Ambient Glow */}
-      <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] bg-marine-700/10 rounded-full blur-[140px] pointer-events-none"></div>
+      <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-[700px] h-[350px] sm:h-[700px] bg-marine-700/10 rounded-full blur-[140px] pointer-events-none"></div>
 
       <div className="max-w-7xl mx-auto px-6 sm:px-10 relative">
         {/* Section Heading */}
