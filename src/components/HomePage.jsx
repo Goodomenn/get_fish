@@ -627,36 +627,6 @@ export default function HomePage({
         </div>
       </section>
 
-      {/* 9. FAST TABLE RESERVATION CTA */}
-      <section className="py-20 bg-gradient-to-b from-[#071421] to-[#050e17] border-t border-slate-800 text-center relative overflow-hidden">
-        <div className="max-w-4xl mx-auto px-6 relative z-10 space-y-6">
-          <span className="font-serif italic text-gold-300 text-xl tracking-wider block">
-            an unforgettable evening awaits
-          </span>
-          <h2 className="font-serif text-3xl sm:text-5xl text-white uppercase tracking-tight">
-            RESERVE YOUR TABLE AT SEACLUB
-          </h2>
-          <p className="text-slate-300 text-xs sm:text-sm font-light max-w-xl mx-auto leading-relaxed">
-            Due to our reliance on morning day-boat catches, seating is limited each evening. 
-            We recommend reserving your table at least 24 hours in advance.
-          </p>
-
-          <div className="pt-4 flex flex-wrap items-center justify-center gap-4">
-            <button
-              onClick={() => onOpenBookTable()}
-              className="px-10 py-4 bg-gradient-to-r from-gold-600 to-gold-500 hover:from-gold-500 hover:to-gold-400 text-slate-950 font-serif text-xs font-bold tracking-[0.25em] uppercase transition duration-300 shadow-2xl active:scale-95"
-            >
-              Book A Table Now
-            </button>
-            <button
-              onClick={() => onNavigate('contacts')}
-              className="px-8 py-4 border border-gold-500/50 hover:border-gold-300 text-gold-200 hover:text-white font-serif text-xs tracking-[0.2em] uppercase transition bg-[#091b2c]/80"
-            >
-              Location & Yacht Mooring →
-            </button>
-          </div>
-        </div>
-      </section>
     </div>
   );
 }
