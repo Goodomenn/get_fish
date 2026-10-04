@@ -28,8 +28,8 @@ export default function Hero({
   if (compact) {
     return (
       <section className="relative w-full bg-[#050e17] overflow-hidden select-none border-b border-slate-800">
-        {/* Compact Hero Container: exactly ~30% scale (~220px to 300px height) */}
-        <div className="relative w-full max-w-[1536px] mx-auto min-h-[220px] sm:h-[260px] md:h-[285px] lg:h-[300px] bg-[#071421] shadow-2xl overflow-hidden">
+        {/* Compact Hero Container: exactly ~30% scale (~250px to 310px height) */}
+        <div className="relative w-full max-w-[1536px] mx-auto min-h-[250px] sm:min-h-[270px] md:h-[295px] lg:h-[310px] bg-[#071421] shadow-2xl overflow-hidden">
           {/* Pristine Background Canvas cropped to luxury dark-marble & seafood top */}
           <img
             src="/hero-bg.jpg"

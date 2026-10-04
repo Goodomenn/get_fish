@@ -41,7 +41,7 @@ export default function Header({
   return (
     <header
       className={`fixed top-0 inset-x-0 z-50 transition-all duration-300 ${
-        isScrolled || mobileMenuOpen
+        isScrolled || mobileMenuOpen || currentPage !== 'home'
           ? 'bg-[#071421]/95 backdrop-blur-md border-b border-slate-800 shadow-2xl'
           : 'bg-gradient-to-b from-[#030910]/85 via-[#030910]/40 to-transparent backdrop-blur-[1px]'
       }`}
