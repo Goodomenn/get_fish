@@ -57,7 +57,7 @@ export default function App() {
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 220);
+      setIsScrolled(window.scrollY > 20);
     };
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
@@ -179,14 +179,14 @@ export default function App() {
         </div>
       )}
 
-      {/* Sticky Header with Home nav tab and routing (slides down upon scroll) */}
+      {/* Stuck/Sticky Header with navigation and responsive mobile burger menu */}
       <Header
         cartCount={totalCartCount}
         onOpenCart={() => setIsCartOpen(true)}
         onOpenBookTable={() => handleOpenBookTableWithArea('Ocean Terrace')}
         currentPage={currentPage}
         onNavigate={handleNavigate}
-        isVisible={isScrolled}
+        isScrolled={isScrolled}
       />
 
       {/* Main Content Router */}
