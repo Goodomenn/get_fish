@@ -1,7 +1,5 @@
 import React from 'react';
 import Hero from './Hero';
-import DressedOystersSection from './DressedOystersSection';
-import TignanelloSection from './TignanelloSection';
 import {
   Sparkles,
   Fish,
@@ -119,19 +117,7 @@ export default function HomePage({
         </div>
       </div>
 
-      {/* 2. DEDICATED SECTION: Dressed Oysters (25 $) */}
-      <DressedOystersSection
-        onAddToCart={onAddToCart}
-        onOpenDishDetail={onOpenDish}
-      />
-
-      {/* 3. DEDICATED SECTION: Tignanello 2019 (300 $) */}
-      <TignanelloSection
-        onAddToCart={onAddToCart}
-        onOpenDishDetail={onOpenDish}
-      />
-
-      {/* 4. OUR STORY & THE STANDARD WE SET */}
+      {/* 2. OUR STORY & THE STANDARD WE SET */}
       <section id="our-story" className="py-20 sm:py-28 bg-[#050e17] relative overflow-hidden border-t border-slate-800">
         <div className="max-w-7xl mx-auto px-6 sm:px-10 space-y-16">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
@@ -458,52 +444,65 @@ export default function HomePage({
             </p>
           </div>
 
-          {/* 3 Branches Grid */}
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          {/* 3 Branches in Column Order (Vertical Stack) */}
+          <div className="space-y-10 max-w-5xl mx-auto">
             {RESTAURANT_BRANCHES.map((branch, idx) => (
               <div
                 key={branch.id}
-                className="bg-[#050e17] border border-slate-800/90 hover:border-gold-500/40 rounded-3xl overflow-hidden transition-all duration-300 group hover:-translate-y-1.5 shadow-2xl flex flex-col justify-between"
+                className="bg-[#050e17] border border-slate-800/90 hover:border-gold-500/40 rounded-3xl overflow-hidden transition-all duration-300 group hover:-translate-y-1 shadow-2xl flex flex-col md:flex-row items-stretch"
               >
-                <div>
-                  {/* Branch Photo */}
-                  <div className="relative h-60 sm:h-64 overflow-hidden">
-                    <img
-                      src={branch.image}
-                      alt={branch.name}
-                      className="w-full h-full object-cover group-hover:scale-105 transition duration-700"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-[#050e17] via-transparent to-transparent opacity-90" />
-                    
-                    {/* Top Badges */}
-                    <div className="absolute top-4 left-4 right-4 flex items-center justify-between">
-                      <span className="px-3 py-1 bg-[#050e17]/85 backdrop-blur-md border border-gold-500/40 text-gold-300 text-[10px] font-serif uppercase tracking-widest rounded-full font-bold">
-                        {branch.badge}
-                      </span>
-                      <span className="px-2.5 py-1 bg-black/60 backdrop-blur-md text-slate-300 text-[10px] font-mono rounded-full">
-                        Branch 0{idx + 1}
-                      </span>
-                    </div>
+                {/* Branch Photo */}
+                <div className="relative md:w-5/12 lg:w-1/2 min-h-[260px] sm:min-h-[300px] overflow-hidden">
+                  <img
+                    src={branch.image}
+                    alt={branch.name}
+                    className="w-full h-full object-cover group-hover:scale-105 transition duration-700"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t md:bg-gradient-to-r from-transparent via-[#050e17]/30 to-[#050e17] opacity-90" />
+                  
+                  {/* Top Badges */}
+                  <div className="absolute top-4 left-4 right-4 flex items-center justify-between">
+                    <span className="px-3 py-1 bg-[#050e17]/85 backdrop-blur-md border border-gold-500/40 text-gold-300 text-[10px] font-serif uppercase tracking-widest rounded-full font-bold">
+                      {branch.badge}
+                    </span>
+                    <span className="px-2.5 py-1 bg-black/60 backdrop-blur-md text-slate-300 text-[10px] font-mono rounded-full">
+                      Branch 0{idx + 1}
+                    </span>
+                  </div>
 
-                    {/* City and Title overlay */}
-                    <div className="absolute bottom-4 left-4 right-4">
+                  {/* City and Title overlay on small screens */}
+                  <div className="absolute bottom-4 left-4 right-4 md:hidden">
+                    <span className="text-xs text-gold-300 font-serif italic block">
+                      {branch.city}
+                    </span>
+                    <h3 className="font-serif text-xl text-white font-bold tracking-wide uppercase">
+                      {branch.name}
+                    </h3>
+                  </div>
+                </div>
+
+                {/* Branch Details & Actions */}
+                <div className="p-6 sm:p-8 md:w-7/12 lg:w-1/2 flex flex-col justify-between space-y-6">
+                  <div className="space-y-4">
+                    {/* Header on medium/large screens */}
+                    <div className="hidden md:block space-y-1">
                       <span className="text-xs text-gold-300 font-serif italic block">
                         {branch.city}
                       </span>
-                      <h3 className="font-serif text-xl sm:text-2xl text-white font-bold tracking-wide uppercase">
+                      <h3 className="font-serif text-2xl lg:text-3xl text-white font-bold tracking-wide uppercase">
                         {branch.name}
                       </h3>
+                      <p className="text-xs text-gold-400/80 font-serif tracking-wide">
+                        {branch.tagline}
+                      </p>
                     </div>
-                  </div>
 
-                  {/* Branch Details */}
-                  <div className="p-6 sm:p-7 space-y-5">
                     <p className="text-xs sm:text-sm text-slate-300 font-light leading-relaxed">
                       {branch.description}
                     </p>
 
                     {/* Highlights Pills */}
-                    <div className="flex flex-wrap gap-1.5 pt-1">
+                    <div className="flex flex-wrap gap-2 pt-1">
                       {branch.highlights.map((h, i) => (
                         <span
                           key={i}
@@ -518,11 +517,11 @@ export default function HomePage({
                     <div className="space-y-2 pt-4 border-t border-slate-800/80 text-xs text-slate-400 font-light">
                       <div className="flex items-start space-x-2">
                         <MapPin className="w-3.5 h-3.5 text-gold-400 shrink-0 mt-0.5" />
-                        <span>{branch.address}</span>
+                        <span className="text-slate-200">{branch.address}</span>
                       </div>
                       <div className="flex items-center space-x-2">
                         <Clock className="w-3.5 h-3.5 text-gold-400 shrink-0" />
-                        <span>Dinner: {branch.hours.dinner}</span>
+                        <span>Dinner Service: {branch.hours.dinner}</span>
                       </div>
                       <div className="flex items-center space-x-2">
                         <Anchor className="w-3.5 h-3.5 text-gold-400 shrink-0" />
@@ -530,23 +529,23 @@ export default function HomePage({
                       </div>
                     </div>
                   </div>
-                </div>
 
-                {/* Card CTA Actions */}
-                <div className="p-6 sm:p-7 pt-0 flex items-center gap-3">
-                  <button
-                    onClick={() => onOpenBookTable(branch.id)}
-                    className="flex-1 py-3 bg-gradient-to-r from-gold-600 to-gold-500 hover:from-gold-500 hover:to-gold-400 text-slate-950 font-serif font-bold text-xs uppercase tracking-wider rounded-xl transition shadow-lg text-center cursor-pointer active:scale-95"
-                  >
-                    Reserve Table
-                  </button>
-                  <button
-                    onClick={() => handleBranchViewOnMap(branch.id)}
-                    className="px-4 py-3 bg-[#091b2c] hover:bg-[#0e273f] border border-slate-700 hover:border-gold-500/40 text-gold-300 hover:text-white font-serif text-xs uppercase tracking-wider rounded-xl transition text-center cursor-pointer"
-                    title="View this branch on the map"
-                  >
-                    View Map
-                  </button>
+                  {/* Card CTA Actions */}
+                  <div className="pt-4 border-t border-slate-800/60 flex flex-wrap sm:flex-nowrap items-center gap-3">
+                    <button
+                      onClick={() => onOpenBookTable(branch.id)}
+                      className="flex-1 py-3 bg-gradient-to-r from-gold-600 to-gold-500 hover:from-gold-500 hover:to-gold-400 text-slate-950 font-serif font-bold text-xs uppercase tracking-wider rounded-xl transition shadow-lg text-center cursor-pointer active:scale-95 whitespace-nowrap"
+                    >
+                      Reserve Table at {branch.name.split(' ')[0]}
+                    </button>
+                    <button
+                      onClick={() => handleBranchViewOnMap(branch.id)}
+                      className="px-5 py-3 bg-[#091b2c] hover:bg-[#0e273f] border border-slate-700 hover:border-gold-500/40 text-gold-300 hover:text-white font-serif text-xs uppercase tracking-wider rounded-xl transition text-center cursor-pointer whitespace-nowrap"
+                      title="View this branch on the map"
+                    >
+                      View on Map
+                    </button>
+                  </div>
                 </div>
               </div>
             ))}
