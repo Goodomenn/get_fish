@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import {
-  Fish,
-  Wine,
   MapPin,
   Phone,
   Mail,
@@ -169,10 +167,10 @@ export default function Footer({ onOpenBookTable, onNavigate }) {
 
       {/* 2. Main Footer Multi-Column Grid */}
       <div className="max-w-7xl mx-auto px-6 sm:px-10 py-16 sm:py-20">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 lg:gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-12 gap-10 lg:gap-12">
           
-          {/* Column 1: Brand Identity & Reservations CTA (4 cols) */}
-          <div className="lg:col-span-4 space-y-5 text-center md:text-left">
+          {/* Column 1: Brand Identity & Reservations CTA (5 cols) */}
+          <div className="lg:col-span-5 space-y-5 text-center md:text-left">
             <div className="space-y-1">
               <button
                 onClick={() => handleNav('home')}
@@ -221,61 +219,8 @@ export default function Footer({ onOpenBookTable, onNavigate }) {
             </div>
           </div>
 
-          {/* Column 2: Gastronomy & Menus (3 cols) */}
+          {/* Column 2: Navigation & Experiences (3 cols) */}
           <div className="lg:col-span-3 space-y-4 text-center md:text-left">
-            <h4 className="font-serif text-sm font-semibold uppercase tracking-[0.2em] text-white flex items-center justify-center md:justify-start space-x-2">
-              <Fish className="w-3.5 h-3.5 text-gold-400" />
-              <span>Gastronomy</span>
-            </h4>
-            <ul className="space-y-2.5 text-xs text-slate-400 font-light">
-              <li>
-                <button
-                  onClick={() => handleNav('menu')}
-                  className="hover:text-gold-300 transition cursor-pointer flex items-center justify-center md:justify-start space-x-1.5 mx-auto md:mx-0"
-                >
-                  <span>Wild Day-Boat Catches</span>
-                </button>
-              </li>
-              <li>
-                <button
-                  onClick={() => handleNav('menu')}
-                  className="hover:text-gold-300 transition cursor-pointer flex items-center justify-center md:justify-start space-x-1.5 mx-auto md:mx-0"
-                >
-                  <span>Raw Bar & Dressed Oysters</span>
-                  <span className="text-[10px] text-gold-400 font-serif italic">(25 $)</span>
-                </button>
-              </li>
-              <li>
-                <button
-                  onClick={() => handleNav('menu')}
-                  className="hover:text-gold-300 transition cursor-pointer flex items-center justify-center md:justify-start space-x-1.5 mx-auto md:mx-0"
-                >
-                  <span>Wood-Fired Mediterranean Branzino</span>
-                </button>
-              </li>
-              <li>
-                <button
-                  onClick={() => handleNav('menu')}
-                  className="hover:text-gold-300 transition cursor-pointer flex items-center justify-center md:justify-start space-x-1.5 mx-auto md:mx-0"
-                >
-                  <span>Squid Ink Tagliolini Pasta</span>
-                  <span className="text-[10px] text-gold-400 font-serif italic">(36 $)</span>
-                </button>
-              </li>
-              <li>
-                <button
-                  onClick={() => handleNav('wine')}
-                  className="hover:text-gold-300 transition cursor-pointer flex items-center justify-center md:justify-start space-x-1.5 mx-auto md:mx-0"
-                >
-                  <span>Tignanello & Super Tuscans</span>
-                  <span className="text-[10px] text-gold-400 font-serif italic">(300 $)</span>
-                </button>
-              </li>
-            </ul>
-          </div>
-
-          {/* Column 3: Navigation & Experiences (2 cols) */}
-          <div className="lg:col-span-2 space-y-4 text-center md:text-left">
             <h4 className="font-serif text-sm font-semibold uppercase tracking-[0.2em] text-white flex items-center justify-center md:justify-start space-x-2">
               <Compass className="w-3.5 h-3.5 text-gold-400" />
               <span>Explore</span>
@@ -314,9 +259,8 @@ export default function Footer({ onOpenBookTable, onNavigate }) {
             </ul>
           </div>
 
-          {/* Column 4: Harbor Location & Hours (3 cols) */}
-          {/* Column 4: Service Hours & Concierge (3 cols) */}
-          <div className="lg:col-span-3 space-y-4 text-center md:text-left">
+          {/* Column 3: Service Hours & Concierge (4 cols) */}
+          <div className="lg:col-span-4 space-y-4 text-center md:text-left">
             <h4 className="font-serif text-sm font-semibold uppercase tracking-[0.2em] text-white flex items-center justify-center md:justify-start space-x-2">
               <Clock className="w-3.5 h-3.5 text-gold-400" />
               <span>Service Hours</span>
