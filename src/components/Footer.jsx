@@ -31,8 +31,8 @@ export default function Footer({ onOpenBookTable, onNavigate }) {
       {/* 1. Interactive Harbor Map & Docking Section */}
       <div className="border-b border-slate-800/80 bg-[#050e17] relative">
         {/* Top Header Strip */}
-        <div className="max-w-7xl mx-auto px-6 sm:px-10 py-6 border-b border-slate-800/60">
-          <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+        <div className="max-w-7xl mx-auto px-6 sm:px-10 py-5 border-b border-slate-800/60">
+          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
             <div className="space-y-1">
               <div className="flex items-center space-x-2 text-gold-400 font-serif text-xs uppercase tracking-widest">
                 <Compass className="w-3.5 h-3.5 text-gold-400" />
@@ -41,104 +41,99 @@ export default function Footer({ onOpenBookTable, onNavigate }) {
               <h3 className="font-serif text-xl sm:text-2xl text-white tracking-wide uppercase">
                 Find Us on the Waterfront
               </h3>
-              <p className="text-xs text-slate-400 font-light">
-                {RESTAURANT_INFO.address} • Yacht Tender Slip 4B • Marina Gate 2 Valet
-              </p>
             </div>
 
-            <div className="flex flex-wrap items-center gap-3">
-              <a
-                href={`https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(RESTAURANT_INFO.address)}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center space-x-2 px-5 py-2.5 bg-gradient-to-r from-gold-600 to-gold-500 hover:from-gold-500 hover:to-gold-400 text-slate-950 font-serif font-bold text-xs uppercase tracking-wider rounded-xl transition shadow-lg cursor-pointer active:scale-95"
-              >
-                <Navigation className="w-3.5 h-3.5" />
-                <span>Get Directions</span>
-                <ExternalLink className="w-3 h-3 ml-0.5 opacity-80" />
-              </a>
-
-              <a
-                href={`tel:${RESTAURANT_INFO.phone}`}
-                className="inline-flex items-center space-x-2 px-4 py-2.5 bg-[#091b2c] hover:bg-[#0c2338] border border-slate-700 hover:border-gold-500/50 text-slate-200 hover:text-gold-300 font-serif text-xs uppercase tracking-wider rounded-xl transition"
-              >
-                <Phone className="w-3.5 h-3.5 text-gold-400" />
-                <span>Concierge Desk</span>
-              </a>
+            <div className="text-xs text-slate-400 font-light flex items-center space-x-3">
+              <span>San Francisco Marina District</span>
+              <span className="text-slate-700">•</span>
+              <span className="text-gold-300/90 font-serif italic">Waterfront Panoramic Views</span>
             </div>
           </div>
         </div>
 
-        {/* Map Container with Dark Stylized Map and Interactive Glassmorphism Overlay */}
-        <div className="relative w-full h-[320px] sm:h-[380px] md:h-[420px] bg-[#07131f] overflow-hidden">
+        {/* Map Container - 100% Clean & Unobstructed */}
+        <div className="relative w-full h-[320px] sm:h-[380px] md:h-[440px] bg-[#07131f] overflow-hidden">
           {/* Embedded Map */}
           <iframe
             title="SEACLUB Harbor Location Map"
             src="https://maps.google.com/maps?q=Pier%2024%20The%20Embarcadero%20San%20Francisco%20CA&t=&z=15&ie=UTF8&iwloc=&output=embed"
-            className="w-full h-full border-0 filter invert-[92%] hue-rotate-180 contrast-[1.15] brightness-[0.82] opacity-85 hover:opacity-100 transition-opacity duration-300"
+            className="w-full h-full border-0 filter invert-[92%] hue-rotate-180 contrast-[1.15] brightness-[0.82] opacity-90 hover:opacity-100 transition-opacity duration-300"
             loading="lazy"
             allowFullScreen=""
             referrerPolicy="no-referrer-when-downgrade"
           />
 
-          {/* Floating Glassmorphism Location Card (Overlay) */}
-          <div className="absolute top-4 left-4 sm:top-6 sm:left-10 z-10 max-w-sm pointer-events-auto">
-            <div className="bg-[#050e17]/92 backdrop-blur-md border border-gold-500/30 p-5 rounded-2xl shadow-2xl space-y-3">
-              <div className="flex items-center justify-between">
-                <span className="inline-flex items-center space-x-1.5 px-2.5 py-0.5 rounded-full bg-gold-500/10 border border-gold-500/30 text-gold-300 font-serif text-[10px] uppercase tracking-widest">
-                  <MapPin className="w-3 h-3 text-gold-400" />
-                  <span>Harbor Front Pier 24</span>
-                </span>
-                <span className="text-[10px] text-emerald-400 font-mono tracking-wider flex items-center space-x-1">
-                  <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse inline-block mr-1"></span>
-                  OPEN FOR DINNER
-                </span>
-              </div>
+          {/* Discreet live GPS coordinate tag at bottom-right corner of map */}
+          <div className="absolute bottom-3 right-4 z-10 hidden sm:flex items-center space-x-2 px-3 py-1 bg-[#050e17]/85 backdrop-blur-md border border-slate-800 rounded-lg text-[10px] text-slate-400 font-mono pointer-events-none">
+            <span className="w-1.5 h-1.5 rounded-full bg-gold-400"></span>
+            <span>Pier 24 Slip 4B • 37°47'28"N 122°23'19"W</span>
+          </div>
+        </div>
 
-              <div>
-                <h4 className="font-serif text-base text-white font-bold tracking-wide">
-                  SEACLUB Restaurant & Cellar
-                </h4>
-                <p className="text-xs text-slate-300 font-light mt-0.5">
-                  Pier 24 Marina Blvd, Harbor View Harbor
-                </p>
+        {/* Bottom Location & Action Bar (At the bottom of the map) */}
+        <div className="border-t border-slate-800/80 bg-[#050e17] py-5 sm:py-6">
+          <div className="max-w-7xl mx-auto px-6 sm:px-10 flex flex-col lg:flex-row items-center justify-between gap-6">
+            
+            {/* Left: Venue & Arrival Info */}
+            <div className="flex flex-col sm:flex-row items-center sm:items-start text-center sm:text-left gap-4">
+              <div className="w-12 h-12 rounded-2xl bg-gold-500/10 border border-gold-500/25 flex items-center justify-center text-gold-400 shrink-0">
+                <MapPin className="w-6 h-6" />
               </div>
-
-              <div className="pt-2 border-t border-slate-800/80 space-y-1.5 text-[11px] text-slate-400">
-                <div className="flex items-center space-x-2">
-                  <span className="w-1.5 h-1.5 rounded-full bg-gold-400"></span>
-                  <span><strong>Arriving by Car:</strong> Complimentary Valet at Gate 2</span>
+              <div className="space-y-1">
+                <div className="flex flex-wrap items-center justify-center sm:justify-start gap-2.5">
+                  <h4 className="font-serif text-base sm:text-lg text-white font-bold tracking-wide">
+                    SEACLUB Restaurant & Cellar
+                  </h4>
+                  <span className="inline-flex items-center px-2.5 py-0.5 rounded-full bg-gold-500/10 border border-gold-500/30 text-gold-300 font-serif text-[10px] uppercase tracking-widest">
+                    Harbor Front Pier 24
+                  </span>
+                  <span className="text-[10px] text-emerald-400 font-mono tracking-wider flex items-center">
+                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse inline-block mr-1"></span>
+                    OPEN FOR DINNER
+                  </span>
                 </div>
-                <div className="flex items-center space-x-2">
-                  <span className="w-1.5 h-1.5 rounded-full bg-gold-400"></span>
+                <p className="text-xs text-slate-300 font-light">
+                  {RESTAURANT_INFO.address}
+                </p>
+                <div className="flex flex-wrap items-center justify-center sm:justify-start gap-x-4 gap-y-1 text-[11px] text-slate-400 pt-0.5">
+                  <span><strong>Arriving by Car:</strong> Complimentary Valet at Gate 2</span>
+                  <span className="hidden sm:inline text-slate-700">•</span>
                   <span><strong>Arriving by Yacht:</strong> Tender Slip 4B (VHF Ch. 68)</span>
                 </div>
               </div>
-
-              <div className="pt-2 flex items-center gap-2">
-                <a
-                  href={`https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(RESTAURANT_INFO.address)}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex-1 text-center py-2 bg-gradient-to-r from-gold-600 to-gold-500 hover:from-gold-500 hover:to-gold-400 text-slate-950 font-serif font-bold text-[11px] uppercase tracking-wider rounded-lg transition shadow cursor-pointer"
-                >
-                  Navigate Here
-                </a>
-                <button
-                  onClick={onOpenBookTable}
-                  className="px-3 py-2 bg-slate-800/80 hover:bg-slate-700/80 border border-slate-700 text-gold-300 font-serif text-[11px] uppercase tracking-wider rounded-lg transition cursor-pointer"
-                >
-                  Reserve Table
-                </button>
-              </div>
             </div>
-          </div>
 
-          {/* Bottom Map Status Strip */}
-          <div className="absolute bottom-2 right-4 z-10 hidden sm:flex items-center space-x-3 px-3 py-1 bg-[#050e17]/80 backdrop-blur-sm border border-slate-800 rounded-lg text-[10px] text-slate-400 font-mono">
-            <span>Waterfront Dock Slip 4B</span>
-            <span>•</span>
-            <span>Harbor View San Francisco</span>
+            {/* Right: Navigate Here & Reserve Table Buttons */}
+            <div className="flex flex-wrap items-center justify-center gap-3 shrink-0 w-full sm:w-auto">
+              <a
+                href={`https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(RESTAURANT_INFO.address)}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex-1 sm:flex-initial inline-flex items-center justify-center space-x-2 px-6 py-3 bg-gradient-to-r from-gold-600 to-gold-500 hover:from-gold-500 hover:to-gold-400 text-slate-950 font-serif font-bold text-xs uppercase tracking-wider rounded-xl transition duration-200 shadow-lg cursor-pointer active:scale-95"
+              >
+                <Navigation className="w-3.5 h-3.5" />
+                <span>Navigate Here</span>
+                <ExternalLink className="w-3 h-3 ml-0.5 opacity-80" />
+              </a>
+
+              <button
+                onClick={onOpenBookTable}
+                className="flex-1 sm:flex-initial inline-flex items-center justify-center space-x-2 px-6 py-3 bg-[#0a1c2e] hover:bg-[#0f2842] border border-gold-500/40 hover:border-gold-400 text-gold-300 hover:text-gold-200 font-serif font-bold text-xs uppercase tracking-wider rounded-xl transition duration-200 shadow-lg cursor-pointer active:scale-95"
+              >
+                <ArrowRight className="w-3.5 h-3.5" />
+                <span>Reserve Table</span>
+              </button>
+
+              <a
+                href={`tel:${RESTAURANT_INFO.phone}`}
+                className="inline-flex items-center justify-center space-x-2 px-4 py-3 bg-slate-900/90 hover:bg-slate-800 border border-slate-700 hover:border-slate-600 text-slate-300 hover:text-white font-serif text-xs uppercase tracking-wider rounded-xl transition"
+                title="Call Concierge Desk"
+              >
+                <Phone className="w-3.5 h-3.5 text-gold-400" />
+                <span className="hidden sm:inline">Concierge</span>
+              </a>
+            </div>
+
           </div>
         </div>
       </div>
