@@ -405,54 +405,6 @@ export default function HomePage({
         </div>
       </section>
 
-      {/* 7. DAY-BOAT SOURCING TIMELINE */}
-      <section className="py-20 bg-[#071421] border-t border-slate-800">
-        <div className="max-w-7xl mx-auto px-6 sm:px-10">
-          <div className="text-center max-w-xl mx-auto mb-14 space-y-3">
-            <span className="font-serif italic text-gold-300 text-lg tracking-wider">
-              the journey of freshness
-            </span>
-            <h2 className="font-serif text-3xl sm:text-4xl text-white tracking-tight uppercase">
-              OCEAN TO PLATE IN 12 HOURS
-            </h2>
-            <div className="w-16 h-0.5 bg-gold-500/70 mx-auto" />
-          </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            <div className="p-6 bg-[#050e17] border border-slate-800/80 rounded-2xl space-y-3">
-              <span className="text-gold-400 font-serif text-2xl font-bold block">04:30 AM</span>
-              <h4 className="font-serif text-sm uppercase text-white">Dawn Day-Boat Harvest</h4>
-              <p className="text-xs text-slate-400 font-light leading-relaxed">
-                Certified sustainable coastal fishermen land line-caught branzino, Dover sole, and Atlantic tuna.
-              </p>
-            </div>
-
-            <div className="p-6 bg-[#050e17] border border-slate-800/80 rounded-2xl space-y-3">
-              <span className="text-gold-400 font-serif text-2xl font-bold block">08:00 AM</span>
-              <h4 className="font-serif text-sm uppercase text-white">Fishmonger Inspection</h4>
-              <p className="text-xs text-slate-400 font-light leading-relaxed">
-                Executive Chef Antoine Laurent personally examines gill clarity, ocean fragrance, and skin elasticity.
-              </p>
-            </div>
-
-            <div className="p-6 bg-[#050e17] border border-slate-800/80 rounded-2xl space-y-3">
-              <span className="text-gold-400 font-serif text-2xl font-bold block">11:30 AM</span>
-              <h4 className="font-serif text-sm uppercase text-white">Cold-Chain Prep</h4>
-              <p className="text-xs text-slate-400 font-light leading-relaxed">
-                Raw bar beds are layered with glacier ice; whole fishes are dry-aged or prepped for 800° wood stone fire.
-              </p>
-            </div>
-
-            <div className="p-6 bg-[#050e17] border border-slate-800/80 rounded-2xl space-y-3">
-              <span className="text-gold-400 font-serif text-2xl font-bold block">18:00 PM</span>
-              <h4 className="font-serif text-sm uppercase text-white">Table-Side Service</h4>
-              <p className="text-xs text-slate-400 font-light leading-relaxed">
-                Dover sole is filleted table-side, oysters are freshly shucked, and chilled grand crus are poured.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
 
       {/* 8. CRITIC ACCLAIM */}
       <section className="py-20 bg-[#050e17] border-t border-slate-800">
