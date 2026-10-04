@@ -176,11 +176,21 @@ export default function Footer({ onOpenBookTable, onNavigate }) {
             <div className="space-y-1">
               <button
                 onClick={() => handleNav('home')}
-                className="font-serif tracking-[0.28em] text-2xl sm:text-3xl font-bold uppercase text-white hover:text-gold-300 transition cursor-pointer"
+                className="flex items-center justify-center md:justify-start space-x-3 group cursor-pointer"
+                title="SEACLUB Home"
               >
-                SEACLUB
+                <div className="w-10 h-10 rounded-full overflow-hidden border border-gold-400/50 bg-[#050e17] shrink-0 shadow-lg group-hover:scale-105 transition-transform">
+                  <img
+                    src="/seaclub-crest.png"
+                    alt="SEACLUB Crest"
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+                <span className="font-serif tracking-[0.28em] text-2xl sm:text-3xl font-bold uppercase text-white group-hover:text-gold-300 transition">
+                  SEACLUB
+                </span>
               </button>
-              <span className="font-serif italic text-gold-300 text-sm block">
+              <span className="font-serif italic text-gold-300 text-sm block md:pl-13">
                 seafood + wine
               </span>
             </div>

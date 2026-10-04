@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { ShoppingBag, Menu, X, ExternalLink } from 'lucide-react';
+import { ShoppingBag, Menu, X, ExternalLink, CalendarCheck } from 'lucide-react';
 
 export default function Header({
   cartCount = 0,
@@ -46,16 +46,33 @@ export default function Header({
           : 'bg-gradient-to-b from-[#030910]/85 via-[#030910]/40 to-transparent backdrop-blur-[1px]'
       }`}
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-10 h-16 sm:h-20 flex items-center justify-between">
-        {/* Brand Logo - "SEACLUB" */}
-        <div className="flex items-center space-x-4 sm:space-x-6 shrink-0">
+      <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-10 h-16 sm:h-20 flex items-center justify-between">
+        {/* Brand Logo - Crest Emblem + "SEACLUB" */}
+        <div className="flex items-center space-x-3 shrink-0">
           <button
             onClick={() => handleNavClick('home')}
-            className="flex items-center space-x-3 group text-left cursor-pointer"
+            className="flex items-center space-x-2 sm:space-x-3 group text-left cursor-pointer"
+            title="SEACLUB Home"
+            aria-label="SEACLUB Home"
           >
-            <span className="font-serif tracking-[0.2em] sm:tracking-[0.28em] text-lg sm:text-xl font-bold uppercase text-gold-300 hover:text-white transition duration-300 whitespace-nowrap drop-shadow-md">
-              SEACLUB
-            </span>
+            {/* High-Resolution Luxury Nautical Crest Emblem */}
+            <div className="relative w-8 h-8 sm:w-10 sm:h-10 rounded-full overflow-hidden border border-gold-400/50 shadow-md group-hover:border-gold-300 group-hover:scale-105 transition-all duration-300 shrink-0 bg-[#050e17]">
+              <img
+                src="/seaclub-crest.png"
+                alt="SEACLUB Crest"
+                className="w-full h-full object-cover"
+              />
+            </div>
+
+            {/* Brand Typography */}
+            <div className="flex flex-col">
+              <span className="font-serif tracking-[0.2em] sm:tracking-[0.28em] text-base sm:text-xl font-bold uppercase text-gold-300 group-hover:text-white transition duration-300 whitespace-nowrap drop-shadow-md">
+                SEACLUB
+              </span>
+              <span className="hidden sm:block text-[8px] sm:text-[9px] font-serif tracking-[0.22em] uppercase text-gold-400/70 -mt-0.5 whitespace-nowrap">
+                Seafood & Wine
+              </span>
+            </div>
           </button>
         </div>
 
@@ -83,14 +100,18 @@ export default function Header({
         </nav>
 
         {/* Right CTA / Action Group */}
-        <div className="flex items-center space-x-2 sm:space-x-4 lg:space-x-6 shrink-0">
-          {/* Book a Table — Never wraps or breaks into multiple lines */}
+        <div className="flex items-center space-x-2 sm:space-x-3.5 lg:space-x-5 shrink-0">
+          {/* Book a Table — Icon on Mobile, Icon + Text on Desktop */}
           <button
             onClick={onOpenBookTable}
-            className="flex items-center space-x-1.5 sm:space-x-2.5 text-gold-300 hover:text-white font-serif text-[11px] sm:text-xs lg:text-sm tracking-[0.12em] sm:tracking-[0.16em] uppercase transition duration-300 cursor-pointer group whitespace-nowrap shrink-0 drop-shadow-md"
+            className="relative p-1.5 sm:px-3 sm:py-1.5 text-gold-300 hover:text-white rounded-lg border border-gold-500/30 hover:border-gold-400 bg-gold-500/10 hover:bg-gold-500/20 transition duration-300 cursor-pointer flex items-center space-x-1.5 shrink-0 group shadow-sm"
+            title="Book a Table"
+            aria-label="Book a Table"
           >
-            <span>Book a table</span>
-            <span className="hidden sm:inline-block w-3 sm:w-6 h-0.5 bg-gold-400 group-hover:w-8 transition-all duration-300" />
+            <CalendarCheck className="w-4 h-4 sm:w-4.5 sm:h-4.5 text-gold-400 group-hover:scale-110 transition-transform shrink-0" />
+            <span className="hidden md:inline font-serif text-xs lg:text-sm tracking-[0.14em] uppercase whitespace-nowrap">
+              Book a table
+            </span>
           </button>
 
           {/* Ticket / Cart Button */}
@@ -138,31 +159,54 @@ export default function Header({
 
       {/* Mobile / Tablet Drawer */}
       {mobileMenuOpen && (
-        <div className="lg:hidden bg-[#071421]/98 backdrop-blur-xl border-b border-slate-800 px-6 py-6 space-y-3 animate-in slide-in-from-top-2 duration-200 text-xs sm:text-sm tracking-widest uppercase font-serif shadow-2xl">
-          {navItems.map((item) => {
-            const isActive = currentPage === item.id;
-            return (
-              <button
-                key={item.id}
-                onClick={() => handleNavClick(item.id)}
-                className={`flex items-center justify-between w-full text-left py-2.5 transition border-b border-slate-800/40 last:border-b-0 cursor-pointer ${
-                  isActive ? 'text-gold-300 font-bold' : 'text-slate-200 hover:text-gold-300'
-                }`}
-              >
-                <span>{item.label}</span>
-                {isActive && <span className="w-1.5 h-1.5 rounded-full bg-gold-400" />}
-              </button>
-            );
-          })}
+        <div className="lg:hidden bg-[#071421]/98 backdrop-blur-xl border-b border-slate-800 px-6 py-6 space-y-4 animate-in slide-in-from-top-2 duration-200 text-xs sm:text-sm tracking-widest uppercase font-serif shadow-2xl">
+          {/* Drawer Brand Header with Crest Logo */}
+          <div className="flex items-center space-x-3 pb-3 border-b border-slate-800/80">
+            <div className="w-8 h-8 rounded-full overflow-hidden border border-gold-400/50 bg-[#050e17] shrink-0">
+              <img
+                src="/seaclub-crest.png"
+                alt="SEACLUB Crest"
+                className="w-full h-full object-cover"
+              />
+            </div>
+            <div>
+              <div className="font-serif tracking-[0.24em] text-sm font-bold uppercase text-gold-300">
+                SEACLUB
+              </div>
+              <div className="text-[9px] font-serif tracking-widest text-slate-400">
+                Fish Restaurant & Wine Cellar
+              </div>
+            </div>
+          </div>
+
+          <div className="space-y-1">
+            {navItems.map((item) => {
+              const isActive = currentPage === item.id;
+              return (
+                <button
+                  key={item.id}
+                  onClick={() => handleNavClick(item.id)}
+                  className={`flex items-center justify-between w-full text-left py-2.5 transition border-b border-slate-800/40 last:border-b-0 cursor-pointer ${
+                    isActive ? 'text-gold-300 font-bold' : 'text-slate-200 hover:text-gold-300'
+                  }`}
+                >
+                  <span>{item.label}</span>
+                  {isActive && <span className="w-1.5 h-1.5 rounded-full bg-gold-400" />}
+                </button>
+              );
+            })}
+          </div>
+
           <div className="pt-3 border-t border-slate-800/80 space-y-2.5">
             <button
               onClick={() => {
                 setMobileMenuOpen(false);
                 onOpenBookTable();
               }}
-              className="w-full py-3 px-4 bg-gradient-to-r from-gold-500/20 to-gold-400/10 border border-gold-500/50 hover:border-gold-400 text-gold-300 hover:text-white text-center font-serif text-xs tracking-widest uppercase rounded transition cursor-pointer"
+              className="w-full py-3 px-4 bg-gradient-to-r from-gold-500/20 to-gold-400/10 border border-gold-500/50 hover:border-gold-400 text-gold-300 hover:text-white text-center font-serif text-xs tracking-widest uppercase rounded transition cursor-pointer flex items-center justify-center space-x-2"
             >
-              Book a Table →
+              <CalendarCheck className="w-4 h-4 text-gold-400" />
+              <span>Book a Table →</span>
             </button>
             <a
               href="http://localhost:5174"
