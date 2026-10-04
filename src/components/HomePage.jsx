@@ -20,7 +20,7 @@ import {
   Plus,
   BookOpen
 } from 'lucide-react';
-import { RESTAURANT_DISHES, RESTAURANT_INFO } from '../data/restaurantData';
+import { RESTAURANT_DISHES, RESTAURANT_INFO, RESTAURANT_BRANCHES } from '../data/restaurantData';
 
 export default function HomePage({
   onOpenMenu,
@@ -32,6 +32,14 @@ export default function HomePage({
   currentPage = 'home',
   onNavigate
 }) {
+  const handleBranchViewOnMap = (branchId) => {
+    window.dispatchEvent(new CustomEvent('select-branch', { detail: { branchId } }));
+    const el = document.getElementById('harbor-map');
+    if (el) {
+      el.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   // Curated Signature Dishes to display on the Home Page
   const featuredDishes = RESTAURANT_DISHES.filter(
     (d) => d.badge === "Chef's Masterpiece" || d.badge === 'Signature Platter' || d.badge === 'Best Seller' || d.id === 'dish-4' || d.id === 'dish-6' || d.id === 'dish-7'
@@ -85,6 +93,31 @@ export default function HomePage({
         currentPage={currentPage}
         onNavigate={onNavigate}
       />
+
+      {/* 3 Waterfront Branches Announcement Banner */}
+      <div className="bg-gradient-to-r from-[#030910] via-[#091b2c] to-[#030910] border-b border-slate-800/80 py-4 px-6 sm:px-10">
+        <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between text-center md:text-left gap-3">
+          <div className="flex items-center space-x-2 text-xs sm:text-sm text-gold-300 font-serif tracking-widest uppercase">
+            <Sparkles className="w-3.5 h-3.5 text-gold-400" />
+            <span>Welcoming Guests Across 3 Waterfront Destinations</span>
+          </div>
+          <div className="flex flex-wrap items-center justify-center gap-3 sm:gap-6 text-xs text-slate-300 font-light">
+            {RESTAURANT_BRANCHES.map((b, idx) => (
+              <React.Fragment key={b.id}>
+                {idx > 0 && <span className="hidden sm:inline text-slate-700">•</span>}
+                <button
+                  onClick={() => handleBranchViewOnMap(b.id)}
+                  className="flex items-center space-x-1.5 hover:text-gold-300 transition cursor-pointer"
+                >
+                  <span className="w-1.5 h-1.5 rounded-full bg-gold-400"></span>
+                  <strong className="text-white font-medium">{b.city.split(',')[0]}:</strong>
+                  <span>{b.name}</span>
+                </button>
+              </React.Fragment>
+            ))}
+          </div>
+        </div>
+      </div>
 
       {/* 2. DEDICATED SECTION: Dressed Oysters (25 $) */}
       <DressedOystersSection
@@ -405,6 +438,135 @@ export default function HomePage({
         </div>
       </section>
 
+      {/* 7. OUR 3 WATERFRONT DESTINATIONS (BRANCHES) */}
+      <section id="our-branches" className="py-24 bg-[#071421] border-t border-slate-800 relative overflow-hidden">
+        {/* Subtle Ambient Glows */}
+        <div className="absolute top-0 right-1/4 w-96 h-96 bg-gold-600/5 rounded-full blur-3xl pointer-events-none" />
+        <div className="absolute bottom-0 left-1/4 w-96 h-96 bg-blue-950/20 rounded-full blur-3xl pointer-events-none" />
+
+        <div className="max-w-7xl mx-auto px-6 sm:px-10 space-y-16 relative z-10">
+          <div className="text-center max-w-2xl mx-auto space-y-3">
+            <span className="font-serif italic text-gold-300 text-lg tracking-wider block">
+              coastal sanctuaries
+            </span>
+            <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl text-white tracking-tight uppercase">
+              OUR 3 WATERFRONT DESTINATIONS
+            </h2>
+            <div className="w-20 h-0.5 bg-gold-400 mx-auto" />
+            <p className="text-slate-300 text-xs sm:text-sm font-light leading-relaxed">
+              Three premier waterfront sanctuaries along the California coast, each featuring private yacht moorings, day-boat seafood selections, and legendary cellar allocations.
+            </p>
+          </div>
+
+          {/* 3 Branches Grid */}
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            {RESTAURANT_BRANCHES.map((branch, idx) => (
+              <div
+                key={branch.id}
+                className="bg-[#050e17] border border-slate-800/90 hover:border-gold-500/40 rounded-3xl overflow-hidden transition-all duration-300 group hover:-translate-y-1.5 shadow-2xl flex flex-col justify-between"
+              >
+                <div>
+                  {/* Branch Photo */}
+                  <div className="relative h-60 sm:h-64 overflow-hidden">
+                    <img
+                      src={branch.image}
+                      alt={branch.name}
+                      className="w-full h-full object-cover group-hover:scale-105 transition duration-700"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#050e17] via-transparent to-transparent opacity-90" />
+                    
+                    {/* Top Badges */}
+                    <div className="absolute top-4 left-4 right-4 flex items-center justify-between">
+                      <span className="px-3 py-1 bg-[#050e17]/85 backdrop-blur-md border border-gold-500/40 text-gold-300 text-[10px] font-serif uppercase tracking-widest rounded-full font-bold">
+                        {branch.badge}
+                      </span>
+                      <span className="px-2.5 py-1 bg-black/60 backdrop-blur-md text-slate-300 text-[10px] font-mono rounded-full">
+                        Branch 0{idx + 1}
+                      </span>
+                    </div>
+
+                    {/* City and Title overlay */}
+                    <div className="absolute bottom-4 left-4 right-4">
+                      <span className="text-xs text-gold-300 font-serif italic block">
+                        {branch.city}
+                      </span>
+                      <h3 className="font-serif text-xl sm:text-2xl text-white font-bold tracking-wide uppercase">
+                        {branch.name}
+                      </h3>
+                    </div>
+                  </div>
+
+                  {/* Branch Details */}
+                  <div className="p-6 sm:p-7 space-y-5">
+                    <p className="text-xs sm:text-sm text-slate-300 font-light leading-relaxed">
+                      {branch.description}
+                    </p>
+
+                    {/* Highlights Pills */}
+                    <div className="flex flex-wrap gap-1.5 pt-1">
+                      {branch.highlights.map((h, i) => (
+                        <span
+                          key={i}
+                          className="px-2.5 py-1 rounded-md bg-[#091b2c] border border-slate-800 text-[11px] text-slate-300 font-serif"
+                        >
+                          {h}
+                        </span>
+                      ))}
+                    </div>
+
+                    {/* Address & Logistics Info */}
+                    <div className="space-y-2 pt-4 border-t border-slate-800/80 text-xs text-slate-400 font-light">
+                      <div className="flex items-start space-x-2">
+                        <MapPin className="w-3.5 h-3.5 text-gold-400 shrink-0 mt-0.5" />
+                        <span>{branch.address}</span>
+                      </div>
+                      <div className="flex items-center space-x-2">
+                        <Clock className="w-3.5 h-3.5 text-gold-400 shrink-0" />
+                        <span>Dinner: {branch.hours.dinner}</span>
+                      </div>
+                      <div className="flex items-center space-x-2">
+                        <Anchor className="w-3.5 h-3.5 text-gold-400 shrink-0" />
+                        <span className="text-[11px]">{branch.arrival.yacht}</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Card CTA Actions */}
+                <div className="p-6 sm:p-7 pt-0 flex items-center gap-3">
+                  <button
+                    onClick={() => onOpenBookTable(branch.id)}
+                    className="flex-1 py-3 bg-gradient-to-r from-gold-600 to-gold-500 hover:from-gold-500 hover:to-gold-400 text-slate-950 font-serif font-bold text-xs uppercase tracking-wider rounded-xl transition shadow-lg text-center cursor-pointer active:scale-95"
+                  >
+                    Reserve Table
+                  </button>
+                  <button
+                    onClick={() => handleBranchViewOnMap(branch.id)}
+                    className="px-4 py-3 bg-[#091b2c] hover:bg-[#0e273f] border border-slate-700 hover:border-gold-500/40 text-gold-300 hover:text-white font-serif text-xs uppercase tracking-wider rounded-xl transition text-center cursor-pointer"
+                    title="View this branch on the map"
+                  >
+                    View Map
+                  </button>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* Quick Footer Anchor to Map */}
+          <div className="text-center pt-4">
+            <button
+              onClick={() => {
+                const el = document.getElementById('harbor-map');
+                if (el) el.scrollIntoView({ behavior: 'smooth' });
+              }}
+              className="inline-flex items-center space-x-2 text-xs font-serif uppercase tracking-widest text-gold-300 hover:text-white transition cursor-pointer"
+            >
+              <span>Explore All 3 Branches on the Interactive Map</span>
+              <ArrowRight className="w-3.5 h-3.5" />
+            </button>
+          </div>
+        </div>
+      </section>
 
       {/* 8. CRITIC ACCLAIM */}
       <section className="py-20 bg-[#050e17] border-t border-slate-800">

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { X, Calendar, Clock, Users, Sparkles, CheckCircle2, MapPin, Wine } from 'lucide-react';
 import { apiService } from '../services/apiService';
+import { RESTAURANT_BRANCHES } from '../data/restaurantData';
 
 const SEATING_AREAS = [
   { id: 'Ocean Terrace', label: 'Ocean Terrace', desc: 'Harbor sunset breeze & panoramic water views' },
@@ -13,8 +14,16 @@ const TIME_SLOTS = [
   '17:30', '18:00', '18:30', '19:00', '19:30', '20:00', '20:30', '21:00', '21:30'
 ];
 
-export default function BookTableModal({ isOpen, onClose, onBookingCompleted, initialSeatingArea = 'Ocean Terrace' }) {
+export default function BookTableModal({
+  isOpen,
+  onClose,
+  onBookingCompleted,
+  initialSeatingArea = 'Ocean Terrace',
+  initialBranch = 'pier-24'
+}) {
   if (!isOpen) return null;
+
+  const defaultBranch = RESTAURANT_BRANCHES.find(b => b.id === initialBranch) || RESTAURANT_BRANCHES[0];
 
   const [form, setForm] = useState({
     guestName: '',
@@ -23,6 +32,7 @@ export default function BookTableModal({ isOpen, onClose, onBookingCompleted, in
     partySize: 2,
     date: 'Tonight',
     time: '19:30',
+    branch: defaultBranch.name,
     seatingArea: initialSeatingArea || 'Ocean Terrace',
     notes: ''
   });
@@ -32,6 +42,15 @@ export default function BookTableModal({ isOpen, onClose, onBookingCompleted, in
       setForm(prev => ({ ...prev, seatingArea: initialSeatingArea }));
     }
   }, [initialSeatingArea]);
+
+  React.useEffect(() => {
+    if (initialBranch) {
+      const b = RESTAURANT_BRANCHES.find(x => x.id === initialBranch);
+      if (b) {
+        setForm(prev => ({ ...prev, branch: b.name }));
+      }
+    }
+  }, [initialBranch]);
 
   const [submitting, setSubmitting] = useState(false);
   const [confirmedReservation, setConfirmedReservation] = useState(null);
@@ -108,6 +127,12 @@ export default function BookTableModal({ isOpen, onClose, onBookingCompleted, in
               {/* Reservation Receipt Card */}
               <div className="bg-[#061421] border border-slate-800 rounded-2xl p-5 text-left text-xs space-y-3 max-w-md mx-auto">
                 <div className="flex justify-between pb-2 border-b border-slate-800">
+                  <span className="text-slate-400">Branch Destination:</span>
+                  <span className="font-serif text-gold-300 font-bold text-sm">
+                    {confirmedReservation.branch || 'Pier 24 Flagship'}
+                  </span>
+                </div>
+                <div className="flex justify-between pb-2 border-b border-slate-800">
                   <span className="text-slate-400">Date & Time:</span>
                   <span className="font-serif text-gold-300 font-bold text-sm">
                     {confirmedReservation.date} at {confirmedReservation.time}
@@ -140,6 +165,43 @@ export default function BookTableModal({ isOpen, onClose, onBookingCompleted, in
           ) : (
             /* Booking Form */
             <form onSubmit={handleSubmit} className="space-y-6 text-xs">
+              {/* Branch / Destination Selection */}
+              <div>
+                <label className="font-serif text-slate-300 block mb-2 uppercase tracking-wider text-[11px] flex items-center justify-between">
+                  <span className="flex items-center space-x-1.5 text-gold-400">
+                    <MapPin className="w-3.5 h-3.5" />
+                    <span>Select Waterfront Branch *</span>
+                  </span>
+                  <span className="text-[10px] text-slate-400 font-mono">3 Locations</span>
+                </label>
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5">
+                  {RESTAURANT_BRANCHES.map(b => (
+                    <button
+                      key={b.id}
+                      type="button"
+                      onClick={() => setForm({ ...form, branch: b.name })}
+                      className={`p-3 rounded-2xl border text-left transition cursor-pointer flex flex-col justify-between ${
+                        form.branch === b.name
+                          ? 'bg-gradient-to-b from-[#0a233a] to-[#071727] border-gold-400 shadow-md ring-1 ring-gold-400/50'
+                          : 'bg-[#061421] border-slate-700/80 hover:border-slate-500 text-slate-300'
+                      }`}
+                    >
+                      <div>
+                        <span className={`font-serif font-bold text-xs block ${form.branch === b.name ? 'text-gold-300' : 'text-white'}`}>
+                          {b.name}
+                        </span>
+                        <span className="text-[10px] text-slate-400 block truncate mt-0.5">
+                          {b.city}
+                        </span>
+                      </div>
+                      <span className="text-[9px] text-slate-500 uppercase font-mono tracking-wider mt-2 block">
+                        {b.badge}
+                      </span>
+                    </button>
+                  ))}
+                </div>
+              </div>
+
               {/* Guests & Date & Time */}
               <div className="space-y-4">
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">

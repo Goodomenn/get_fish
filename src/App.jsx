@@ -40,6 +40,7 @@ export default function App() {
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [isBookTableOpen, setIsBookTableOpen] = useState(false);
   const [selectedSeatingArea, setSelectedSeatingArea] = useState('Ocean Terrace');
+  const [selectedBranch, setSelectedBranch] = useState('pier-24');
   const [activeDetailDish, setActiveDetailDish] = useState(null);
 
   // Toast Notification
@@ -81,8 +82,17 @@ export default function App() {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
-  const handleOpenBookTableWithArea = (area = 'Ocean Terrace') => {
-    setSelectedSeatingArea(area);
+  const handleOpenBookTableWithArea = (areaOrBranch = 'Ocean Terrace') => {
+    if (typeof areaOrBranch === 'string') {
+      if (['pier-24', 'carmel-cove', 'newport-harbor'].includes(areaOrBranch)) {
+        setSelectedBranch(areaOrBranch);
+      } else {
+        setSelectedSeatingArea(areaOrBranch);
+      }
+    } else if (typeof areaOrBranch === 'object' && areaOrBranch !== null) {
+      if (areaOrBranch.area) setSelectedSeatingArea(areaOrBranch.area);
+      if (areaOrBranch.branchId) setSelectedBranch(areaOrBranch.branchId);
+    }
     setIsBookTableOpen(true);
   };
 
@@ -303,7 +313,7 @@ export default function App() {
 
       {/* Luxury Footer with Home link and routing */}
       <Footer
-        onOpenBookTable={() => handleOpenBookTableWithArea('Ocean Terrace')}
+        onOpenBookTable={(branchId) => handleOpenBookTableWithArea(branchId || 'pier-24')}
         onNavigate={handleNavigate}
       />
 
@@ -313,6 +323,7 @@ export default function App() {
         onClose={() => setIsBookTableOpen(false)}
         onBookingCompleted={handleBookingCompleted}
         initialSeatingArea={selectedSeatingArea}
+        initialBranch={selectedBranch}
       />
 
       <DishDetailModal

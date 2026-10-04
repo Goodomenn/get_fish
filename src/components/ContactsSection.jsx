@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { RESTAURANT_INFO } from '../data/restaurantData';
+import { RESTAURANT_INFO, RESTAURANT_BRANCHES } from '../data/restaurantData';
 import { apiService } from '../services/apiService';
 import {
   MapPin,
@@ -200,6 +200,33 @@ export default function ContactsSection({ onOpenBookTable, showToast }) {
                   </div>
                 </div>
               </div>
+
+              {/* 5. Direct Lines Across 3 Destinations */}
+              <div className="pt-4 border-t border-slate-800/80 space-y-3">
+                <span className="text-[11px] font-serif uppercase tracking-widest text-gold-400 block">
+                  Direct Lines Across 3 Waterfront Destinations
+                </span>
+                <div className="space-y-2">
+                  {RESTAURANT_BRANCHES.map(b => (
+                    <div
+                      key={b.id}
+                      className="p-3 bg-[#071421] border border-slate-800/80 rounded-xl flex items-center justify-between"
+                    >
+                      <div>
+                        <span className="font-serif font-bold text-white text-xs block">{b.name}</span>
+                        <span className="text-[10px] text-slate-400 block truncate">{b.city}</span>
+                      </div>
+                      <a
+                        href={`tel:${b.phone}`}
+                        className="text-xs text-gold-300 hover:text-white font-mono font-semibold transition"
+                      >
+                        {b.phone}
+                      </a>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
             </div>
           </div>
 
