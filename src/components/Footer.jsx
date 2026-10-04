@@ -49,7 +49,7 @@ export default function Footer({ onOpenBookTable, onNavigate }) {
             <div className="space-y-1">
               <div className="flex items-center space-x-2 text-gold-400 font-serif text-xs uppercase tracking-widest">
                 <Compass className="w-3.5 h-3.5 text-gold-400" />
-                <span>3 Waterfront Flagships • Coordinates: {activeBranch.coordinates}</span>
+                <span>3 Waterfront Flagships</span>
               </div>
               <h3 className="font-serif text-xl sm:text-2xl text-white tracking-wide uppercase">
                 Find Us on the Waterfront
@@ -92,10 +92,10 @@ export default function Footer({ onOpenBookTable, onNavigate }) {
             referrerPolicy="no-referrer-when-downgrade"
           />
 
-          {/* Discreet live GPS coordinate tag at bottom-right corner of map */}
+          {/* Discreet live venue tag at bottom-right corner of map */}
           <div className="absolute bottom-3 right-4 z-10 hidden sm:flex items-center space-x-2 px-3 py-1 bg-[#050e17]/85 backdrop-blur-md border border-slate-800 rounded-lg text-[10px] text-slate-400 font-mono pointer-events-none">
             <span className="w-1.5 h-1.5 rounded-full bg-gold-400"></span>
-            <span>{activeBranch.title} • {activeBranch.coordinates}</span>
+            <span>{activeBranch.title}</span>
           </div>
         </div>
 
