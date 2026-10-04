@@ -315,48 +315,26 @@ export default function Footer({ onOpenBookTable, onNavigate }) {
           </div>
 
           {/* Column 4: Harbor Location & Hours (3 cols) */}
-          {/* Column 4: 3 Waterfront Locations & Hours (3 cols) */}
+          {/* Column 4: Service Hours & Concierge (3 cols) */}
           <div className="lg:col-span-3 space-y-4 text-center md:text-left">
             <h4 className="font-serif text-sm font-semibold uppercase tracking-[0.2em] text-white flex items-center justify-center md:justify-start space-x-2">
-              <MapPin className="w-3.5 h-3.5 text-gold-400" />
-              <span>3 Waterfront Locations</span>
+              <Clock className="w-3.5 h-3.5 text-gold-400" />
+              <span>Service Hours</span>
             </h4>
             
-            <div className="space-y-2.5 text-xs text-slate-400 font-light">
+            <div className="space-y-3 text-xs text-slate-400 font-light">
               <div className="space-y-1.5">
-                {RESTAURANT_BRANCHES.map(b => (
-                  <button
-                    key={b.id}
-                    onClick={() => {
-                      setSelectedBranchId(b.id);
-                      const el = document.getElementById('harbor-map');
-                      if (el) el.scrollIntoView({ behavior: 'smooth' });
-                    }}
-                    className={`w-full text-left p-2 rounded-xl border transition cursor-pointer flex items-center justify-between ${
-                      selectedBranchId === b.id
-                        ? 'border-gold-500/40 bg-gold-500/10 text-white'
-                        : 'border-slate-800/80 hover:border-slate-700 bg-[#050e17] text-slate-300'
-                    }`}
-                  >
-                    <div>
-                      <span className="font-serif font-bold text-xs block text-white">{b.name}</span>
-                      <span className="text-[10px] text-slate-400 block truncate">{b.city}</span>
-                    </div>
-                    <span className="text-[10px] text-gold-400 font-serif">Map →</span>
-                  </button>
-                ))}
-              </div>
-
-              <div className="pt-2 border-t border-slate-800/80 space-y-1 text-[11px]">
-                <div className="flex items-center justify-center md:justify-start space-x-1.5 text-gold-400/90 font-serif uppercase tracking-wider">
-                  <Clock className="w-3 h-3" />
-                  <span>{activeBranch.name} Hours</span>
+                <span className="font-serif text-xs text-gold-300 uppercase tracking-wider block font-semibold">
+                  {activeBranch.title}
+                </span>
+                <p className="text-slate-300 text-xs">{activeBranch.address}</p>
+                <div className="pt-1.5 space-y-0.5 text-[11px] text-slate-400">
+                  <p>{activeBranch.hours.lunch}</p>
+                  <p>{activeBranch.hours.dinner}</p>
                 </div>
-                <p>{activeBranch.hours.lunch}</p>
-                <p>{activeBranch.hours.dinner}</p>
               </div>
 
-              <div className="pt-2">
+              <div className="pt-2 border-t border-slate-800/80">
                 <a
                   href={`mailto:${activeBranch.email || RESTAURANT_INFO.email}`}
                   className="text-slate-300 hover:text-gold-300 transition inline-flex items-center space-x-1.5 text-[11px]"
