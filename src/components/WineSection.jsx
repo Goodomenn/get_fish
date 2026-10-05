@@ -1,5 +1,5 @@
 import React from 'react';
-import { Wine, Award, Plus, Sparkles, Check } from 'lucide-react';
+import { Award, Plus, Sparkles, Check } from 'lucide-react';
 
 export default function WineSection({ onAddToCart, onOpenDishDetail }) {
   const featuredWines = [
@@ -44,9 +44,6 @@ export default function WineSection({ onAddToCart, onOpenDishDetail }) {
               CURATED WINE PAIRINGS
             </h2>
           </div>
-          <p className="text-xs text-slate-400 max-w-md font-light">
-            Our sommelier curates over 1,200 bottles spanning old-world Grand Crus and rare Super Tuscans stored in our temperature-controlled harbor vault.
-          </p>
         </div>
 
         {/* 3 Wine Cards */}
@@ -61,7 +58,6 @@ export default function WineSection({ onAddToCart, onOpenDishDetail }) {
                   <span className="text-[10px] font-serif uppercase tracking-widest text-gold-400 bg-gold-500/10 px-2.5 py-1 rounded-full border border-gold-500/30">
                     {wine.badge}
                   </span>
-                  <Wine className="w-4 h-4 text-gold-400" />
                 </div>
 
                 <div>

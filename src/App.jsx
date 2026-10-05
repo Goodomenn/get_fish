@@ -236,7 +236,6 @@ export default function App() {
               compact={true}
               pageBadge="Wine Cellar"
               pageTitle="The Sommelier Wine Cellar"
-              pageSubtitle="Rare allocations, Super Tuscans, Grand Cru Chablis, and vintage champagnes"
               currentPage={currentPage}
               onNavigate={handleNavigate}
               onOpenBookTable={() => handleOpenBookTableWithArea('Ocean Terrace')}
