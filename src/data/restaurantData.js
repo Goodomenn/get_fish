@@ -1,91 +1,65 @@
 export const RESTAURANT_BRANCHES = [
   {
-    id: 'pier-24',
-    name: 'Pier 24 Flagship',
-    city: 'San Francisco, CA',
-    title: 'Gech Fish Flagship & Marina Vault',
-    tagline: 'The Original Waterfront Flagship',
-    badge: 'Flagship Haven',
-    address: 'Pier 24 Marina Boulevard, Harbor View Harbor, San Francisco, CA',
-    phone: '+1 (800) 732-2582',
-    email: 'sf@gechfish-restaurant.com',
+    id: 'bahir-dar',
+    name: 'Bahir Dar Flagship (ባህር ዳር)',
+    city: 'Bahir Dar, Ethiopia',
+    title: 'Gech Fish Lake Tana Flagship (ጌች ዓሳ)',
+    tagline: 'Fresh Lake Tana Catch & Waterfront Dining',
+    badge: 'Lake Tana Flagship',
+    address: 'Kebele 13, Near St. Michael Church, Bahir Dar',
+    phone: '+251 91 800 1234',
+    email: 'bahirdar@gechfish-restaurant.com',
     hours: {
-      lunch: 'Wed - Sun: 12:00 PM – 3:30 PM',
-      dinner: 'Mon - Sun: 5:30 PM – 11:30 PM',
-      rawBar: 'Daily: 4:00 PM – Late'
+      lunch: 'Daily: 11:30 AM – 4:00 PM',
+      dinner: 'Daily: 5:00 PM – 11:00 PM',
+      rawBar: 'Fresh Fish Bar: 10:00 AM – Late'
     },
     arrival: {
-      car: 'Complimentary Valet at Marina Gate 2',
-      yacht: 'Tender Slip 4B (VHF Ch. 68 hailing)'
+      car: 'Dedicated Restaurant Parking at Kebele 13',
+      yacht: 'Lake Tana Shore Access / Boat Point'
     },
-    coordinates: '37°47\'28"N 122°23\'19"W',
-    mapEmbedUrl: 'https://maps.google.com/maps?q=Pier%2024%20The%20Embarcadero%20San%20Francisco%20CA&t=&z=15&ie=UTF8&iwloc=&output=embed',
-    directionsUrl: 'https://www.google.com/maps/dir/?api=1&destination=Pier+24+The+Embarcadero+San+Francisco+CA',
+    coordinates: '11°35\'38"N 37°23\'24"E',
+    mapEmbedUrl: 'https://maps.google.com/maps?q=Bahir%20Dar%20Ethiopia&t=&z=14&ie=UTF8&iwloc=&output=embed',
+    directionsUrl: 'https://www.google.com/maps/dir/?api=1&destination=Bahir+Dar+Ethiopia',
     image: 'https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=900&q=80',
-    description: 'Our iconic founding haven perched directly over San Francisco Bay with panoramic water views, book-matched dark marble salons, and private yacht tender slips.',
-    highlights: ['Deepwater Yacht Mooring', 'Private Wine Vault', 'Heated Tideside Terrace', 'Raw Bar Omakase Counter']
+    description: 'Our founding flagship located in Bahir Dar Kebele 13 near St. Michael Church. Enjoy the freshest Lake Tana fish, authentic Fish Lebleb, whole roasted fish, and pleasant open-air dining.',
+    highlights: ['Lake Tana Fresh Daily Fish', 'Signature Fish Lebleb', 'Outdoor Garden & Breeze', 'Live Fish Grilling Station']
   },
   {
-    id: 'carmel-cove',
-    name: 'Carmel Ocean Bluff',
-    city: 'Carmel-by-the-Sea, CA',
-    title: 'Gech Fish Pacific Bluff & Hearth',
-    tagline: 'Sunset Cliffside Dining & Reserve Cellar',
-    badge: 'Pacific Bluff',
-    address: 'Scenic Road & 8th Avenue, Carmel-by-the-Sea, CA 93921',
-    phone: '+1 (831) 624-7322',
-    email: 'carmel@gechfish-restaurant.com',
+    id: 'addis-summit',
+    name: 'Addis Ababa - Summit (ሰሚት)',
+    city: 'Addis Ababa, Ethiopia',
+    title: 'Gech Fish Summit Branch (ጌች ዓሳ)',
+    tagline: 'Authentic Fish Tibs, Lebleb & Family Dining',
+    badge: 'Summit Branch',
+    address: 'Summit Area, Behind Chanoli, Addis Ababa',
+    phone: '+251 91 122 3344',
+    email: 'summit@gechfish-restaurant.com',
     hours: {
-      lunch: 'Thu - Sun: 12:00 PM – 3:00 PM',
-      dinner: 'Daily: 5:00 PM – 10:30 PM',
-      rawBar: 'Sunset Lounge: 4:30 PM – Late'
+      lunch: 'Daily: 11:30 AM – 4:00 PM',
+      dinner: 'Daily: 5:00 PM – 11:00 PM',
+      rawBar: 'Kitchen: 11:00 AM – 11:30 PM'
     },
     arrival: {
-      car: 'Private Ocean Way Porte-Cochère Valet',
-      yacht: 'Monterey Bay Marina Shuttle Service'
+      car: 'Convenient Parking behind Chanoli',
+      yacht: 'Summit Main Road Access'
     },
-    coordinates: '36°33\'18"N 121°55\'42"W',
-    mapEmbedUrl: 'https://maps.google.com/maps?q=Scenic%20Rd%20and%208th%20Ave%20Carmel-by-the-Sea%20CA&t=&z=15&ie=UTF8&iwloc=&output=embed',
-    directionsUrl: 'https://www.google.com/maps/dir/?api=1&destination=Scenic+Rd+and+8th+Ave+Carmel-by-the-Sea+CA',
+    coordinates: '9°01\'23"N 38°51\'45"E',
+    mapEmbedUrl: 'https://maps.google.com/maps?q=Summit%20Addis%20Ababa%20Ethiopia&t=&z=14&ie=UTF8&iwloc=&output=embed',
+    directionsUrl: 'https://www.google.com/maps/dir/?api=1&destination=Summit+Addis+Ababa+Ethiopia',
     image: 'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=900&q=80',
-    description: 'Set on the rugged cypress-lined bluffs of Carmel Cove. Features wood-stone hearth roasted whole catches, rare Central Coast and Tuscan vintages, and breath-taking Pacific sunsets.',
-    highlights: ['Pacific Sunset Views', 'Wood-Stone Fire Hearth', '800-Label Wine Cave', 'Heated Fire Pit Patios']
-  },
-  {
-    id: 'newport-harbor',
-    name: 'Newport Harbor Marina',
-    city: 'Newport Beach, CA',
-    title: 'Gech Fish Yacht Club & Champagne Lounge',
-    tagline: 'Deepwater Mega-Yacht Pavilions & Oyster Bar',
-    badge: 'Yacht Club & Marina',
-    address: '2801 West Coast Highway, Newport Beach, CA 92663',
-    phone: '+1 (949) 673-7322',
-    email: 'newport@gechfish-restaurant.com',
-    hours: {
-      lunch: 'Fri - Sun: 11:30 AM – 3:30 PM',
-      dinner: 'Mon - Sun: 5:00 PM – 11:00 PM',
-      rawBar: 'Harbor Lounge: 3:00 PM – 1:00 AM'
-    },
-    arrival: {
-      car: 'Complimentary Marina Promenade Valet',
-      yacht: 'Dock & Dine Mega-Yacht Slip 12 (VHF Ch. 71)'
-    },
-    coordinates: '33°36\'54"N 117°55\'18"W',
-    mapEmbedUrl: 'https://maps.google.com/maps?q=2801%20W%20Coast%20Hwy%20Newport%20Beach%20CA&t=&z=15&ie=UTF8&iwloc=&output=embed',
-    directionsUrl: 'https://www.google.com/maps/dir/?api=1&destination=2801+W+Coast+Hwy+Newport+Beach+CA',
-    image: 'https://images.unsplash.com/photo-1579027989536-b7b1f875659b?auto=format&fit=crop&w=900&q=80',
-    description: 'Our luxurious southern California waterfront retreat with private mega-yacht moorings, world-class caviar service, live oyster shucking theatre, and open-air harbor cabanas.',
-    highlights: ['Mega-Yacht Dock & Dine', 'Dom Pérignon Cabanas', 'Live Omakase Oyster Theater', 'Late-Night Harbor Lounge']
+    description: 'Our beloved capital city location in Summit behind Chanoli. Known across Addis Ababa for sizzling Fish Tibs, rich Fish Lebleb, Fish Combo platters, and warm hospitable dining.',
+    highlights: ['Signature Fish Lebleb & Tibs', 'Special Fish Combos', 'Spacious Family Seating', 'VIP Dining Area']
   }
 ];
 
 export const RESTAURANT_INFO = {
   name: 'Gech Fish',
-  fullName: 'Gech Fish Restaurant & Seafood Bar (ጌች አሳ)',
-  tagline: 'Delicious fresh fish and fine dining',
+  fullName: 'Gech Fish Restaurant (ጌች ዓሳ)',
+  tagline: 'Delicious fresh fish and authentic dining',
   subHeading: 'ጌች አሳ • fresh fish',
-  address: 'Pier 24 Marina Boulevard, Harbor View Harbor',
-  phone: '+1 (800) 732-2582',
+  address: 'Bahir Dar (Kebele 13) & Addis Ababa (Summit, Behind Chanoli)',
+  phone: '+251 91 800 1234 / +251 91 122 3344',
   email: 'reservations@gechfish-restaurant.com',
   branches: RESTAURANT_BRANCHES,
   hours: {

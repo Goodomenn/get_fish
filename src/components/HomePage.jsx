@@ -128,12 +128,12 @@ export default function HomePage({
         onNavigate={onNavigate}
       />
 
-      {/* 3 Waterfront Branches Announcement Banner */}
+      {/* Restaurant Locations Announcement Banner */}
       <div className="bg-gradient-to-r from-[#030910] via-[#091b2c] to-[#030910] border-b border-slate-800/80 py-4 px-6 sm:px-10">
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between text-center md:text-left gap-3">
           <div className="flex items-center space-x-2 text-xs sm:text-sm text-gold-300 font-serif tracking-widest uppercase">
             <Sparkles className="w-3.5 h-3.5 text-gold-400" />
-            <span>Welcoming Guests Across 3 Waterfront Destinations</span>
+            <span>Welcoming Guests in Bahir Dar & Addis Ababa (ባህር ዳር እና አዲስ አበባ)</span>
           </div>
           <div className="flex flex-wrap items-center justify-center gap-3 sm:gap-6 text-xs text-slate-300 font-light">
             {RESTAURANT_BRANCHES.map((b, idx) => (
@@ -460,7 +460,7 @@ export default function HomePage({
         </div>
       </section>
 
-      {/* 7. OUR 3 WATERFRONT DESTINATIONS (BRANCHES) */}
+      {/* 7. OUR RESTAURANT LOCATIONS (BRANCHES) */}
       <section id="our-branches" className="py-24 bg-[#071421] border-t border-slate-800 relative overflow-hidden">
         {/* Subtle Ambient Glows */}
         <div className="absolute top-0 right-1/4 w-96 h-96 bg-gold-600/5 rounded-full blur-3xl pointer-events-none" />
@@ -469,14 +469,14 @@ export default function HomePage({
         <div className="max-w-7xl mx-auto px-6 sm:px-10 space-y-16 relative z-10">
           <div className="text-center max-w-2xl mx-auto space-y-3">
             <span className="font-serif italic text-gold-300 text-lg tracking-wider block">
-              coastal sanctuaries
+              የጌች ዓሳ ቅርንጫፎች • our locations
             </span>
             <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl text-white tracking-tight uppercase">
-              OUR 3 WATERFRONT DESTINATIONS
+              OUR RESTAURANT LOCATIONS
             </h2>
             <div className="w-20 h-0.5 bg-gold-400 mx-auto" />
             <p className="text-slate-300 text-xs sm:text-sm font-light leading-relaxed">
-              Three premier waterfront sanctuaries along the California coast, each featuring private yacht moorings, day-boat seafood selections, and legendary cellar allocations.
+              Experience the unmatched taste of fresh fish across our founding Lake Tana flagship in Bahir Dar and our signature capital city branch in Addis Ababa.
             </p>
           </div>
 

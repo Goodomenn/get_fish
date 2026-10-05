@@ -113,7 +113,7 @@ export default function ContactsSection({ onOpenBookTable, showToast }) {
                     {RESTAURANT_INFO.address}
                   </p>
                   <p className="text-slate-400 text-xs font-light">
-                    Pier 24 Private Slip • Harbor View Marina
+                    Bahir Dar (Kebele 13) • Addis Ababa (Summit Behind Chanoli)
                   </p>
                 </div>
               </div>
@@ -182,29 +182,25 @@ export default function ContactsSection({ onOpenBookTable, showToast }) {
                   <h4 className="text-white font-serif font-semibold text-base mb-1">Hours</h4>
                   <div className="space-y-1 text-xs sm:text-sm">
                     <div className="flex">
-                      <span className="w-28 text-slate-400 font-light">Wed – Sun</span>
-                      <span className="text-slate-300">12 PM – 3:30 PM (Lunch)</span>
-                    </div>
-                    <div className="flex">
-                      <span className="w-28 text-slate-400 font-light">Mon – Sun</span>
-                      <span className="text-slate-300">5:30 PM – 11:30 PM</span>
+                      <span className="w-28 text-slate-400 font-light">Daily</span>
+                      <span className="text-slate-300">11:30 AM – 4:00 PM (Lunch)</span>
                     </div>
                     <div className="flex">
                       <span className="w-28 text-slate-400 font-light">Daily</span>
-                      <span className="text-slate-300">4 PM – Late (Raw Bar)</span>
+                      <span className="text-slate-300">5:00 PM – 11:00 PM (Dinner)</span>
                     </div>
                     <div className="flex">
-                      <span className="w-28 text-slate-400 font-light">Monday</span>
-                      <span className="text-slate-400 italic">Harbor Slip Open</span>
+                      <span className="w-28 text-slate-400 font-light">Fish Bar</span>
+                      <span className="text-slate-300">10:00 AM – Late</span>
                     </div>
                   </div>
                 </div>
               </div>
 
-              {/* 5. Direct Lines Across 3 Destinations */}
+              {/* 5. Direct Lines Across Destinations */}
               <div className="pt-4 border-t border-slate-800/80 space-y-3">
                 <span className="text-[11px] font-serif uppercase tracking-widest text-gold-400 block">
-                  Direct Lines Across 3 Waterfront Destinations
+                  Direct Branch Contact Lines (የቅርንጫፎች ስልክ ቁጥሮች)
                 </span>
                 <div className="space-y-2">
                   {RESTAURANT_BRANCHES.map(b => (

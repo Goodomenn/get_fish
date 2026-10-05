@@ -39,8 +39,8 @@ export default function App() {
   // Modals state
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [isBookTableOpen, setIsBookTableOpen] = useState(false);
-  const [selectedSeatingArea, setSelectedSeatingArea] = useState('Ocean Terrace');
-  const [selectedBranch, setSelectedBranch] = useState('pier-24');
+  const [selectedSeatingArea, setSelectedSeatingArea] = useState('Bahir Dar Flagship');
+  const [selectedBranch, setSelectedBranch] = useState('bahir-dar');
   const [activeDetailDish, setActiveDetailDish] = useState(null);
 
   // Toast Notification
@@ -82,10 +82,12 @@ export default function App() {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
-  const handleOpenBookTableWithArea = (areaOrBranch = 'Ocean Terrace') => {
+  const handleOpenBookTableWithArea = (areaOrBranch = 'Bahir Dar Flagship') => {
     if (typeof areaOrBranch === 'string') {
-      if (['pier-24', 'carmel-cove', 'newport-harbor'].includes(areaOrBranch)) {
-        setSelectedBranch(areaOrBranch);
+      if (['bahir-dar', 'addis-summit', 'pier-24', 'carmel-cove', 'newport-harbor'].includes(areaOrBranch)) {
+        const branchKey = areaOrBranch === 'addis-summit' ? 'addis-summit' : 'bahir-dar';
+        setSelectedBranch(branchKey);
+        setSelectedSeatingArea(branchKey === 'addis-summit' ? 'Addis Ababa - Summit' : 'Bahir Dar Flagship');
       } else {
         setSelectedSeatingArea(areaOrBranch);
       }
@@ -313,7 +315,7 @@ export default function App() {
 
       {/* Luxury Footer with Home link and routing */}
       <Footer
-        onOpenBookTable={(branchId) => handleOpenBookTableWithArea(branchId || 'pier-24')}
+        onOpenBookTable={(branchId) => handleOpenBookTableWithArea(branchId || 'bahir-dar')}
         onNavigate={handleNavigate}
       />
 

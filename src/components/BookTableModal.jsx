@@ -3,27 +3,42 @@ import { X, Calendar, Clock, Users, Sparkles, CheckCircle2, MapPin, Wine } from 
 import { apiService } from '../services/apiService';
 import { RESTAURANT_BRANCHES } from '../data/restaurantData';
 
-const SEATING_AREAS = [
-  { id: 'Ocean Terrace', label: 'Ocean Terrace', desc: 'Harbor sunset breeze & panoramic water views' },
-  { id: 'Main Dining Salon', label: 'Main Dining Salon', desc: 'Refined acoustic luxury with marble & velvet' },
-  { id: "Chef's Counter", label: "Chef's Counter", desc: 'Front-row view of wood fire grill & master shuckers' },
-  { id: 'Private Wine Vault', label: 'Private Wine Vault', desc: 'Intimate cellar setting surrounded by rare vintages' }
+const RESTAURANT_LOCATIONS = [
+  {
+    id: 'Bahir Dar Flagship',
+    branchId: 'bahir-dar',
+    name: 'Bahir Dar Flagship (ባህር ዳር)',
+    city: 'Bahir Dar • Kebele 13',
+    desc: 'Near St. Michael Church • Lake Tana waterfront dining & fresh daily catch',
+    badge: 'Lake Tana Flagship',
+    address: 'Kebele 13, Near St. Michael Church, Bahir Dar'
+  },
+  {
+    id: 'Addis Ababa - Summit',
+    branchId: 'addis-summit',
+    name: 'Addis Ababa - Summit (አዲስ አበባ ሰሚት)',
+    city: 'Addis Ababa • Summit',
+    desc: 'Behind Chanoli • Sizzling Fish Tibs, Fish Lebleb & family dining',
+    badge: 'Summit Branch',
+    address: 'Summit Area, Behind Chanoli, Addis Ababa'
+  }
 ];
 
 const TIME_SLOTS = [
-  '17:30', '18:00', '18:30', '19:00', '19:30', '20:00', '20:30', '21:00', '21:30'
+  '12:00', '13:00', '14:00', '17:30', '18:30', '19:30', '20:30', '21:30'
 ];
 
 export default function BookTableModal({
   isOpen,
   onClose,
   onBookingCompleted,
-  initialSeatingArea = 'Ocean Terrace',
-  initialBranch = 'pier-24'
+  initialSeatingArea = 'Bahir Dar Flagship',
+  initialBranch = 'bahir-dar'
 }) {
   if (!isOpen) return null;
 
   const defaultBranch = RESTAURANT_BRANCHES.find(b => b.id === initialBranch) || RESTAURANT_BRANCHES[0];
+  const defaultLoc = RESTAURANT_LOCATIONS.find(l => l.branchId === initialBranch || l.id === initialSeatingArea) || RESTAURANT_LOCATIONS[0];
 
   const [form, setForm] = useState({
     guestName: '',
@@ -33,21 +48,24 @@ export default function BookTableModal({
     date: 'Tonight',
     time: '19:30',
     branch: defaultBranch.name,
-    seatingArea: initialSeatingArea || 'Ocean Terrace',
+    seatingArea: defaultLoc.id,
     notes: ''
   });
 
   React.useEffect(() => {
     if (initialSeatingArea) {
-      setForm(prev => ({ ...prev, seatingArea: initialSeatingArea }));
+      const match = RESTAURANT_LOCATIONS.find(l => l.id === initialSeatingArea || l.branchId === initialSeatingArea);
+      if (match) {
+        setForm(prev => ({ ...prev, seatingArea: match.id, branch: match.name }));
+      }
     }
   }, [initialSeatingArea]);
 
   React.useEffect(() => {
     if (initialBranch) {
-      const b = RESTAURANT_BRANCHES.find(x => x.id === initialBranch);
-      if (b) {
-        setForm(prev => ({ ...prev, branch: b.name }));
+      const match = RESTAURANT_LOCATIONS.find(l => l.branchId === initialBranch || l.id === initialBranch);
+      if (match) {
+        setForm(prev => ({ ...prev, seatingArea: match.id, branch: match.name }));
       }
     }
   }, [initialBranch]);
@@ -120,16 +138,16 @@ export default function BookTableModal({
                 </h3>
                 <p className="text-sm text-slate-300 mt-2 max-w-md mx-auto font-light">
                   We look forward to welcoming you, <strong className="text-white font-serif">{confirmedReservation.guestName}</strong>. 
-                  A table in the <strong className="text-gold-300">{confirmedReservation.seatingArea}</strong> is set for your arrival.
+                  A table at <strong className="text-gold-300">{confirmedReservation.seatingArea || confirmedReservation.branch}</strong> is set for your arrival.
                 </p>
               </div>
 
               {/* Reservation Receipt Card */}
               <div className="bg-[#061421] border border-slate-800 rounded-2xl p-5 text-left text-xs space-y-3 max-w-md mx-auto">
                 <div className="flex justify-between pb-2 border-b border-slate-800">
-                  <span className="text-slate-400">Branch Destination:</span>
+                  <span className="text-slate-400">Restaurant Location:</span>
                   <span className="font-serif text-gold-300 font-bold text-sm">
-                    {confirmedReservation.branch || 'Pier 24 Flagship'}
+                    {confirmedReservation.seatingArea || confirmedReservation.branch}
                   </span>
                 </div>
                 <div className="flex justify-between pb-2 border-b border-slate-800">
@@ -141,10 +159,6 @@ export default function BookTableModal({
                 <div className="flex justify-between pb-2 border-b border-slate-800">
                   <span className="text-slate-400">Guests:</span>
                   <span className="font-bold text-white">{confirmedReservation.partySize} Guests</span>
-                </div>
-                <div className="flex justify-between pb-2 border-b border-slate-800">
-                  <span className="text-slate-400">Atmosphere:</span>
-                  <span className="font-semibold text-slate-200">{confirmedReservation.seatingArea}</span>
                 </div>
                 {confirmedReservation.notes && (
                   <div className="pt-1 text-slate-400 italic text-[11px]">
@@ -165,40 +179,48 @@ export default function BookTableModal({
           ) : (
             /* Booking Form */
             <form onSubmit={handleSubmit} className="space-y-6 text-xs">
-              {/* Branch / Destination Selection */}
+              {/* Select Restaurant Location */}
               <div>
                 <label className="font-serif text-slate-300 block mb-2 uppercase tracking-wider text-[11px] flex items-center justify-between">
                   <span className="flex items-center space-x-1.5 text-gold-400">
                     <MapPin className="w-3.5 h-3.5" />
-                    <span>Select Waterfront Branch *</span>
+                    <span>Select Restaurant Location (ቅርንጫፍ ይምረጡ) *</span>
                   </span>
-                  <span className="text-[10px] text-slate-400 font-mono">3 Locations</span>
+                  <span className="text-[10px] text-slate-400 font-mono">2 Locations</span>
                 </label>
-                <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5">
-                  {RESTAURANT_BRANCHES.map(b => (
-                    <button
-                      key={b.id}
-                      type="button"
-                      onClick={() => setForm({ ...form, branch: b.name })}
-                      className={`p-3 rounded-2xl border text-left transition cursor-pointer flex flex-col justify-between ${
-                        form.branch === b.name
-                          ? 'bg-gradient-to-b from-[#0a233a] to-[#071727] border-gold-400 shadow-md ring-1 ring-gold-400/50'
-                          : 'bg-[#061421] border-slate-700/80 hover:border-slate-500 text-slate-300'
-                      }`}
-                    >
-                      <div>
-                        <span className={`font-serif font-bold text-xs block ${form.branch === b.name ? 'text-gold-300' : 'text-white'}`}>
-                          {b.name}
-                        </span>
-                        <span className="text-[10px] text-slate-400 block truncate mt-0.5">
-                          {b.city}
-                        </span>
-                      </div>
-                      <span className="text-[9px] text-slate-500 uppercase font-mono tracking-wider mt-2 block">
-                        {b.badge}
-                      </span>
-                    </button>
-                  ))}
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  {RESTAURANT_LOCATIONS.map(loc => {
+                    const isSelected = form.seatingArea === loc.id;
+                    return (
+                      <button
+                        key={loc.id}
+                        type="button"
+                        onClick={() => setForm({ ...form, seatingArea: loc.id, branch: loc.name })}
+                        className={`p-3.5 rounded-2xl border text-left transition cursor-pointer flex flex-col justify-between ${
+                          isSelected
+                            ? 'bg-gradient-to-b from-[#0a233a] to-[#071727] border-gold-400 shadow-md ring-1 ring-gold-400/50'
+                            : 'bg-[#061421] border-slate-800 text-slate-300 hover:border-slate-700'
+                        }`}
+                      >
+                        <div className="space-y-1">
+                          <div className="flex items-center justify-between">
+                            <span className={`font-serif font-bold text-sm block ${isSelected ? 'text-gold-300' : 'text-white'}`}>
+                              {loc.name}
+                            </span>
+                            <span className="text-[9px] px-2 py-0.5 rounded-full font-mono bg-gold-500/10 text-gold-400 border border-gold-500/20">
+                              {loc.badge}
+                            </span>
+                          </div>
+                          <span className="text-[10px] text-slate-400 block font-medium">
+                            {loc.city}
+                          </span>
+                          <span className="text-[11px] text-slate-300/80 mt-1 block leading-snug">
+                            {loc.desc}
+                          </span>
+                        </div>
+                      </button>
+                    );
+                  })}
                 </div>
               </div>
 
@@ -235,7 +257,7 @@ export default function BookTableModal({
                       <option value="Tomorrow">Tomorrow</option>
                       <option value="Friday">This Friday</option>
                       <option value="Saturday">This Saturday</option>
-                      <option value="Sunday">Sunday Brunch</option>
+                      <option value="Sunday">Sunday Lunch</option>
                     </select>
                   </div>
 
@@ -253,37 +275,6 @@ export default function BookTableModal({
                         <option key={t} value={t}>{t}</option>
                       ))}
                     </select>
-                  </div>
-                </div>
-
-                {/* Seating Area Picker */}
-                <div>
-                  <label className="font-serif text-slate-300 block mb-2 uppercase tracking-wider text-[11px]">
-                    Select Dining Area *
-                  </label>
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
-                    {SEATING_AREAS.map(area => {
-                      const isSelected = form.seatingArea === area.id;
-                      return (
-                        <button
-                          key={area.id}
-                          type="button"
-                          onClick={() => setForm({ ...form, seatingArea: area.id })}
-                          className={`p-3 rounded-xl border text-left transition ${
-                            isSelected
-                              ? 'bg-gold-500/15 border-gold-400 text-white shadow-md'
-                              : 'bg-[#061421] border-slate-800 text-slate-300 hover:border-slate-700'
-                          }`}
-                        >
-                          <span className="font-serif font-bold text-sm block text-gold-300">
-                            {area.label}
-                          </span>
-                          <span className="text-[11px] text-slate-400 mt-0.5 block leading-snug">
-                            {area.desc}
-                          </span>
-                        </button>
-                      );
-                    })}
                   </div>
                 </div>
 
