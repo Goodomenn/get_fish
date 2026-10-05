@@ -123,9 +123,6 @@ export default function AboutSection({ onOpenBookTable, onNavigate }) {
             {/* Standard 1: The Freshest Catch */}
             <div className="bg-[#071421] border border-slate-800 hover:border-gold-500/40 rounded-2xl p-8 space-y-4 flex flex-col justify-between transition duration-300 group hover:-translate-y-1 shadow-xl">
               <div className="space-y-4">
-                <div className="w-14 h-14 rounded-xl bg-gold-500/10 border border-gold-400/30 flex items-center justify-center text-gold-300 group-hover:bg-gold-500/20 transition">
-                  <Fish className="w-7 h-7" />
-                </div>
                 <h4 className="font-serif text-xl text-white group-hover:text-gold-300 transition">
                   The Freshest Catch
                 </h4>
@@ -142,9 +139,6 @@ export default function AboutSection({ onOpenBookTable, onNavigate }) {
             {/* Standard 2: Uncompromised Technique */}
             <div className="bg-[#071421] border border-slate-800 hover:border-gold-500/40 rounded-2xl p-8 space-y-4 flex flex-col justify-between transition duration-300 group hover:-translate-y-1 shadow-xl">
               <div className="space-y-4">
-                <div className="w-14 h-14 rounded-xl bg-gold-500/10 border border-gold-400/30 flex items-center justify-center text-gold-300 group-hover:bg-gold-500/20 transition">
-                  <Flame className="w-7 h-7" />
-                </div>
                 <h4 className="font-serif text-xl text-white group-hover:text-gold-300 transition">
                   Uncompromised Technique
                 </h4>
@@ -161,9 +155,6 @@ export default function AboutSection({ onOpenBookTable, onNavigate }) {
             {/* Standard 3: Bold, Clean Flavors */}
             <div className="bg-[#071421] border border-slate-800 hover:border-gold-500/40 rounded-2xl p-8 space-y-4 flex flex-col justify-between transition duration-300 group hover:-translate-y-1 shadow-xl">
               <div className="space-y-4">
-                <div className="w-14 h-14 rounded-xl bg-gold-500/10 border border-gold-400/30 flex items-center justify-center text-gold-300 group-hover:bg-gold-500/20 transition">
-                  <Sparkles className="w-7 h-7" />
-                </div>
                 <h4 className="font-serif text-xl text-white group-hover:text-gold-300 transition">
                   Bold, Clean Flavors
                 </h4>

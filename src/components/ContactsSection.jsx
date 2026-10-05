@@ -198,23 +198,27 @@ export default function ContactsSection({ onOpenBookTable, showToast }) {
               </div>
 
               {/* 5. Direct Lines Across Destinations */}
-              <div className="pt-4 border-t border-slate-800/80 space-y-3">
-                <span className="text-[11px] font-serif uppercase tracking-widest text-gold-400 block">
+              <div className="pt-6 border-t border-slate-800/80 space-y-4">
+                <span className="text-xs sm:text-sm font-serif font-bold uppercase tracking-wider text-gold-400 block">
                   Direct Branch Contact Lines (የቅርንጫፎች ስልክ ቁጥሮች)
                 </span>
-                <div className="space-y-2">
+                <div className="space-y-3">
                   {RESTAURANT_BRANCHES.map(b => (
                     <div
                       key={b.id}
-                      className="p-3 bg-[#071421] border border-slate-800/80 rounded-xl flex items-center justify-between"
+                      className="p-4 sm:p-5 bg-[#071421] border border-slate-800/90 hover:border-gold-500/50 rounded-2xl flex flex-col sm:flex-row sm:items-center justify-between gap-3 shadow-lg transition duration-200 group"
                     >
-                      <div>
-                        <span className="font-serif font-bold text-white text-xs block">{b.name}</span>
-                        <span className="text-[10px] text-slate-400 block truncate">{b.city}</span>
+                      <div className="space-y-1">
+                        <span className="font-serif font-bold text-white text-base sm:text-lg block tracking-wide group-hover:text-gold-300 transition">
+                          {b.name}
+                        </span>
+                        <span className="text-xs sm:text-sm text-slate-300 block font-light">
+                          {b.city}
+                        </span>
                       </div>
                       <a
                         href={`tel:${b.phone}`}
-                        className="text-xs text-gold-300 hover:text-white font-mono font-semibold transition"
+                        className="text-sm sm:text-base text-gold-300 hover:text-white font-mono font-bold tracking-wider transition whitespace-nowrap bg-gold-500/10 border border-gold-500/30 px-3.5 py-1.5 rounded-xl self-start sm:self-auto hover:bg-gold-500/20"
                       >
                         {b.phone}
                       </a>

@@ -131,8 +131,7 @@ export default function HomePage({
       {/* Restaurant Locations Announcement Banner - Single Line */}
       <div className="bg-gradient-to-r from-[#030910] via-[#091b2c] to-[#030910] border-b border-slate-800/80 py-3.5 px-4 sm:px-8 overflow-x-auto no-scrollbar">
         <div className="max-w-7xl mx-auto flex items-center justify-between gap-6 whitespace-nowrap min-w-max md:min-w-0">
-          <div className="flex items-center space-x-2 text-xs sm:text-sm text-gold-300 font-serif tracking-wider uppercase shrink-0">
-            <Sparkles className="w-3.5 h-3.5 text-gold-400 shrink-0" />
+          <div className="text-xs sm:text-sm text-gold-300 font-serif tracking-wider uppercase shrink-0">
             <span>Welcoming Guests Across 2 Locations:</span>
           </div>
           <div className="flex items-center gap-4 sm:gap-6 text-xs text-slate-300 font-light shrink-0">
@@ -230,9 +229,6 @@ export default function HomePage({
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               <div className="bg-[#071421] border border-slate-800 rounded-2xl p-6 space-y-3 shadow-lg">
-                <div className="w-10 h-10 rounded-lg bg-gold-500/10 border border-gold-400/30 flex items-center justify-center text-gold-300">
-                  <Fish className="w-5 h-5" />
-                </div>
                 <h4 className="font-serif text-base font-bold text-white uppercase">The Freshest Catch</h4>
                 <p className="text-xs text-slate-300 font-light leading-relaxed">
                   We partner directly with trusted sources to ensure that the fish on your plate is impeccably fresh, day in and day out.
@@ -240,9 +236,6 @@ export default function HomePage({
               </div>
 
               <div className="bg-[#071421] border border-slate-800 rounded-2xl p-6 space-y-3 shadow-lg">
-                <div className="w-10 h-10 rounded-lg bg-gold-500/10 border border-gold-400/30 flex items-center justify-center text-gold-300">
-                  <Flame className="w-5 h-5" />
-                </div>
                 <h4 className="font-serif text-base font-bold text-white uppercase">Uncompromised Technique</h4>
                 <p className="text-xs text-slate-300 font-light leading-relaxed">
                   Every species has its own unique texture and flavor profile. Our chefs use the exact cooking method designed to elevate that specific cut, never relying on a one-size-fits-all approach.
@@ -250,9 +243,6 @@ export default function HomePage({
               </div>
 
               <div className="bg-[#071421] border border-slate-800 rounded-2xl p-6 space-y-3 shadow-lg">
-                <div className="w-10 h-10 rounded-lg bg-gold-500/10 border border-gold-400/30 flex items-center justify-center text-gold-300">
-                  <Sparkles className="w-5 h-5" />
-                </div>
                 <h4 className="font-serif text-base font-bold text-white uppercase">Bold, Clean Flavors</h4>
                 <p className="text-xs text-slate-300 font-light leading-relaxed">
                   We believe high-quality fish doesn’t need to be hidden. We use bright, simple, and clean ingredients to let the natural flavor of the catch shine through.
