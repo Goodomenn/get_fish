@@ -1,5 +1,5 @@
 import React from 'react';
-import { Fish, Flame, Sparkles, MapPin, Calendar, BookOpen, ArrowRight, ShieldCheck, Award } from 'lucide-react';
+import { Fish, Sparkles, MapPin, Calendar, BookOpen, ArrowRight, ShieldCheck, Award } from 'lucide-react';
 
 export default function AboutSection({ onOpenBookTable, onNavigate }) {
   const handleNav = (target) => {
@@ -38,16 +38,13 @@ export default function AboutSection({ onOpenBookTable, onNavigate }) {
                 
                 {/* Floating Tag */}
                 <div className="absolute bottom-6 left-6 right-6 p-4 bg-[#091b2c]/90 backdrop-blur-md rounded-2xl border border-gold-500/30 flex items-center justify-between">
-                  <div className="flex items-center space-x-3">
-                    <Flame className="w-5 h-5 text-gold-400 shrink-0" />
-                    <div>
-                      <span className="font-serif text-gold-300 text-sm font-semibold uppercase tracking-wider block">
-                        Undivided Attention
-                      </span>
-                      <span className="text-[11px] text-slate-300 font-light">
-                        Single-craft kitchen honoring daily wild catches
-                      </span>
-                    </div>
+                  <div>
+                    <span className="font-serif text-gold-300 text-sm font-semibold uppercase tracking-wider block">
+                      Undivided Attention
+                    </span>
+                    <span className="text-[11px] text-slate-300 font-light">
+                      Single-craft kitchen honoring daily wild catches
+                    </span>
                   </div>
                 </div>
               </div>

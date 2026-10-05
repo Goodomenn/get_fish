@@ -13,7 +13,6 @@ import {
   ChevronRight,
   ChevronLeft,
   ShieldCheck,
-  Flame,
   MapPin,
   ArrowRight,
   Plus,
@@ -167,8 +166,7 @@ export default function HomePage({
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-[#050e17] via-transparent to-transparent opacity-80" />
                 <div className="absolute bottom-6 left-6 right-6 p-4 sm:p-5 bg-[#091b2c]/90 backdrop-blur-md rounded-2xl border border-gold-500/30">
-                  <div className="flex items-center space-x-2 text-gold-400 text-xs font-serif uppercase tracking-widest mb-1">
-                    <Flame className="w-3.5 h-3.5" />
+                  <div className="text-gold-400 text-xs font-serif uppercase tracking-widest mb-1">
                     <span>Single-Craft Dedication</span>
                   </div>
                   <p className="text-xs text-slate-300 font-light leading-relaxed">
