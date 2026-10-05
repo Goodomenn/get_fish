@@ -145,10 +145,10 @@ export default function ContactsSection({ onOpenBookTable, showToast }) {
                     <div className="flex">
                       <span className="w-28 text-slate-400 font-light">General</span>
                       <a
-                        href="mailto:hello@seaclub-restaurant.com"
+                        href="mailto:hello@gechfish-restaurant.com"
                         className="text-slate-300 hover:text-gold-300 transition"
                       >
-                        hello@seaclub-restaurant.com
+                        hello@gechfish-restaurant.com
                       </a>
                     </div>
                     <div className="flex">
@@ -163,10 +163,10 @@ export default function ContactsSection({ onOpenBookTable, showToast }) {
                     <div className="flex">
                       <span className="w-28 text-slate-400 font-light">Press</span>
                       <a
-                        href="mailto:press@seaclub-restaurant.com"
+                        href="mailto:press@gechfish-restaurant.com"
                         className="text-slate-300 hover:text-gold-300 transition"
                       >
-                        press@seaclub-restaurant.com
+                        press@gechfish-restaurant.com
                       </a>
                     </div>
                   </div>

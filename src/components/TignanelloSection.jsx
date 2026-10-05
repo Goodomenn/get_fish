@@ -129,7 +129,7 @@ export default function TignanelloSection({ onAddToCart, onOpenDishDetail }) {
               <Sparkles className="w-4 h-4 text-gold-400 shrink-0 mt-0.5" />
               <div>
                 <span className="font-serif text-gold-300 uppercase tracking-wider block font-semibold">
-                  Culinary Harmony at SEACLUB
+                  Culinary Harmony at Gech Fish
                 </span>
                 <p className="text-slate-300 font-light mt-0.5">
                   Tignanello's balanced acidity cuts exquisitely through the rich fat of our Wood-Fired Mediterranean Branzino and complements Dressed Oysters.

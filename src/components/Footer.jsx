@@ -175,21 +175,21 @@ export default function Footer({ onOpenBookTable, onNavigate }) {
               <button
                 onClick={() => handleNav('home')}
                 className="flex items-center justify-center md:justify-start space-x-3 group cursor-pointer"
-                title="SEACLUB Home"
+                title="Gech Fish Home"
               >
-                <div className="w-10 h-10 rounded-full overflow-hidden border border-gold-400/50 bg-[#050e17] shrink-0 shadow-lg group-hover:scale-105 transition-transform">
+                <div className="w-11 h-11 rounded-full overflow-hidden border border-gold-400/50 bg-[#050e17] shrink-0 shadow-lg group-hover:scale-105 transition-transform">
                   <img
-                    src="/seaclub-crest.png"
-                    alt="SEACLUB Crest"
+                    src="/gech-fish-logo.jpg"
+                    alt="Gech Fish Logo"
                     className="w-full h-full object-cover"
                   />
                 </div>
-                <span className="font-serif tracking-[0.28em] text-2xl sm:text-3xl font-bold uppercase text-white group-hover:text-gold-300 transition">
-                  SEACLUB
+                <span className="font-serif tracking-[0.2em] text-2xl sm:text-3xl font-bold uppercase text-white group-hover:text-gold-300 transition">
+                  GECH FISH
                 </span>
               </button>
-              <span className="font-serif italic text-gold-300 text-sm block md:pl-13">
-                seafood + wine
+              <span className="font-sans text-gold-300 text-xs tracking-wider block md:pl-14">
+                ጌች አሳ • Fresh Fish & Seafood
               </span>
             </div>
 
@@ -297,7 +297,7 @@ export default function Footer({ onOpenBookTable, onNavigate }) {
       <div className="border-t border-slate-900 bg-[#02060b]">
         <div className="max-w-7xl mx-auto px-6 sm:px-10 py-6 flex flex-col md:flex-row items-center justify-between text-slate-500 text-[11px] gap-4">
           <div className="flex flex-col sm:flex-row items-center space-y-1 sm:space-y-0 sm:space-x-4 text-center sm:text-left">
-            <p>© {new Date().getFullYear()} SEACLUB Fish Restaurant & Wine Cellar. All rights reserved.</p>
+            <p>© {new Date().getFullYear()} Gech Fish Restaurant (ጌች አሳ). All rights reserved.</p>
             <span className="hidden sm:inline text-slate-700">•</span>
             <span className="font-serif italic text-slate-400">Delicious food and fine wine on the harbor.</span>
           </div>

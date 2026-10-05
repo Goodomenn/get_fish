@@ -33,7 +33,7 @@ export default function Hero({
           {/* Pristine Background Canvas cropped to luxury dark-marble & seafood top */}
           <img
             src="/hero-bg.jpg"
-            alt="SEACLUB Fish Restaurant & Fine Wine"
+            alt="Gech Fish Restaurant & Fresh Fish"
             className="w-full h-full object-cover object-top block"
             style={{ imageRendering: '-webkit-optimize-contrast' }}
           />
@@ -96,7 +96,7 @@ export default function Hero({
         {/* High-Resolution User-Provided Pristine Clean Background Canvas */}
         <img
           src="/hero-bg.jpg"
-          alt="SEACLUB Fish Restaurant & Fine Wine"
+          alt="Gech Fish Restaurant & Fresh Fish"
           className="w-full h-full object-contain object-center block"
           style={{ imageRendering: '-webkit-optimize-contrast' }}
         />

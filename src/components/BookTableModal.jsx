@@ -113,7 +113,7 @@ export default function BookTableModal({
 
               <div>
                 <span className="text-[11px] font-serif uppercase tracking-[0.2em] text-gold-400 block">
-                  Table Reserved At SEACLUB
+                  Table Reserved At Gech Fish
                 </span>
                 <h3 className="font-serif text-3xl sm:text-4xl text-white font-normal mt-1">
                   #{confirmedReservation.id}

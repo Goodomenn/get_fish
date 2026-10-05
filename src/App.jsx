@@ -254,7 +254,7 @@ export default function App() {
             <Hero
               compact={true}
               pageBadge="About"
-              pageTitle="About SEACLUB"
+              pageTitle="About Gech Fish"
               pageSubtitle="Our culinary heritage, day-boat sustainability ethics, and master craftsmanship"
               currentPage={currentPage}
               onNavigate={handleNavigate}

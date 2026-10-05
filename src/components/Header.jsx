@@ -45,30 +45,30 @@ export default function Header({
       }`}
     >
       <div className="w-full max-w-7xl mx-auto px-3 sm:px-6 lg:px-10 h-16 sm:h-20 flex items-center justify-between">
-        {/* Brand Logo - Crest Emblem + "SEACLUB" */}
+        {/* Brand Logo - Gech Fish Logo Emblem */}
         <div className="flex items-center space-x-3 shrink-0">
           <button
             onClick={() => handleNavClick('home')}
             className="flex items-center space-x-2 sm:space-x-3 group text-left cursor-pointer"
-            title="SEACLUB Home"
-            aria-label="SEACLUB Home"
+            title="Gech Fish Home"
+            aria-label="Gech Fish Home"
           >
-            {/* High-Resolution Luxury Nautical Crest Emblem */}
+            {/* Gech Fish Circular Brand Logo */}
             <div className="relative w-8 h-8 sm:w-10 sm:h-10 rounded-full overflow-hidden border border-gold-400/50 shadow-md group-hover:border-gold-300 group-hover:scale-105 transition-all duration-300 shrink-0 bg-[#050e17]">
               <img
-                src="/seaclub-crest.png"
-                alt="SEACLUB Crest"
+                src="/gech-fish-logo.jpg"
+                alt="Gech Fish Logo"
                 className="w-full h-full object-cover"
               />
             </div>
 
             {/* Brand Typography */}
             <div className="flex flex-col">
-              <span className="font-serif tracking-[0.2em] sm:tracking-[0.28em] text-base sm:text-xl font-bold uppercase text-gold-300 group-hover:text-white transition duration-300 whitespace-nowrap drop-shadow-md">
-                SEACLUB
+              <span className="font-serif tracking-[0.16em] sm:tracking-[0.22em] text-base sm:text-xl font-bold uppercase text-gold-300 group-hover:text-white transition duration-300 whitespace-nowrap drop-shadow-md">
+                GECH FISH
               </span>
-              <span className="hidden sm:block text-[8px] sm:text-[9px] font-serif tracking-[0.22em] uppercase text-gold-400/70 -mt-0.5 whitespace-nowrap">
-                Seafood & Wine
+              <span className="hidden sm:block text-[8px] sm:text-[9px] font-sans tracking-wider uppercase text-gold-400/80 -mt-0.5 whitespace-nowrap">
+                ጌች አሳ • Fresh Fish
               </span>
             </div>
           </button>
@@ -165,21 +165,21 @@ export default function Header({
       {/* Navigation Drawer - Opens cleanly on any resolution */}
       {mobileMenuOpen && (
         <div className="bg-[#071421]/98 backdrop-blur-xl border-b border-slate-800 px-6 py-6 space-y-4 animate-in slide-in-from-top-2 duration-200 text-xs sm:text-sm tracking-widest uppercase font-serif shadow-2xl">
-          {/* Drawer Brand Header with Crest Logo */}
+          {/* Drawer Brand Header with Gech Fish Logo */}
           <div className="flex items-center space-x-3 pb-3 border-b border-slate-800/80">
-            <div className="w-8 h-8 rounded-full overflow-hidden border border-gold-400/50 bg-[#050e17] shrink-0">
+            <div className="w-9 h-9 rounded-full overflow-hidden border border-gold-400/50 bg-[#050e17] shrink-0">
               <img
-                src="/seaclub-crest.png"
-                alt="SEACLUB Crest"
+                src="/gech-fish-logo.jpg"
+                alt="Gech Fish Logo"
                 className="w-full h-full object-cover"
               />
             </div>
             <div>
-              <div className="font-serif tracking-[0.24em] text-sm font-bold uppercase text-gold-300">
-                SEACLUB
+              <div className="font-serif tracking-[0.2em] text-sm font-bold uppercase text-gold-300">
+                GECH FISH
               </div>
-              <div className="text-[9px] font-serif tracking-widest text-slate-400">
-                Fish Restaurant & Wine Cellar
+              <div className="text-[9px] font-sans tracking-wider text-slate-300">
+                ጌች አሳ • Fish Restaurant
               </div>
             </div>
           </div>
