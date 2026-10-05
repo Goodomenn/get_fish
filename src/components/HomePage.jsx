@@ -128,24 +128,25 @@ export default function HomePage({
         onNavigate={onNavigate}
       />
 
-      {/* Restaurant Locations Announcement Banner */}
-      <div className="bg-gradient-to-r from-[#030910] via-[#091b2c] to-[#030910] border-b border-slate-800/80 py-4 px-6 sm:px-10">
-        <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between text-center md:text-left gap-3">
-          <div className="flex items-center space-x-2 text-xs sm:text-sm text-gold-300 font-serif tracking-widest uppercase">
-            <Sparkles className="w-3.5 h-3.5 text-gold-400" />
-            <span>Welcoming Guests in Bahir Dar & Addis Ababa (ባህር ዳር እና አዲስ አበባ)</span>
+      {/* Restaurant Locations Announcement Banner - Single Line */}
+      <div className="bg-gradient-to-r from-[#030910] via-[#091b2c] to-[#030910] border-b border-slate-800/80 py-3.5 px-4 sm:px-8 overflow-x-auto no-scrollbar">
+        <div className="max-w-7xl mx-auto flex items-center justify-between gap-6 whitespace-nowrap min-w-max md:min-w-0">
+          <div className="flex items-center space-x-2 text-xs sm:text-sm text-gold-300 font-serif tracking-wider uppercase shrink-0">
+            <Sparkles className="w-3.5 h-3.5 text-gold-400 shrink-0" />
+            <span>Welcoming Guests Across 2 Locations:</span>
           </div>
-          <div className="flex flex-wrap items-center justify-center gap-3 sm:gap-6 text-xs text-slate-300 font-light">
+          <div className="flex items-center gap-4 sm:gap-6 text-xs text-slate-300 font-light shrink-0">
             {RESTAURANT_BRANCHES.map((b, idx) => (
               <React.Fragment key={b.id}>
-                {idx > 0 && <span className="hidden sm:inline text-slate-700">•</span>}
+                {idx > 0 && <span className="text-slate-600">•</span>}
                 <button
+                  type="button"
                   onClick={() => handleBranchViewOnMap(b.id)}
-                  className="flex items-center space-x-1.5 hover:text-gold-300 transition cursor-pointer"
+                  className="inline-flex items-center space-x-1.5 hover:text-gold-300 transition cursor-pointer"
                 >
-                  <span className="w-1.5 h-1.5 rounded-full bg-gold-400"></span>
+                  <span className="w-1.5 h-1.5 rounded-full bg-gold-400 shrink-0"></span>
                   <strong className="text-white font-medium">{b.city.split(',')[0]}:</strong>
-                  <span>{b.name}</span>
+                  <span>{b.badge}</span>
                 </button>
               </React.Fragment>
             ))}
