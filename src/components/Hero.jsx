@@ -45,8 +45,8 @@ export default function Hero({
           <div className="absolute inset-x-0 bottom-4 sm:bottom-6 px-4 sm:px-10 z-20">
             <div className="max-w-7xl mx-auto flex flex-col sm:flex-row sm:items-end justify-between gap-3">
               <div className="space-y-1.5 max-w-3xl">
-                {/* Breadcrumbs & Quick Subpage Navigation */}
-                <div className="flex flex-wrap items-center gap-1.5 sm:gap-2 text-[11px] font-serif text-slate-400 tracking-wider">
+                {/* Breadcrumbs: Clean Home > Current Page */}
+                <div className="flex items-center gap-1.5 sm:gap-2 text-[11px] font-serif text-slate-400 tracking-wider">
                   <button
                     onClick={() => handleNav('home')}
                     className="hover:text-gold-300 transition flex items-center space-x-1 cursor-pointer font-medium"
@@ -55,25 +55,6 @@ export default function Hero({
                   </button>
                   <ChevronRight className="w-3 h-3 text-slate-600" />
                   <span className="text-gold-400 uppercase font-semibold">{pageBadge || currentPage}</span>
-
-                  <span className="hidden sm:inline text-slate-600">|</span>
-                  <div className="hidden sm:flex items-center gap-2 text-[10px] uppercase font-serif text-slate-400">
-                    {currentPage !== 'menu' && (
-                      <button onClick={() => handleNav('menu')} className="hover:text-gold-300 transition cursor-pointer">Menu</button>
-                    )}
-                    {currentPage !== 'wine' && (
-                      <button onClick={() => handleNav('wine')} className="hover:text-gold-300 transition cursor-pointer">Wine Cellar</button>
-                    )}
-                    {currentPage !== 'about' && (
-                      <button onClick={() => handleNav('about')} className="hover:text-gold-300 transition cursor-pointer">About</button>
-                    )}
-                    {currentPage !== 'events' && (
-                      <button onClick={() => handleNav('events')} className="hover:text-gold-300 transition cursor-pointer">Events</button>
-                    )}
-                    {currentPage !== 'contacts' && (
-                      <button onClick={() => handleNav('contacts')} className="hover:text-gold-300 transition cursor-pointer">Contacts</button>
-                    )}
-                  </div>
                 </div>
 
                 {/* Subpage Title */}
