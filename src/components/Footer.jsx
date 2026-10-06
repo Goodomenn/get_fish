@@ -177,11 +177,11 @@ export default function Footer({ onOpenBookTable, onNavigate }) {
                 className="flex items-center justify-center md:justify-start space-x-3 group cursor-pointer"
                 title="Gech Fish Home"
               >
-                <div className="w-11 h-11 rounded-full overflow-hidden border border-gold-400/50 bg-[#050e17] shrink-0 shadow-lg group-hover:scale-105 transition-transform">
+                <div className="w-11 h-11 rounded-full overflow-hidden border border-gold-400/50 bg-white p-0.5 shrink-0 shadow-lg group-hover:scale-105 transition-transform">
                   <img
-                    src="/gech-fish-logo.jpg"
+                    src="/gech-fish-logo.png"
                     alt="Gech Fish Logo"
-                    className="w-full h-full object-cover"
+                    className="w-full h-full object-contain"
                   />
                 </div>
                 <span className="font-serif tracking-[0.2em] text-2xl sm:text-3xl font-bold uppercase text-white group-hover:text-gold-300 transition">

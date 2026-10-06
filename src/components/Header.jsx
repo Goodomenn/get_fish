@@ -54,11 +54,11 @@ export default function Header({
             aria-label="Gech Fish Home"
           >
             {/* Gech Fish Circular Brand Logo */}
-            <div className="relative w-8 h-8 sm:w-10 sm:h-10 rounded-full overflow-hidden border border-gold-400/50 shadow-md group-hover:border-gold-300 group-hover:scale-105 transition-all duration-300 shrink-0 bg-[#050e17]">
+            <div className="relative w-8 h-8 sm:w-10 sm:h-10 rounded-full overflow-hidden border border-gold-400/50 shadow-md group-hover:border-gold-300 group-hover:scale-105 transition-all duration-300 shrink-0 bg-white p-0.5">
               <img
-                src="/gech-fish-logo.jpg"
+                src="/gech-fish-logo.png"
                 alt="Gech Fish Logo"
-                className="w-full h-full object-cover"
+                className="w-full h-full object-contain"
               />
             </div>
 
@@ -167,11 +167,11 @@ export default function Header({
         <div className="bg-[#071421]/98 backdrop-blur-xl border-b border-slate-800 px-6 py-6 space-y-4 animate-in slide-in-from-top-2 duration-200 text-xs sm:text-sm tracking-widest uppercase font-serif shadow-2xl">
           {/* Drawer Brand Header with Gech Fish Logo */}
           <div className="flex items-center space-x-3 pb-3 border-b border-slate-800/80">
-            <div className="w-9 h-9 rounded-full overflow-hidden border border-gold-400/50 bg-[#050e17] shrink-0">
+            <div className="w-9 h-9 rounded-full overflow-hidden border border-gold-400/50 bg-white p-0.5 shrink-0">
               <img
-                src="/gech-fish-logo.jpg"
+                src="/gech-fish-logo.png"
                 alt="Gech Fish Logo"
-                className="w-full h-full object-cover"
+                className="w-full h-full object-contain"
               />
             </div>
             <div>
