@@ -79,6 +79,131 @@ export const MENU_CATEGORIES = [
 
 export const RESTAURANT_DISHES = [
   {
+    "id": "dish-fish-1",
+    "name": "Fish Lebleb (አሳ ለበለብ)",
+    "frenchName": "አሳ ለበለብ / Fish Lebleb",
+    "category": "Fish Mains",
+    "price": 1200,
+    "priceNote": "Portion with Injera",
+    "badge": "Ethiopian Classic",
+    "image": null,
+    "description": "Fresh diced fish fillet lightly cooked in hot spiced oil with garlic, ginger, rosemary, and green chilies, served with fresh injera.",
+    "ingredients": [
+      "Fresh Fish Fillet",
+      "Garlic",
+      "Ginger",
+      "Green Chilies",
+      "Ethiopian Spiced Oil",
+      "Rosemary",
+      "Injera"
+    ],
+    "pairingWine": "Crisp White Wine or Draft Beer",
+    "prepTime": "15 mins",
+    "dietary": [
+      "Daily Catch",
+      "Traditional Specialty"
+    ]
+  },
+  {
+    "id": "dish-fish-2",
+    "name": "Fish Wot (አሳ ወጥ)",
+    "frenchName": "አሳ ወጥ / Fish Wet",
+    "category": "Fish Mains",
+    "price": 1100,
+    "priceNote": "Portion with Injera",
+    "badge": "Rich & Spicy",
+    "image": null,
+    "description": "Traditional Ethiopian spicy fish stew simmered in slow-cooked berbere sauce, caramelized onions, garlic, and wild herbs.",
+    "ingredients": [
+      "Fresh Fish Fillet",
+      "Berbere Sauce",
+      "Caramelized Onions",
+      "Garlic",
+      "Korerima (Cardamom)",
+      "Injera"
+    ],
+    "pairingWine": "Bold Red Wine or Cold Lager",
+    "prepTime": "20 mins",
+    "dietary": [
+      "Traditional Stew",
+      "Spicy"
+    ]
+  },
+  {
+    "id": "dish-fish-3",
+    "name": "Fish Dulet (አሳ ዱለት)",
+    "frenchName": "አሳ ዱለት / Fish Dulet",
+    "category": "Fish Mains",
+    "price": 1100,
+    "priceNote": "Portion with Injera",
+    "badge": "House Favorite",
+    "image": null,
+    "description": "Finely minced fresh fish seasoned with mitmita, diced jalapeño peppers, red onions, garlic, and seasoned Ethiopian spiced oil.",
+    "ingredients": [
+      "Minced Fish Fillet",
+      "Mitmita Spice",
+      "Diced Jalapeños",
+      "Red Onions",
+      "Garlic",
+      "Spiced Oil"
+    ],
+    "pairingWine": "Sauvignon Blanc or Chilled Lager",
+    "prepTime": "15 mins",
+    "dietary": [
+      "Minced Specialty",
+      "Spicy"
+    ]
+  },
+  {
+    "id": "dish-fish-4",
+    "name": "Fish Firfir (አሳ ፍርፍር)",
+    "frenchName": "አሳ ፍርፍር / Fish Firfir",
+    "category": "Fish Mains",
+    "price": 1100,
+    "priceNote": "Portion with Injera",
+    "badge": "Savory Classic",
+    "image": null,
+    "description": "Torn pieces of soft injera simmered into savory fish stew, sautéed with berbere, garlic, and fresh herbs.",
+    "ingredients": [
+      "Fresh Fish",
+      "Torn Injera",
+      "Berbere Sauce",
+      "Garlic",
+      "Fresh Herbs",
+      "Green Pepper"
+    ],
+    "pairingWine": "Cold Draft Beer",
+    "prepTime": "15 mins",
+    "dietary": [
+      "Traditional Firfir",
+      "Hearty"
+    ]
+  },
+  {
+    "id": "dish-fish-5",
+    "name": "Fish Kitfo (አሳ ክትፎ)",
+    "frenchName": "አሳ ክትፎ / Fish Kitfo",
+    "category": "Fish Mains",
+    "price": 1100,
+    "priceNote": "Portion with Injera / Kocho",
+    "badge": "Chef's Cut",
+    "image": null,
+    "description": "Delicately minced fresh fish fillet marinated in fragrant mitmita spice and seasoned herb oil, served with chili and greens.",
+    "ingredients": [
+      "Finely Minced Fish",
+      "Mitmita Spice",
+      "Seasoned Spiced Oil",
+      "Ayib (Cottage Cheese)",
+      "Gomen"
+    ],
+    "pairingWine": "Crisp Chilled White Wine",
+    "prepTime": "10 mins",
+    "dietary": [
+      "Delicacy",
+      "High Protein"
+    ]
+  },
+  {
     "id": "dish-fish-6",
     "name": "Special Fish Lebleb (ስፔሻል አሳ ለበለብ)",
     "frenchName": "ስፔሻል አሳ ለበለብ / Spiecal Fish Lebeleb",
@@ -144,11 +269,11 @@ export const RESTAURANT_DISHES = [
       "Jalapeño Peppers",
       "Red Onions"
     ],
-    "pairingWine": "House White Wine or Cold Beverage",
-    "prepTime": "15 mins",
+    "pairingWine": "Draft Beer or Dry White Wine",
+    "prepTime": "18 mins",
     "dietary": [
-      "Spicy Duo",
-      "Popular Specialty"
+      "Combo Platter",
+      "Authentic"
     ]
   },
   {
@@ -157,21 +282,22 @@ export const RESTAURANT_DISHES = [
     "frenchName": "ሃፍ አሳ ለበለብ ሃፍ አሳ ፍርፍር / Half Asa Lebleb Half Firfir",
     "category": "Fish Mains",
     "price": 1300,
-    "priceNote": "Combo Plate",
-    "badge": "Lebleb & Firfir",
+    "priceNote": "Half & Half Platter",
+    "badge": "Lebleb & Firfir Combo",
     "image": null,
-    "description": "A comforting combination plate of succulent seasoned fish lebleb alongside rich spicy fish firfir on fresh injera.",
+    "description": "Flavorful combination of pan-seared warm fish lebleb and richly seasoned fish firfir soaked in spiced berbere broth.",
     "ingredients": [
-      "Sautéed Fish (Lebleb)",
+      "Fish Fillet Lebleb",
       "Injera Firfir",
+      "Ethiopian Spices",
       "Garlic",
-      "Green Peppers",
-      "Clarified Herb Oil"
+      "Green Chilies"
     ],
-    "pairingWine": "Dry White Wine",
-    "prepTime": "15 mins",
+    "pairingWine": "Pinot Grigio or Local Beer",
+    "prepTime": "18 mins",
     "dietary": [
-      "Customer Favorite"
+      "Combo Platter",
+      "Chef Recommended"
     ]
   },
   {
@@ -180,21 +306,23 @@ export const RESTAURANT_DISHES = [
     "frenchName": "ሃፍ ዱለት ሃፍ ወጥ / Half Dulet Half Wet",
     "category": "Fish Mains",
     "price": 1300,
-    "priceNote": "Dulet & Stew Duo",
-    "badge": "Dulet & Wot",
+    "priceNote": "Half & Half Platter",
+    "badge": "Dulet & Wot Duo",
     "image": null,
-    "description": "Flavorful minced fish dulet seasoned with onions and peppers, served beside a rich, slow-simmered berbere fish stew (wot).",
+    "description": "Half portion of seasoned minced fish dulet paired with half portion of slow-simmered spicy Ethiopian fish stew (wot).",
     "ingredients": [
-      "Fish Dulet",
-      "Slow-Simmered Fish Wot",
-      "Berbere",
-      "Cardamom",
+      "Minced Fish Dulet",
+      "Fish Wot (Stew)",
+      "Berbere Paste",
+      "Garlic",
+      "Spiced Butter Essence",
       "Injera"
     ],
-    "pairingWine": "Traditional Spiced Tea or Wine",
+    "pairingWine": "Chilled Rosé or St. George Beer",
     "prepTime": "18 mins",
     "dietary": [
-      "Traditional Stew"
+      "Spicy Duo",
+      "Traditional"
     ]
   },
   {
@@ -203,21 +331,23 @@ export const RESTAURANT_DISHES = [
     "frenchName": "ሃፍ ለበለብ ሃፍ ወጥ / Half Lebleb Half Wet",
     "category": "Fish Mains",
     "price": 1300,
-    "priceNote": "Combination Plate",
-    "badge": "Lebleb & Wot",
+    "priceNote": "Half & Half Platter",
+    "badge": "Lebleb & Wot Duo",
     "image": null,
-    "description": "Half portion of lightly pan-sautéed fish lebleb served with authentic aromatic spicy fish wot and fresh injera.",
+    "description": "Sautéed garlicky fish lebleb alongside a hearty serving of rich berbere-infused fish stew served with fresh rolled injera.",
     "ingredients": [
-      "Fish Lebleb",
-      "Spiced Fish Wot",
+      "Fish Lebleb Fillet",
+      "Fish Wot Stew",
+      "Berbere",
       "Garlic",
       "Rosemary",
-      "Fresh Chilies"
+      "Injera"
     ],
-    "pairingWine": "Chardonnay or Mineral Water",
-    "prepTime": "15 mins",
+    "pairingWine": "Chardonnay or Cold Draft",
+    "prepTime": "18 mins",
     "dietary": [
-      "Authentic Flavor"
+      "Rich & Savory",
+      "Combo Special"
     ]
   },
   {
@@ -226,22 +356,23 @@ export const RESTAURANT_DISHES = [
     "frenchName": "አሳ ጉላሽ / Asa Gulash",
     "category": "Fish Mains",
     "price": 1200,
-    "priceNote": "Main Entrée",
-    "badge": "Fish Gulash",
+    "priceNote": "Portion with Bread or Injera",
+    "badge": "House Gulash",
     "image": null,
-    "description": "Tender boneless fish morsels simmered in a rich tomato, garlic, and sweet bell pepper goulash reduction.",
+    "description": "Tender cubes of fresh fish fillet simmered with tomatoes, bell peppers, onions, and mild spices in a thick savory sauce.",
     "ingredients": [
-      "Boneless Fish Chunks",
-      "Ripe Tomatoes",
-      "Bell Peppers",
+      "Fish Cubes",
+      "Fresh Tomato Reduction",
+      "Sweet Bell Peppers",
+      "Onions",
       "Garlic",
-      "Black Pepper",
       "Herbs"
     ],
-    "pairingWine": "Pinot Grigio",
+    "pairingWine": "Sauvignon Blanc",
     "prepTime": "15 mins",
     "dietary": [
-      "Hearty Stew"
+      "Mild & Savory",
+      "Family Favorite"
     ]
   },
   {
@@ -250,22 +381,22 @@ export const RESTAURANT_DISHES = [
     "frenchName": "አሳ ኮተሌት / Asa Kotelet",
     "category": "Fish Mains",
     "price": 1200,
-    "priceNote": "Cutlets with Sides",
+    "priceNote": "Crispy Cutlet Platter",
     "badge": "Crispy Cutlet",
     "image": null,
-    "description": "Crisp golden-crusted minced fish cutlets seasoned with fragrant herbs, served with lemon wedges and house dip.",
+    "description": "Golden breaded and seasoned crispy fish cutlet fried to a crunchy finish, accompanied by fresh lemon and house dipping sauce.",
     "ingredients": [
-      "Minced Fish Fillet",
-      "Breadcrumbs",
-      "Egg",
-      "Fresh Herbs",
+      "Fresh Fish Fillet",
+      "Golden Breadcrumbs",
+      "Garlic & Herb Seasoning",
       "Lemon",
-      "Tartar Sauce"
+      "House Tartar/Awaze"
     ],
-    "pairingWine": "Chilled Sauvignon Blanc",
+    "pairingWine": "Chablis or Pilsner",
     "prepTime": "15 mins",
     "dietary": [
-      "Crispy Golden"
+      "Crispy Fried",
+      "Popular"
     ]
   },
   {
@@ -274,24 +405,23 @@ export const RESTAURANT_DISHES = [
     "frenchName": "የቤቱ ስፔሻል / Spiecal Combo",
     "category": "Fish Mains",
     "price": 3600,
-    "priceNote": "Grand Platter (Feeds 2-3)",
-    "badge": "House Grand Feast",
+    "priceNote": "Grand Feast for 3-4",
+    "badge": "Grand Feast 3-4 Pax",
     "image": null,
-    "description": "The premier Gech Fish culinary showcase: assorted platter of fish tibs, lebleb, dulet, goulash, and crispy cutlets served family-style with injera.",
+    "description": "The ultimate restaurant centerpiece platter with assorted fish delicacies: Dulet, Lebleb, Gulash, Cotelet, Fried Fish, and sides.",
     "ingredients": [
-      "Fish Tibs",
-      "Fish Lebleb",
+      "Assorted Fresh Fish Cuts",
       "Fish Dulet",
+      "Fish Lebleb",
       "Fish Gulash",
-      "Cutlet",
-      "Assorted Condiments",
-      "Injera"
+      "Cotelet",
+      "Injera & Bread"
     ],
-    "pairingWine": "Fine Wine Cellar Selection",
+    "pairingWine": "Tignanello Toscana or Bottle Champagne",
     "prepTime": "25 mins",
     "dietary": [
-      "Chef Signature Platter",
-      "Feeds 2-3"
+      "Grand Platter",
+      "Sharing Feast"
     ]
   },
   {
@@ -300,45 +430,46 @@ export const RESTAURANT_DISHES = [
     "frenchName": "ኖርማል ኮምቦ / Normal Combo",
     "category": "Fish Mains",
     "price": 3000,
-    "priceNote": "Family Platter (Feeds 2)",
-    "badge": "Classic Combo",
+    "priceNote": "Sharing Platter for 2-3",
+    "badge": "Sharing Platter 2-3 Pax",
     "image": null,
-    "description": "Generous sharing combo featuring fried and sautéed fish specialties served with fresh injera and salad.",
+    "description": "Generous sharing platter offering three chef favorite fish preparations served family style on fresh Ethiopian injera.",
     "ingredients": [
-      "Sautéed Fish Chunks",
-      "Crispy Fish Cutlets",
-      "Injera",
-      "Fresh Salad",
-      "House Chili Sauce"
+      "Fish Tibs",
+      "Fish Dulet",
+      "Fish Wot / Firfir",
+      "Fresh Chilies",
+      "Injera Platter"
     ],
-    "pairingWine": "Chardonnay",
-    "prepTime": "20 mins",
+    "pairingWine": "Chilled White Wine or Premium Beer",
+    "prepTime": "22 mins",
     "dietary": [
-      "Sharing Platter"
+      "Sharing Platter",
+      "Family Style"
     ]
   },
   {
     "id": "dish-fish-16",
     "name": "Nile Perch (1 Kilo) (ናይል ፐርች)",
-    "frenchName": "ናይል ፐርች / Nile Perche (1 kg)",
+    "frenchName": "ናይል ፐርች / Nile Perche 1 Kilo",
     "category": "Fish Mains",
     "price": 2500,
-    "priceNote": "1 Kilogram Fresh Weight",
-    "badge": "Fresh Catch 1kg",
+    "priceNote": "Per 1 Kilogram",
+    "badge": "1kg Lake Tana Perch",
     "image": null,
-    "description": "One full kilogram of wild Nile Perch prepared whole or filleted to your preference (fried or grilled), served with lemons and dips.",
+    "description": "One full kilogram of premium Nile Perch prepared whole or cut to your preference: deep-fried, pan-roasted, or spiced grilled.",
     "ingredients": [
       "Fresh Nile Perch 1kg",
       "Garlic Marinade",
-      "Lemon Juice",
-      "Spiced Flour Dredge",
-      "Hot Dip"
+      "Ethiopian Seasonings",
+      "Lemon Slices",
+      "Dipping Sauces"
     ],
-    "pairingWine": "Sancerre Blanc",
+    "pairingWine": "Chablis Grand Cru or Dry Riesling",
     "prepTime": "25 mins",
     "dietary": [
-      "Wild Harvested",
-      "High Protein"
+      "Whole Fish",
+      "Fresh Catch"
     ]
   },
   {
@@ -347,47 +478,46 @@ export const RESTAURANT_DISHES = [
     "frenchName": "አሳ ቆሮሶ ሙሉ / Fish Koroso Full",
     "category": "Fish Mains",
     "price": 3000,
-    "priceNote": "Whole Fish (Mulu)",
-    "badge": "Whole Lake Tilapia",
+    "priceNote": "Full Whole Tilapia",
+    "badge": "Full Whole Catch",
     "image": null,
-    "description": "Whole fresh Lake Tana Koroso (Tilapia) deep-fried to golden crispness, scored and seasoned with lemon, rosemary, and mitmita.",
+    "description": "Whole fresh Lake Tana Koroso (Tilapia) scored and seasoned with garlic and mitmita, crisp-fried whole to golden crunch.",
     "ingredients": [
-      "Whole Lake Tana Tilapia",
-      "Cracked Pepper",
-      "Rosemary",
-      "Lime",
-      "Mitmita",
-      "Awaze Dip"
+      "Whole Koroso Fish",
+      "Spiced Batter Coating",
+      "Fresh Lemon",
+      "Awaze Dip",
+      "Hot Peppers"
     ],
-    "pairingWine": "Cold Draft Beer or Vermentino",
+    "pairingWine": "Crisp Sauvignon Blanc",
     "prepTime": "20 mins",
     "dietary": [
-      "Whole Fish",
-      "Crispy Skin"
+      "Whole Fried Fish",
+      "Lake Catch"
     ]
   },
   {
     "id": "dish-fish-18",
     "name": "Fish Tibs Half (አሳ ጥብስ ግማሽ)",
-    "frenchName": "አሳ ትቢት ግማሽ / Fish Tebit Half",
+    "frenchName": "አሳ ጥብስ ግማሽ / Fish Tebit Half",
     "category": "Fish Mains",
     "price": 2000,
-    "priceNote": "Half Portion (Gimash)",
-    "badge": "Sautéed Fish Tibs",
+    "priceNote": "Half Order",
+    "badge": "Half Tibs Portion",
     "image": null,
-    "description": "Half portion of fresh fish cubes flash-sautéed in a hot pan with red onions, garlic, fresh rosemary, and sliced serrano chilies.",
+    "description": "Half portion of tender fish chunks pan-sautéed with onions, rosemary, jalapeños, and spiced clarified butter/oil.",
     "ingredients": [
-      "Fish Fillet Chunks",
-      "Red Onions",
-      "Garlic",
+      "Fresh Fish Cubes",
+      "Sautéed Onions",
+      "Jalapeño Peppers",
       "Rosemary",
-      "Jalapeños",
-      "Awaze"
+      "Garlic"
     ],
-    "pairingWine": "Dry White Wine",
+    "pairingWine": "Light Red or Craft Beer",
     "prepTime": "15 mins",
     "dietary": [
-      "Sautéed Tibs"
+      "Pan Sautéed",
+      "Popular"
     ]
   },
   {
@@ -397,19 +527,20 @@ export const RESTAURANT_DISHES = [
     "category": "Fish Mains",
     "price": 1500,
     "priceNote": "Half Portion",
-    "badge": "Half Koroso",
+    "badge": "Half Koroso Catch",
     "image": null,
-    "description": "Half serving of crispy fried Lake Tana Koroso tilapia with fresh lemon slices and traditional spices.",
+    "description": "Half portion of seasoned crispy fried Lake Tana Koroso tilapia served with lemon wedges and spicy dipping condiment.",
     "ingredients": [
-      "Fresh Koroso Tilapia",
-      "Spiced Seasoning",
-      "Fresh Lemon",
-      "Mitmita"
+      "Half Koroso Tilapia",
+      "Garlic & Spices",
+      "Lemon",
+      "Mitmita Seasoning"
     ],
-    "pairingWine": "White Wine or Lager",
+    "pairingWine": "Cold Draught Beer",
     "prepTime": "15 mins",
     "dietary": [
-      "Crispy Tilapia"
+      "Crispy Fried",
+      "Traditional"
     ]
   },
   {
@@ -418,21 +549,22 @@ export const RESTAURANT_DISHES = [
     "frenchName": "አሳ ሸክላ ሙሉ / Fish Shekla Mulu",
     "category": "Fish Mains",
     "price": 3000,
-    "priceNote": "Whole Sizzling Clay Pot",
-    "badge": "Sizzling Clay Pot",
+    "priceNote": "Full Clay Pot Sizzler",
+    "badge": "Clay Pot Sizzler (Full)",
     "image": null,
-    "description": "Whole seasoned fish served sizzling hot in a traditional earthenware clay pot (Shekla) over red-hot charcoal with caramelized onions.",
+    "description": "Full portion of fresh fish chunks served sizzling hot over live coals in a traditional Ethiopian terracotta clay dish (shekla).",
     "ingredients": [
-      "Whole Fish",
-      "Clay Pot (Shekla)",
+      "Fresh Fish Cuts",
       "Caramelized Onions",
-      "Rosemary Butter",
-      "Jalapeño"
+      "Rosemary Sprigs",
+      "Green Chilies",
+      "Kibe Spiced Oil"
     ],
-    "pairingWine": "Medium Bodied White or Red Wine",
+    "pairingWine": "Pinot Noir or Tuscan Red",
     "prepTime": "22 mins",
     "dietary": [
-      "Signature Sizzler"
+      "Clay Pot Sizzler",
+      "Chef Signature"
     ]
   },
   {
@@ -441,21 +573,22 @@ export const RESTAURANT_DISHES = [
     "frenchName": "አሳ ሸክላ ግማሽ / Fish Shekla Half",
     "category": "Fish Mains",
     "price": 1500,
-    "priceNote": "Half Sizzling Clay Pot",
-    "badge": "Half Clay Pot",
+    "priceNote": "Half Clay Pot Sizzler",
+    "badge": "Clay Pot Sizzler (Half)",
     "image": null,
-    "description": "Half portion of mouth-watering sizzling fish presented in a heated traditional smoking clay pot.",
+    "description": "Half portion of aromatic fish sautéed with rosemary and garlic, served sizzling on a traditional charcoal clay stove.",
     "ingredients": [
-      "Fish Chunks",
-      "Hot Clay Pot",
+      "Fish Fillet Chunks",
       "Onions",
-      "Garlic",
-      "Rosemary"
+      "Rosemary",
+      "Green Pepper",
+      "Spiced Oil"
     ],
-    "pairingWine": "Crisp White Wine",
+    "pairingWine": "Chilled Beer or Rosé",
     "prepTime": "18 mins",
     "dietary": [
-      "Sizzling Clay Pot"
+      "Clay Pot Sizzler",
+      "Sizzling Hot"
     ]
   },
   {
@@ -464,22 +597,22 @@ export const RESTAURANT_DISHES = [
     "frenchName": "ሙሉ ናይል ፐርች ዝልዝል ሸክላ / Full Nile Purch Zlzl Shekal",
     "category": "Fish Mains",
     "price": 4000,
-    "priceNote": "Premium Full Platter",
-    "badge": "Nile Perch Zilzil",
+    "priceNote": "Full Premium Sizzler",
+    "badge": "Premium Strip Sizzler (Full)",
     "image": null,
-    "description": "Long tender strips (Zilzil) of succulent Nile Perch sizzled table-side in a burning clay pot with spiced herb butter and peppers.",
+    "description": "Full portion of long prime Nile Perch fillet strips (zilzil) flash-sautéed with onions, rosemary, and peppers in a clay brazier.",
     "ingredients": [
-      "Nile Perch Strips (Zilzil)",
-      "Aromatic Spices",
-      "Sliced Onions",
-      "Garlic",
-      "Hot Clay Pot"
+      "Nile Perch Fillet Strips (Zilzil)",
+      "Sliced Red Onions",
+      "Fresh Rosemary",
+      "Jalapeño",
+      "Garlic Butter/Oil"
     ],
-    "pairingWine": "Sommelier Choice White",
-    "prepTime": "20 mins",
+    "pairingWine": "Dom Pérignon or Bold Red Wine",
+    "prepTime": "25 mins",
     "dietary": [
-      "Prime Cut",
-      "Clay Pot Sizzler"
+      "Prime Fillet",
+      "Signature Sizzler"
     ]
   },
   {
@@ -488,20 +621,22 @@ export const RESTAURANT_DISHES = [
     "frenchName": "ግማሽ ናይል ፐርች ዝልዝል ሸክላ / Half Nile Purch Zlzl Shekal",
     "category": "Fish Mains",
     "price": 3000,
-    "priceNote": "Half Clay Pot Portion",
-    "badge": "Zilzil Shekla Half",
+    "priceNote": "Half Premium Sizzler",
+    "badge": "Premium Strip Sizzler (Half)",
     "image": null,
-    "description": "Half portion of prime Nile Perch strips sizzling hot in an authentic earthen clay bowl.",
+    "description": "Half portion of succulent Nile Perch tender fillet strips sizzling hot in an earthenware clay pot with fresh rosemary.",
     "ingredients": [
       "Nile Perch Strips",
-      "Garlic",
-      "Herb Butter",
-      "Jalapeños"
+      "Rosemary",
+      "Onions",
+      "Peppers",
+      "Seasoned Oil"
     ],
-    "pairingWine": "Chardonnay",
-    "prepTime": "18 mins",
+    "pairingWine": "Chardonnay or Cold Lager",
+    "prepTime": "20 mins",
     "dietary": [
-      "Prime Cut"
+      "Prime Fillet",
+      "Sizzling Clay Pot"
     ]
   },
   {
@@ -510,20 +645,22 @@ export const RESTAURANT_DISHES = [
     "frenchName": "ሙሉ ዝልዝል ሸክላ / Full Asa Zlzl Shekla",
     "category": "Fish Mains",
     "price": 3000,
-    "priceNote": "Whole Zilzil Shekla",
-    "badge": "Asa Zilzil Mulu",
+    "priceNote": "Full Clay Pot Strips",
+    "badge": "Strip Sizzler (Full)",
     "image": null,
-    "description": "Full order of seasoned fish fillet strips roasted hot in a traditional earthenware dish with onions and rosemary.",
+    "description": "Full platter of tender fish strips seared with garlic, rosemary, and sliced chilies, served on an Ethiopian smoking clay pot.",
     "ingredients": [
-      "Fish Strips (Zilzil)",
-      "Sautéed Onions",
+      "Tender Fish Fillet Strips",
+      "White & Red Onions",
+      "Rosemary",
       "Green Chilies",
-      "Clay Pot"
+      "Spiced Oil"
     ],
-    "pairingWine": "Dry White Wine",
+    "pairingWine": "Sauvignon Blanc or Chilled Red",
     "prepTime": "20 mins",
     "dietary": [
-      "Traditional Sizzler"
+      "Clay Pot Sizzler",
+      "Traditional"
     ]
   },
   {
@@ -532,21 +669,22 @@ export const RESTAURANT_DISHES = [
     "frenchName": "ግማሽ ዝልዝል ሸክላ / Half Asa Zlzl Shekla",
     "category": "Fish Mains",
     "price": 1700,
-    "priceNote": "Half Zilzil Shekla",
-    "badge": "Asa Zilzil Half",
+    "priceNote": "Half Clay Pot Strips",
+    "badge": "Strip Sizzler (Half)",
     "image": null,
-    "description": "Half serving of sizzled fish fillet strips in hot clay pot with sweet onions and herb seasoning.",
+    "description": "Half portion of marinated fish strips served sizzling hot in a clay dish with aromatic herbs, onions, and dipping awaze.",
     "ingredients": [
       "Fish Strips",
-      "Rosemary",
       "Onions",
-      "Garlic",
-      "Clay Pot"
+      "Rosemary",
+      "Chili",
+      "Awaze Sauce"
     ],
-    "pairingWine": "House White Wine",
-    "prepTime": "15 mins",
+    "pairingWine": "Draft Beer or Pinot Grigio",
+    "prepTime": "16 mins",
     "dietary": [
-      "Clay Pot"
+      "Clay Pot Sizzler",
+      "Savory"
     ]
   },
   {
@@ -555,21 +693,22 @@ export const RESTAURANT_DISHES = [
     "frenchName": "አሳ አገልግል ሙሉ / Fish Agelegel Mulu",
     "category": "Fish Mains",
     "price": 3000,
-    "priceNote": "Full Traditional Basket",
-    "badge": "Traditional Agelegel",
+    "priceNote": "Full Leather Basket Feast",
+    "badge": "Traditional Leather Basket (Full)",
     "image": null,
-    "description": "A feast of assorted fish dishes wrapped in layers of injera and served in a traditional hand-crafted leather Agelegel basket.",
+    "description": "Full authentic Ethiopian leather basket (agelegel) presentation lined with injera, packed with variety fish delicacies.",
     "ingredients": [
-      "Fried & Sautéed Fish",
-      "Torn Injera",
+      "Assorted Seasoned Fish Dishes",
+      "Fresh Injera Layers",
       "Awaze",
-      "Fresh Lemon",
-      "Agelegel Basket"
+      "Ayib",
+      "Gomen Greens"
     ],
-    "pairingWine": "Cellar Reserve White",
-    "prepTime": "22 mins",
+    "pairingWine": "Traditional Tej or Rich Red Wine",
+    "prepTime": "25 mins",
     "dietary": [
-      "Heritage Presentation"
+      "Traditional Feast",
+      "Cultural Specialty"
     ]
   },
   {
@@ -578,20 +717,21 @@ export const RESTAURANT_DISHES = [
     "frenchName": "አሳ አገልግል ግማሽ / Fish Agelegel Half",
     "category": "Fish Mains",
     "price": 2000,
-    "priceNote": "Half Traditional Basket",
-    "badge": "Agelegel Half",
+    "priceNote": "Half Leather Basket Feast",
+    "badge": "Traditional Leather Basket (Half)",
     "image": null,
-    "description": "Half portion of traditional fish dishes presented in the iconic leather-bound Agelegel carrier.",
+    "description": "Half portion served in an authentic woven agelegel basket filled with flavorful fish preparations on rolled injera.",
     "ingredients": [
-      "Fish Dishes",
+      "Selected Fish Stews",
       "Injera",
-      "Lemon Wedges",
-      "Spiced Dip"
+      "Spiced Herbs",
+      "Green Chilies"
     ],
-    "pairingWine": "White Wine or Tea",
-    "prepTime": "18 mins",
+    "pairingWine": "Ethiopian Tej or Amber Beer",
+    "prepTime": "20 mins",
     "dietary": [
-      "Heritage Presentation"
+      "Traditional Presentation",
+      "Hearty"
     ]
   },
   {
@@ -600,20 +740,22 @@ export const RESTAURANT_DISHES = [
     "frenchName": "ሀፍ ጉላሽ እና ሀፍ ኮተሌት / Half Gulashe & Cotelet",
     "category": "Fish Mains",
     "price": 1300,
-    "priceNote": "Duo Combo",
-    "badge": "Gulash & Cutlet",
+    "priceNote": "Duo Platter",
+    "badge": "Gulash & Cotelet Duo",
     "image": null,
-    "description": "Combination plate of savory tomato-simmered fish goulash alongside a crispy golden fish cutlet.",
+    "description": "Perfect pair of rich savory fish gulash in tomato sauce alongside a golden crispy fried fish cutlet.",
     "ingredients": [
       "Fish Gulash",
-      "Fish Cutlet (Cotelet)",
-      "Tomato Gravy",
-      "Crisp Breadcrumbs"
+      "Crispy Fish Cotelet",
+      "Tomato Stew Sauce",
+      "Lemon",
+      "House Dip"
     ],
-    "pairingWine": "Chilled Pinot Grigio",
-    "prepTime": "16 mins",
+    "pairingWine": "Sauvignon Blanc or Lager",
+    "prepTime": "18 mins",
     "dietary": [
-      "Duo Special"
+      "Duo Platter",
+      "Popular"
     ]
   },
   {
@@ -622,21 +764,21 @@ export const RESTAURANT_DISHES = [
     "frenchName": "አሳ ፊንገር / Fish Finger",
     "category": "Fish Mains",
     "price": 1200,
-    "priceNote": "Portion with Dip",
-    "badge": "Crispy Fingers",
+    "priceNote": "Finger Food Platter",
+    "badge": "Crispy Strips",
     "image": null,
-    "description": "Tender fish fillets cut into batons, lightly seasoned and fried to a crunchy golden crust with tartar sauce.",
+    "description": "Crispy battered fish tenders seasoned with Ethiopian spices, served golden hot with house dipping sauce and lemon.",
     "ingredients": [
-      "Fish Fillet Strips",
-      "Spiced Breading",
-      "Tartar Sauce",
+      "Fresh Fish Fillet Tenders",
+      "Crispy Batter Coating",
+      "House Tartar / Awaze Dip",
       "Lemon"
     ],
-    "pairingWine": "Cold Lager or Soda",
-    "prepTime": "14 mins",
+    "pairingWine": "Cold Draught Beer",
+    "prepTime": "12 mins",
     "dietary": [
-      "Finger Food",
-      "Crispy"
+      "Crispy Finger Food",
+      "Snack / Main"
     ]
   },
   {
@@ -645,20 +787,22 @@ export const RESTAURANT_DISHES = [
     "frenchName": "አሳ ራፕ / Fish Wrap",
     "category": "Fish Mains",
     "price": 1100,
-    "priceNote": "Handheld Wrap",
+    "priceNote": "Fresh Wrap with Fries",
     "badge": "Fresh Wrap",
     "image": null,
-    "description": "Grilled fish fillets wrapped in fresh warm flatbread with shredded lettuce, tomatoes, red onions, and garlic sauce.",
+    "description": "Flaky fish fillet rolled in a warm flatbread with crisp lettuce, sliced tomatoes, onions, and creamy spiced herb sauce.",
     "ingredients": [
-      "Grilled Fish",
-      "Flatbread Wrap",
-      "Lettuce & Tomatoes",
-      "House Garlic Sauce"
+      "Fish Fillet",
+      "Warm Flatbread / Tortilla",
+      "Crisp Lettuce",
+      "Tomatoes",
+      "Creamy Spiced Sauce"
     ],
-    "pairingWine": "Iced Tea or Soft Drink",
+    "pairingWine": "Sparkling Water or Light Beer",
     "prepTime": "12 mins",
     "dietary": [
-      "Handheld Quick Bite"
+      "Quick Casual",
+      "Handheld"
     ]
   },
   {
@@ -667,20 +811,21 @@ export const RESTAURANT_DISHES = [
     "frenchName": "የልጆች አሳ / Fish Nagut",
     "category": "Fish Mains",
     "price": 1200,
-    "priceNote": "Kids Meal",
-    "badge": "Kids Special",
+    "priceNote": "Kid Friendly Portion",
+    "badge": "Kids Menu Favorite",
     "image": null,
-    "description": "Bite-sized tender boneless fish nuggets prepared especially for kids, served with fries and mild dip.",
+    "description": "Bite-sized tender fresh fish fillets in a mild crunchy golden coating, crafted specially for children with mild dip.",
     "ingredients": [
-      "Boneless Fish Chunks",
-      "Mild Batter",
-      "Crispy Fries",
-      "Ketchup & Mayo"
+      "Tender Fish Fillet Bites",
+      "Mild Crunchy Coating",
+      "Mild Dipping Sauce",
+      "Golden Fries"
     ],
     "pairingWine": "Fresh Fruit Juice",
     "prepTime": "12 mins",
     "dietary": [
-      "Kids Friendly"
+      "Kids Menu",
+      "Mild Seasoning"
     ]
   },
   {
@@ -689,20 +834,21 @@ export const RESTAURANT_DISHES = [
     "frenchName": "ሃፍ ጉላሽ ሃፍ ፊንገር / Half Gulash Half Finger",
     "category": "Fish Mains",
     "price": 1300,
-    "priceNote": "Combination Plate",
-    "badge": "Gulash & Finger",
+    "priceNote": "Combo Platter",
+    "badge": "Gulash & Finger Duo",
     "image": null,
-    "description": "A savory serving of rich fish goulash paired with crispy fried fish fingers.",
+    "description": "Combines a portion of savory saucy fish gulash with golden crunchy fried fish fingers for dual texture satisfaction.",
     "ingredients": [
-      "Fish Gulash",
-      "Fish Fingers",
-      "Tomato Sauce",
-      "Crispy Breading"
+      "Fish Gulash in Sauce",
+      "Crispy Fish Fingers",
+      "Lemon Wedge",
+      "Dipping Condiment"
     ],
-    "pairingWine": "House White Wine",
-    "prepTime": "15 mins",
+    "pairingWine": "Chilled White Wine or Beer",
+    "prepTime": "16 mins",
     "dietary": [
-      "Popular Combination"
+      "Combo Platter",
+      "Crunchy & Saucy"
     ]
   },
   {
@@ -711,21 +857,22 @@ export const RESTAURANT_DISHES = [
     "frenchName": "ግሪልድ ናይል ፐርች / Grilled Nile Perch",
     "category": "Fish Mains",
     "price": 1500,
-    "priceNote": "Grilled Fillet",
-    "badge": "Flame-Grilled Perch",
+    "priceNote": "Fresh Cut",
+    "badge": "Flame Grilled Fillet",
     "image": null,
-    "description": "Thick fillet of fresh Nile Perch grilled over charcoal with Ethiopian herbs, garlic butter, and fresh lime.",
+    "description": "Thick cut of prime Nile Perch fillet seasoned with wild herbs, lime juice, and garlic, grilled to juicy flakiness.",
     "ingredients": [
-      "Nile Perch Fillet",
-      "Garlic Butter",
-      "Wild Herbs",
-      "Lime"
+      "Prime Nile Perch Cut",
+      "Wild Mountain Herbs",
+      "Lime Juice",
+      "Garlic & Olive Oil",
+      "Fresh Vegetables"
     ],
-    "pairingWine": "Chablis or Sauvignon Blanc",
-    "prepTime": "18 mins",
+    "pairingWine": "Chardonnay or Crisp Rosé",
+    "prepTime": "20 mins",
     "dietary": [
-      "Charcoal Grilled",
-      "Heart Healthy"
+      "Flame Grilled",
+      "High Protein"
     ]
   },
   {
@@ -734,136 +881,118 @@ export const RESTAURANT_DISHES = [
     "frenchName": "አሳ እና ቺፕስ / Asa & Chips",
     "category": "Fish Mains",
     "price": 1100,
-    "priceNote": "Fillet & Hand-Cut Fries",
+    "priceNote": "Classic Platter",
     "badge": "Classic Fish & Chips",
     "image": null,
-    "description": "Deep-fried golden battered fish fillet served with generous hand-cut potato chips, lemon wedges, and tartar sauce.",
+    "description": "Golden battered crispy fresh fish fillets served hot with crispy hand-cut potato chips, lemon wedges, and tartar sauce.",
     "ingredients": [
-      "Battered Fish Fillet",
-      "Hand-Cut Potato Fries",
+      "Crispy Battered Fish",
+      "Fresh Potato Chips / Fries",
       "House Tartar Sauce",
-      "Lemon"
+      "Lemon Slices"
     ],
-    "pairingWine": "Cold Lager or Mineral Water",
+    "pairingWine": "Cold Pilsner or Sparkling Water",
     "prepTime": "15 mins",
     "dietary": [
-      "Classic Comfort Food"
+      "Classic Favorite",
+      "Crispy Fried"
     ]
   },
   {
     "id": "dish-fish-35",
     "name": "Enjera Firfir be Asa (እንጀራ ፍርፍር በ አሳ)",
-    "frenchName": "እንጀራ ፍርፍር በ አሳ / Enjera Frfr be Asa",
+    "frenchName": "እንጀራ ፍርፍር በ አሳ / Enjera Frfr Be Asa",
     "category": "Fish Mains",
     "price": 600,
-    "priceNote": "Traditional Firfir Bowl",
-    "badge": "Authentic Firfir",
+    "priceNote": "Traditional Portion",
+    "badge": "Traditional Breakfast / Lunch",
     "image": null,
-    "description": "Soft shredded injera soaked and sautéed in a spicy, rich berbere and garlic fish sauce with fresh herbs.",
+    "description": "Torn pieces of soft injera simmered into a spicy berbere fish sauce with onions, garlic, and sliced hot green peppers.",
     "ingredients": [
       "Torn Injera",
-      "Fresh Fish Flakes",
-      "Berbere Spice",
+      "Fresh Fish Pieces",
+      "Berbere Paste",
       "Garlic",
-      "Red Onions"
+      "Red Onions",
+      "Green Peppers"
     ],
-    "pairingWine": "Ethiopian Spiced Tea or Beer",
+    "pairingWine": "Spiced Ethiopian Tea or Cold Beer",
     "prepTime": "12 mins",
     "dietary": [
-      "Traditional Comfort Food"
+      "Spicy Stew",
+      "Traditional Firfir"
     ]
   },
   {
     "id": "dish-fish-36",
     "name": "Rice with Fish (አሳ በሩዝ)",
-    "frenchName": "አሳ በሩዝ / Rice with Fish",
+    "frenchName": "አሳ በሩዝ / Rice With Fish",
     "category": "Fish Mains",
     "price": 1100,
-    "priceNote": "Steamed Rice Platter",
-    "badge": "Fish & Rice",
+    "priceNote": "Full Platter",
+    "badge": "Savory Fish Rice",
     "image": null,
-    "description": "Steamed aromatic white rice topped with seasoned pan-sautéed fish pieces, sweet onions, and mild peppers.",
+    "description": "Fluffy fragrant spiced rice topped with sautéed or crispy fish fillet, diced bell peppers, and mild seasoning.",
     "ingredients": [
-      "Steamed Rice",
-      "Seasoned Fish Fillet",
-      "Sautéed Bell Peppers",
-      "Onions",
-      "Garlic Sauce"
+      "Fragrant Steamed Rice",
+      "Fish Fillet",
+      "Bell Peppers",
+      "Sautéed Onions",
+      "Mild Ethiopian Seasoning"
     ],
-    "pairingWine": "White Wine or Mineral Water",
+    "pairingWine": "Sauvignon Blanc or Fresh Juice",
     "prepTime": "15 mins",
     "dietary": [
-      "Gluten-Free Option"
+      "Rice Platter",
+      "Gluten Conscious"
     ]
   },
   {
     "id": "dish-fish-37",
     "name": "Spaghetti with Fish (አሳ በፓስታ)",
-    "frenchName": "አሳ በፓስታ / Spageti with Fish",
+    "frenchName": "አሳ በፓስታ / Spageti With Fish",
     "category": "Fish Mains",
     "price": 1100,
-    "priceNote": "Pasta Entrée",
-    "badge": "Fish Spaghetti",
+    "priceNote": "Full Pasta Bowl",
+    "badge": "Fish Pasta Fusion",
     "image": null,
-    "description": "Tender Italian spaghetti tossed in a rich, savory tomato, garlic, and fresh fish ragù with Ethiopian herbs.",
+    "description": "Al dente spaghetti tossed in a rich, herbed tomato and garlic fish ragù with fresh basil and Ethiopian pepper touch.",
     "ingredients": [
-      "Spaghetti Pasta",
-      "Fish Chunks",
-      "Tomato Garlic Sauce",
-      "Ethiopian Spices",
-      "Basil"
+      "Al Dente Spaghetti",
+      "Fresh Fish Ragù",
+      "Tomato & Garlic Sauce",
+      "Fresh Basil",
+      "Olive Oil"
     ],
-    "pairingWine": "Italian White or Pinot Grigio",
+    "pairingWine": "Pinot Grigio or Chianti",
     "prepTime": "15 mins",
     "dietary": [
-      "Pasta Dish"
+      "Italian Ethiopian Fusion",
+      "Hearty Pasta"
     ]
   },
   {
     "id": "dish-6",
     "name": "Chilean Sea Bass in Miso Dashi",
-    "frenchName": "Légine Australe Caramélisée au Miso",
+    "frenchName": "Loup de Mer Chilien au Dashi Miso",
     "category": "Chef Specials",
     "price": 48,
-    "priceNote": "Signature Dish",
-    "badge": "Chef's Masterpiece",
-    "image": "https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=800&q=80",
-    "description": "Glacier 51 Chilean sea bass marinated for 48 hours in Kyoto sweet saikyo miso. Caramelized under salamander grill and served in a fragrant shiitake dashi broth with lotus root crisps.",
+    "priceNote": "Per Tasting Portion",
+    "badge": "Chef Signature",
+    "image": "https://images.unsplash.com/photo-1534422298391-e4f8c172dddb?auto=format&fit=crop&w=800&q=80",
+    "description": "Sustainably caught Patagonian sea bass pan-roasted with white miso and umami-rich kombu dashi broth.",
     "ingredients": [
       "Chilean Sea Bass",
-      "Saikyo Sweet Miso",
-      "Shiitake Dashi",
-      "Baby Bok Choy",
-      "Lotus Crisps"
+      "White Miso",
+      "Kombu Dashi",
+      "Bok Choy",
+      "Enoki Mushrooms"
     ],
-    "pairingWine": "Puligny-Montrachet 2021",
-    "prepTime": "20 mins",
+    "pairingWine": "Chablis Grand Cru Les Clos 2020",
+    "prepTime": "25 mins",
     "dietary": [
-      "Chef Signature"
-    ]
-  },
-  {
-    "id": "dish-7",
-    "name": "Squid Ink Tagliolini & Colossal Scallops",
-    "frenchName": "Tagliolini à l’Encre de Seiche et Noix de St-Jacques",
-    "category": "Seafood Pastas",
-    "price": 36,
-    "priceNote": "Handmade Pasta",
-    "isHeroFeatured": true,
-    "badge": "House Specialty",
-    "image": "https://images.unsplash.com/photo-1565680018434-b513d5e5fd47?auto=format&fit=crop&w=800&q=80",
-    "description": "Handcrafted fresh squid ink pasta ribbons tossed with colossal Hokkaido diver scallops, tiger prawns, sweet datterini tomatoes, white wine garlic fumet, and finished with fresh garden basil.",
-    "ingredients": [
-      "Housemade Squid Ink Pasta",
-      "Hokkaido Scallops",
-      "Wild Tiger Prawns",
-      "Datterini Tomatoes",
-      "Calabrian Chili"
-    ],
-    "pairingWine": "Etna Bianco DOC 2022",
-    "prepTime": "16 mins",
-    "dietary": [
-      "Handmade Fresh Pasta"
+      "Gluten Conscious",
+      "Omega-3 Rich"
     ]
   },
   {
@@ -872,109 +1001,85 @@ export const RESTAURANT_DISHES = [
     "frenchName": "Sole Meunière Façon Traditionnelle",
     "category": "Chef Specials",
     "price": 54,
-    "priceNote": "Classic Tableside Service",
-    "badge": "Gastronomy Classic",
-    "image": "https://images.unsplash.com/photo-1534422298391-e4f8c172dddb?auto=format&fit=crop&w=800&q=80",
-    "description": "Wild North Sea Dover Sole lightly dusted in flour, gently pan-seared in foaming browned butter (beurre noisette) with fresh lemon juice and chopped flat-leaf parsley. Filleted table-side by our head maître.",
+    "priceNote": "Whole Fish Table-side Deboned",
+    "badge": "Table-Side Deboning",
+    "image": "https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?auto=format&fit=crop&w=800&q=80",
+    "description": "Wild caught North Sea Dover sole gently pan-fried in noisette butter, finished table-side with fresh Meyer lemon and parsley.",
     "ingredients": [
       "Wild Dover Sole",
-      "Normandy Butter",
-      "Fresh Lemon Juice",
-      "Capers",
-      "Parsley"
+      "Normandy Beurre Noisette",
+      "Meyer Lemon",
+      "Flat Parsley",
+      "Capers"
     ],
-    "pairingWine": "Chassagne-Montrachet 1er Cru",
+    "pairingWine": "Puligny-Montrachet 1er Cru",
     "prepTime": "25 mins",
     "dietary": [
-      "French Culinary Classic"
-    ]
-  },
-  {
-    "id": "dish-9",
-    "name": "Maine Lobster Bisque & Ravioli",
-    "frenchName": "Bisque de Homard et Ravioles de Crabe",
-    "category": "Seafood Pastas",
-    "price": 34,
-    "priceNote": "Entrée Course",
-    "badge": "Comfort Luxury",
-    "image": "https://images.unsplash.com/photo-1559742811-82286364ceaf?auto=format&fit=crop&w=800&q=80",
-    "description": "Velvety slow-simmered Maine lobster bisque infused with cognac and tarragon, poured over house-made artisanal crab and mascarpone ravioli with chive cream.",
-    "ingredients": [
-      "Poached Maine Lobster",
-      "Cognac Bisque",
-      "Mascarpone Ravioli",
-      "Sea Tarragon",
-      "Cream"
-    ],
-    "pairingWine": "Condrieu Viognier 2021",
-    "prepTime": "14 mins",
-    "dietary": [
-      "House Favorite"
+      "Classic French Technique",
+      "High Protein"
     ]
   },
   {
     "id": "dish-10",
     "name": "Tignanello Toscana IGT 2019",
-    "frenchName": "Marchesi Antinori, Tenuta Tignanello",
+    "producer": "Marchesi Antinori • Toscana",
     "category": "Fine Wine Cellar",
     "price": 300,
-    "priceNote": "Bottle 750ml",
-    "isHeroFeatured": true,
+    "priceNote": "750ml Bottle",
     "badge": "Sommelier Reserve 98pts",
-    "image": "https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?auto=format&fit=crop&w=800&q=80",
-    "description": "Legendary Super Tuscan masterpiece crafted from Sangiovese, Cabernet Sauvignon, and Cabernet Franc. Deep ruby red, aromas of ripe red fruits, vanilla, and sweet spices. Sublime pairing with our rich fish dishes and raw bar.",
+    "image": "https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?auto=format&fit=crop&w=600&q=80",
+    "description": "Intense ruby red with complex aromas of ripe red fruits, vanilla, and dark chocolate. Silky tannins with exceptional persistence.",
     "ingredients": [
-      "Sangiovese 80%",
-      "Cabernet Sauvignon 15%",
-      "Cabernet Franc 5%",
-      "French Oak 14 Months"
+      "Sangiovese",
+      "Cabernet Sauvignon",
+      "Cabernet Franc"
     ],
-    "pairingWine": "Pairs with Dressed Oysters, Tuna Tartare & Wood-Fired Branzino",
-    "prepTime": "Cellar Temp: 16°C",
+    "pairingWine": "Pairs sublime with Wood-Fired Fish & Meat",
+    "prepTime": "Immediate",
     "dietary": [
-      "Organic Certified",
-      "Exclusive Allocation"
+      "Aged in French Oak for 14-16 Months",
+      "14.5% ABV"
     ]
   },
   {
     "id": "dish-11",
     "name": "Chablis Grand Cru Les Clos 2020",
-    "frenchName": "Domaine Christian Moreau Père & Fils",
+    "producer": "Domaine Christian Moreau Père & Fils",
     "category": "Fine Wine Cellar",
     "price": 185,
-    "priceNote": "Bottle 750ml",
+    "priceNote": "750ml Bottle",
     "badge": "Iconic Mineral White",
-    "image": "https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?auto=format&fit=crop&w=800&q=80",
-    "description": "The pinnacle of Chablis terroir. Kimmeridgian limestone minerality, vibrant citrus zest, crushed sea shells, and intense saline elegance that elevates freshly shucked oysters.",
+    "image": "https://images.unsplash.com/photo-1558001373-7b93ee48ffa0?auto=format&fit=crop&w=600&q=80",
+    "description": "Purity of limestone minerality, green apple, crushed oyster shell and brioche notes. The quintessence of Burgundy whites.",
     "ingredients": [
-      "100% Chardonnay",
-      "Limestone Terroir",
-      "Natural Fermentation"
+      "100% Chardonnay"
     ],
     "pairingWine": "Ultimate match for Fresh Oysters & Hamachi Crudo",
-    "prepTime": "Cellar Temp: 10°C",
+    "prepTime": "Immediate",
     "dietary": [
-      "Estate Bottled"
+      "Kimmeridgian Clay Soil",
+      "13.0% ABV"
     ]
   },
   {
     "id": "dish-12",
     "name": "Dom Pérignon Vintage Champagne 2013",
-    "frenchName": "Champagne Moët & Chandon",
+    "producer": "Champagne Moët & Chandon",
     "category": "Fine Wine Cellar",
     "price": 350,
-    "priceNote": "Bottle 750ml",
+    "priceNote": "750ml Bottle",
     "badge": "Prestige Cuvée",
-    "image": "https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?auto=format&fit=crop&w=800&q=80",
-    "description": "Remarkable harmony and silky precision. Notes of mirabelle plum, fresh cardamom, eucalyptus, and toasted brioche with a persistent, refined bubble bead.",
+    "image": "https://images.unsplash.com/photo-1569919659476-f0852f6834b7?auto=format&fit=crop&w=600&q=80",
+    "description": "Vibrant citrus and stone fruit with smoky, toasted brioche and white floral undertones. Precision, density and endless elegance.",
     "ingredients": [
-      "Pinot Noir & Chardonnay",
-      "Aged 9 Years on Lees"
+      "Chardonnay",
+      "Pinot Noir"
     ],
     "pairingWine": "Pairs with Caviar, Oysters, and Lobster Ravioli",
-    "prepTime": "Chilled: 8°C",
+    "prepTime": "Immediate",
     "dietary": [
-      "Prestige Cuvée"
+      "10 Years Cellar Aging on Lees",
+      "12.5% ABV"
     ]
   }
 ];
