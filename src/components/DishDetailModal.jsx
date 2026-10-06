@@ -23,11 +23,18 @@ export default function DishDetailModal({ dish, onClose, onAddToCart }) {
           {/* Top: Image + Key Presentation */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-start">
             <div className="relative aspect-square rounded-2xl overflow-hidden bg-slate-900 border border-slate-800">
-              <img
-                src={dish.image}
-                alt={dish.name}
-                className="w-full h-full object-cover"
-              />
+              {dish.image ? (
+                <img
+                  src={dish.image}
+                  alt={dish.name}
+                  className="w-full h-full object-cover"
+                />
+              ) : (
+                <div className="w-full h-full flex flex-col items-center justify-center bg-gradient-to-br from-[#0c233c] to-[#061421] p-6 text-center">
+                  <span className="font-serif italic text-gold-300 text-lg tracking-wide">{dish.name}</span>
+                  <span className="text-xs uppercase font-mono tracking-widest text-slate-400 mt-2">{dish.category}</span>
+                </div>
+              )}
               {dish.badge && (
                 <div className="absolute top-3 left-3">
                   <span className="px-3 py-1 rounded-full text-[10px] uppercase tracking-widest font-serif font-bold bg-[#071421]/90 text-gold-300 border border-gold-500/40 shadow">

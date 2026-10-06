@@ -99,12 +99,19 @@ export default function MenuSection({
             >
               {/* Dish Image */}
               <div className="relative aspect-[16/10] overflow-hidden bg-slate-900">
-                <img
-                  src={dish.image}
-                  alt={dish.name}
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#091928] via-transparent to-black/30"></div>
+                {dish.image ? (
+                  <img
+                    src={dish.image}
+                    alt={dish.name}
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
+                  />
+                ) : (
+                  <div className="w-full h-full flex flex-col items-center justify-center bg-gradient-to-br from-[#0c233c] to-[#061421] p-4 text-center">
+                    <span className="font-serif italic text-gold-300 text-sm tracking-wide">{dish.name}</span>
+                    <span className="text-[10px] uppercase font-mono tracking-widest text-slate-400 mt-1">{dish.category}</span>
+                  </div>
+                )}
+                <div className="absolute inset-0 bg-gradient-to-t from-[#091928] via-transparent to-black/30 pointer-events-none"></div>
 
                 {/* Badge */}
                 {dish.badge && (
