@@ -77,6 +77,11 @@ export const MENU_CATEGORIES = [
   "Salad",
   "Soup",
   "Juice",
+  "Shake",
+  "Mojito",
+  "Drinks",
+  "Hot Drinks",
+  "Extras",
   "Chef Specials",
   "Fine Wine Cellar"
 ];
@@ -88,6 +93,11 @@ export const CANONICAL_CATEGORIES = [
   "Salad",
   "Soup",
   "Juice",
+  "Shake",
+  "Mojito",
+  "Drinks",
+  "Hot Drinks",
+  "Extras",
   "Chef Specials",
   "Fine Wine Cellar"
 ];
@@ -2422,6 +2432,878 @@ export const RESTAURANT_DISHES = [
     "dietary": [
       "Plant Milk Tradition",
       "Protein Rich"
+    ]
+  },
+  {
+    "id": "dish-shake-93",
+    "name": "Mango Shake (ማንጎ ሼክ)",
+    "frenchName": "ማንጎ ሼክ / Mango Shake",
+    "category": "Shake",
+    "price": 650,
+    "priceNote": "Fresh Chilled Glass",
+    "badge": "Creamy Shake",
+    "image": null,
+    "description": "Rich, velvety sweet mango milkshake blended with chilled fresh milk.",
+    "ingredients": [
+      "Fresh Mango",
+      "Milk",
+      "Ice",
+      "Sugar"
+    ],
+    "pairingWine": "Crisp Sparkling Water",
+    "prepTime": "8 mins",
+    "dietary": [
+      "Vegetarian",
+      "Dairy"
+    ]
+  },
+  {
+    "id": "dish-shake-94",
+    "name": "Avocado Shake (አቮካዶ ሼክ)",
+    "frenchName": "አቮካዶ ሼክ / Avocado Shake",
+    "category": "Shake",
+    "price": 650,
+    "priceNote": "Fresh Chilled Glass",
+    "badge": "Super Rich",
+    "image": null,
+    "description": "Luscious creamy ripe avocado shake with a silky smooth, thick texture.",
+    "ingredients": [
+      "Fresh Avocado",
+      "Milk",
+      "Ice",
+      "Dash of Lime"
+    ],
+    "pairingWine": "Mineral Water",
+    "prepTime": "8 mins",
+    "dietary": [
+      "Vegetarian",
+      "Dairy"
+    ]
+  },
+  {
+    "id": "dish-shake-95",
+    "name": "Papaya Shake (ፓፓዬ ሼክ)",
+    "frenchName": "ፓፓዬ ሼክ / Papaya Shake",
+    "category": "Shake",
+    "price": 600,
+    "priceNote": "Fresh Chilled Glass",
+    "badge": "Tropical",
+    "image": null,
+    "description": "Smooth tropical ripe papaya shake blended fresh with chilled milk.",
+    "ingredients": [
+      "Fresh Papaya",
+      "Milk",
+      "Ice"
+    ],
+    "pairingWine": "Mineral Water",
+    "prepTime": "8 mins",
+    "dietary": [
+      "Vegetarian",
+      "Dairy"
+    ]
+  },
+  {
+    "id": "dish-shake-96",
+    "name": "Watermelon Shake (ሃባብ ሼክ)",
+    "frenchName": "ሃባብ ሼክ / Watermelon Shake",
+    "category": "Shake",
+    "price": 600,
+    "priceNote": "Fresh Chilled Glass",
+    "badge": "Refreshing",
+    "image": null,
+    "description": "Sweet and ultra-refreshing watermelon shake blended cool with milk.",
+    "ingredients": [
+      "Fresh Watermelon",
+      "Milk",
+      "Crushed Ice"
+    ],
+    "pairingWine": "Chilled Soda",
+    "prepTime": "8 mins",
+    "dietary": [
+      "Vegetarian",
+      "Dairy"
+    ]
+  },
+  {
+    "id": "dish-shake-97",
+    "name": "Chocolate Shake (ቸኮሌት ሼክ)",
+    "frenchName": "ቸኮሌት ሼክ / Chocolate Shake",
+    "category": "Shake",
+    "price": 600,
+    "priceNote": "Fresh Chilled Glass",
+    "badge": "Indulgent",
+    "image": null,
+    "description": "Rich cocoa chocolate milkshake whipped to decadent, frothy perfection.",
+    "ingredients": [
+      "Cocoa / Chocolate",
+      "Fresh Milk",
+      "Ice cream base"
+    ],
+    "pairingWine": "Draft Beer or Espresso",
+    "prepTime": "8 mins",
+    "dietary": [
+      "Vegetarian",
+      "Dairy"
+    ]
+  },
+  {
+    "id": "dish-shake-98",
+    "name": "Banana Shake (ሙዝ ሼክ)",
+    "frenchName": "ሙዝ ሼክ / Banana Shake",
+    "category": "Shake",
+    "price": 600,
+    "priceNote": "Fresh Chilled Glass",
+    "badge": "Classic",
+    "image": null,
+    "description": "Sweet ripe bananas blended fresh with milk for a smooth, hearty shake.",
+    "ingredients": [
+      "Ripe Bananas",
+      "Milk",
+      "Ice",
+      "Vanilla hint"
+    ],
+    "pairingWine": "Mineral Water",
+    "prepTime": "8 mins",
+    "dietary": [
+      "Vegetarian",
+      "Dairy"
+    ]
+  },
+  {
+    "id": "dish-shake-99",
+    "name": "Pineapple Shake (አናናስ ሼክ)",
+    "frenchName": "አናናስ ሼክ / Pineapple Shake",
+    "category": "Shake",
+    "price": 600,
+    "priceNote": "Fresh Chilled Glass",
+    "badge": "Zesty & Sweet",
+    "image": null,
+    "description": "Zesty tropical pineapple shake whipped cold with chilled milk.",
+    "ingredients": [
+      "Fresh Pineapple",
+      "Milk",
+      "Ice"
+    ],
+    "pairingWine": "Sparkling Water",
+    "prepTime": "8 mins",
+    "dietary": [
+      "Vegetarian",
+      "Dairy"
+    ]
+  },
+  {
+    "id": "dish-shake-100",
+    "name": "Milk Shake (ወተት ሼክ)",
+    "frenchName": "ወተት ሼክ / Milk Shake",
+    "category": "Shake",
+    "price": 650,
+    "priceNote": "Fresh Chilled Glass",
+    "badge": "Pure Dairy",
+    "image": null,
+    "description": "Traditional sweet dairy milkshake, chilled and frothy.",
+    "ingredients": [
+      "Fresh Pure Milk",
+      "Ice",
+      "Vanilla Essence"
+    ],
+    "pairingWine": "Mineral Water",
+    "prepTime": "6 mins",
+    "dietary": [
+      "Vegetarian",
+      "Dairy"
+    ]
+  },
+  {
+    "id": "dish-mojito-101",
+    "name": "Strawberry Mojito (እንጆሪ ሞዲቶ)",
+    "frenchName": "እንጆሪ ሞዲቶ / Strawberry Mojito",
+    "category": "Mojito",
+    "price": 500,
+    "priceNote": "Ice Cold Mocktail",
+    "badge": "Berry Fresh",
+    "image": null,
+    "description": "Crushed sweet strawberries muddled with garden mint, lime, and fizzy soda.",
+    "ingredients": [
+      "Fresh Strawberries",
+      "Mint Leaves",
+      "Lime",
+      "Sparkling Soda",
+      "Crushed Ice"
+    ],
+    "pairingWine": "Sparkling Rosé",
+    "prepTime": "6 mins",
+    "dietary": [
+      "Vegetarian",
+      "Vegan"
+    ]
+  },
+  {
+    "id": "dish-mojito-102",
+    "name": "Orange Mojito (ብርቱካን ሞዲቶ)",
+    "frenchName": "ብርቱካን ሞዲቶ / Orange Mojito",
+    "category": "Mojito",
+    "price": 400,
+    "priceNote": "Ice Cold Mocktail",
+    "badge": "Citrus Zing",
+    "image": null,
+    "description": "Freshly squeezed sweet orange muddled with aromatic mint, lime, and soda.",
+    "ingredients": [
+      "Fresh Orange Juice",
+      "Mint",
+      "Lime",
+      "Sparkling Soda",
+      "Ice"
+    ],
+    "pairingWine": "Chilled White Wine",
+    "prepTime": "6 mins",
+    "dietary": [
+      "Vegetarian",
+      "Vegan"
+    ]
+  },
+  {
+    "id": "dish-mojito-103",
+    "name": "Watermelon Mojito (ሃባብ ሞዲቶ)",
+    "frenchName": "ሃባብ ሞዲቶ / Watermelon Mojito",
+    "category": "Mojito",
+    "price": 400,
+    "priceNote": "Ice Cold Mocktail",
+    "badge": "Summer Crisp",
+    "image": null,
+    "description": "Crisp crushed watermelon with fresh mint sprigs, lime wedge, and fizzy soda.",
+    "ingredients": [
+      "Watermelon",
+      "Garden Mint",
+      "Lime",
+      "Soda Water",
+      "Ice"
+    ],
+    "pairingWine": "Prosecco",
+    "prepTime": "6 mins",
+    "dietary": [
+      "Vegetarian",
+      "Vegan"
+    ]
+  },
+  {
+    "id": "dish-mojito-104",
+    "name": "Smoothie Mojito (ስሞዚ ሞዲቶ)",
+    "frenchName": "ስሞዚ ሞዲቶ / Smoothie Mojito",
+    "category": "Mojito",
+    "price": 500,
+    "priceNote": "Blended Specialty",
+    "badge": "Fruit Fusion",
+    "image": null,
+    "description": "Thick fruit smoothie blend infused with refreshing mint and zesty lime bubbles.",
+    "ingredients": [
+      "Mixed Fruit Puree",
+      "Mint",
+      "Lime",
+      "Sparkling Float"
+    ],
+    "pairingWine": "Chilled Cider",
+    "prepTime": "7 mins",
+    "dietary": [
+      "Vegetarian"
+    ]
+  },
+  {
+    "id": "dish-mojito-105",
+    "name": "Titanic Mojito (ታይታኒክ ሞዲቶ)",
+    "frenchName": "ታይታኒክ ሞዲቶ / Titanic Mojito",
+    "category": "Mojito",
+    "price": 400,
+    "priceNote": "Signature Mocktail",
+    "badge": "House Special",
+    "image": null,
+    "description": "Signature Titanic layered cooler with deep blue curaçao flavor, mint, and citrus.",
+    "ingredients": [
+      "Blue Citrus Syrup",
+      "Fresh Mint",
+      "Lime",
+      "Soda Water",
+      "Ice"
+    ],
+    "pairingWine": "Draft Beer",
+    "prepTime": "6 mins",
+    "dietary": [
+      "Vegetarian",
+      "Vegan"
+    ]
+  },
+  {
+    "id": "dish-mojito-106",
+    "name": "Avatar Mojito (አቫተር ሞዲቶ)",
+    "frenchName": "አቫተር ሞዲቶ / Avatar Mojito",
+    "category": "Mojito",
+    "price": 500,
+    "priceNote": "Signature Mocktail",
+    "badge": "Electric Blue",
+    "image": null,
+    "description": "Striking electric blue tropical mojito infused with mint, lime, and crushed ice.",
+    "ingredients": [
+      "Tropical Blue Blend",
+      "Mint Leaves",
+      "Lime",
+      "Sparkling Soda"
+    ],
+    "pairingWine": "Crisp White Wine",
+    "prepTime": "6 mins",
+    "dietary": [
+      "Vegetarian",
+      "Vegan"
+    ]
+  },
+  {
+    "id": "dish-mojito-107",
+    "name": "Love Mojito (ፍቅር ሞዲቶ)",
+    "frenchName": "ፍቅር ሞዲቶ / Love Mojito",
+    "category": "Mojito",
+    "price": 500,
+    "priceNote": "Signature Mocktail",
+    "badge": "Ruby Red",
+    "image": null,
+    "description": "Romantic ruby-red berry infusion muddled with fresh mint and tart lime.",
+    "ingredients": [
+      "Ruby Red Berry Syrup",
+      "Fresh Strawberries",
+      "Mint",
+      "Lime",
+      "Soda"
+    ],
+    "pairingWine": "Rosé",
+    "prepTime": "6 mins",
+    "dietary": [
+      "Vegetarian",
+      "Vegan"
+    ]
+  },
+  {
+    "id": "dish-mojito-108",
+    "name": "Pineapple Mojito (አናናስ ሞዲቶ)",
+    "frenchName": "አናናስ ሞዲቶ / Pineapple Mojito",
+    "category": "Mojito",
+    "price": 400,
+    "priceNote": "Ice Cold Mocktail",
+    "badge": "Tropical Zing",
+    "image": null,
+    "description": "Tangy sweet pineapple juice muddled with garden mint and sparkling soda.",
+    "ingredients": [
+      "Fresh Pineapple Juice",
+      "Mint",
+      "Lime",
+      "Soda",
+      "Crushed Ice"
+    ],
+    "pairingWine": "Sauvignon Blanc",
+    "prepTime": "6 mins",
+    "dietary": [
+      "Vegetarian",
+      "Vegan"
+    ]
+  },
+  {
+    "id": "dish-mojito-109",
+    "name": "Yam Mojito (ያም ሞዲቶ)",
+    "frenchName": "ያም ሞዲቶ / Yam Mojito",
+    "category": "Mojito",
+    "price": 400,
+    "priceNote": "Specialty Mocktail",
+    "badge": "Sweet Cooler",
+    "image": null,
+    "description": "House special sweet layered refreshing mojito served over mountains of crushed ice.",
+    "ingredients": [
+      "Yam Specialty Blend",
+      "Mint",
+      "Lime",
+      "Sparkling Water"
+    ],
+    "pairingWine": "Light Beer",
+    "prepTime": "6 mins",
+    "dietary": [
+      "Vegetarian"
+    ]
+  },
+  {
+    "id": "dish-mojito-110",
+    "name": "Sunset Mojito (ሰንሰት ሞዲቶ)",
+    "frenchName": "ሰንሰት ሞዲቶ / Sunset Mojito",
+    "category": "Mojito",
+    "price": 400,
+    "priceNote": "Layered Mocktail",
+    "badge": "Lake Tana Sunset",
+    "image": null,
+    "description": "Dramatic gradient of orange, grenadine, and lime muddled with fresh mint.",
+    "ingredients": [
+      "Orange & Grenadine",
+      "Lime",
+      "Garden Mint",
+      "Sparkling Soda",
+      "Ice"
+    ],
+    "pairingWine": "Pinot Grigio",
+    "prepTime": "6 mins",
+    "dietary": [
+      "Vegetarian",
+      "Vegan"
+    ]
+  },
+  {
+    "id": "dish-drinks-111",
+    "name": "Acacia Wine (አካሺያ ወይን / Acisha)",
+    "frenchName": "አካሺያ / Acisha Wine",
+    "category": "Drinks",
+    "price": 2000,
+    "priceNote": "Full Bottle 750ml",
+    "badge": "Ethiopian Wine",
+    "image": null,
+    "description": "Premium Ethiopian bottled wine from the Rift Valley, elegant and aromatic.",
+    "ingredients": [
+      "Ethiopian Grapes",
+      "Sulfites"
+    ],
+    "pairingWine": "Whole Fried Fish or Sizzling Tibs",
+    "prepTime": "Served Immediately",
+    "dietary": [
+      "Alcoholic"
+    ]
+  },
+  {
+    "id": "dish-drinks-112",
+    "name": "Kemila / Axumite Wine (አክሱማይት / ከሚላ)",
+    "frenchName": "አክሱማይት / Kemila/Axumit Wine",
+    "category": "Drinks",
+    "price": 1300,
+    "priceNote": "Full Bottle 750ml",
+    "badge": "Sweet Red Wine",
+    "image": null,
+    "description": "Classic sweet Ethiopian red wine, rich in fruit flavors and heritage.",
+    "ingredients": [
+      "Red Grapes",
+      "Natural Sweeteners"
+    ],
+    "pairingWine": "Fish Tibs or Fish Asa Gulash",
+    "prepTime": "Served Immediately",
+    "dietary": [
+      "Alcoholic"
+    ]
+  },
+  {
+    "id": "dish-drinks-113",
+    "name": "Tkesheno Honey Wine (ተከሸና ጠጅ)",
+    "frenchName": "ተከሸና / Tkesheno Honey Wine",
+    "category": "Drinks",
+    "price": 1500,
+    "priceNote": "Full Bottle",
+    "badge": "Royal Tej",
+    "image": null,
+    "description": "Traditional fermented Ethiopian honey wine (Tej), golden, fragrant, and smooth.",
+    "ingredients": [
+      "Pure Honey",
+      "Gesho Leaves",
+      "Water"
+    ],
+    "pairingWine": "Traditional Fish Combo Platter",
+    "prepTime": "Served Immediately",
+    "dietary": [
+      "Alcoholic",
+      "Gluten-Free"
+    ]
+  },
+  {
+    "id": "dish-drinks-114",
+    "name": "Awash / Guder Wine (አዋሽ ፤ ጉደር ወይን)",
+    "frenchName": "አዋሽ ፤ ጉደር / Awash/Guder Wine",
+    "category": "Drinks",
+    "price": 1200,
+    "priceNote": "Full Bottle 750ml",
+    "badge": "Heritage Wine",
+    "image": null,
+    "description": "Beloved vintage Ethiopian wine from Awash or Guder vineyards.",
+    "ingredients": [
+      "Locally Harvested Grapes"
+    ],
+    "pairingWine": "Fish Lebleb or Grilled Fish Fillet",
+    "prepTime": "Served Immediately",
+    "dietary": [
+      "Alcoholic"
+    ]
+  },
+  {
+    "id": "dish-drinks-115",
+    "name": "Special Beer (ስፔሻል ቢራ)",
+    "frenchName": "ስፔሻል ቢራ / Special Beer",
+    "category": "Drinks",
+    "price": 150,
+    "priceNote": "Chilled Bottle 330ml",
+    "badge": "Cold Beer",
+    "image": null,
+    "description": "Chilled bottle of premium Ethiopian special malt lager beer.",
+    "ingredients": [
+      "Malt",
+      "Hops",
+      "Barley",
+      "Pure Water"
+    ],
+    "pairingWine": "Spicy Fish Tibs or Fish Cutlet",
+    "prepTime": "Served Immediately",
+    "dietary": [
+      "Alcoholic"
+    ]
+  },
+  {
+    "id": "dish-drinks-116",
+    "name": "Bottled Beer (ቢራ)",
+    "frenchName": "ቢራ / Standard Beer",
+    "category": "Drinks",
+    "price": 120,
+    "priceNote": "Chilled Bottle 330ml",
+    "badge": "Lager",
+    "image": null,
+    "description": "Classic crisp Ethiopian bottled lager beer served ice cold.",
+    "ingredients": [
+      "Barley Malt",
+      "Hops",
+      "Water"
+    ],
+    "pairingWine": "Crispy Fried Fish",
+    "prepTime": "Served Immediately",
+    "dietary": [
+      "Alcoholic"
+    ]
+  },
+  {
+    "id": "dish-drinks-117",
+    "name": "Soft Drink (ለስላሳ መጠጦች)",
+    "frenchName": "ለስላሳ መጠጦች / Soft Drink",
+    "category": "Drinks",
+    "price": 100,
+    "priceNote": "Chilled Glass Bottle",
+    "badge": "Cold Soda",
+    "image": null,
+    "description": "Chilled glass bottle of Coca-Cola, Fanta, Sprite, or Mirinda.",
+    "ingredients": [
+      "Carbonated Water",
+      "Cane Sugar",
+      "Natural Flavors"
+    ],
+    "pairingWine": "Any Fish Main",
+    "prepTime": "Served Immediately",
+    "dietary": [
+      "Non-Alcoholic"
+    ]
+  },
+  {
+    "id": "dish-drinks-118",
+    "name": "Bottled Water 1L (ውሃ 1 ሊትር)",
+    "frenchName": "ውሃ 1 ሊትር / Water 1 Liter",
+    "category": "Drinks",
+    "price": 100,
+    "priceNote": "Sealed Bottle 1L",
+    "badge": "Pure Water",
+    "image": null,
+    "description": "Pure natural spring mineral drinking water in 1 liter sealed bottle.",
+    "ingredients": [
+      "Natural Spring Mineral Water"
+    ],
+    "pairingWine": "All Dishes",
+    "prepTime": "Served Immediately",
+    "dietary": [
+      "Non-Alcoholic",
+      "Gluten-Free"
+    ]
+  },
+  {
+    "id": "dish-drinks-119",
+    "name": "Bottled Water 0.5L (ውሃ ግማሽ ሊትር)",
+    "frenchName": "ውሃ ግማሽ ሊትር / Water Half Liter",
+    "category": "Drinks",
+    "price": 80,
+    "priceNote": "Sealed Bottle 500ml",
+    "badge": "Pure Water",
+    "image": null,
+    "description": "Pure natural spring mineral drinking water in 500ml sealed bottle.",
+    "ingredients": [
+      "Natural Spring Mineral Water"
+    ],
+    "pairingWine": "All Dishes",
+    "prepTime": "Served Immediately",
+    "dietary": [
+      "Non-Alcoholic",
+      "Gluten-Free"
+    ]
+  },
+  {
+    "id": "dish-drinks-120",
+    "name": "Draft Beer (ድራፍት ቢራ)",
+    "frenchName": "ድራፍት / Draft Beer",
+    "category": "Drinks",
+    "price": 100,
+    "priceNote": "Fresh Cold Glass",
+    "badge": "On Tap",
+    "image": null,
+    "description": "Freshly poured chilled draught beer on tap with crisp golden foam.",
+    "ingredients": [
+      "Freshly Brewed Malt Beer on Tap"
+    ],
+    "pairingWine": "Sizzling Fish Tibs",
+    "prepTime": "Served Immediately",
+    "dietary": [
+      "Alcoholic"
+    ]
+  },
+  {
+    "id": "dish-drinks-121",
+    "name": "Habesha Araqe (ሀበሻ አረቄ)",
+    "frenchName": "ሀበሻ አረቄ / Habesh Arqe",
+    "category": "Drinks",
+    "price": 100,
+    "priceNote": "Shot / Portion",
+    "badge": "Traditional Spirit",
+    "image": null,
+    "description": "Traditional high-proof clear Ethiopian distilled spirit (Araqe).",
+    "ingredients": [
+      "Distilled Grain & Aniseed"
+    ],
+    "pairingWine": "Spicy Fish Lebleb",
+    "prepTime": "Served Immediately",
+    "dietary": [
+      "Alcoholic",
+      "Potent"
+    ]
+  },
+  {
+    "id": "dish-extras-122",
+    "name": "Whole Injera (ሙሉ እንጀራ)",
+    "frenchName": "ሙሉ እንጀራ / Mulu Enjra",
+    "category": "Extras",
+    "price": 40,
+    "priceNote": "1 Whole Piece",
+    "badge": "Teff Injera",
+    "image": null,
+    "description": "Extra fresh whole round of traditional soft, spongy teff injera.",
+    "ingredients": [
+      "Pure Teff Flour",
+      "Water",
+      "Sourdough Starter"
+    ],
+    "pairingWine": "Any Ethiopian Dish",
+    "prepTime": "Instant",
+    "dietary": [
+      "Vegan",
+      "Gluten-Free Option"
+    ]
+  },
+  {
+    "id": "dish-extras-123",
+    "name": "Half Injera (ሃፍ እንጀራ)",
+    "frenchName": "ሃፍ እንጀራ / Half Enjra",
+    "category": "Extras",
+    "price": 30,
+    "priceNote": "Half Piece",
+    "badge": "Side Portion",
+    "image": null,
+    "description": "Extra half piece of fresh soft Ethiopian injera.",
+    "ingredients": [
+      "Pure Teff Flour",
+      "Water"
+    ],
+    "pairingWine": "Any Ethiopian Dish",
+    "prepTime": "Instant",
+    "dietary": [
+      "Vegan"
+    ]
+  },
+  {
+    "id": "dish-extras-124",
+    "name": "Bread (ዳቦ)",
+    "frenchName": "ዳቦ / Bread",
+    "category": "Extras",
+    "price": 30,
+    "priceNote": "1 Roll / Piece",
+    "badge": "Fresh Baked",
+    "image": null,
+    "description": "Freshly baked soft white roll or bread portion.",
+    "ingredients": [
+      "Wheat Flour",
+      "Yeast",
+      "Water"
+    ],
+    "pairingWine": "Fish Soup",
+    "prepTime": "Instant",
+    "dietary": [
+      "Vegetarian"
+    ]
+  },
+  {
+    "id": "dish-extras-125",
+    "name": "Barley Bread (የገብስ ዳቦ)",
+    "frenchName": "የገብስ ዳቦ / Barley Bread",
+    "category": "Extras",
+    "price": 40,
+    "priceNote": "Traditional Portion",
+    "badge": "Whole Grain",
+    "image": null,
+    "description": "Traditional rustic Ethiopian roasted barley bread (የገብስ ዳቦ).",
+    "ingredients": [
+      "Roasted Barley Flour",
+      "Water",
+      "Salt"
+    ],
+    "pairingWine": "Fish Tibs or Soup",
+    "prepTime": "Instant",
+    "dietary": [
+      "Vegetarian"
+    ]
+  },
+  {
+    "id": "dish-extras-126",
+    "name": "Extra Rice (ጭማሪ ሩዝ)",
+    "frenchName": "ጭማሪ ሩዝ / Extra Rice",
+    "category": "Extras",
+    "price": 40,
+    "priceNote": "Side Bowl",
+    "badge": "Steamed Rice",
+    "image": null,
+    "description": "Side bowl of seasoned fluffy steamed white rice.",
+    "ingredients": [
+      "Long Grain White Rice",
+      "Oil",
+      "Light Seasoning"
+    ],
+    "pairingWine": "Fish Fillet",
+    "prepTime": "Instant",
+    "dietary": [
+      "Vegan",
+      "Gluten-Free"
+    ]
+  },
+  {
+    "id": "dish-extras-127",
+    "name": "Extra Salad (ጭማሪ ሰላጣ)",
+    "frenchName": "ጭማሪ ሰላጣ / Extra Salad",
+    "category": "Extras",
+    "price": 40,
+    "priceNote": "Side Bowl",
+    "badge": "Fresh Veg",
+    "image": null,
+    "description": "Crisp side salad of diced tomatoes, red onions, and green chilies.",
+    "ingredients": [
+      "Tomatoes",
+      "Onions",
+      "Jalapeño",
+      "Lemon Vinaigrette"
+    ],
+    "pairingWine": "Fish Mains",
+    "prepTime": "Instant",
+    "dietary": [
+      "Vegan",
+      "Gluten-Free"
+    ]
+  },
+  {
+    "id": "dish-extras-128",
+    "name": "Extra Cooked Vegetables (ጭማሪ የበሰለ አትክልት)",
+    "frenchName": "ጭማሪ የበሰለ አትክልት / Extra Veg",
+    "category": "Extras",
+    "price": 40,
+    "priceNote": "Side Portion",
+    "badge": "Warm Veg",
+    "image": null,
+    "description": "Extra side serving of warm, seasoned sautéed garden vegetables.",
+    "ingredients": [
+      "Carrots",
+      "Green Beans",
+      "Onions",
+      "Herbs"
+    ],
+    "pairingWine": "Fish Mains",
+    "prepTime": "5 mins",
+    "dietary": [
+      "Vegan",
+      "Gluten-Free"
+    ]
+  },
+  {
+    "id": "dish-extras-129",
+    "name": "Takeaway Foil (ፎይል)",
+    "frenchName": "ፎይል / Foil Packaging",
+    "category": "Extras",
+    "price": 100,
+    "priceNote": "Per Pack",
+    "badge": "Packaging",
+    "image": null,
+    "description": "Thermal insulated aluminum foil food container for takeaway orders.",
+    "ingredients": [
+      "Food Grade Aluminum Foil Container"
+    ],
+    "pairingWine": "Takeout Orders",
+    "prepTime": "Instant",
+    "dietary": [
+      "Non-Edible"
+    ]
+  },
+  {
+    "id": "dish-extras-130",
+    "name": "Extra Paper Bag (ዘንቢል / Extra Paper Bag)",
+    "frenchName": "ዘንቢል / Extra Paper Bag",
+    "category": "Extras",
+    "price": 100,
+    "priceNote": "Per Bag",
+    "badge": "Eco Bag",
+    "image": null,
+    "description": "Sturdy eco-friendly kraft paper carrier bag with handles.",
+    "ingredients": [
+      "Recycled Kraft Paper"
+    ],
+    "pairingWine": "Takeout Orders",
+    "prepTime": "Instant",
+    "dietary": [
+      "Non-Edible"
+    ]
+  },
+  {
+    "id": "dish-hot-129",
+    "name": "Traditional Coffee (ቡና)",
+    "frenchName": "ቡና / Coffee",
+    "category": "Hot Drinks",
+    "price": 80,
+    "priceNote": "Fresh Hot Cup / Sini",
+    "badge": "Ethiopian Roast",
+    "image": null,
+    "description": "Freshly roasted and brewed authentic Ethiopian coffee, rich and fragrant.",
+    "ingredients": [
+      "Single-Origin Ethiopian Arabica Beans",
+      "Spring Water"
+    ],
+    "pairingWine": "Mineral Water",
+    "prepTime": "5 mins",
+    "dietary": [
+      "Vegan",
+      "Gluten-Free"
+    ]
+  },
+  {
+    "id": "dish-hot-130",
+    "name": "Spiced Tea (ሻይ)",
+    "frenchName": "ሻይ / Tea",
+    "category": "Hot Drinks",
+    "price": 80,
+    "priceNote": "Fresh Hot Cup",
+    "badge": "Spiced Tea",
+    "image": null,
+    "description": "Freshly steeped hot Ethiopian spiced black tea with cinnamon, cloves, and cardamom.",
+    "ingredients": [
+      "Black Tea Leaves",
+      "Cinnamon",
+      "Cardamom",
+      "Cloves"
+    ],
+    "pairingWine": "Mineral Water",
+    "prepTime": "4 mins",
+    "dietary": [
+      "Vegan",
+      "Gluten-Free"
     ]
   }
 ];
