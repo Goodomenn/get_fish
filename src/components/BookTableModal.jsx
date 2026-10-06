@@ -49,6 +49,7 @@ export default function BookTableModal({
     time: '19:30',
     branch: defaultBranch.name,
     seatingArea: defaultLoc.id,
+    tableNumber: '',
     notes: ''
   });
 
@@ -160,6 +161,14 @@ export default function BookTableModal({
                   <span className="text-slate-400">Guests:</span>
                   <span className="font-bold text-white">{confirmedReservation.partySize} Guests</span>
                 </div>
+                {confirmedReservation.tableNumber && (
+                  <div className="flex justify-between pb-2 border-b border-slate-800">
+                    <span className="text-slate-400">Reserved Table:</span>
+                    <span className="font-mono text-gold-300 font-bold text-sm">
+                      {confirmedReservation.tableNumber}
+                    </span>
+                  </div>
+                )}
                 {confirmedReservation.notes && (
                   <div className="pt-1 text-slate-400 italic text-[11px]">
                     Note: "{confirmedReservation.notes}"
@@ -276,6 +285,63 @@ export default function BookTableModal({
                       ))}
                     </select>
                   </div>
+                </div>
+
+                {/* Table Number & Seating Name Picker */}
+                <div className="pt-1">
+                  <label className="font-serif text-slate-300 block mb-1.5 uppercase tracking-wider text-[11px] flex items-center justify-between">
+                    <span className="flex items-center space-x-1.5 text-gold-400">
+                      <span>Pick Table Number & Name (የጠረጴዛ ቁጥርና ስም ይምረጡ)</span>
+                    </span>
+                    <span className="text-[10px] text-slate-400 font-mono">Optional</span>
+                  </label>
+                  <select
+                    value={form.tableNumber || ''}
+                    onChange={(e) => setForm({ ...form, tableNumber: e.target.value })}
+                    className="w-full px-3 py-2.5 bg-[#061421] border border-slate-700 hover:border-gold-500/50 focus:border-gold-400 rounded-xl text-white focus:outline-none font-medium text-xs cursor-pointer"
+                  >
+                    <option value="">Auto-Assign Best Available Table (ምርጥ ክፍት ጠረጴዛ)</option>
+                    <optgroup label="Lake Tana Terrace (ባህር ዳር)">
+                      <option value="Table 1 (Lake Tana Terrace)">Table 1 (Lake Tana Terrace)</option>
+                      <option value="Table 2 (Lake Tana Terrace)">Table 2 (Lake Tana Terrace)</option>
+                      <option value="Table 3 (Lake Tana Terrace)">Table 3 (Lake Tana Terrace)</option>
+                      <option value="Table 4 (Lake Tana Terrace)">Table 4 (Lake Tana Terrace)</option>
+                      <option value="Table 5 (Lake Tana Terrace)">Table 5 (Lake Tana Terrace)</option>
+                      <option value="Table 6 (Lake Tana Terrace)">Table 6 (Lake Tana Terrace)</option>
+                    </optgroup>
+                    <optgroup label="Main Dining Hall">
+                      <option value="Table 7 (Main Dining Hall)">Table 7 (Main Dining Hall)</option>
+                      <option value="Table 8 (Main Dining Hall)">Table 8 (Main Dining Hall)</option>
+                      <option value="Table 9 (Main Dining Hall)">Table 9 (Main Dining Hall)</option>
+                      <option value="Table 10 (Main Dining Hall)">Table 10 (Main Dining Hall)</option>
+                      <option value="Table 11 (Main Dining Hall)">Table 11 (Main Dining Hall)</option>
+                      <option value="Table 12 (Main Dining Hall)">Table 12 (Main Dining Hall)</option>
+                    </optgroup>
+                    <optgroup label="Garden Breeze & Terrace">
+                      <option value="Table 13 (Garden Breeze)">Table 13 (Garden Breeze)</option>
+                      <option value="Table 14 (Terrace)">Table 14 (Terrace)</option>
+                      <option value="Table 15 (Garden Breeze)">Table 15 (Garden Breeze)</option>
+                      <option value="Table 16 (Garden Breeze)">Table 16 (Garden Breeze)</option>
+                    </optgroup>
+                    <optgroup label="Sunset Balcony & VIP Lounge">
+                      <option value="Table 17 (Sunset Balcony)">Table 17 (Sunset Balcony)</option>
+                      <option value="Table 18 (Sunset Balcony)">Table 18 (Sunset Balcony)</option>
+                      <option value="Table 19 (VIP Wine Lounge)">Table 19 (VIP Wine Lounge)</option>
+                      <option value="Table 20 (VIP Wine Lounge)">Table 20 (VIP Wine Lounge)</option>
+                    </optgroup>
+                    <optgroup label="Summit Family Hall (ሰሚት)">
+                      <option value="Table 21 (Summit Family Hall)">Table 21 (Summit Family Hall)</option>
+                      <option value="Table 22 (Summit Family Hall)">Table 22 (Summit Family Hall)</option>
+                      <option value="Table 23 (Summit Family Hall)">Table 23 (Summit Family Hall)</option>
+                      <option value="Table 24 (Summit Family Hall)">Table 24 (Summit Family Hall)</option>
+                    </optgroup>
+                  </select>
+                  {form.tableNumber && (
+                    <div className="mt-2 text-[11px] text-gold-300 font-serif flex items-center space-x-1.5">
+                      <span className="w-1.5 h-1.5 rounded-full bg-gold-400"></span>
+                      <span>Selected Table: <strong className="text-white font-bold">{form.tableNumber}</strong></span>
+                    </div>
+                  )}
                 </div>
 
                 {/* Guest Contact Details */}

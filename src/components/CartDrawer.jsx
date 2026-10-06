@@ -1,5 +1,55 @@
 import React, { useState } from 'react';
-import { X, Trash2, Plus, Minus, ShoppingBag, ArrowRight, Wine, Sparkles } from 'lucide-react';
+import { X, Trash2, Plus, Minus, ShoppingBag, ArrowRight, Wine, Sparkles, MapPin, Check } from 'lucide-react';
+
+const RESTAURANT_TABLES = [
+  // Lake Tana Terrace / Waterfront
+  { number: 1, name: 'Lake Tana Terrace' },
+  { number: 2, name: 'Lake Tana Terrace' },
+  { number: 3, name: 'Lake Tana Terrace' },
+  { number: 4, name: 'Lake Tana Terrace' },
+  { number: 5, name: 'Lake Tana Terrace' },
+  { number: 6, name: 'Lake Tana Terrace' },
+  // Main Dining Hall
+  { number: 7, name: 'Main Dining Hall' },
+  { number: 8, name: 'Main Dining Hall' },
+  { number: 9, name: 'Main Dining Hall' },
+  { number: 10, name: 'Main Dining Hall' },
+  { number: 11, name: 'Main Dining Hall' },
+  { number: 12, name: 'Main Dining Hall' },
+  // Garden Breeze & Terrace
+  { number: 13, name: 'Garden Breeze' },
+  { number: 14, name: 'Terrace' },
+  { number: 15, name: 'Garden Breeze' },
+  { number: 16, name: 'Garden Breeze' },
+  // Sunset Balcony
+  { number: 17, name: 'Sunset Balcony' },
+  { number: 18, name: 'Sunset Balcony' },
+  { number: 19, name: 'Sunset Balcony' },
+  { number: 20, name: 'Sunset Balcony' },
+  // VIP Wine Lounge
+  { number: 21, name: 'VIP Wine Lounge' },
+  { number: 22, name: 'VIP Wine Lounge' },
+  // Summit Family Hall
+  { number: 23, name: 'Summit Family Hall' },
+  { number: 24, name: 'Summit Family Hall' },
+  { number: 25, name: 'Summit Family Hall' },
+  // Waterfront Deck & Chef's Table
+  { number: 26, name: 'Waterfront Deck' },
+  { number: 27, name: 'Waterfront Deck' },
+  { number: 28, name: "Chef's Private Table" }
+];
+
+const SEATING_NAMES = [
+  'Terrace',
+  'Lake Tana Terrace',
+  'Main Dining Hall',
+  'Garden Breeze',
+  'Sunset Balcony',
+  'VIP Wine Lounge',
+  'Summit Family Hall',
+  'Waterfront Deck',
+  "Chef's Private Table"
+];
 
 export default function CartDrawer({
   isOpen,
@@ -12,7 +62,11 @@ export default function CartDrawer({
   if (!isOpen) return null;
 
   const [orderType, setOrderType] = useState('Table Service');
-  const [tableNumber, setTableNumber] = useState('Table 14 (Terrace)');
+  const [selectedTableNumber, setSelectedTableNumber] = useState('');
+  const [selectedTableName, setSelectedTableName] = useState('');
+  const [isCustomMode, setIsCustomMode] = useState(false);
+  const [customTable, setCustomTable] = useState('');
+  const [tableValidationError, setTableValidationError] = useState('');
   const [guestNotes, setGuestNotes] = useState('');
 
   const subtotal = cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0);
@@ -20,9 +74,29 @@ export default function CartDrawer({
   const total = subtotal + (orderType === 'Table Service' ? serviceCharge : 0);
 
   const handleCheckout = () => {
+    let finalTableNumber = '';
+
+    if (orderType === 'Table Service') {
+      if (isCustomMode) {
+        if (!customTable.trim()) {
+          setTableValidationError('Please enter your table number and location.');
+          return;
+        }
+        finalTableNumber = customTable.trim();
+      } else {
+        if (!selectedTableNumber || !selectedTableName) {
+          setTableValidationError('Please pick both the table number and the table name.');
+          return;
+        }
+        finalTableNumber = `Table ${selectedTableNumber} (${selectedTableName})`;
+      }
+    } else {
+      finalTableNumber = 'Takeaway Order';
+    }
+
     onProceedOrder({
       orderType,
-      tableNumber: orderType === 'Table Service' ? tableNumber : 'Takeaway Order',
+      tableNumber: finalTableNumber,
       notes: guestNotes,
       subtotal,
       serviceCharge,
@@ -153,17 +227,146 @@ export default function CartDrawer({
         {cartItems.length > 0 && (
           <div className="p-6 border-t border-slate-800 bg-[#061421] space-y-4 text-xs">
             {orderType === 'Table Service' ? (
-              <div>
-                <label className="font-serif text-slate-300 block mb-1 uppercase tracking-wider text-[10px]">
-                  Table Seating / Location
-                </label>
-                <input
-                  type="text"
-                  value={tableNumber}
-                  onChange={(e) => setTableNumber(e.target.value)}
-                  placeholder="e.g. Table 14 or Terrace Table 3"
-                  className="w-full px-3 py-2 bg-slate-900 border border-slate-700 rounded-xl text-white font-medium"
-                />
+              <div className="space-y-2.5 bg-[#081928] p-3.5 rounded-2xl border border-slate-800">
+                <div className="flex items-center justify-between">
+                  <label className="font-serif text-slate-300 block uppercase tracking-wider text-[10px] flex items-center space-x-1">
+                    <MapPin className="w-3 h-3 text-gold-400" />
+                    <span>Table Seating / Location <span className="text-gold-400">*</span></span>
+                  </label>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setIsCustomMode(!isCustomMode);
+                      setTableValidationError('');
+                    }}
+                    className="text-[10px] text-gold-400 hover:text-gold-300 underline font-medium transition cursor-pointer"
+                  >
+                    {isCustomMode ? 'Pick from List' : 'Custom Table?'}
+                  </button>
+                </div>
+
+                {!isCustomMode ? (
+                  <div className="space-y-2.5">
+                    {/* Quick Select all-in-one */}
+                    <div>
+                      <select
+                        value={
+                          selectedTableNumber && selectedTableName
+                            ? `${selectedTableNumber}|${selectedTableName}`
+                            : ''
+                        }
+                        onChange={(e) => {
+                          if (!e.target.value) {
+                            setSelectedTableNumber('');
+                            setSelectedTableName('');
+                            return;
+                          }
+                          const [num, name] = e.target.value.split('|');
+                          setSelectedTableNumber(num);
+                          setSelectedTableName(name);
+                          setTableValidationError('');
+                        }}
+                        className="w-full px-3 py-2 bg-slate-900 border border-slate-700 hover:border-gold-500/50 focus:border-gold-400 rounded-xl text-white font-medium text-xs focus:outline-none transition cursor-pointer"
+                      >
+                        <option value="">-- Quick Pick: Select Table # & Name --</option>
+                        {RESTAURANT_TABLES.map((t) => (
+                          <option key={t.number} value={`${t.number}|${t.name}`}>
+                            Table {t.number} — {t.name}
+                          </option>
+                        ))}
+                      </select>
+                    </div>
+
+                    {/* Or pick Number & Name individually */}
+                    <div className="grid grid-cols-2 gap-2">
+                      <div>
+                        <label className="block text-[9px] uppercase tracking-wider text-slate-400 mb-1 font-serif">
+                          Table Number *
+                        </label>
+                        <select
+                          value={selectedTableNumber}
+                          onChange={(e) => {
+                            setSelectedTableNumber(e.target.value);
+                            setTableValidationError('');
+                          }}
+                          className="w-full px-3 py-2 bg-slate-900 border border-slate-700 hover:border-gold-500/50 focus:border-gold-400 rounded-xl text-white font-medium text-xs focus:outline-none transition cursor-pointer"
+                        >
+                          <option value="">Pick Table #</option>
+                          {Array.from({ length: 30 }, (_, i) => i + 1).map((n) => (
+                            <option key={n} value={String(n)}>
+                              Table {n}
+                            </option>
+                          ))}
+                        </select>
+                      </div>
+
+                      <div>
+                        <label className="block text-[9px] uppercase tracking-wider text-slate-400 mb-1 font-serif">
+                          Table Name / Area *
+                        </label>
+                        <select
+                          value={selectedTableName}
+                          onChange={(e) => {
+                            setSelectedTableName(e.target.value);
+                            setTableValidationError('');
+                          }}
+                          className="w-full px-3 py-2 bg-slate-900 border border-slate-700 hover:border-gold-500/50 focus:border-gold-400 rounded-xl text-white font-medium text-xs focus:outline-none transition cursor-pointer"
+                        >
+                          <option value="">Pick Table Name</option>
+                          {SEATING_NAMES.map((name) => (
+                            <option key={name} value={name}>
+                              {name}
+                            </option>
+                          ))}
+                        </select>
+                      </div>
+                    </div>
+
+                    {/* Selected Table Status Badge */}
+                    {selectedTableNumber && selectedTableName ? (
+                      <div className="flex items-center justify-between px-3 py-2 bg-gradient-to-r from-gold-500/15 to-[#0b2844] border border-gold-400/40 rounded-xl text-xs shadow-inner">
+                        <span className="text-slate-300 text-[10px] uppercase font-serif tracking-wider flex items-center space-x-1">
+                          <Check className="w-3 h-3 text-gold-400" />
+                          <span>Selected Table:</span>
+                        </span>
+                        <span className="font-serif font-bold text-gold-300">
+                          Table {selectedTableNumber} ({selectedTableName})
+                        </span>
+                      </div>
+                    ) : tableValidationError ? (
+                      <div className="text-[11px] text-rose-400 font-medium bg-rose-500/10 border border-rose-500/30 px-3 py-1.5 rounded-lg animate-in fade-in">
+                        {tableValidationError}
+                      </div>
+                    ) : (
+                      <p className="text-[10px] text-slate-400 italic">
+                        * Please pick your table number and table name before ordering.
+                      </p>
+                    )}
+                  </div>
+                ) : (
+                  /* Custom Input Mode */
+                  <div className="space-y-1.5">
+                    <input
+                      type="text"
+                      value={customTable}
+                      onChange={(e) => {
+                        setCustomTable(e.target.value);
+                        setTableValidationError('');
+                      }}
+                      placeholder="e.g. Table 14 (Terrace) or Bar Stool 3"
+                      className="w-full px-3 py-2 bg-slate-900 border border-slate-700 focus:border-gold-400 rounded-xl text-white font-medium text-xs focus:outline-none"
+                    />
+                    {tableValidationError ? (
+                      <div className="text-[11px] text-rose-400 font-medium bg-rose-500/10 border border-rose-500/30 px-3 py-1.5 rounded-lg">
+                        {tableValidationError}
+                      </div>
+                    ) : (
+                      <p className="text-[10px] text-slate-400 italic">
+                        Type your table number and location name manually.
+                      </p>
+                    )}
+                  </div>
+                )}
               </div>
             ) : (
               <div>
@@ -200,7 +403,7 @@ export default function CartDrawer({
 
             <button
               onClick={handleCheckout}
-              className="w-full py-3.5 bg-gradient-to-r from-gold-600 to-gold-500 hover:from-gold-500 hover:to-gold-400 text-slate-950 font-serif font-bold tracking-[0.2em] uppercase text-xs rounded-xl shadow-lg transition active:scale-95 flex items-center justify-center space-x-2"
+              className="w-full py-3.5 bg-gradient-to-r from-gold-600 to-gold-500 hover:from-gold-500 hover:to-gold-400 text-slate-950 font-serif font-bold tracking-[0.2em] uppercase text-xs rounded-xl shadow-lg transition active:scale-95 flex items-center justify-center space-x-2 cursor-pointer"
             >
               <span>Transmit Order to Kitchen</span>
               <ArrowRight className="w-4 h-4" />
