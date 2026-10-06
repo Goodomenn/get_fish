@@ -23,6 +23,7 @@ export default function App() {
   });
 
   const [dishes, setDishes] = useState([]);
+  const [categories, setCategories] = useState([]);
   const [loading, setLoading] = useState(true);
   const [isScrolled, setIsScrolled] = useState(false);
 
@@ -98,21 +99,25 @@ export default function App() {
     setIsBookTableOpen(true);
   };
 
-  const loadDishes = async () => {
+  const loadMenuData = async () => {
     try {
-      const list = await apiService.getDishes();
+      const [list, catList] = await Promise.all([
+        apiService.getDishes(),
+        apiService.getCategories()
+      ]);
       setDishes(list);
+      setCategories(catList);
     } catch (err) {
-      console.error('Failed to load menu dishes:', err);
+      console.error('Failed to load menu data:', err);
     } finally {
       setLoading(false);
     }
   };
 
   useEffect(() => {
-    loadDishes();
+    loadMenuData();
     const unsubscribe = apiService.subscribe(() => {
-      loadDishes();
+      loadMenuData();
     });
     return () => unsubscribe();
   }, []);
@@ -223,6 +228,7 @@ export default function App() {
             />
             <MenuSection
               dishes={dishes}
+              categories={categories}
               onAddToCart={handleAddToCart}
               onOpenDishDetail={setActiveDetailDish}
             />

@@ -4,11 +4,17 @@ import { Wine, Sparkles, Plus, Eye, Search } from 'lucide-react';
 
 export default function MenuSection({
   dishes,
+  categories = [],
   onAddToCart,
   onOpenDishDetail
 }) {
   const [selectedCategory, setSelectedCategory] = useState('All');
   const [search, setSearch] = useState('');
+
+  const categoryList =
+    categories && categories.length > 0
+      ? ['All', ...categories.filter((c) => c !== 'All')]
+      : MENU_CATEGORIES;
 
   const filteredDishes = dishes.filter(dish => {
     const matchCat = selectedCategory === 'All' || dish.category === selectedCategory;
@@ -43,7 +49,7 @@ export default function MenuSection({
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 mb-12 border-b border-slate-800/80 pb-6">
           {/* Category Tabs */}
           <div className="flex items-center space-x-2 sm:space-x-3 overflow-x-auto pb-2 md:pb-0 scrollbar-none">
-            {MENU_CATEGORIES.map((cat) => {
+            {categoryList.map((cat) => {
               const isSelected = selectedCategory === cat;
               return (
                 <button

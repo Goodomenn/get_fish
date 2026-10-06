@@ -1,4 +1,4 @@
-import { RESTAURANT_DISHES, INITIAL_RESERVATIONS } from '../data/restaurantData';
+import { RESTAURANT_DISHES, INITIAL_RESERVATIONS, MENU_CATEGORIES } from '../data/restaurantData';
 import { db, isFirebaseConfigured } from '../firebase';
 import {
   collection,
@@ -13,6 +13,7 @@ const LOCAL_STORAGE_DISHES = 'seaclub_dishes_v2';
 const LOCAL_STORAGE_RESERVATIONS = 'seaclub_reservations_v2';
 const LOCAL_STORAGE_ORDERS = 'seaclub_orders_v2';
 const LOCAL_STORAGE_FEEDBACK = 'seaclub_feedback_v2';
+const LOCAL_STORAGE_CATEGORIES = 'seaclub_categories_v2';
 
 // Safe timeout wrapper: guarantees Firestore calls never hang or freeze UI
 const withTimeout = (promise, ms = 2200, label = 'Firestore operation') =>
@@ -138,6 +139,8 @@ class ApiService {
       this.eventSource.addEventListener('DISH_CREATED', handleUpdate);
       this.eventSource.addEventListener('DISH_UPDATED', handleUpdate);
       this.eventSource.addEventListener('DISH_DELETED', handleUpdate);
+      this.eventSource.addEventListener('DISHES_UPDATED', handleUpdate);
+      this.eventSource.addEventListener('CATEGORIES_UPDATED', handleUpdate);
       this.eventSource.addEventListener('RESERVATION_CREATED', handleUpdate);
       this.eventSource.addEventListener('RESERVATION_UPDATED', handleUpdate);
       this.eventSource.addEventListener('RESERVATION_DELETED', handleUpdate);
@@ -210,6 +213,33 @@ class ApiService {
     // C. Fallback: Local Storage
     const raw = localStorage.getItem(LOCAL_STORAGE_DISHES);
     return raw ? JSON.parse(raw) : RESTAURANT_DISHES;
+  }
+
+  async getCategories() {
+    if (this.isBackendAvailable) {
+      try {
+        const res = await fetch(`${BACKEND_URL}/categories`);
+        if (res.ok) {
+          const data = await res.json();
+          if (Array.isArray(data) && data.length > 0) {
+            localStorage.setItem(LOCAL_STORAGE_CATEGORIES, JSON.stringify(data));
+            return data;
+          }
+        }
+      } catch (err) {
+        this.isBackendAvailable = false;
+      }
+    }
+
+    const raw = localStorage.getItem(LOCAL_STORAGE_CATEGORIES);
+    if (raw) {
+      try {
+        const parsed = JSON.parse(raw);
+        if (Array.isArray(parsed) && parsed.length > 0) return parsed;
+      } catch (e) {}
+    }
+
+    return MENU_CATEGORIES.filter((c) => c !== 'All');
   }
 
   async seedInitialFirestoreDishes() {
