@@ -1,4 +1,13 @@
-import { RESTAURANT_DISHES, INITIAL_RESERVATIONS, MENU_CATEGORIES } from '../data/restaurantData';
+import {
+  RESTAURANT_DISHES,
+  INITIAL_RESERVATIONS,
+  MENU_CATEGORIES,
+  CANONICAL_CATEGORIES,
+  normalizeCategory,
+  areCategoriesEqual,
+  getCanonicalCategoryName,
+  deduplicateCategories
+} from '../data/restaurantData';
 import { db, isFirebaseConfigured } from '../firebase';
 import {
   collection,
@@ -44,7 +53,7 @@ export const DEFAULT_LOCATIONS = [
 ];
 
 // Safe timeout wrapper: guarantees Firestore calls never hang or freeze UI
-const withTimeout = (promise, ms = 2200, label = 'Firestore operation') =>
+const withTimeout = (promise, ms = 8000, label = 'Firestore operation') =>
   Promise.race([
     promise,
     new Promise((_, reject) =>
@@ -146,11 +155,18 @@ class ApiService {
 
   initLocalStorage() {
     if (typeof window === 'undefined') return;
-    if (!localStorage.getItem(LOCAL_STORAGE_CATEGORIES)) {
-      localStorage.setItem(LOCAL_STORAGE_CATEGORIES, JSON.stringify(MENU_CATEGORIES.filter(c => c !== 'All')));
-    }
-    if (!localStorage.getItem(LOCAL_STORAGE_DISHES)) {
+    const rawDishes = localStorage.getItem(LOCAL_STORAGE_DISHES);
+    if (!rawDishes) {
       localStorage.setItem(LOCAL_STORAGE_DISHES, JSON.stringify(RESTAURANT_DISHES));
+    } else {
+      try {
+        const parsed = JSON.parse(rawDishes);
+        if (!Array.isArray(parsed) || parsed.length < RESTAURANT_DISHES.length) {
+          localStorage.setItem(LOCAL_STORAGE_DISHES, JSON.stringify(RESTAURANT_DISHES));
+        }
+      } catch (e) {
+        localStorage.setItem(LOCAL_STORAGE_DISHES, JSON.stringify(RESTAURANT_DISHES));
+      }
     }
     if (!localStorage.getItem(LOCAL_STORAGE_RESERVATIONS)) {
       localStorage.setItem(LOCAL_STORAGE_RESERVATIONS, JSON.stringify(INITIAL_RESERVATIONS));
@@ -161,6 +177,19 @@ class ApiService {
     if (!localStorage.getItem(LOCAL_STORAGE_FEEDBACK)) {
       localStorage.setItem(LOCAL_STORAGE_FEEDBACK, JSON.stringify([]));
     }
+
+    const rawCats = localStorage.getItem(LOCAL_STORAGE_CATEGORIES);
+    let cats = CANONICAL_CATEGORIES;
+    if (rawCats) {
+      try {
+        const parsed = JSON.parse(rawCats);
+        if (Array.isArray(parsed) && parsed.length > 0) {
+          cats = deduplicateCategories([...parsed, ...CANONICAL_CATEGORIES]);
+        }
+      } catch (e) {}
+    }
+    localStorage.setItem(LOCAL_STORAGE_CATEGORIES, JSON.stringify(cats));
+
     if (!localStorage.getItem(LOCAL_STORAGE_LOCATIONS)) {
       localStorage.setItem(LOCAL_STORAGE_LOCATIONS, JSON.stringify(DEFAULT_LOCATIONS));
     }
@@ -247,7 +276,7 @@ class ApiService {
       const res = await fetch(`${BACKEND_URL}/dishes`, { signal: AbortSignal.timeout(2000) });
       if (res.ok) {
         const data = await res.json();
-        if (Array.isArray(data) && data.length > 0) {
+        if (Array.isArray(data) && data.length >= RESTAURANT_DISHES.length) {
           this.isBackendAvailable = true;
           localStorage.setItem(LOCAL_STORAGE_DISHES, JSON.stringify(data));
           return data;
@@ -261,7 +290,7 @@ class ApiService {
     if (this.isFirestoreAvailable) {
       try {
         const dishesRef = collection(db, 'dishes');
-        const snapshot = await withTimeout(getDocs(dishesRef), 2200, 'Dishes fetch');
+        const snapshot = await withTimeout(getDocs(dishesRef), 8000, 'Dishes fetch');
         if (!snapshot.empty) {
           const list = snapshot.docs.map((d) => ({ id: d.id, ...d.data() }));
           localStorage.setItem(LOCAL_STORAGE_DISHES, JSON.stringify(list));
@@ -276,10 +305,21 @@ class ApiService {
 
     // C. Fallback: Local Storage
     const raw = localStorage.getItem(LOCAL_STORAGE_DISHES);
-    return raw ? JSON.parse(raw) : RESTAURANT_DISHES;
+    if (raw) {
+      try {
+        const parsed = JSON.parse(raw);
+        if (Array.isArray(parsed) && parsed.length >= RESTAURANT_DISHES.length) {
+          return parsed;
+        }
+      } catch (e) {}
+    }
+
+    localStorage.setItem(LOCAL_STORAGE_DISHES, JSON.stringify(RESTAURANT_DISHES));
+    return RESTAURANT_DISHES;
   }
 
   async getCategories() {
+    let rawList = [];
     // A. Backend Server (always try first)
     try {
       const res = await fetch(`${BACKEND_URL}/categories`, { signal: AbortSignal.timeout(2000) });
@@ -287,8 +327,7 @@ class ApiService {
         const data = await res.json();
         if (Array.isArray(data) && data.length > 0) {
           this.isBackendAvailable = true;
-          localStorage.setItem(LOCAL_STORAGE_CATEGORIES, JSON.stringify(data));
-          return data;
+          rawList = data;
         }
       }
     } catch (err) {
@@ -296,15 +335,23 @@ class ApiService {
     }
 
     // B. Local Storage
-    const raw = localStorage.getItem(LOCAL_STORAGE_CATEGORIES);
-    if (raw) {
-      try {
-        const parsed = JSON.parse(raw);
-        if (Array.isArray(parsed) && parsed.length > 0) return parsed;
-      } catch (e) {}
+    if (rawList.length === 0) {
+      const raw = localStorage.getItem(LOCAL_STORAGE_CATEGORIES);
+      if (raw) {
+        try {
+          const parsed = JSON.parse(raw);
+          if (Array.isArray(parsed) && parsed.length > 0) rawList = parsed;
+        } catch (e) {}
+      }
     }
 
-    return MENU_CATEGORIES.filter((c) => c !== 'All');
+    if (rawList.length === 0) {
+      rawList = [...CANONICAL_CATEGORIES];
+    }
+
+    const merged = deduplicateCategories([...rawList, ...CANONICAL_CATEGORIES]);
+    localStorage.setItem(LOCAL_STORAGE_CATEGORIES, JSON.stringify(merged));
+    return merged;
   }
 
   async getLocations() {

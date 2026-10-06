@@ -1,5 +1,11 @@
 import React, { useState } from 'react';
-import { MENU_CATEGORIES } from '../data/restaurantData';
+import {
+  MENU_CATEGORIES,
+  CANONICAL_CATEGORIES,
+  normalizeCategory,
+  areCategoriesEqual,
+  deduplicateCategories
+} from '../data/restaurantData';
 import { Wine, Sparkles, Plus, Eye, Search } from 'lucide-react';
 
 export default function MenuSection({
@@ -13,21 +19,21 @@ export default function MenuSection({
 
   const categoryList =
     categories && categories.length > 0
-      ? ['All', ...categories.filter((c) => c !== 'All')]
-      : MENU_CATEGORIES;
+      ? ['All', ...deduplicateCategories(categories.filter((c) => c !== 'All'))]
+      : ['All', ...CANONICAL_CATEGORIES];
 
   // Fallback to 'All' if selected category was deleted
-  const activeCategory = categoryList.includes(selectedCategory) ? selectedCategory : 'All';
+  const activeCategory = categoryList.find((c) => areCategoriesEqual(c, selectedCategory)) || 'All';
 
   // Allowed non-'All' categories
   const validCategories = categoryList.filter((c) => c !== 'All');
 
   const filteredDishes = dishes.filter(dish => {
     // Exclude dishes whose category has been deleted
-    if (validCategories.length > 0 && !validCategories.includes(dish.category)) {
+    if (validCategories.length > 0 && !validCategories.some((c) => areCategoriesEqual(c, dish.category))) {
       return false;
     }
-    const matchCat = activeCategory === 'All' || dish.category === activeCategory;
+    const matchCat = activeCategory === 'All' || areCategoriesEqual(dish.category, activeCategory);
     const matchSearch =
       dish.name.toLowerCase().includes(search.toLowerCase()) ||
       (dish.frenchName && dish.frenchName.toLowerCase().includes(search.toLowerCase())) ||
@@ -60,7 +66,7 @@ export default function MenuSection({
           {/* Category Tabs */}
           <div className="flex items-center space-x-2 sm:space-x-3 overflow-x-auto pb-2 md:pb-0 scrollbar-none">
             {categoryList.map((cat) => {
-              const isSelected = activeCategory === cat;
+              const isSelected = areCategoriesEqual(activeCategory, cat);
               return (
                 <button
                   key={cat}

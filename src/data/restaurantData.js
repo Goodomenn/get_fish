@@ -81,6 +81,48 @@ export const MENU_CATEGORIES = [
   "Fine Wine Cellar"
 ];
 
+export const CANONICAL_CATEGORIES = [
+  "Fish Mains",
+  "Traditional",
+  "Fish Burger and Pizza",
+  "Salad",
+  "Soup",
+  "Juice",
+  "Chef Specials",
+  "Fine Wine Cellar"
+];
+
+export function normalizeCategory(cat) {
+  if (!cat) return '';
+  return cat
+    .toString()
+    .trim()
+    .toLowerCase()
+    .replace(/&/g, 'and')
+    .replace(/[\s\-_]+/g, ' ');
+}
+
+export function areCategoriesEqual(a, b) {
+  return normalizeCategory(a) === normalizeCategory(b);
+}
+
+export function getCanonicalCategoryName(cat) {
+  const match = CANONICAL_CATEGORIES.find((c) => areCategoriesEqual(c, cat));
+  return match || (cat ? cat.trim() : '');
+}
+
+export function deduplicateCategories(cats) {
+  const result = [];
+  for (const c of (cats || [])) {
+    if (!c || c === 'All') continue;
+    const canonical = getCanonicalCategoryName(c);
+    if (!result.some((existing) => areCategoriesEqual(existing, canonical))) {
+      result.push(canonical);
+    }
+  }
+  return result;
+}
+
 
 
 export const RESTAURANT_DISHES = [
