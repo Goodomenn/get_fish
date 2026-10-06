@@ -14,6 +14,34 @@ const LOCAL_STORAGE_RESERVATIONS = 'seaclub_reservations_v2';
 const LOCAL_STORAGE_ORDERS = 'seaclub_orders_v2';
 const LOCAL_STORAGE_FEEDBACK = 'seaclub_feedback_v2';
 const LOCAL_STORAGE_CATEGORIES = 'seaclub_categories_v2';
+const LOCAL_STORAGE_LOCATIONS = 'seaclub_locations_v2';
+
+export const DEFAULT_LOCATIONS = [
+  {
+    id: 'Bahir Dar Flagship',
+    branchId: 'bahir-dar',
+    name: 'Bahir Dar Flagship (ባህር ዳር)',
+    city: 'Bahir Dar • Kebele 13',
+    desc: 'Near St. Michael Church • Lake Tana waterfront dining & fresh daily catch',
+    badge: 'Lake Tana Flagship',
+    address: 'Kebele 13, Near St. Michael Church, Bahir Dar',
+    phone: '+251 91 800 1234',
+    email: 'bahirdar@gechfish-restaurant.com',
+    hours: 'Daily: 11:30 AM – 11:00 PM'
+  },
+  {
+    id: 'Addis Ababa - Summit',
+    branchId: 'addis-summit',
+    name: 'Addis Ababa - Summit (አዲስ አበባ ሰሚት)',
+    city: 'Addis Ababa • Summit',
+    desc: 'Behind Chanoli • Sizzling Fish Tibs, Fish Lebleb & family dining',
+    badge: 'Summit Branch',
+    address: 'Summit Area, Behind Chanoli, Addis Ababa',
+    phone: '+251 91 122 3344',
+    email: 'summit@gechfish-restaurant.com',
+    hours: 'Daily: 11:30 AM – 11:00 PM'
+  }
+];
 
 // Safe timeout wrapper: guarantees Firestore calls never hang or freeze UI
 const withTimeout = (promise, ms = 2200, label = 'Firestore operation') =>
@@ -53,7 +81,9 @@ class ApiService {
           e.key === LOCAL_STORAGE_DISHES ||
           e.key === LOCAL_STORAGE_RESERVATIONS ||
           e.key === LOCAL_STORAGE_ORDERS ||
-          e.key === LOCAL_STORAGE_FEEDBACK
+          e.key === LOCAL_STORAGE_FEEDBACK ||
+          e.key === LOCAL_STORAGE_CATEGORIES ||
+          e.key === LOCAL_STORAGE_LOCATIONS
         ) {
           this.notifySubscribers();
         }
@@ -124,6 +154,9 @@ class ApiService {
     if (!localStorage.getItem(LOCAL_STORAGE_FEEDBACK)) {
       localStorage.setItem(LOCAL_STORAGE_FEEDBACK, JSON.stringify([]));
     }
+    if (!localStorage.getItem(LOCAL_STORAGE_LOCATIONS)) {
+      localStorage.setItem(LOCAL_STORAGE_LOCATIONS, JSON.stringify(DEFAULT_LOCATIONS));
+    }
   }
 
   initSSE() {
@@ -141,6 +174,7 @@ class ApiService {
       this.eventSource.addEventListener('DISH_DELETED', handleUpdate);
       this.eventSource.addEventListener('DISHES_UPDATED', handleUpdate);
       this.eventSource.addEventListener('CATEGORIES_UPDATED', handleUpdate);
+      this.eventSource.addEventListener('LOCATIONS_UPDATED', handleUpdate);
       this.eventSource.addEventListener('RESERVATION_CREATED', handleUpdate);
       this.eventSource.addEventListener('RESERVATION_UPDATED', handleUpdate);
       this.eventSource.addEventListener('RESERVATION_DELETED', handleUpdate);
@@ -240,6 +274,33 @@ class ApiService {
     }
 
     return MENU_CATEGORIES.filter((c) => c !== 'All');
+  }
+
+  async getLocations() {
+    if (this.isBackendAvailable) {
+      try {
+        const res = await fetch(`${BACKEND_URL}/locations`);
+        if (res.ok) {
+          const data = await res.json();
+          if (Array.isArray(data) && data.length > 0) {
+            localStorage.setItem(LOCAL_STORAGE_LOCATIONS, JSON.stringify(data));
+            return data;
+          }
+        }
+      } catch (err) {
+        this.isBackendAvailable = false;
+      }
+    }
+
+    const raw = localStorage.getItem(LOCAL_STORAGE_LOCATIONS);
+    if (raw) {
+      try {
+        const parsed = JSON.parse(raw);
+        if (Array.isArray(parsed) && parsed.length > 0) return parsed;
+      } catch (e) {}
+    }
+
+    return [...DEFAULT_LOCATIONS];
   }
 
   async seedInitialFirestoreDishes() {

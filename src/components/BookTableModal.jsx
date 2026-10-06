@@ -1,28 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { X, Calendar, Clock, Users, Sparkles, CheckCircle2, MapPin, Wine } from 'lucide-react';
-import { apiService } from '../services/apiService';
+import { apiService, DEFAULT_LOCATIONS } from '../services/apiService';
 import { RESTAURANT_BRANCHES } from '../data/restaurantData';
-
-const RESTAURANT_LOCATIONS = [
-  {
-    id: 'Bahir Dar Flagship',
-    branchId: 'bahir-dar',
-    name: 'Bahir Dar Flagship (ባህር ዳር)',
-    city: 'Bahir Dar • Kebele 13',
-    desc: 'Near St. Michael Church • Lake Tana waterfront dining & fresh daily catch',
-    badge: 'Lake Tana Flagship',
-    address: 'Kebele 13, Near St. Michael Church, Bahir Dar'
-  },
-  {
-    id: 'Addis Ababa - Summit',
-    branchId: 'addis-summit',
-    name: 'Addis Ababa - Summit (አዲስ አበባ ሰሚት)',
-    city: 'Addis Ababa • Summit',
-    desc: 'Behind Chanoli • Sizzling Fish Tibs, Fish Lebleb & family dining',
-    badge: 'Summit Branch',
-    address: 'Summit Area, Behind Chanoli, Addis Ababa'
-  }
-];
 
 const TIME_SLOTS = [
   '12:00', '13:00', '14:00', '17:30', '18:30', '19:30', '20:30', '21:30'
@@ -37,8 +16,30 @@ export default function BookTableModal({
 }) {
   if (!isOpen) return null;
 
+  const [locations, setLocations] = useState(DEFAULT_LOCATIONS);
+
+  useEffect(() => {
+    let isMounted = true;
+    const fetchLocs = async () => {
+      try {
+        const data = await apiService.getLocations();
+        if (isMounted && Array.isArray(data) && data.length > 0) {
+          setLocations(data);
+        }
+      } catch (e) {
+        console.error('Failed to load locations', e);
+      }
+    };
+    fetchLocs();
+    const unsubscribe = apiService.subscribe(fetchLocs);
+    return () => {
+      isMounted = false;
+      unsubscribe();
+    };
+  }, []);
+
   const defaultBranch = RESTAURANT_BRANCHES.find(b => b.id === initialBranch) || RESTAURANT_BRANCHES[0];
-  const defaultLoc = RESTAURANT_LOCATIONS.find(l => l.branchId === initialBranch || l.id === initialSeatingArea) || RESTAURANT_LOCATIONS[0];
+  const defaultLoc = locations.find(l => l.branchId === initialBranch || l.id === initialSeatingArea) || locations[0] || DEFAULT_LOCATIONS[0];
 
   const [form, setForm] = useState({
     guestName: '',
@@ -47,29 +48,29 @@ export default function BookTableModal({
     partySize: 2,
     date: 'Tonight',
     time: '19:30',
-    branch: defaultBranch.name,
+    branch: defaultBranch?.name || defaultLoc.name,
     seatingArea: defaultLoc.id,
     tableNumber: '',
     notes: ''
   });
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (initialSeatingArea) {
-      const match = RESTAURANT_LOCATIONS.find(l => l.id === initialSeatingArea || l.branchId === initialSeatingArea);
+      const match = locations.find(l => l.id === initialSeatingArea || l.branchId === initialSeatingArea);
       if (match) {
         setForm(prev => ({ ...prev, seatingArea: match.id, branch: match.name }));
       }
     }
-  }, [initialSeatingArea]);
+  }, [initialSeatingArea, locations]);
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (initialBranch) {
-      const match = RESTAURANT_LOCATIONS.find(l => l.branchId === initialBranch || l.id === initialBranch);
+      const match = locations.find(l => l.branchId === initialBranch || l.id === initialBranch);
       if (match) {
         setForm(prev => ({ ...prev, seatingArea: match.id, branch: match.name }));
       }
     }
-  }, [initialBranch]);
+  }, [initialBranch, locations]);
 
   const [submitting, setSubmitting] = useState(false);
   const [confirmedReservation, setConfirmedReservation] = useState(null);
@@ -195,10 +196,10 @@ export default function BookTableModal({
                     <MapPin className="w-3.5 h-3.5" />
                     <span>Select Restaurant Location (ቅርንጫፍ ይምረጡ) *</span>
                   </span>
-                  <span className="text-[10px] text-slate-400 font-mono">2 Locations</span>
+                  <span className="text-[10px] text-slate-400 font-mono">{locations.length} Locations</span>
                 </label>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                  {RESTAURANT_LOCATIONS.map(loc => {
+                  {locations.map(loc => {
                     const isSelected = form.seatingArea === loc.id;
                     return (
                       <button
