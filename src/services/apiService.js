@@ -131,7 +131,11 @@ class ApiService {
     try {
       const res = await fetch(`${BACKEND_URL}/health`, { method: 'GET', signal: AbortSignal.timeout(1200) });
       if (res.ok) {
+        const wasOffline = !this.isBackendAvailable;
         this.isBackendAvailable = true;
+        if (wasOffline) {
+          this.notifySubscribers();
+        }
         return true;
       }
     } catch (err) {
@@ -142,6 +146,9 @@ class ApiService {
 
   initLocalStorage() {
     if (typeof window === 'undefined') return;
+    if (!localStorage.getItem(LOCAL_STORAGE_CATEGORIES)) {
+      localStorage.setItem(LOCAL_STORAGE_CATEGORIES, JSON.stringify(MENU_CATEGORIES.filter(c => c !== 'All')));
+    }
     if (!localStorage.getItem(LOCAL_STORAGE_DISHES)) {
       localStorage.setItem(LOCAL_STORAGE_DISHES, JSON.stringify(RESTAURANT_DISHES));
     }
@@ -169,11 +176,33 @@ class ApiService {
         this.notifySubscribers();
       };
 
+      this.eventSource.addEventListener('CATEGORIES_UPDATED', (e) => {
+        try {
+          if (e.data) {
+            const parsed = JSON.parse(e.data);
+            if (Array.isArray(parsed)) {
+              localStorage.setItem(LOCAL_STORAGE_CATEGORIES, JSON.stringify(parsed));
+            }
+          }
+        } catch (err) {}
+        this.notifySubscribers();
+      });
+
+      this.eventSource.addEventListener('DISHES_UPDATED', (e) => {
+        try {
+          if (e.data) {
+            const parsed = JSON.parse(e.data);
+            if (Array.isArray(parsed)) {
+              localStorage.setItem(LOCAL_STORAGE_DISHES, JSON.stringify(parsed));
+            }
+          }
+        } catch (err) {}
+        this.notifySubscribers();
+      });
+
       this.eventSource.addEventListener('DISH_CREATED', handleUpdate);
       this.eventSource.addEventListener('DISH_UPDATED', handleUpdate);
       this.eventSource.addEventListener('DISH_DELETED', handleUpdate);
-      this.eventSource.addEventListener('DISHES_UPDATED', handleUpdate);
-      this.eventSource.addEventListener('CATEGORIES_UPDATED', handleUpdate);
       this.eventSource.addEventListener('LOCATIONS_UPDATED', handleUpdate);
       this.eventSource.addEventListener('RESERVATION_CREATED', handleUpdate);
       this.eventSource.addEventListener('RESERVATION_UPDATED', handleUpdate);
@@ -213,7 +242,22 @@ class ApiService {
   // 1. DISHES & MENU
   // =========================================================================
   async getDishes() {
-    // A. Firestore Cloud Database
+    // A. Local Express Backend (live real-time database)
+    try {
+      const res = await fetch(`${BACKEND_URL}/dishes`, { signal: AbortSignal.timeout(2000) });
+      if (res.ok) {
+        const data = await res.json();
+        if (Array.isArray(data) && data.length > 0) {
+          this.isBackendAvailable = true;
+          localStorage.setItem(LOCAL_STORAGE_DISHES, JSON.stringify(data));
+          return data;
+        }
+      }
+    } catch (err) {
+      // Backend not yet reachable or timed out
+    }
+
+    // B. Firestore Cloud Database
     if (this.isFirestoreAvailable) {
       try {
         const dishesRef = collection(db, 'dishes');
@@ -230,41 +274,28 @@ class ApiService {
       }
     }
 
-    // B. Local Express Backend
-    if (this.isBackendAvailable) {
-      try {
-        const res = await fetch(`${BACKEND_URL}/dishes`);
-        if (res.ok) {
-          const data = await res.json();
-          localStorage.setItem(LOCAL_STORAGE_DISHES, JSON.stringify(data));
-          return data;
-        }
-      } catch (err) {
-        this.isBackendAvailable = false;
-      }
-    }
-
     // C. Fallback: Local Storage
     const raw = localStorage.getItem(LOCAL_STORAGE_DISHES);
     return raw ? JSON.parse(raw) : RESTAURANT_DISHES;
   }
 
   async getCategories() {
-    if (this.isBackendAvailable) {
-      try {
-        const res = await fetch(`${BACKEND_URL}/categories`);
-        if (res.ok) {
-          const data = await res.json();
-          if (Array.isArray(data) && data.length > 0) {
-            localStorage.setItem(LOCAL_STORAGE_CATEGORIES, JSON.stringify(data));
-            return data;
-          }
+    // A. Backend Server (always try first)
+    try {
+      const res = await fetch(`${BACKEND_URL}/categories`, { signal: AbortSignal.timeout(2000) });
+      if (res.ok) {
+        const data = await res.json();
+        if (Array.isArray(data) && data.length > 0) {
+          this.isBackendAvailable = true;
+          localStorage.setItem(LOCAL_STORAGE_CATEGORIES, JSON.stringify(data));
+          return data;
         }
-      } catch (err) {
-        this.isBackendAvailable = false;
       }
+    } catch (err) {
+      // Backend not yet reachable or timed out
     }
 
+    // B. Local Storage
     const raw = localStorage.getItem(LOCAL_STORAGE_CATEGORIES);
     if (raw) {
       try {

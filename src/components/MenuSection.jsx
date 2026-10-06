@@ -16,8 +16,18 @@ export default function MenuSection({
       ? ['All', ...categories.filter((c) => c !== 'All')]
       : MENU_CATEGORIES;
 
+  // Fallback to 'All' if selected category was deleted
+  const activeCategory = categoryList.includes(selectedCategory) ? selectedCategory : 'All';
+
+  // Allowed non-'All' categories
+  const validCategories = categoryList.filter((c) => c !== 'All');
+
   const filteredDishes = dishes.filter(dish => {
-    const matchCat = selectedCategory === 'All' || dish.category === selectedCategory;
+    // Exclude dishes whose category has been deleted
+    if (validCategories.length > 0 && !validCategories.includes(dish.category)) {
+      return false;
+    }
+    const matchCat = activeCategory === 'All' || dish.category === activeCategory;
     const matchSearch =
       dish.name.toLowerCase().includes(search.toLowerCase()) ||
       (dish.frenchName && dish.frenchName.toLowerCase().includes(search.toLowerCase())) ||
@@ -50,7 +60,7 @@ export default function MenuSection({
           {/* Category Tabs */}
           <div className="flex items-center space-x-2 sm:space-x-3 overflow-x-auto pb-2 md:pb-0 scrollbar-none">
             {categoryList.map((cat) => {
-              const isSelected = selectedCategory === cat;
+              const isSelected = activeCategory === cat;
               return (
                 <button
                   key={cat}

@@ -71,7 +71,6 @@ export const RESTAURANT_INFO = {
 
 export const MENU_CATEGORIES = [
   'All',
-  'Raw Bar & Oysters',
   'Chef Specials',
   'Fish Mains',
   'Seafood Pastas',
