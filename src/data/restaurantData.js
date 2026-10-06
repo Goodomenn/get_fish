@@ -70,12 +70,18 @@ export const RESTAURANT_INFO = {
 };
 
 export const MENU_CATEGORIES = [
-  'All',
-  'Chef Specials',
-  'Fish Mains',
-  'Fine Wine Cellar',
-  'Traditional'
+  "All",
+  "Fish Mains",
+  "Traditional",
+  "Fish Burger and Pizza",
+  "Salad",
+  "Soup",
+  "Juice",
+  "Chef Specials",
+  "Fine Wine Cellar"
 ];
+
+
 
 export const RESTAURANT_DISHES = [
   {
@@ -1080,6 +1086,1300 @@ export const RESTAURANT_DISHES = [
     "dietary": [
       "10 Years Cellar Aging on Lees",
       "12.5% ABV"
+    ]
+  },
+  {
+    "id": "dish-38",
+    "name": "Special Fish Burger (ስፔሻል አሳ በርገር)",
+    "frenchName": "ስፔሻል አሳ በርገር / Spiecal Fish Burger",
+    "category": "Fish Burger and Pizza",
+    "price": 800,
+    "priceNote": "With Hand-Cut Fries",
+    "badge": "House Special Burger",
+    "image": null,
+    "description": "Deluxe crispy fish fillet in a toasted sesame bun with melted cheese, caramelized onions, fresh lettuce, tomato, and house tartar awaze sauce.",
+    "ingredients": [
+      "Lake Fish Fillet",
+      "Sesame Brioche Bun",
+      "Melted Cheese",
+      "Caramelized Onions",
+      "Lettuce & Tomato",
+      "House Tartar Sauce"
+    ],
+    "pairingWine": "Cold Draft Beer or Soda",
+    "prepTime": "15 mins",
+    "dietary": [
+      "House Special",
+      "Handcrafted"
+    ]
+  },
+  {
+    "id": "dish-39",
+    "name": "Fish Burger (አሳ በርገር)",
+    "frenchName": "አሳ በርገር / Fish Burger",
+    "category": "Fish Burger and Pizza",
+    "price": 600,
+    "priceNote": "With Fries",
+    "badge": "Classic Burger",
+    "image": null,
+    "description": "Golden pan-fried fish patty on a fresh soft bun with crisp greens, sliced pickles, and savory burger sauce.",
+    "ingredients": [
+      "Seasoned Fish Patty",
+      "Soft Bun",
+      "Crisp Lettuce",
+      "Tomato",
+      "Pickles",
+      "Burger Sauce"
+    ],
+    "pairingWine": "Chilled Soda or Beer",
+    "prepTime": "12 mins",
+    "dietary": [
+      "Fresh Daily",
+      "Classic"
+    ]
+  },
+  {
+    "id": "dish-40",
+    "name": "Fish Pizza (አሳ ፒዛ)",
+    "frenchName": "አሳ ፒዛ / Fish Pizza",
+    "category": "Fish Burger and Pizza",
+    "price": 800,
+    "priceNote": "Medium / Large",
+    "badge": "Seafood Pizza",
+    "image": null,
+    "description": "Stone-baked pizza crust topped with rich tomato sauce, melted mozzarella, tender seasoned fish chunks, sliced peppers, and oregano.",
+    "ingredients": [
+      "Hand-tossed Dough",
+      "Rich Tomato Sauce",
+      "Mozzarella Cheese",
+      "Fresh Fish Chunks",
+      "Bell Peppers",
+      "Wild Oregano"
+    ],
+    "pairingWine": "Crisp White Wine or Lager",
+    "prepTime": "18 mins",
+    "dietary": [
+      "Stone Baked",
+      "Popular"
+    ]
+  },
+  {
+    "id": "dish-41",
+    "name": "Tuna Pizza (ቱና ፒዛ)",
+    "frenchName": "ቱና ፒዛ / Tuna Pizza",
+    "category": "Fish Burger and Pizza",
+    "price": 700,
+    "priceNote": "Medium / Large",
+    "badge": "Tuna & Mozzarella",
+    "image": null,
+    "description": "Wood-fired crust loaded with flaked tuna, sliced red onions, black olives, mozzarella, and savory tomato base.",
+    "ingredients": [
+      "Pizza Crust",
+      "Flaked Tuna",
+      "Red Onions",
+      "Black Olives",
+      "Mozzarella Cheese",
+      "Tomato Coulis"
+    ],
+    "pairingWine": "Pinot Grigio or Beer",
+    "prepTime": "18 mins",
+    "dietary": [
+      "Wood Fired",
+      "High Protein"
+    ]
+  },
+  {
+    "id": "dish-42",
+    "name": "Special Fish Sandwich (ስፔሻል አሳ ሳንድዊች)",
+    "frenchName": "ስፔሻል አሳ ሳንድዊች / Spiecal Fish Sandwich",
+    "category": "Fish Burger and Pizza",
+    "price": 800,
+    "priceNote": "With Hand-Cut Fries",
+    "badge": "Chef Special Sandwich",
+    "image": null,
+    "description": "Toasted artisanal baguette packed with marinated fish fillet, sautéed peppers, caramelized onions, melted cheese, and herb dressing.",
+    "ingredients": [
+      "Marinated Fish Fillet",
+      "Artisanal Baguette",
+      "Melted Cheese",
+      "Sautéed Peppers",
+      "Caramelized Onions"
+    ],
+    "pairingWine": "Chilled White Wine",
+    "prepTime": "14 mins",
+    "dietary": [
+      "Hot Pressed",
+      "House Special"
+    ]
+  },
+  {
+    "id": "dish-43",
+    "name": "Fish Sandwich (አሳ ሳንድዊች)",
+    "frenchName": "አሳ ሳንድዊች / Fish Sandwich",
+    "category": "Fish Burger and Pizza",
+    "price": 700,
+    "priceNote": "With Fries",
+    "badge": "Classic Sandwich",
+    "image": null,
+    "description": "Crispy seasoned fish fillet tucked into warm crusty bread with crisp lettuce, fresh tomatoes, and seasoned mayonnaise.",
+    "ingredients": [
+      "Fish Fillet",
+      "Crusty Bread",
+      "Lettuce",
+      "Tomatoes",
+      "Seasoned Mayo"
+    ],
+    "pairingWine": "Fresh Juice or Soda",
+    "prepTime": "12 mins",
+    "dietary": [
+      "Crispy",
+      "Casual Favorite"
+    ]
+  },
+  {
+    "id": "dish-44",
+    "name": "Vegetable Sandwich (አትክልት ሳንድዊች)",
+    "frenchName": "አትክልት ሳንድዊች / Vegetable Sandwich",
+    "category": "Fish Burger and Pizza",
+    "price": 600,
+    "priceNote": "With Fries",
+    "badge": "Vegetarian / Fasting",
+    "image": null,
+    "description": "Layered garden vegetables including grilled peppers, cucumbers, tomatoes, shredded lettuce, and creamy vinaigrette on toasted bread.",
+    "ingredients": [
+      "Grilled Bell Peppers",
+      "Sliced Cucumber",
+      "Fresh Tomatoes",
+      "Shredded Lettuce",
+      "Toasted Bread"
+    ],
+    "pairingWine": "Iced Tea or Fresh Juice",
+    "prepTime": "10 mins",
+    "dietary": [
+      "Vegetarian",
+      "Fasting Friendly"
+    ]
+  },
+  {
+    "id": "dish-45",
+    "name": "Vegetable Pizza (አትክልት ፒዛ)",
+    "frenchName": "አትክልት ፒዛ / Vegetable Pizza",
+    "category": "Fish Burger and Pizza",
+    "price": 600,
+    "priceNote": "Medium / Large",
+    "badge": "Garden Veggie",
+    "image": null,
+    "description": "Oven-baked crust generously loaded with colorful bell peppers, red onions, mushrooms, sweet corn, and rich tomato sauce.",
+    "ingredients": [
+      "Pizza Crust",
+      "Bell Peppers",
+      "Mushrooms",
+      "Onions",
+      "Sweet Corn",
+      "Tomato Herb Sauce"
+    ],
+    "pairingWine": "Cold Soda or White Wine",
+    "prepTime": "16 mins",
+    "dietary": [
+      "Vegetarian",
+      "Fasting Option Available"
+    ]
+  },
+  {
+    "id": "dish-46",
+    "name": "Margarita Pizza (ማርጋሪታ ፒዛ)",
+    "frenchName": "ማርጋሪታ ፒዛ / Margarita Pizza",
+    "category": "Fish Burger and Pizza",
+    "price": 800,
+    "priceNote": "Medium / Large",
+    "badge": "Italian Classic",
+    "image": null,
+    "description": "Classic Italian style pizza with slow-simmered San Marzano style tomato sauce, premium melted mozzarella, and fresh basil.",
+    "ingredients": [
+      "Hand-tossed Dough",
+      "Rich Tomato Sauce",
+      "Melted Mozzarella",
+      "Fresh Basil",
+      "Extra Virgin Olive Oil"
+    ],
+    "pairingWine": "Chianti or Sparkling Water",
+    "prepTime": "16 mins",
+    "dietary": [
+      "Classic",
+      "Vegetarian"
+    ]
+  },
+  {
+    "id": "dish-47",
+    "name": "Avocado Salad (አቮካዶ ሳላድ)",
+    "frenchName": "አቮካዶ ሳላድ / Avocado Salad",
+    "category": "Salad",
+    "price": 700,
+    "priceNote": "Fresh Garden Bowl",
+    "badge": "Fresh Avocado",
+    "image": null,
+    "description": "Fresh ripe diced Ethiopian avocado tossed with tomatoes, red onions, jalapeños, lime juice, and cold-pressed olive oil.",
+    "ingredients": [
+      "Fresh Ripe Avocado",
+      "Diced Tomatoes",
+      "Red Onions",
+      "Jalapeño",
+      "Fresh Lime",
+      "Olive Oil"
+    ],
+    "pairingWine": "Sauvignon Blanc or Fresh Juice",
+    "prepTime": "10 mins",
+    "dietary": [
+      "Fresh & Healthy",
+      "Fasting Friendly"
+    ]
+  },
+  {
+    "id": "dish-48",
+    "name": "Fish Salad (አሳ ሳላድ)",
+    "frenchName": "አሳ ሳላድ / Fish Salad",
+    "category": "Salad",
+    "price": 800,
+    "priceNote": "Protein Salad Bowl",
+    "badge": "Protein Rich",
+    "image": null,
+    "description": "Tender grilled or poached fish fillet flakes over mixed crisp greens, cucumbers, sweet corn, cherry tomatoes, and herb lemon dressing.",
+    "ingredients": [
+      "Fresh Fish Flakes",
+      "Crisp Greens",
+      "Cucumbers",
+      "Cherry Tomatoes",
+      "Sweet Corn",
+      "Herb Lemon Dressing"
+    ],
+    "pairingWine": "Chardonnay or Crisp Rosé",
+    "prepTime": "12 mins",
+    "dietary": [
+      "High Protein",
+      "Gluten Conscious"
+    ]
+  },
+  {
+    "id": "dish-49",
+    "name": "Fruit Salad (ፍሩት ሳላድ)",
+    "frenchName": "ፍሩት ሳላድ / Fruit Salad",
+    "category": "Salad",
+    "price": 600,
+    "priceNote": "Chilled Fruit Bowl",
+    "badge": "Seasonal Fruits",
+    "image": null,
+    "description": "Refreshing bowl of seasonal diced tropical fruits including mango, papaya, pineapple, banana, and fresh citrus squeeze.",
+    "ingredients": [
+      "Fresh Mango",
+      "Ripe Papaya",
+      "Pineapple",
+      "Banana",
+      "Citrus Juice"
+    ],
+    "pairingWine": "Sparkling Water",
+    "prepTime": "10 mins",
+    "dietary": [
+      "100% Fresh",
+      "Vitamin Rich"
+    ]
+  },
+  {
+    "id": "dish-50",
+    "name": "Normal Salad (ኖርማል ሳላድ)",
+    "frenchName": "ኖርማል ሳላድ / Normal Salad",
+    "category": "Salad",
+    "price": 600,
+    "priceNote": "Garden Fresh",
+    "badge": "House Green Salad",
+    "image": null,
+    "description": "Crisp garden salad with fresh romaine lettuce, sliced tomatoes, onions, cucumbers, and mild Ethiopian vinaigrette.",
+    "ingredients": [
+      "Romaine Lettuce",
+      "Tomatoes",
+      "Cucumbers",
+      "Onions",
+      "House Vinaigrette"
+    ],
+    "pairingWine": "Light White Wine",
+    "prepTime": "8 mins",
+    "dietary": [
+      "Light & Crisp",
+      "Fasting Friendly"
+    ]
+  },
+  {
+    "id": "dish-51",
+    "name": "Tuna Salad (ቱና ሳላድ)",
+    "frenchName": "ቱና ሳላድ / Tuna Salad",
+    "category": "Salad",
+    "price": 800,
+    "priceNote": "Mediterranean Bowl",
+    "badge": "Tuna & Crisp Greens",
+    "image": null,
+    "description": "Flaked tuna tossed with mixed garden greens, red onions, black olives, sliced cucumbers, and zesty mustard vinaigrette.",
+    "ingredients": [
+      "Tuna Chunks",
+      "Mixed Garden Greens",
+      "Red Onions",
+      "Black Olives",
+      "Zesty Dressing"
+    ],
+    "pairingWine": "Pinot Grigio",
+    "prepTime": "10 mins",
+    "dietary": [
+      "High Protein",
+      "Keto Friendly"
+    ]
+  },
+  {
+    "id": "dish-52",
+    "name": "Potato Salad (ድንች ሳላድ)",
+    "frenchName": "ድንች ሳላድ / Potato Salad",
+    "category": "Salad",
+    "price": 600,
+    "priceNote": "Traditional Portion",
+    "badge": "Savory Potato",
+    "image": null,
+    "description": "Tender steamed potato cubes dressed with fresh red onions, parsley, mild mustard dressing, and olive oil.",
+    "ingredients": [
+      "Steamed Potatoes",
+      "Red Onions",
+      "Fresh Parsley",
+      "Olive Oil",
+      "Mild Mustard Dressing"
+    ],
+    "pairingWine": "Cold Beer",
+    "prepTime": "10 mins",
+    "dietary": [
+      "Hearty",
+      "Fasting Friendly"
+    ]
+  },
+  {
+    "id": "dish-53",
+    "name": "Mixed Salad (ሚክስድ ሳላድ)",
+    "frenchName": "ሚክስድ ሳላድ / Mixed Salad",
+    "category": "Salad",
+    "price": 700,
+    "priceNote": "Colorful Medley",
+    "badge": "Garden Medley",
+    "image": null,
+    "description": "Colorful garden medley combining shredded carrots, beetroots, cabbage, tomatoes, and cucumbers with lime dressing.",
+    "ingredients": [
+      "Carrots",
+      "Beetroots",
+      "Shredded Cabbage",
+      "Tomatoes",
+      "Cucumbers",
+      "Citrus Dressing"
+    ],
+    "pairingWine": "Crisp Sauvignon Blanc",
+    "prepTime": "10 mins",
+    "dietary": [
+      "Vibrant & Crunchy",
+      "Fasting Friendly"
+    ]
+  },
+  {
+    "id": "dish-54",
+    "name": "Special Salad (ስፔሻል ሳላድ)",
+    "frenchName": "ስፔሻል ሳላድ / Special Salad",
+    "category": "Salad",
+    "price": 900,
+    "priceNote": "Grand Chef Bowl",
+    "badge": "Chef Signature Salad",
+    "image": null,
+    "description": "Deluxe chef salad loaded with avocado, grilled fish cuts, sweet corn, crisp mixed greens, and honey-lime dressing.",
+    "ingredients": [
+      "Avocado",
+      "Grilled Fish Cuts",
+      "Sweet Corn",
+      "Crisp Mixed Greens",
+      "Chef Dressing"
+    ],
+    "pairingWine": "Chablis Grand Cru",
+    "prepTime": "12 mins",
+    "dietary": [
+      "Chef Signature",
+      "Nutrient Packed"
+    ]
+  },
+  {
+    "id": "dish-55",
+    "name": "Fruit Punch (ፍሩት ፓንች)",
+    "frenchName": "ፍሩት ፓንች / Fruit Punch",
+    "category": "Salad",
+    "price": 600,
+    "priceNote": "Chilled Glass",
+    "badge": "Chilled Punch",
+    "image": null,
+    "description": "Chilled refreshing fruit cocktail blend with tropical fruit juices, diced fruit bits, and crushed mint.",
+    "ingredients": [
+      "Mixed Tropical Juices",
+      "Diced Fruit Bits",
+      "Crushed Mint",
+      "Chilled Ice"
+    ],
+    "pairingWine": "Sparkling Water",
+    "prepTime": "5 mins",
+    "dietary": [
+      "Refreshing",
+      "Non-Alcoholic"
+    ]
+  },
+  {
+    "id": "dish-56",
+    "name": "Special Fruit Punch (ስፔሻል ፍሩት ፓንች)",
+    "frenchName": "ስፔሻል ፍሩት ፓንች / Special Fruit Punch",
+    "category": "Salad",
+    "price": 900,
+    "priceNote": "Tall Signature Glass",
+    "badge": "Grand Cocktail Punch",
+    "image": null,
+    "description": "Premium layered tropical fruit punch with pureed mango, strawberry, avocado cream, and sparkling splash.",
+    "ingredients": [
+      "Layered Mango Puree",
+      "Strawberry Coulis",
+      "Avocado Cream",
+      "Tropical Nectar",
+      "Fresh Mint"
+    ],
+    "pairingWine": "Non-Alcoholic",
+    "prepTime": "8 mins",
+    "dietary": [
+      "Signature Punch",
+      "Party Favorite"
+    ]
+  },
+  {
+    "id": "dish-57",
+    "name": "Special Fish Soup (ስፔሻል የአሳ ሱፕ)",
+    "frenchName": "ስፔሻል የአሳ ሱፕ / Spiecal Fish Soup",
+    "category": "Soup",
+    "price": 800,
+    "priceNote": "Hot Terracotta Bowl",
+    "badge": "Chef Special Broth",
+    "image": null,
+    "description": "Rich, aromatic slow-simmered fish broth loaded with tender fillet chunks, garlic, ginger, rosemary, and seasonal root vegetables.",
+    "ingredients": [
+      "Fish Fillet Chunks",
+      "Slow-Cooked Fish Broth",
+      "Garlic & Ginger",
+      "Fresh Rosemary",
+      "Carrots & Celery",
+      "Lemon"
+    ],
+    "pairingWine": "Crisp Sauvignon Blanc",
+    "prepTime": "15 mins",
+    "dietary": [
+      "Warm & Nourishing",
+      "Immunity Boosting"
+    ]
+  },
+  {
+    "id": "dish-58",
+    "name": "Fish Soup (አሳ ሱፕ)",
+    "frenchName": "አሳ ሱፕ / Fish Soup",
+    "category": "Soup",
+    "price": 600,
+    "priceNote": "Warm Bowl with Bread",
+    "badge": "Clear Fish Broth",
+    "image": null,
+    "description": "Hearty and warming traditional clear fish broth infused with herbs, black pepper, garlic, and diced fish pieces.",
+    "ingredients": [
+      "Fish Stock",
+      "Diced Fish",
+      "Garlic",
+      "Black Pepper",
+      "Fresh Herbs",
+      "Lemon Wedge"
+    ],
+    "pairingWine": "Draft Beer or Sparkling Water",
+    "prepTime": "12 mins",
+    "dietary": [
+      "Comforting",
+      "Low Calorie"
+    ]
+  },
+  {
+    "id": "dish-59",
+    "name": "Gebeta (ገበታ)",
+    "frenchName": "ገበታ / Gebeta",
+    "category": "Traditional",
+    "price": 1500,
+    "priceNote": "Grand Feast for 2-3",
+    "badge": "Grand Feast Platter",
+    "image": null,
+    "description": "Grand shared Ethiopian feast platter served on injera with an assortment of spicy and mild traditional stews, shiro, and greens.",
+    "ingredients": [
+      "Shiro",
+      "Misir Wot",
+      "Kik Alicha",
+      "Gomen",
+      "Atkilt Wot",
+      "Fresh Injera"
+    ],
+    "pairingWine": "Traditional Tej or Rich Red",
+    "prepTime": "20 mins",
+    "dietary": [
+      "Sharing Platter",
+      "Traditional Feast"
+    ]
+  },
+  {
+    "id": "dish-60",
+    "name": "Special Shiro (ስፔሻል ሽሮ)",
+    "frenchName": "ስፔሻል ሽሮ / Spiecal Shro",
+    "category": "Traditional",
+    "price": 500,
+    "priceNote": "Bubbling Clay Pot",
+    "badge": "Clay Pot Sizzler",
+    "image": null,
+    "description": "Rich spiced powdered chickpea stew slow-simmered with minced garlic, onions, and spicy berbere in a bubbling clay pot.",
+    "ingredients": [
+      "Spiced Chickpea Powder",
+      "Berbere Sauce",
+      "Garlic",
+      "Red Onions",
+      "Spiced Oil",
+      "Injera"
+    ],
+    "pairingWine": "St. George Beer or Cold Water",
+    "prepTime": "15 mins",
+    "dietary": [
+      "Bubbling Hot",
+      "Traditional Classic"
+    ]
+  },
+  {
+    "id": "dish-61",
+    "name": "Tegabino (ተጋቢኖ)",
+    "frenchName": "ተጋቢኖ / Tegabino",
+    "category": "Traditional",
+    "price": 500,
+    "priceNote": "Clay Pot Serving",
+    "badge": "Extra Thick Shiro",
+    "image": null,
+    "description": "Extra thick, concentrated spiced shiro cooked and served sizzling hot in a heavy traditional earthenware pot.",
+    "ingredients": [
+      "Concentrated Shiro",
+      "Garlic",
+      "Green Chilies",
+      "Ethiopian Spices",
+      "Injera"
+    ],
+    "pairingWine": "Cold Draft Beer",
+    "prepTime": "15 mins",
+    "dietary": [
+      "Sizzling Clay Pot",
+      "Rich & Hearty"
+    ]
+  },
+  {
+    "id": "dish-62",
+    "name": "Shiro Feses (ሽሮ ፈሰስ)",
+    "frenchName": "ሽሮ ፈሰስ / Shero",
+    "category": "Traditional",
+    "price": 350,
+    "priceNote": "Portion with Injera",
+    "badge": "Classic Shiro",
+    "image": null,
+    "description": "Classic smooth and velvety chickpea stew gently simmered with mild spices, served warm with injera.",
+    "ingredients": [
+      "Smooth Chickpea Puree",
+      "Onions",
+      "Garlic",
+      "Mild Spices",
+      "Injera"
+    ],
+    "pairingWine": "Water or Tea",
+    "prepTime": "12 mins",
+    "dietary": [
+      "Comfort Food",
+      "Fasting Friendly"
+    ]
+  },
+  {
+    "id": "dish-63",
+    "name": "Shiro be Selata (ሽሮ በ ሰላጣ)",
+    "frenchName": "ሽሮ በ ሰላጣ / Shro Be Selata",
+    "category": "Traditional",
+    "price": 400,
+    "priceNote": "Combo Plate",
+    "badge": "Shiro & Salad Duo",
+    "image": null,
+    "description": "Warm comforting bowl of spiced shiro served alongside a fresh crisp tomato, onion, and jalapeño garden salad.",
+    "ingredients": [
+      "Simmered Shiro",
+      "Tomato & Green Pepper Salad",
+      "Lime Dressing",
+      "Injera"
+    ],
+    "pairingWine": "Cold Beverage",
+    "prepTime": "14 mins",
+    "dietary": [
+      "Balanced Duo",
+      "Popular Lunch"
+    ]
+  },
+  {
+    "id": "dish-64",
+    "name": "Misir (ምስር)",
+    "frenchName": "ምስር / Misir Wot",
+    "category": "Traditional",
+    "price": 400,
+    "priceNote": "Portion with Injera",
+    "badge": "Spicy Red Lentils",
+    "image": null,
+    "description": "Slow-simmered red lentils in a deeply flavorful berbere paste with garlic, ginger, and caramelized red onions.",
+    "ingredients": [
+      "Red Split Lentils",
+      "Berbere Paste",
+      "Red Onions",
+      "Garlic & Ginger",
+      "Injera"
+    ],
+    "pairingWine": "Red Wine or Lager",
+    "prepTime": "15 mins",
+    "dietary": [
+      "High Fiber",
+      "Fasting Stew"
+    ]
+  },
+  {
+    "id": "dish-65",
+    "name": "Spaghetti with Vegetables (ፓስታ በአትክልት)",
+    "frenchName": "ፓስታ በአትክልት / Spagetti Vge.",
+    "category": "Traditional",
+    "price": 500,
+    "priceNote": "Full Bowl",
+    "badge": "Veggie Pasta",
+    "image": null,
+    "description": "Al dente spaghetti tossed with sautéed seasonal garden vegetables, garlic, olive oil, and herbs.",
+    "ingredients": [
+      "Spaghetti",
+      "Carrots",
+      "Bell Peppers",
+      "Zucchini",
+      "Garlic",
+      "Herbs"
+    ],
+    "pairingWine": "White Wine",
+    "prepTime": "14 mins",
+    "dietary": [
+      "Vegetarian",
+      "Fasting Friendly"
+    ]
+  },
+  {
+    "id": "dish-66",
+    "name": "Rice with Vegetables (ሩዝ በአትክልት)",
+    "frenchName": "ሩዝ በአትክልት / Rice Vge.",
+    "category": "Traditional",
+    "price": 500,
+    "priceNote": "Full Plate",
+    "badge": "Spiced Veggie Rice",
+    "image": null,
+    "description": "Aromatic steamed basmati rice sautéed with mixed vegetables, onions, and mild Ethiopian spices.",
+    "ingredients": [
+      "Steamed Rice",
+      "Carrots",
+      "Green Peas",
+      "Bell Peppers",
+      "Mild Spices"
+    ],
+    "pairingWine": "Fresh Juice",
+    "prepTime": "14 mins",
+    "dietary": [
+      "Gluten Conscious",
+      "Vegetarian"
+    ]
+  },
+  {
+    "id": "dish-67",
+    "name": "Spaghetti with Tomato Sauce (ፓስታ በሶስ)",
+    "frenchName": "ፓስታ በሶስ / Spagetti with Tomato Souce",
+    "category": "Traditional",
+    "price": 450,
+    "priceNote": "Full Bowl",
+    "badge": "Classic Tomato Pasta",
+    "image": null,
+    "description": "Italian-Ethiopian pasta classic tossed in rich slow-simmered tomato, garlic, and fresh basil sauce.",
+    "ingredients": [
+      "Spaghetti",
+      "Tomato Reduction",
+      "Garlic",
+      "Basil",
+      "Olive Oil"
+    ],
+    "pairingWine": "Chianti",
+    "prepTime": "12 mins",
+    "dietary": [
+      "Classic",
+      "Vegetarian"
+    ]
+  },
+  {
+    "id": "dish-68",
+    "name": "Tomato Lebleb (ቲማቲም ለበለብ)",
+    "frenchName": "ቲማቲም ለበለብ / Tomato Lebeleb",
+    "category": "Traditional",
+    "price": 350,
+    "priceNote": "Portion with Bread / Injera",
+    "badge": "Warm Spiced Tomatoes",
+    "image": null,
+    "description": "Quick-sautéed fresh ripe tomatoes with garlic, sliced green chilies, onions, and spiced olive oil.",
+    "ingredients": [
+      "Fresh Ripe Tomatoes",
+      "Green Chilies",
+      "Red Onions",
+      "Garlic",
+      "Spiced Oil"
+    ],
+    "pairingWine": "Cold Drink",
+    "prepTime": "10 mins",
+    "dietary": [
+      "Warm & Zesty",
+      "Quick Sauté"
+    ]
+  },
+  {
+    "id": "dish-69",
+    "name": "Tomato Qurt (ቲማቲም ቁርጥ)",
+    "frenchName": "ቲማቲም ቁርጥ / Tomato Qurt",
+    "category": "Traditional",
+    "price": 350,
+    "priceNote": "Chilled Plate",
+    "badge": "Chilled Sliced Tomatoes",
+    "image": null,
+    "description": "Fresh chilled sliced ripe tomatoes served with diced jalapeños, onions, mitmita spice, and lemon dressing.",
+    "ingredients": [
+      "Fresh Sliced Tomatoes",
+      "Diced Jalapeño",
+      "Mitmita Seasoning",
+      "Lemon Dressing"
+    ],
+    "pairingWine": "Iced Tea",
+    "prepTime": "8 mins",
+    "dietary": [
+      "Refreshing",
+      "Crisp"
+    ]
+  },
+  {
+    "id": "dish-70",
+    "name": "Special Injera Firfir (ስፔሻል እንጀራ ፍርፍር)",
+    "frenchName": "ስፔሻል እንጀራ ፍርፍር / Spiecal Enjra Firfir",
+    "category": "Traditional",
+    "price": 450,
+    "priceNote": "Full Portion",
+    "badge": "Chef Special Firfir",
+    "image": null,
+    "description": "Torn pieces of fresh injera soaked in rich spicy berbere sauce with caramelized onions, garlic, and jalapeños.",
+    "ingredients": [
+      "Torn Injera",
+      "Berbere Sauce",
+      "Caramelized Onions",
+      "Garlic",
+      "Green Chilies"
+    ],
+    "pairingWine": "Cold Beer",
+    "prepTime": "12 mins",
+    "dietary": [
+      "Spicy & Tangy",
+      "House Special"
+    ]
+  },
+  {
+    "id": "dish-71",
+    "name": "Injera Firfir (እንጀራ ፍርፍር)",
+    "frenchName": "እንጀራ ፍርፍር / Enjra Firfir",
+    "category": "Traditional",
+    "price": 400,
+    "priceNote": "Regular Portion",
+    "badge": "Traditional Firfir",
+    "image": null,
+    "description": "Traditional Ethiopian comfort food with soft injera simmered into savory berbere stew.",
+    "ingredients": [
+      "Injera",
+      "Berbere Stew",
+      "Garlic",
+      "Onions"
+    ],
+    "pairingWine": "Ethiopian Spiced Tea",
+    "prepTime": "10 mins",
+    "dietary": [
+      "Traditional Comfort",
+      "Fasting Friendly"
+    ]
+  },
+  {
+    "id": "dish-72",
+    "name": "Beyaynet (በያይነት)",
+    "frenchName": "በያይነት / Beyaynet",
+    "category": "Traditional",
+    "price": 600,
+    "priceNote": "Full Fasting Platter",
+    "badge": "Fasting Combo Platter",
+    "image": null,
+    "description": "Authentic multi-dish fasting platter with shiro, misir wot, kik alicha, gomen, and cabbage arranged on injera.",
+    "ingredients": [
+      "Shiro",
+      "Spicy Lentils",
+      "Yellow Split Peas",
+      "Collard Greens",
+      "Cabbage & Carrots",
+      "Injera"
+    ],
+    "pairingWine": "Cold Beverage or Tej",
+    "prepTime": "15 mins",
+    "dietary": [
+      "100% Vegan",
+      "Fasting Platter"
+    ]
+  },
+  {
+    "id": "dish-73",
+    "name": "Fasting Full Agelgl (የጾም አገልግል ሙሉ)",
+    "frenchName": "የጾም አገልግል ሙሉ / Fasting Full Agelgl",
+    "category": "Traditional",
+    "price": 2000,
+    "priceNote": "Full Woven Basket",
+    "badge": "Full Basket Feast",
+    "image": null,
+    "description": "Complete authentic woven leather basket filled with an expansive spread of vegan fasting stews layered on fresh injera.",
+    "ingredients": [
+      "Assorted Fasting Stews",
+      "Fresh Injera Layers",
+      "Awaze",
+      "Peppers"
+    ],
+    "pairingWine": "Traditional Tej",
+    "prepTime": "22 mins",
+    "dietary": [
+      "Traditional Agelgl",
+      "Sharing Platter"
+    ]
+  },
+  {
+    "id": "dish-74",
+    "name": "Fasting Half Agelgl (የጾም አገልግል ግማሽ)",
+    "frenchName": "የጾም አገልግል ግማሽ / Fasting Half Agelgl",
+    "category": "Traditional",
+    "price": 1000,
+    "priceNote": "Half Woven Basket",
+    "badge": "Half Basket Feast",
+    "image": null,
+    "description": "Half portion of authentic leather basket fasting feast packed with diverse vegan delicacies.",
+    "ingredients": [
+      "Selected Fasting Stews",
+      "Injera",
+      "Spiced Greens",
+      "Peppers"
+    ],
+    "pairingWine": "Cold Drink",
+    "prepTime": "18 mins",
+    "dietary": [
+      "Traditional Presentation",
+      "Vegan"
+    ]
+  },
+  {
+    "id": "dish-75",
+    "name": "Special Juice (ስፔሻል ጁስ)",
+    "frenchName": "ስፔሻል ጁስ / Special Juice",
+    "category": "Juice",
+    "price": 400,
+    "priceNote": "Tall Glass",
+    "badge": "House Special Blend",
+    "image": null,
+    "description": "Layered signature cocktail of mango, avocado, and papaya with vimto syrup drizzle.",
+    "ingredients": [
+      "Fresh Mango",
+      "Avocado",
+      "Papaya",
+      "Vimto Drizzle",
+      "Lime"
+    ],
+    "pairingWine": "Non-Alcoholic",
+    "prepTime": "5 mins",
+    "dietary": [
+      "100% Fresh",
+      "House Signature"
+    ]
+  },
+  {
+    "id": "dish-76",
+    "name": "Mango Juice (ማንጎ ጁስ)",
+    "frenchName": "ማንጎ ጁስ / Mango Juice",
+    "category": "Juice",
+    "price": 350,
+    "priceNote": "Chilled Glass",
+    "badge": "Fresh Mango",
+    "image": null,
+    "description": "Pure chilled thick mango nectar freshly blended from sun-ripened Ethiopian mangoes.",
+    "ingredients": [
+      "Ripe Mango",
+      "Touch of Lime",
+      "Chilled Ice"
+    ],
+    "pairingWine": "Non-Alcoholic",
+    "prepTime": "4 mins",
+    "dietary": [
+      "100% Fruit",
+      "Thick & Sweet"
+    ]
+  },
+  {
+    "id": "dish-77",
+    "name": "Avocado Juice (አቮካዶ ጁስ)",
+    "frenchName": "አቮካዶ ጁስ / Avocado Juice",
+    "category": "Juice",
+    "price": 350,
+    "priceNote": "Chilled Glass",
+    "badge": "Creamy Avocado",
+    "image": null,
+    "description": "Creamy velvety Ethiopian avocado juice served thick with a fresh squeeze of lime.",
+    "ingredients": [
+      "Ripe Avocado",
+      "Fresh Lime Squeeze",
+      "Pure Honey Touch"
+    ],
+    "pairingWine": "Non-Alcoholic",
+    "prepTime": "4 mins",
+    "dietary": [
+      "Rich & Creamy",
+      "Healthy Fats"
+    ]
+  },
+  {
+    "id": "dish-78",
+    "name": "Papaye Juice (ፓፓዬ ጁስ)",
+    "frenchName": "ፓፓዬ ጁስ / Papaye Juice",
+    "category": "Juice",
+    "price": 300,
+    "priceNote": "Chilled Glass",
+    "badge": "Tropical Papaya",
+    "image": null,
+    "description": "Sweet sun-ripened papaya blended smooth and served ice cold with lime wedge.",
+    "ingredients": [
+      "Fresh Papaya",
+      "Lime Juice",
+      "Ice"
+    ],
+    "pairingWine": "Non-Alcoholic",
+    "prepTime": "4 mins",
+    "dietary": [
+      "Digestive Wellness",
+      "Natural Sweetness"
+    ]
+  },
+  {
+    "id": "dish-79",
+    "name": "Watermelon Juice (ሃብሃብ ጁስ)",
+    "frenchName": "ሃብሃብ ጁስ / Watermelon Juice",
+    "category": "Juice",
+    "price": 300,
+    "priceNote": "Chilled Glass",
+    "badge": "Hydrating Melon",
+    "image": null,
+    "description": "Ultra-refreshing cold-pressed fresh watermelon juice served crisp and chilled.",
+    "ingredients": [
+      "Fresh Watermelon",
+      "Mint Leaf",
+      "Crushed Ice"
+    ],
+    "pairingWine": "Non-Alcoholic",
+    "prepTime": "3 mins",
+    "dietary": [
+      "Hydrating",
+      "Low Calorie"
+    ]
+  },
+  {
+    "id": "dish-80",
+    "name": "Pineapple Juice (አናናስ ጁስ)",
+    "frenchName": "አናናስ ጁስ / Pineapple Juice",
+    "category": "Juice",
+    "price": 400,
+    "priceNote": "Chilled Glass",
+    "badge": "Zesty Pineapple",
+    "image": null,
+    "description": "Zesty sweet freshly extracted pineapple juice packed with tropical vibrance.",
+    "ingredients": [
+      "Fresh Pineapple",
+      "Ice"
+    ],
+    "pairingWine": "Non-Alcoholic",
+    "prepTime": "4 mins",
+    "dietary": [
+      "Digestive Enzyme Rich",
+      "Zesty Sweet"
+    ]
+  },
+  {
+    "id": "dish-81",
+    "name": "Moca Juice (ሞካ ጁስ)",
+    "frenchName": "ሞካ ጁስ / Moca Juice",
+    "category": "Juice",
+    "price": 400,
+    "priceNote": "Tall Glass",
+    "badge": "Moca Fusion",
+    "image": null,
+    "description": "Rich and energizing chocolate-coffee tropical juice fusion blend.",
+    "ingredients": [
+      "Cocoa Extract",
+      "Ethiopian Coffee Essence",
+      "Banana",
+      "Milk / Soy Option"
+    ],
+    "pairingWine": "Non-Alcoholic",
+    "prepTime": "5 mins",
+    "dietary": [
+      "Energizing",
+      "Rich Flavor"
+    ]
+  },
+  {
+    "id": "dish-82",
+    "name": "Strawberry Juice (እንጆሪ ጁስ)",
+    "frenchName": "እንጆሪ ጁስ / Strawberry Juice",
+    "category": "Juice",
+    "price": 400,
+    "priceNote": "Chilled Glass",
+    "badge": "Sweet Strawberry",
+    "image": null,
+    "description": "Bright and sweet freshly blended local strawberry nectar served ice cold.",
+    "ingredients": [
+      "Fresh Strawberries",
+      "Citrus Splash",
+      "Chilled Ice"
+    ],
+    "pairingWine": "Non-Alcoholic",
+    "prepTime": "4 mins",
+    "dietary": [
+      "Antioxidant Rich",
+      "Sweet Berry"
+    ]
+  },
+  {
+    "id": "dish-83",
+    "name": "Apple Juice (አፕል ጁስ)",
+    "frenchName": "አፕል ጁስ / Apple Juice",
+    "category": "Juice",
+    "price": 400,
+    "priceNote": "Chilled Glass",
+    "badge": "Crisp Apple",
+    "image": null,
+    "description": "Crisp and clean fresh pressed natural apple juice with a light cinnamon hint.",
+    "ingredients": [
+      "Fresh Apples",
+      "Ice"
+    ],
+    "pairingWine": "Non-Alcoholic",
+    "prepTime": "4 mins",
+    "dietary": [
+      "Crisp & Pure",
+      "Refreshing"
+    ]
+  },
+  {
+    "id": "dish-84",
+    "name": "Banana Juice (ሙዝ ጁስ)",
+    "frenchName": "ሙዝ ጁስ / Banana Juice",
+    "category": "Juice",
+    "price": 350,
+    "priceNote": "Chilled Glass",
+    "badge": "Creamy Banana",
+    "image": null,
+    "description": "Smooth and creamy ripe banana shake blend, rich in potassium and energy.",
+    "ingredients": [
+      "Ripe Bananas",
+      "Honey",
+      "Chilled Milk / Water"
+    ],
+    "pairingWine": "Non-Alcoholic",
+    "prepTime": "4 mins",
+    "dietary": [
+      "Creamy & Sweet",
+      "Energy Booster"
+    ]
+  },
+  {
+    "id": "dish-85",
+    "name": "Orange Juice (ብርቱካን ጁስ)",
+    "frenchName": "ብርቱካን ጁስ / Orange Juice",
+    "category": "Juice",
+    "price": 400,
+    "priceNote": "Fresh Squeezed Glass",
+    "badge": "Pure Citrus",
+    "image": null,
+    "description": "Freshly squeezed citrus orange juice bursting with natural Vitamin C and freshness.",
+    "ingredients": [
+      "Fresh Oranges",
+      "Pulp"
+    ],
+    "pairingWine": "Non-Alcoholic",
+    "prepTime": "4 mins",
+    "dietary": [
+      "100% Squeezed",
+      "Immunity Booster"
+    ]
+  },
+  {
+    "id": "dish-86",
+    "name": "Sweet Juice (ጣፋጭ ጁስ)",
+    "frenchName": "ጣፋጭ ጁስ / Sweet Juice",
+    "category": "Juice",
+    "price": 400,
+    "priceNote": "Tall Glass",
+    "badge": "Sweet Cocktail",
+    "image": null,
+    "description": "Naturally sweet honeyed mixed fruit blend of banana, mango, and date nectar.",
+    "ingredients": [
+      "Mixed Sweet Fruits",
+      "Pure Honey",
+      "Ice"
+    ],
+    "pairingWine": "Non-Alcoholic",
+    "prepTime": "4 mins",
+    "dietary": [
+      "Naturally Sweet",
+      "Delightful"
+    ]
+  },
+  {
+    "id": "dish-87",
+    "name": "Mixed Juice (ሚክስድ ጁስ)",
+    "frenchName": "ሚክስድ ጁስ / Mixed Juice",
+    "category": "Juice",
+    "price": 400,
+    "priceNote": "Layered 'Spris' Glass",
+    "badge": "Classic 'Spris' Layers",
+    "image": null,
+    "description": "Classic layered Ethiopian 'Spris' tri-color juice with mango, avocado, and papaya served with fresh lime.",
+    "ingredients": [
+      "Layered Mango",
+      "Layered Avocado",
+      "Layered Papaya",
+      "Lime Wedge"
+    ],
+    "pairingWine": "Non-Alcoholic",
+    "prepTime": "5 mins",
+    "dietary": [
+      "Ethiopian Classic Spris",
+      "Tri-Color"
+    ]
+  },
+  {
+    "id": "dish-88",
+    "name": "Carrot Juice (ካሮት ጁስ)",
+    "frenchName": "ካሮት ጁስ / Carot Juice",
+    "category": "Juice",
+    "price": 300,
+    "priceNote": "Cold Pressed Glass",
+    "badge": "Fresh Carrot",
+    "image": null,
+    "description": "Fresh earthy cold-pressed sweet carrot juice with a touch of ginger and orange.",
+    "ingredients": [
+      "Fresh Carrots",
+      "Orange Splash",
+      "Ginger Hint"
+    ],
+    "pairingWine": "Non-Alcoholic",
+    "prepTime": "4 mins",
+    "dietary": [
+      "Beta-Carotene Rich",
+      "Healthy"
+    ]
+  },
+  {
+    "id": "dish-89",
+    "name": "Shenkora Juice (ሸንኮራ ጁስ)",
+    "frenchName": "ሸንኮራ ጁስ / Shenkora Juice",
+    "category": "Juice",
+    "price": 400,
+    "priceNote": "Pure Sugarcane Glass",
+    "badge": "Pure Sugarcane",
+    "image": null,
+    "description": "Freshly pressed pure natural sugarcane juice with a squeeze of lime and crushed ginger.",
+    "ingredients": [
+      "Pure Sugarcane",
+      "Fresh Lime",
+      "Crushed Ginger"
+    ],
+    "pairingWine": "Non-Alcoholic",
+    "prepTime": "4 mins",
+    "dietary": [
+      "Pure Natural Sweetener",
+      "Energizing"
+    ]
+  },
+  {
+    "id": "dish-90",
+    "name": "Ginger Juice (ዝንጅብል ጁስ)",
+    "frenchName": "ዝንጅብል ጁስ / Ginger Juice",
+    "category": "Juice",
+    "price": 300,
+    "priceNote": "Wellness Tonic Glass",
+    "badge": "Ginger Wellness Tonic",
+    "image": null,
+    "description": "Invigorating fresh ginger wellness tonic blended with honey, lime juice, and cold water.",
+    "ingredients": [
+      "Fresh Ginger Root",
+      "Pure Honey",
+      "Lime Juice",
+      "Spring Water"
+    ],
+    "pairingWine": "Non-Alcoholic",
+    "prepTime": "3 mins",
+    "dietary": [
+      "Immunity Shot",
+      "Digestive Aid"
+    ]
+  },
+  {
+    "id": "dish-91",
+    "name": "Telba Juice (ተልባ ጁስ)",
+    "frenchName": "ተልባ ጁስ / Telba Juice",
+    "category": "Juice",
+    "price": 450,
+    "priceNote": "Traditional Roasted Flax Glass",
+    "badge": "Flaxseed Superfood",
+    "image": null,
+    "description": "Traditional roasted flaxseed health drink blended with pure honey and water, known for high Omega-3 and vitality.",
+    "ingredients": [
+      "Roasted Flaxseed (Telba)",
+      "Pure Honey",
+      "Purified Water"
+    ],
+    "pairingWine": "Non-Alcoholic",
+    "prepTime": "5 mins",
+    "dietary": [
+      "Omega-3 Rich",
+      "Ethiopian Superfood"
+    ]
+  },
+  {
+    "id": "dish-92",
+    "name": "Suf Juice (ሱፍ ጁስ)",
+    "frenchName": "ሱፍ ጁስ / Suf Juice",
+    "category": "Juice",
+    "price": 450,
+    "priceNote": "Traditional Safflower Milk",
+    "badge": "Safflower Seed Milk",
+    "image": null,
+    "description": "Traditional roasted safflower seed milk drink, smooth, nutritious, and lightly sweetened with honey.",
+    "ingredients": [
+      "Roasted Safflower Seeds (Suf)",
+      "Water",
+      "Honey"
+    ],
+    "pairingWine": "Non-Alcoholic",
+    "prepTime": "5 mins",
+    "dietary": [
+      "Plant Milk Tradition",
+      "Protein Rich"
     ]
   }
 ];
