@@ -73,8 +73,8 @@ export const MENU_CATEGORIES = [
   'All',
   'Chef Specials',
   'Fish Mains',
-  'Seafood Pastas',
-  'Fine Wine Cellar'
+  'Fine Wine Cellar',
+  'Traditional'
 ];
 
 export const RESTAURANT_DISHES = [
