@@ -1,3 +1,38 @@
+
+export const DEFAULT_SPOTS = [
+  {
+    "id": "Ocean Terrace",
+    "title": "The Ocean Terrace",
+    "tag": "Sunset & Sea Breeze",
+    "description": "Perched directly above the lakeside breeze. Enjoy fresh fish delicacies, crisp drinks, and gentle waterside sunsets under ambient lanterns.",
+    "image": "https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=800&q=80",
+    "capacity": "Up to 6 guests per table"
+  },
+  {
+    "id": "Main Dining Salon",
+    "title": "The Grand Marine Salon",
+    "tag": "Warm Wood & Blue Ambient Glow",
+    "description": "Our authentic centerpiece dining hall featuring hand-crafted wooden tables, soothing ambient lighting, brick architecture, and warm Ethiopian hospitality.",
+    "image": "/spots/grand-marine-salon.jpg",
+    "capacity": "Family tables & group dining"
+  },
+  {
+    "id": "Chef's Counter",
+    "title": "The Chef's Raw Bar Counter",
+    "tag": "Omakase & Shucking",
+    "description": "An intimate, front-row gastronomic theater. Watch master chefs prepare fresh day-boat catches and fish delicacies live.",
+    "image": "https://images.unsplash.com/photo-1579027989536-b7b1f875659b?auto=format&fit=crop&w=800&q=80",
+    "capacity": "10 exclusive bar seats"
+  },
+  {
+    "id": "Private Wine Vault",
+    "title": "The Private Wine Vault",
+    "tag": "Sommelier Sanctuary",
+    "description": "Surrounded by rare vintages, Ethiopian wines, and draft selections. Bespoke dining experiences tailored to your private party.",
+    "image": "https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?auto=format&fit=crop&w=800&q=80",
+    "capacity": "Private bookings up to 16 guests"
+  }
+];
 export const RESTAURANT_BRANCHES = [
   {
     id: 'bahir-dar',

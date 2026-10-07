@@ -18,7 +18,7 @@ import {
   Plus,
   BookOpen
 } from 'lucide-react';
-import { RESTAURANT_DISHES, RESTAURANT_INFO, RESTAURANT_BRANCHES } from '../data/restaurantData';
+import { RESTAURANT_DISHES, RESTAURANT_INFO, RESTAURANT_BRANCHES, DEFAULT_SPOTS } from '../data/restaurantData';
 
 export default function HomePage({
   onOpenMenu,
@@ -28,7 +28,8 @@ export default function HomePage({
   onOpenCart,
   cartCount,
   currentPage = 'home',
-  onNavigate
+  onNavigate,
+  spots = DEFAULT_SPOTS
 }) {
   const handleBranchViewOnMap = (branchId) => {
     window.dispatchEvent(new CustomEvent('select-branch', { detail: { branchId } }));
@@ -78,41 +79,8 @@ export default function HomePage({
     (d) => d.badge === "Chef's Masterpiece" || d.badge === 'Signature Platter' || d.badge === 'Best Seller' || d.id === 'dish-4' || d.id === 'dish-6' || d.id === 'dish-7'
   ).slice(0, 6);
 
-  // Dining Spaces
-  const atmospheres = [
-    {
-      id: 'Ocean Terrace',
-      title: 'The Ocean Terrace',
-      tag: 'Sunset & Sea Breeze',
-      description: 'Perched directly above the marina tides. Enjoy chilled crudo towers, crisp Chablis, and gentle ocean breezes under candlelit lanterns.',
-      image: 'https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=800&q=80',
-      capacity: 'Up to 6 guests per table'
-    },
-    {
-      id: 'Main Dining Salon',
-      title: 'The Grand Marine Salon',
-      tag: 'Dark Marble & Crystal',
-      description: 'Our dramatic centerpiece hall featuring book-matched deep blue marble, bronze fixtures, plush leather seating, and grand table-side fish presentations.',
-      image: 'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=800&q=80',
-      capacity: 'Romantic tables & banquet seating'
-    },
-    {
-      id: "Chef's Counter",
-      title: "The Chef's Raw Bar Counter",
-      tag: 'Omakase & Shucking',
-      description: 'An intimate, front-row gastronomic theater. Watch master sushi chefs and oyster shuckers prepare day-boat crudo and tartare live.',
-      image: 'https://images.unsplash.com/photo-1579027989536-b7b1f875659b?auto=format&fit=crop&w=800&q=80',
-      capacity: '10 exclusive bar seats'
-    },
-    {
-      id: 'Private Wine Vault',
-      title: 'The Private Wine Vault',
-      tag: 'Sommelier Sanctuary',
-      description: 'Surrounded by 1,200 bottles of Super Tuscans, Bordeaux, and vintage champagnes. Bespoke 7-course degustation menus tailored to your party.',
-      image: 'https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?auto=format&fit=crop&w=800&q=80',
-      capacity: 'Private bookings up to 16 guests'
-    }
-  ];
+  // Dining Spaces (Dynamically fetched from Database / Firestore)
+  const atmospheres = Array.isArray(spots) && spots.length > 0 ? spots : DEFAULT_SPOTS;
 
   return (
     <div className="w-full bg-[#050e17] text-slate-100">

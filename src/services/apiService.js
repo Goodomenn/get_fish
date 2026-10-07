@@ -1,6 +1,7 @@
 import {
   RESTAURANT_DISHES,
   INITIAL_RESERVATIONS,
+  DEFAULT_SPOTS,
   MENU_CATEGORIES,
   CANONICAL_CATEGORIES,
   normalizeCategory,
@@ -24,6 +25,7 @@ const LOCAL_STORAGE_ORDERS = 'seaclub_orders_v2';
 const LOCAL_STORAGE_FEEDBACK = 'seaclub_feedback_v2';
 const LOCAL_STORAGE_CATEGORIES = 'seaclub_categories_v2';
 const LOCAL_STORAGE_LOCATIONS = 'seaclub_locations_v2';
+const LOCAL_STORAGE_SPOTS = 'seaclub_spots_v2';
 
 export const DEFAULT_LOCATIONS = [
   {
@@ -92,7 +94,8 @@ class ApiService {
           e.key === LOCAL_STORAGE_ORDERS ||
           e.key === LOCAL_STORAGE_FEEDBACK ||
           e.key === LOCAL_STORAGE_CATEGORIES ||
-          e.key === LOCAL_STORAGE_LOCATIONS
+          e.key === LOCAL_STORAGE_LOCATIONS ||
+          e.key === LOCAL_STORAGE_SPOTS
         ) {
           this.notifySubscribers();
         }
@@ -130,7 +133,21 @@ class ApiService {
         console.warn('[Firestore] Reservations listener notice:', err.message);
       });
 
-      this.firestoreUnsubscribes.push(unsubDishes, unsubRes);
+      // 3. Spots Dining Salons Listener
+      const unsubSpots = onSnapshot(collection(db, 'spots'), (snapshot) => {
+        if (!snapshot.empty) {
+          const list = snapshot.docs.map((docSnap) => ({
+            id: docSnap.id,
+            ...docSnap.data()
+          }));
+          localStorage.setItem(LOCAL_STORAGE_SPOTS, JSON.stringify(list));
+          this.notifySubscribers();
+        }
+      }, (err) => {
+        console.warn('[Firestore] Spots listener notice:', err.message);
+      });
+
+      this.firestoreUnsubscribes.push(unsubDishes, unsubRes, unsubSpots);
     } catch (err) {
       console.warn('[Firestore] Notice attaching cloud listeners:', err.message);
     }
@@ -193,6 +210,10 @@ class ApiService {
     if (!localStorage.getItem(LOCAL_STORAGE_LOCATIONS)) {
       localStorage.setItem(LOCAL_STORAGE_LOCATIONS, JSON.stringify(DEFAULT_LOCATIONS));
     }
+
+    if (!localStorage.getItem(LOCAL_STORAGE_SPOTS)) {
+      localStorage.setItem(LOCAL_STORAGE_SPOTS, JSON.stringify(DEFAULT_SPOTS));
+    }
   }
 
   initSSE() {
@@ -233,6 +254,10 @@ class ApiService {
       this.eventSource.addEventListener('DISH_UPDATED', handleUpdate);
       this.eventSource.addEventListener('DISH_DELETED', handleUpdate);
       this.eventSource.addEventListener('LOCATIONS_UPDATED', handleUpdate);
+      this.eventSource.addEventListener('SPOT_CREATED', handleUpdate);
+      this.eventSource.addEventListener('SPOT_UPDATED', handleUpdate);
+      this.eventSource.addEventListener('SPOT_DELETED', handleUpdate);
+      this.eventSource.addEventListener('SPOTS_UPDATED', handleUpdate);
       this.eventSource.addEventListener('RESERVATION_CREATED', handleUpdate);
       this.eventSource.addEventListener('RESERVATION_UPDATED', handleUpdate);
       this.eventSource.addEventListener('RESERVATION_DELETED', handleUpdate);
@@ -649,6 +674,52 @@ class ApiService {
 
     const raw = localStorage.getItem(LOCAL_STORAGE_FEEDBACK);
     return raw ? JSON.parse(raw) : [];
+  }
+
+  // =========================================================================
+  // 5. DINING SALONS & SPOTS
+  // =========================================================================
+  async getSpots() {
+    // A. Firestore Cloud Database
+    if (this.isFirestoreAvailable) {
+      try {
+        const snap = await withTimeout(getDocs(collection(db, 'spots')), 2200, 'Spots fetch');
+        if (!snap.empty) {
+          const list = snap.docs.map((d) => ({ id: d.id, ...d.data() }));
+          localStorage.setItem(LOCAL_STORAGE_SPOTS, JSON.stringify(list));
+          return list;
+        }
+      } catch (err) {
+        console.warn('[Firestore] Spots fetch notice:', err.message);
+      }
+    }
+
+    // B. Local Backend Server
+    if (this.isBackendAvailable) {
+      try {
+        const res = await fetch(`${BACKEND_URL}/spots`);
+        if (res.ok) {
+          const data = await res.json();
+          if (Array.isArray(data) && data.length > 0) {
+            localStorage.setItem(LOCAL_STORAGE_SPOTS, JSON.stringify(data));
+            return data;
+          }
+        }
+      } catch (err) {
+        this.isBackendAvailable = false;
+      }
+    }
+
+    // C. Fallback: Local Storage
+    const raw = localStorage.getItem(LOCAL_STORAGE_SPOTS);
+    if (raw) {
+      try {
+        const parsed = JSON.parse(raw);
+        if (Array.isArray(parsed) && parsed.length > 0) return parsed;
+      } catch (e) {}
+    }
+
+    return [...DEFAULT_SPOTS];
   }
 }
 

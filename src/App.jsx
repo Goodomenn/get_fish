@@ -12,6 +12,7 @@ import BookTableModal from './components/BookTableModal';
 import DishDetailModal from './components/DishDetailModal';
 import CartDrawer from './components/CartDrawer';
 import { apiService } from './services/apiService';
+import { DEFAULT_SPOTS } from './data/restaurantData';
 import { CheckCircle2 } from 'lucide-react';
 
 export default function App() {
@@ -24,6 +25,7 @@ export default function App() {
 
   const [dishes, setDishes] = useState([]);
   const [categories, setCategories] = useState([]);
+  const [spots, setSpots] = useState(DEFAULT_SPOTS);
   const [loading, setLoading] = useState(true);
   const [isScrolled, setIsScrolled] = useState(false);
 
@@ -101,12 +103,16 @@ export default function App() {
 
   const loadMenuData = async () => {
     try {
-      const [list, catList] = await Promise.all([
+      const [list, catList, spotList] = await Promise.all([
         apiService.getDishes(),
-        apiService.getCategories()
+        apiService.getCategories(),
+        apiService.getSpots()
       ]);
       setDishes(list);
       setCategories(catList);
+      if (spotList && spotList.length > 0) {
+        setSpots(spotList);
+      }
     } catch (err) {
       console.error('Failed to load menu data:', err);
     } finally {
@@ -209,6 +215,7 @@ export default function App() {
             cartCount={totalCartCount}
             currentPage={currentPage}
             onNavigate={handleNavigate}
+            spots={spots}
           />
         )}
 
