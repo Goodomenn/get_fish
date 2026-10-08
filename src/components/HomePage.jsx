@@ -286,29 +286,46 @@ export default function HomePage({
             {featuredDishes.map((dish) => (
               <div
                 key={dish.id}
-                className="bg-[#050e17] border border-slate-800 hover:border-gold-500/50 rounded-2xl overflow-hidden transition-all duration-300 flex flex-col group hover:-translate-y-1 shadow-xl"
+                className="bg-[#050e17] border border-slate-800 hover:border-gold-500/50 rounded-2xl overflow-hidden transition-all duration-500 flex flex-col group hover:-translate-y-1 shadow-2xl relative"
               >
-                {/* Dish Photo */}
+                {/* Circular Dish Plate Header Container */}
                 <div
                   onClick={() => onOpenDish(dish)}
-                  className="relative h-56 overflow-hidden cursor-pointer bg-slate-900"
+                  className="relative p-6 flex items-center justify-center cursor-pointer bg-gradient-to-b from-[#091b2c]/60 to-transparent overflow-hidden"
                 >
-                  <img
-                    src={dish.image}
-                    alt={dish.name}
-                    className="w-full h-full object-cover group-hover:scale-105 transition duration-500"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#050e17] via-transparent to-transparent opacity-80" />
+                  {/* Subtle plate glow */}
+                  <div className="w-48 h-48 sm:w-52 sm:h-52 rounded-full relative p-2 bg-gradient-to-br from-[#0e2742] via-[#081829] to-[#030911] border-4 border-[#071626] ring-1 ring-gold-500/35 shadow-[0_18px_40px_rgba(0,0,0,0.9),0_0_25px_rgba(212,175,55,0.12)] flex items-center justify-center transition-transform duration-700 group-hover:scale-105">
+                    
+                    {/* Inner plate image */}
+                    <div className="w-full h-full rounded-full overflow-hidden relative shadow-inner bg-slate-900">
+                      {dish.image ? (
+                        <img
+                          src={dish.image}
+                          alt={dish.name}
+                          className="w-full h-full object-cover rounded-full group-hover:scale-110 transition-transform duration-700 ease-out"
+                        />
+                      ) : (
+                        <div className="w-full h-full rounded-full flex flex-col items-center justify-center bg-gradient-to-br from-[#0c233c] to-[#040e17] text-center p-3">
+                          <span className="font-serif italic text-gold-300 text-xs">{dish.name}</span>
+                        </div>
+                      )}
+                      {/* Glaze highlight */}
+                      <div className="absolute inset-0 bg-gradient-to-tr from-black/40 via-transparent to-white/10 pointer-events-none rounded-full" />
+                    </div>
+
+                    {/* Attached Gold Price Badge (Reference Style) */}
+                    <div className="absolute -right-3 top-1/2 -translate-y-1/2 z-20">
+                      <div className="bg-gradient-to-r from-amber-400 via-amber-300 to-gold-400 text-slate-950 font-serif font-bold text-xs px-3 py-1 rounded shadow-xl tracking-wider border border-amber-200/90 whitespace-nowrap">
+                        {typeof dish.price === 'number' ? dish.price.toLocaleString() : dish.price} ETB
+                      </div>
+                    </div>
+                  </div>
 
                   {dish.badge && (
-                    <span className="absolute top-3 left-3 bg-[#091b2c]/90 border border-gold-500/40 text-gold-300 px-3 py-1 rounded-full text-[10px] font-serif uppercase tracking-wider backdrop-blur-sm">
+                    <span className="absolute top-4 left-4 bg-[#091b2c]/90 border border-gold-500/40 text-gold-300 px-3 py-1 rounded-full text-[10px] font-serif uppercase tracking-wider backdrop-blur-sm shadow">
                       {dish.badge}
                     </span>
                   )}
-
-                  <div className="absolute bottom-3 right-3 bg-black/80 border border-gold-400/40 text-gold-300 px-3 py-1 rounded-lg text-sm font-serif font-bold">
-                    ${dish.price.toFixed(2)}
-                  </div>
                 </div>
 
                 {/* Content */}
@@ -319,11 +336,11 @@ export default function HomePage({
                     </span>
                     <h3
                       onClick={() => onOpenDish(dish)}
-                      className="font-serif text-lg text-white group-hover:text-gold-300 transition cursor-pointer line-clamp-1"
+                      className="font-serif text-lg sm:text-xl text-white group-hover:text-gold-300 transition cursor-pointer line-clamp-1"
                     >
                       {dish.name}
                     </h3>
-                    <p className="text-xs text-slate-400 font-light mt-2 line-clamp-2 leading-relaxed">
+                    <p className="text-xs text-slate-300/80 font-light mt-2 line-clamp-2 leading-relaxed">
                       {dish.description}
                     </p>
                   </div>
@@ -338,14 +355,14 @@ export default function HomePage({
                   <div className="flex items-center space-x-3 pt-2">
                     <button
                       onClick={() => onAddToCart(dish)}
-                      className="flex-1 py-2.5 bg-gold-500 hover:bg-gold-400 text-slate-950 font-serif text-xs font-bold tracking-wider uppercase rounded-lg transition flex items-center justify-center space-x-1 shadow-md active:scale-95"
+                      className="flex-1 py-2.5 bg-gold-500 hover:bg-gold-400 text-slate-950 font-serif text-xs font-bold tracking-wider uppercase rounded-lg transition flex items-center justify-center space-x-1 shadow-md active:scale-95 cursor-pointer"
                     >
                       <Plus className="w-3.5 h-3.5" />
                       <span>Add to Ticket</span>
                     </button>
                     <button
                       onClick={() => onOpenDish(dish)}
-                      className="px-3.5 py-2.5 border border-slate-700 hover:border-gold-400 text-slate-300 hover:text-white rounded-lg text-xs font-serif transition"
+                      className="px-3.5 py-2.5 border border-slate-700 hover:border-gold-400 text-slate-300 hover:text-white rounded-lg text-xs font-serif transition cursor-pointer"
                     >
                       Details
                     </button>
