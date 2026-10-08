@@ -91,8 +91,8 @@ export default function Hero({
   // =========================================================================
   return (
     <section className="relative w-full bg-[#050e17] overflow-hidden select-none">
-      {/* Container maintaining the exact 1024:686 aspect ratio of the clean background image */}
-      <div className="relative w-full max-w-[1536px] mx-auto aspect-[1024/686] bg-[#071421] shadow-2xl">
+      {/* Container maintaining the exact 1024:682 aspect ratio of the clean background image */}
+      <div className="relative w-full max-w-[1536px] mx-auto aspect-[1024/682] bg-[#071421] shadow-2xl">
         {/* High-Resolution User-Provided Pristine Clean Background Canvas */}
         <img
           src="/hero-bg.jpg"
@@ -131,69 +131,76 @@ export default function Hero({
         </div>
 
         {/* ========================================================================= */}
-        {/* DRESSED OYSTERS TAG: Real HTML Typography                                 */}
+        {/* GRILLED FISH FILLET TAG: Real HTML Typography                             */}
         {/* ========================================================================= */}
         <div
-          onClick={() => (onOpenDish ? onOpenDish('dish-1') : handleNav('menu'))}
-          className="absolute left-[47%] top-[66%] z-20 cursor-pointer group text-left select-text"
-          title="Explore Dressed Oysters (25 $)"
+          onClick={() => (onOpenDish ? onOpenDish('dish-fish-7') : handleNav('menu'))}
+          className="absolute left-[45%] top-[72%] z-20 cursor-pointer group text-left select-text"
+          title="Explore Grilled Fish Fillet (28 $)"
         >
           <div className="font-serif text-white text-[11px] sm:text-base lg:text-lg font-normal tracking-wide group-hover:text-gold-300 transition drop-shadow">
-            Dressed Oysters
+            Grilled Fish Fillet
           </div>
           <div className="w-8 sm:w-14 h-[1.5px] sm:h-0.5 bg-gold-400 my-0.5 sm:my-1 group-hover:w-full transition-all duration-300" />
           <div className="font-serif text-slate-200 text-[10px] sm:text-base lg:text-lg font-light group-hover:text-gold-200 transition drop-shadow">
-            25 $
+            28 $
           </div>
         </div>
 
-        {/* Oyster Platter Interactive Click Area */}
+        {/* Grilled Fish Platter Interactive Click Area */}
         <div
-          onClick={() => (onOpenDish ? onOpenDish('dish-1') : handleNav('menu'))}
-          className="absolute left-[50%] top-[20%] w-[38%] h-[53%] rounded-full hover:ring-2 hover:ring-gold-400/30 transition cursor-pointer z-10"
-          title="Dressed Fine de Claire Oysters (Click to View Dish)"
+          onClick={() => (onOpenDish ? onOpenDish('dish-fish-7') : handleNav('menu'))}
+          className="absolute left-[44%] top-[14%] w-[38%] h-[60%] rounded-full hover:ring-2 hover:ring-gold-400/30 transition cursor-pointer z-10"
+          title="Grilled Fresh Fish Fillet (Click to View Dish)"
         />
 
         {/* ========================================================================= */}
-        {/* TIGNANELLO TAG: Real HTML Typography                                      */}
+        {/* OAKED RED WINE TAG: Real HTML Typography                                  */}
         {/* ========================================================================= */}
         <div
           onClick={() => handleNav('wine')}
-          className="absolute left-[77%] top-[78%] z-20 cursor-pointer group text-left select-text"
-          title="Explore Sommelier Wine Cellar (300 $)"
+          className="absolute left-[75%] top-[80%] z-20 cursor-pointer group text-left select-text"
+          title="Explore Sommelier Wine Cellar"
         >
           <div className="font-serif text-white text-[11px] sm:text-base lg:text-lg font-normal tracking-wide group-hover:text-gold-300 transition drop-shadow">
-            Tignanello
+            Oaked Red Wine
           </div>
           <div className="w-8 sm:w-14 h-[1.5px] sm:h-0.5 bg-gold-400 my-0.5 sm:my-1 group-hover:w-full transition-all duration-300" />
           <div className="font-serif text-slate-200 text-[10px] sm:text-base lg:text-lg font-light group-hover:text-gold-200 transition drop-shadow">
-            300 $
+            Wine Cellar
           </div>
         </div>
 
-        {/* Tignanello Bottle Interactive Click Area */}
+        {/* Wine Bottle Interactive Click Area */}
         <div
           onClick={() => handleNav('wine')}
-          className="absolute right-[1.5%] top-[34%] w-[18%] h-[58%] rounded-2xl hover:ring-2 hover:ring-gold-400/30 transition cursor-pointer z-10"
-          title="Tignanello 2019 (Click to View Wine Cellar)"
+          className="absolute right-[2%] top-[24%] w-[20%] h-[68%] rounded-2xl hover:ring-2 hover:ring-gold-400/30 transition cursor-pointer z-10"
+          title="Oaked Red Wine (Click to View Wine Cellar)"
         />
 
         {/* ========================================================================= */}
-        {/* SQUID INK PASTA TAG (Bottom Left)                                         */}
+        {/* FRESH FISH SALAD TAG (Bottom Left)                                        */}
         {/* ========================================================================= */}
         <div
-          onClick={() => (onOpenDish ? onOpenDish('dish-7') : handleNav('menu'))}
+          onClick={() => (onOpenDish ? onOpenDish('dish-48') : handleNav('menu'))}
           className="absolute left-[2%] bottom-[3%] z-20 cursor-pointer group text-left select-text"
-          title="View Squid Ink Tagliolini (36 $)"
+          title="View Fresh Fish Salad (18 $)"
         >
           <div className="font-serif text-white text-[10px] sm:text-sm font-normal tracking-wide group-hover:text-gold-300 transition drop-shadow">
-            Squid Ink Tagliolini
+            Fresh Fish Salad
           </div>
           <div className="w-6 sm:w-10 h-[1.5px] bg-gold-400 my-0.5 group-hover:w-full transition-all duration-300" />
           <div className="font-serif text-slate-200 text-[9px] sm:text-xs font-light group-hover:text-gold-200 transition">
-            36 $
+            18 $
           </div>
         </div>
+
+        {/* Salad Bowl Interactive Click Area */}
+        <div
+          onClick={() => (onOpenDish ? onOpenDish('dish-48') : handleNav('menu'))}
+          className="absolute left-[0%] bottom-[0%] w-[22%] h-[46%] rounded-full hover:ring-2 hover:ring-gold-400/30 transition cursor-pointer z-10"
+          title="Fresh Fish Salad (Click to View Dish)"
+        />
       </div>
     </section>
   );
