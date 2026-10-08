@@ -329,6 +329,7 @@ export default function App() {
       <Footer
         onOpenBookTable={(branchId) => handleOpenBookTableWithArea(branchId || 'bahir-dar')}
         onNavigate={handleNavigate}
+        currentPage={currentPage}
       />
 
       {/* Modals & Drawers */}

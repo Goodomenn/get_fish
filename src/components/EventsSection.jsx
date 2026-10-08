@@ -1,6 +1,6 @@
 import React from 'react';
 import { UPCOMING_EVENTS } from '../data/restaurantData';
-import { Calendar, Clock, Sparkles, ArrowRight } from 'lucide-react';
+import { Calendar, Clock, ArrowRight } from 'lucide-react';
 
 export default function EventsSection({ onOpenBookTable }) {
   return (

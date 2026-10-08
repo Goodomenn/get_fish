@@ -12,9 +12,12 @@ import {
 } from 'lucide-react';
 import { RESTAURANT_INFO, RESTAURANT_BRANCHES } from '../data/restaurantData';
 
-export default function Footer({ onOpenBookTable, onNavigate }) {
+export default function Footer({ onOpenBookTable, onNavigate, currentPage }) {
   const [selectedBranchId, setSelectedBranchId] = useState('pier-24');
   const activeBranch = RESTAURANT_BRANCHES.find(b => b.id === selectedBranchId) || RESTAURANT_BRANCHES[0];
+
+  // Hide the map section on the menu page for a cleaner experience
+  const showMap = currentPage !== 'menu';
 
   useEffect(() => {
     const handleSelectBranch = (e) => {
@@ -39,7 +42,8 @@ export default function Footer({ onOpenBookTable, onNavigate }) {
       <div className="absolute top-0 left-1/4 w-96 h-96 bg-blue-950/20 rounded-full blur-3xl pointer-events-none" />
       <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-gold-600/5 rounded-full blur-3xl pointer-events-none" />
 
-      {/* 1. Interactive Harbor Map & Docking Section with 3 Branches */}
+      {/* 1. Interactive Harbor Map & Docking Section — hidden on menu page */}
+      {showMap && (
       <div id="harbor-map" className="border-b border-slate-800/80 bg-[#050e17] relative">
         {/* Top Header Strip with 3 Branch Tabs */}
         <div className="max-w-7xl mx-auto px-6 sm:px-10 py-5 border-b border-slate-800/60">
@@ -164,6 +168,7 @@ export default function Footer({ onOpenBookTable, onNavigate }) {
           </div>
         </div>
       </div>
+      )}
 
       {/* 2. Main Footer Multi-Column Grid */}
       <div className="max-w-7xl mx-auto px-6 sm:px-10 py-16 sm:py-20">

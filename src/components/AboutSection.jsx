@@ -1,5 +1,5 @@
 import React from 'react';
-import { Fish, Sparkles, MapPin, Calendar, BookOpen, ArrowRight, ShieldCheck, Award } from 'lucide-react';
+import { Fish, MapPin, Calendar, BookOpen, ArrowRight, ShieldCheck, Award } from 'lucide-react';
 
 export default function AboutSection({ onOpenBookTable, onNavigate }) {
   const handleNav = (target) => {

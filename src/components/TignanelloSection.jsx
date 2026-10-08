@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Wine, Award, Plus, Check, Info, Sparkles, GlassWater } from 'lucide-react';
+import { Wine, Award, Plus, Check, Info, GlassWater } from 'lucide-react';
 
 export default function TignanelloSection({ onAddToCart, onOpenDishDetail }) {
   const [format, setFormat] = useState('bottle'); // 'glass' ($60) or 'bottle' ($300)
@@ -126,7 +126,7 @@ export default function TignanelloSection({ onAddToCart, onOpenDishDetail }) {
 
             {/* Fish Harmony Note */}
             <div className="p-4 rounded-xl bg-[#050e17] border border-gold-500/20 flex items-start space-x-3 text-xs">
-              <Sparkles className="w-4 h-4 text-gold-400 shrink-0 mt-0.5" />
+              <Award className="w-4 h-4 text-gold-400 shrink-0 mt-0.5" />
               <div>
                 <span className="font-serif text-gold-300 uppercase tracking-wider block font-semibold">
                   Culinary Harmony at Gech Fish

@@ -6,7 +6,7 @@ import {
   areCategoriesEqual,
   deduplicateCategories
 } from '../data/restaurantData';
-import { Wine, Sparkles, Plus, Eye, Search, ArrowRight, LayoutGrid, Route, Compass } from 'lucide-react';
+import { Wine, Plus, Eye, Search, ArrowRight, LayoutGrid, Route, Compass } from 'lucide-react';
 
 /* =========================================================================
    AUTHENTIC HANDCRAFTED CULINARY GARNISHES & ACCENTS
@@ -293,7 +293,7 @@ export default function MenuSection({
         {filteredDishes.length === 0 && (
           <div className="py-24 text-center max-w-md mx-auto space-y-4">
             <div className="w-16 h-16 rounded-full border border-gold-500/30 bg-[#071727] flex items-center justify-center mx-auto text-gold-400">
-              <Sparkles className="w-8 h-8" />
+              <Search className="w-8 h-8" />
             </div>
             <h3 className="font-serif text-2xl text-white">No Dishes Found</h3>
             <p className="text-xs text-slate-400 leading-relaxed">
@@ -357,14 +357,11 @@ export default function MenuSection({
                               className="w-full h-full object-cover rounded-full group-hover/plate:scale-110 transition-transform duration-700 ease-out"
                             />
                           ) : (
-                            <div className="w-full h-full rounded-full flex flex-col items-center justify-center bg-gradient-to-br from-[#0c233c] via-[#071727] to-[#040e17] p-5 text-center relative overflow-hidden">
-                              <div className="w-14 h-14 rounded-full border border-gold-400/40 flex items-center justify-center bg-gold-500/10 mb-2">
-                                <Sparkles className="w-6 h-6 text-gold-300" />
-                              </div>
-                              <span className="font-serif italic text-gold-200 text-sm font-semibold tracking-wide max-w-[130px] truncate">
+                            <div className="w-full h-full rounded-full flex flex-col items-center justify-center bg-gradient-to-br from-[#0c233c] via-[#071727] to-[#040e17] p-6 text-center relative overflow-hidden">
+                              <span className="font-serif italic text-gold-200 text-base sm:text-lg font-semibold tracking-wide max-w-[150px] leading-snug">
                                 {dish.name}
                               </span>
-                              <span className="text-[10px] uppercase font-mono tracking-widest text-slate-400 mt-0.5">
+                              <span className="text-[10px] uppercase font-mono tracking-widest text-slate-400 mt-2 px-3 py-0.5 rounded-full bg-slate-900/70 border border-slate-700/50">
                                 {dish.category}
                               </span>
                             </div>

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { X, Trash2, Plus, Minus, ShoppingBag, ArrowRight, Wine, Sparkles, MapPin, Check } from 'lucide-react';
+import { X, Trash2, Plus, Minus, ShoppingBag, ArrowRight, Wine, MapPin, Check } from 'lucide-react';
 
 const RESTAURANT_TABLES = [
   // Lake Tana Terrace / Waterfront

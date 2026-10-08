@@ -1,5 +1,5 @@
 import React from 'react';
-import { X, Wine, Sparkles, Plus, Clock, ChefHat, Check } from 'lucide-react';
+import { X, Wine, Plus, Clock, ChefHat, Check } from 'lucide-react';
 
 export default function DishDetailModal({ dish, onClose, onAddToCart }) {
   if (!dish) return null;

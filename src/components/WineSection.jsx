@@ -1,5 +1,5 @@
 import React from 'react';
-import { Award, Plus, Sparkles, Check } from 'lucide-react';
+import { Award, Plus, Check } from 'lucide-react';
 
 export default function WineSection({ onAddToCart, onOpenDishDetail }) {
   const featuredWines = [

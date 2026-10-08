@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Sparkles, Wine, Plus, Check, Info, Award, ShieldCheck } from 'lucide-react';
+import { Wine, Plus, Check, Info, Award, ShieldCheck } from 'lucide-react';
 
 export default function DressedOystersSection({ onAddToCart, onOpenDishDetail }) {
   const [platterType, setPlatterType] = useState('half'); // 'half' (6 pcs, $25) or 'imperial' (12 pcs + caviar, $65)

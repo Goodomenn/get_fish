@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { X, Calendar, Clock, Users, Sparkles, CheckCircle2, MapPin, Wine } from 'lucide-react';
+import { X, Calendar, Clock, Users, CheckCircle2, MapPin, Wine } from 'lucide-react';
 import { apiService, DEFAULT_LOCATIONS } from '../services/apiService';
 import { RESTAURANT_BRANCHES } from '../data/restaurantData';
 
