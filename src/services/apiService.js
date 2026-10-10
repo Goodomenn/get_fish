@@ -149,7 +149,19 @@ class ApiService {
         console.warn('[Firestore] Spots listener notice:', err.message);
       });
 
-      this.firestoreUnsubscribes.push(unsubDishes, unsubRes, unsubSpots);
+      // 4. Events Real-time Listener
+      const unsubEvents = onSnapshot(collection(db, 'events'), (snapshot) => {
+        const list = snapshot.docs.map((docSnap) => ({
+          id: docSnap.id,
+          ...docSnap.data()
+        }));
+        localStorage.setItem(LOCAL_STORAGE_EVENTS, JSON.stringify(list));
+        this.notifySubscribers();
+      }, (err) => {
+        console.warn('[Firestore] Events listener notice:', err.message);
+      });
+
+      this.firestoreUnsubscribes.push(unsubDishes, unsubRes, unsubSpots, unsubEvents);
     } catch (err) {
       console.warn('[Firestore] Notice attaching cloud listeners:', err.message);
     }
@@ -743,23 +755,36 @@ class ApiService {
   // 6. RESTAURANT EVENTS
   // =========================================================================
   async getEvents() {
-    // A. Backend Server
-    if (this.isBackendAvailable) {
+    // A. Firestore Cloud Database
+    if (this.isFirestoreAvailable) {
       try {
-        const res = await fetch(`${BACKEND_URL}/restaurant-events`);
-        if (res.ok) {
-          const data = await res.json();
-          if (Array.isArray(data)) {
+        const snap = await withTimeout(getDocs(collection(db, 'events')), 2500, 'Events fetch');
+        if (!snap.empty) {
+          const list = snap.docs.map((d) => ({ id: d.id, ...d.data() }));
+          localStorage.setItem(LOCAL_STORAGE_EVENTS, JSON.stringify(list));
+          return list;
+        }
+      } catch (err) {
+        console.warn('[Firestore] Events fetch notice:', err.message);
+      }
+    }
+
+    // B. Local Backend Server
+    try {
+      const res = await fetch(`${BACKEND_URL}/restaurant-events`);
+      if (res.ok) {
+        const data = await res.json();
+        if (Array.isArray(data)) {
+          this.isBackendAvailable = true;
+          if (data.length > 0) {
             localStorage.setItem(LOCAL_STORAGE_EVENTS, JSON.stringify(data));
             return data;
           }
         }
-      } catch (err) {
-        this.isBackendAvailable = false;
       }
-    }
+    } catch (err) {}
 
-    // B. Local Storage Cache
+    // C. Fallback: Local Storage Cache
     const raw = localStorage.getItem(LOCAL_STORAGE_EVENTS);
     if (raw) {
       try {
