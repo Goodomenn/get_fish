@@ -84,7 +84,31 @@ export default function BookTableModal({
 
     setSubmitting(true);
     try {
-      const reservation = await apiService.bookTable(form);
+      const today = new Date();
+      let targetBookingDate = new Date(today.getFullYear(), today.getMonth(), today.getDate());
+      const dateStr = String(form.date || '').trim().toLowerCase();
+      if (dateStr === 'tomorrow') {
+        targetBookingDate.setDate(targetBookingDate.getDate() + 1);
+      } else if (dateStr.includes('friday') || dateStr.includes('saturday') || dateStr.includes('sunday')) {
+        const daysOfWeek = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'];
+        const matchedIdx = daysOfWeek.findIndex(day => dateStr.includes(day));
+        if (matchedIdx !== -1) {
+          let diff = matchedIdx - today.getDay();
+          if (diff < 0) diff += 7;
+          targetBookingDate.setDate(targetBookingDate.getDate() + diff);
+        }
+      }
+      const y = targetBookingDate.getFullYear();
+      const m = String(targetBookingDate.getMonth() + 1).padStart(2, '0');
+      const d = String(targetBookingDate.getDate()).padStart(2, '0');
+      const bookingDate = `${y}-${m}-${d}`;
+
+      const payload = {
+        ...form,
+        bookingDate
+      };
+
+      const reservation = await apiService.bookTable(payload);
       setConfirmedReservation(reservation);
       if (onBookingCompleted) {
         onBookingCompleted(reservation);
