@@ -155,30 +155,6 @@ export default function Hero({
         />
 
         {/* ========================================================================= */}
-        {/* OAKED RED WINE TAG: Real HTML Typography                                  */}
-        {/* ========================================================================= */}
-        <div
-          onClick={() => handleNav('wine')}
-          className="absolute left-[75%] top-[80%] z-20 cursor-pointer group text-left select-text"
-          title="Explore Sommelier Wine Cellar"
-        >
-          <div className="font-serif text-white text-[11px] sm:text-base lg:text-lg font-normal tracking-wide group-hover:text-gold-300 transition drop-shadow">
-            Oaked Red Wine
-          </div>
-          <div className="w-8 sm:w-14 h-[1.5px] sm:h-0.5 bg-gold-400 my-0.5 sm:my-1 group-hover:w-full transition-all duration-300" />
-          <div className="font-serif text-slate-200 text-[10px] sm:text-base lg:text-lg font-light group-hover:text-gold-200 transition drop-shadow">
-            Wine Cellar
-          </div>
-        </div>
-
-        {/* Wine Bottle Interactive Click Area */}
-        <div
-          onClick={() => handleNav('wine')}
-          className="absolute right-[2%] top-[24%] w-[20%] h-[68%] rounded-2xl hover:ring-2 hover:ring-gold-400/30 transition cursor-pointer z-10"
-          title="Oaked Red Wine (Click to View Wine Cellar)"
-        />
-
-        {/* ========================================================================= */}
         {/* FRESH FISH SALAD TAG (Bottom Left)                                        */}
         {/* ========================================================================= */}
         <div

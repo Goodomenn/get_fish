@@ -16,16 +16,17 @@ import { DEFAULT_SPOTS } from './data/restaurantData';
 import { CheckCircle2 } from 'lucide-react';
 
 export default function App() {
-  // Page Routing State ('home' | 'menu' | 'wine' | 'about' | 'events' | 'contacts')
+  // Page Routing State ('home' | 'menu' | 'about' | 'events' | 'contacts')
   const [currentPage, setCurrentPage] = useState(() => {
     const hash = window.location.hash.replace('#', '').toLowerCase();
-    const validPages = ['home', 'menu', 'wine', 'about', 'events', 'contacts'];
+    const validPages = ['home', 'menu', 'about', 'contacts'];
     return validPages.includes(hash) ? hash : 'home';
   });
 
   const [dishes, setDishes] = useState([]);
   const [categories, setCategories] = useState([]);
   const [spots, setSpots] = useState(DEFAULT_SPOTS);
+  const [events, setEvents] = useState([]);
   const [loading, setLoading] = useState(true);
   const [isScrolled, setIsScrolled] = useState(false);
 
@@ -70,20 +71,39 @@ export default function App() {
   useEffect(() => {
     const handleHashChange = () => {
       const hash = window.location.hash.replace('#', '').toLowerCase();
-      const validPages = ['home', 'menu', 'wine', 'about', 'events', 'contacts'];
+      if (hash === 'wine') {
+        setCurrentPage('home');
+        return;
+      }
+      if (hash === 'events' && events.length === 0) {
+        setCurrentPage('home');
+        return;
+      }
+      const validPages = ['home', 'menu', 'about', 'events', 'contacts'];
       if (validPages.includes(hash)) {
         setCurrentPage(hash);
       }
     };
     window.addEventListener('hashchange', handleHashChange);
     return () => window.removeEventListener('hashchange', handleHashChange);
-  }, []);
+  }, [events]);
 
   const handleNavigate = (page) => {
-    setCurrentPage(page);
-    window.location.hash = `#${page}`;
+    let target = page;
+    if (target === 'wine' || (target === 'events' && events.length === 0)) {
+      target = 'home';
+    }
+    setCurrentPage(target);
+    window.location.hash = `#${target}`;
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
+
+  // Redirect if currently on hidden wine page or events page with 0 events
+  useEffect(() => {
+    if (currentPage === 'wine' || (currentPage === 'events' && !loading && events.length === 0)) {
+      handleNavigate('home');
+    }
+  }, [currentPage, events, loading]);
 
   const handleOpenBookTableWithArea = (areaOrBranch = 'Bahir Dar Flagship') => {
     if (typeof areaOrBranch === 'string') {
@@ -103,16 +123,18 @@ export default function App() {
 
   const loadMenuData = async () => {
     try {
-      const [list, catList, spotList] = await Promise.all([
+      const [list, catList, spotList, eventList] = await Promise.all([
         apiService.getDishes(),
         apiService.getCategories(),
-        apiService.getSpots()
+        apiService.getSpots(),
+        apiService.getEvents()
       ]);
       setDishes(list);
       setCategories(catList);
       if (spotList && spotList.length > 0) {
         setSpots(spotList);
       }
+      setEvents(Array.isArray(eventList) ? eventList : []);
     } catch (err) {
       console.error('Failed to load menu data:', err);
     } finally {
@@ -200,6 +222,7 @@ export default function App() {
         currentPage={currentPage}
         onNavigate={handleNavigate}
         isScrolled={isScrolled}
+        hasEvents={events.length > 0}
       />
 
       {/* Main Content Router */}
@@ -283,14 +306,14 @@ export default function App() {
           </div>
         )}
 
-        {/* 5. DEDICATED EVENTS PAGE (30% Scale Compact Hero Banner) */}
-        {currentPage === 'events' && (
+        {/* 5. DEDICATED EVENTS PAGE (Only shown if admin entered events) */}
+        {currentPage === 'events' && events.length > 0 && (
           <div>
             <Hero
               compact={true}
               pageBadge="Events"
               pageTitle="Gastronomic Events & Masterclasses"
-              pageSubtitle="Oyster shucking workshops, winemaker galas, and seaside acoustic jazz brunches"
+              pageSubtitle="Special seafood feasts, cultural evenings, and culinary tastings"
               currentPage={currentPage}
               onNavigate={handleNavigate}
               onOpenBookTable={() => handleOpenBookTableWithArea('Ocean Terrace')}
@@ -298,6 +321,7 @@ export default function App() {
               cartCount={totalCartCount}
             />
             <EventsSection
+              events={events}
               onOpenBookTable={() => handleOpenBookTableWithArea('Ocean Terrace')}
             />
           </div>
@@ -330,6 +354,7 @@ export default function App() {
         onOpenBookTable={(branchId) => handleOpenBookTableWithArea(branchId || 'bahir-dar')}
         onNavigate={handleNavigate}
         currentPage={currentPage}
+        hasEvents={events.length > 0}
       />
 
       {/* Modals & Drawers */}

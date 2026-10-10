@@ -2,7 +2,9 @@ import React from 'react';
 import { UPCOMING_EVENTS } from '../data/restaurantData';
 import { Calendar, Clock, ArrowRight } from 'lucide-react';
 
-export default function EventsSection({ onOpenBookTable }) {
+export default function EventsSection({ onOpenBookTable, events = [] }) {
+  const eventList = Array.isArray(events) && events.length > 0 ? events : [];
+
   return (
     <section id="events" className="py-24 bg-[#071421] text-slate-100 border-t border-slate-800/80 relative overflow-hidden w-full">
       <div className="max-w-7xl mx-auto px-6 sm:px-10">
@@ -15,12 +17,12 @@ export default function EventsSection({ onOpenBookTable }) {
           </h2>
           <div className="w-16 h-0.5 bg-gold-500/60 mx-auto"></div>
           <p className="text-xs sm:text-sm text-slate-400 font-light">
-            Join our head sommeliers and culinary masters for intimate tasting dinners and seasonal harbor celebrations.
+            Join us for intimate tasting dinners, cultural evenings, and seasonal celebrations at Gech Fish.
           </p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {UPCOMING_EVENTS.map((evt) => (
+          {eventList.map((evt) => (
             <div
               key={evt.id}
               className="bg-[#091b2c] border border-slate-800 hover:border-gold-500/40 rounded-2xl p-6 flex flex-col justify-between space-y-6 transition-all duration-300 hover:shadow-2xl"

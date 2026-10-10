@@ -7,7 +7,8 @@ export default function Header({
   onOpenBookTable,
   currentPage = 'home',
   onNavigate,
-  isScrolled = false
+  isScrolled = false,
+  hasEvents = false
 }) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
@@ -23,9 +24,8 @@ export default function Header({
   const navItems = [
     { id: 'home', label: 'Home' },
     { id: 'menu', label: 'Menu' },
-    { id: 'wine', label: 'Wine Cellar' },
     { id: 'about', label: 'About' },
-    { id: 'events', label: 'Events' },
+    ...(hasEvents ? [{ id: 'events', label: 'Events' }] : []),
     { id: 'contacts', label: 'Contacts' }
   ];
 
@@ -128,24 +128,12 @@ export default function Header({
             )}
           </button>
 
-          {/* Admin portal link (hidden on mobile < sm to keep header spacious) */}
-          <a
-            href="http://localhost:5174"
-            target="_blank"
-            rel="noreferrer"
-            className="hidden sm:inline-flex p-1.5 text-slate-400 hover:text-gold-300 transition shrink-0"
-            title="Admin Management Portal"
-            aria-label="Admin Portal"
-          >
-            <ExternalLink className="w-3.5 h-3.5" />
-          </a>
-
-          {/* Burger Menu Button - Always present to choose where to go */}
+          {/* Burger Menu Button - Only visible on mobile/tablet (< lg), hidden when desktop nav is visible */}
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="p-1.5 sm:px-2.5 sm:py-1.5 text-gold-300 hover:text-white cursor-pointer rounded-xl border border-gold-500/40 bg-gold-500/10 hover:bg-gold-500/25 transition shrink-0 flex items-center space-x-1 shadow-sm active:scale-95"
+            className="lg:hidden p-1.5 sm:px-2.5 sm:py-1.5 text-gold-300 hover:text-white cursor-pointer rounded-xl border border-gold-500/40 bg-gold-500/10 hover:bg-gold-500/25 transition shrink-0 flex items-center space-x-1 shadow-sm active:scale-95"
             aria-label="Toggle navigation menu"
-            title="Choose where to go"
+            title="Menu"
           >
             {mobileMenuOpen ? (
               <>

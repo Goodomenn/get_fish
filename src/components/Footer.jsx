@@ -12,7 +12,7 @@ import {
 } from 'lucide-react';
 import { RESTAURANT_INFO, RESTAURANT_BRANCHES } from '../data/restaurantData';
 
-export default function Footer({ onOpenBookTable, onNavigate, currentPage }) {
+export default function Footer({ onOpenBookTable, onNavigate, currentPage, hasEvents = false }) {
   const [selectedBranchId, setSelectedBranchId] = useState('pier-24');
   const activeBranch = RESTAURANT_BRANCHES.find(b => b.id === selectedBranchId) || RESTAURANT_BRANCHES[0];
 
@@ -242,20 +242,17 @@ export default function Footer({ onOpenBookTable, onNavigate, currentPage }) {
                 </button>
               </li>
               <li>
-                <button onClick={() => handleNav('wine')} className="hover:text-gold-300 transition cursor-pointer">
-                  Wine Cellar
-                </button>
-              </li>
-              <li>
                 <button onClick={() => handleNav('about')} className="hover:text-gold-300 transition cursor-pointer">
                   Our Story
                 </button>
               </li>
-              <li>
-                <button onClick={() => handleNav('events')} className="hover:text-gold-300 transition cursor-pointer">
-                  Events & Galas
-                </button>
-              </li>
+              {hasEvents && (
+                <li>
+                  <button onClick={() => handleNav('events')} className="hover:text-gold-300 transition cursor-pointer">
+                    Events & Galas
+                  </button>
+                </li>
+              )}
               <li>
                 <button onClick={() => handleNav('contacts')} className="hover:text-gold-300 transition cursor-pointer">
                   Contacts & Hours

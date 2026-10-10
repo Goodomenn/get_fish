@@ -26,6 +26,7 @@ const LOCAL_STORAGE_FEEDBACK = 'seaclub_feedback_v2';
 const LOCAL_STORAGE_CATEGORIES = 'seaclub_categories_v2';
 const LOCAL_STORAGE_LOCATIONS = 'seaclub_locations_v2';
 const LOCAL_STORAGE_SPOTS = 'seaclub_spots_v2';
+const LOCAL_STORAGE_EVENTS = 'seaclub_events_v2';
 
 export const DEFAULT_LOCATIONS = [
   {
@@ -95,7 +96,8 @@ class ApiService {
           e.key === LOCAL_STORAGE_FEEDBACK ||
           e.key === LOCAL_STORAGE_CATEGORIES ||
           e.key === LOCAL_STORAGE_LOCATIONS ||
-          e.key === LOCAL_STORAGE_SPOTS
+          e.key === LOCAL_STORAGE_SPOTS ||
+          e.key === LOCAL_STORAGE_EVENTS
         ) {
           this.notifySubscribers();
         }
@@ -214,6 +216,10 @@ class ApiService {
     if (!localStorage.getItem(LOCAL_STORAGE_SPOTS)) {
       localStorage.setItem(LOCAL_STORAGE_SPOTS, JSON.stringify(DEFAULT_SPOTS));
     }
+
+    if (!localStorage.getItem(LOCAL_STORAGE_EVENTS)) {
+      localStorage.setItem(LOCAL_STORAGE_EVENTS, JSON.stringify([]));
+    }
   }
 
   initSSE() {
@@ -258,6 +264,17 @@ class ApiService {
       this.eventSource.addEventListener('SPOT_UPDATED', handleUpdate);
       this.eventSource.addEventListener('SPOT_DELETED', handleUpdate);
       this.eventSource.addEventListener('SPOTS_UPDATED', handleUpdate);
+      this.eventSource.addEventListener('EVENTS_UPDATED', (e) => {
+        try {
+          if (e.data) {
+            const parsed = JSON.parse(e.data);
+            if (Array.isArray(parsed)) {
+              localStorage.setItem(LOCAL_STORAGE_EVENTS, JSON.stringify(parsed));
+            }
+          }
+        } catch (err) {}
+        this.notifySubscribers();
+      });
       this.eventSource.addEventListener('RESERVATION_CREATED', handleUpdate);
       this.eventSource.addEventListener('RESERVATION_UPDATED', handleUpdate);
       this.eventSource.addEventListener('RESERVATION_DELETED', handleUpdate);
@@ -720,6 +737,38 @@ class ApiService {
     }
 
     return [...DEFAULT_SPOTS];
+  }
+
+  // =========================================================================
+  // 6. RESTAURANT EVENTS
+  // =========================================================================
+  async getEvents() {
+    // A. Backend Server
+    if (this.isBackendAvailable) {
+      try {
+        const res = await fetch(`${BACKEND_URL}/restaurant-events`);
+        if (res.ok) {
+          const data = await res.json();
+          if (Array.isArray(data)) {
+            localStorage.setItem(LOCAL_STORAGE_EVENTS, JSON.stringify(data));
+            return data;
+          }
+        }
+      } catch (err) {
+        this.isBackendAvailable = false;
+      }
+    }
+
+    // B. Local Storage Cache
+    const raw = localStorage.getItem(LOCAL_STORAGE_EVENTS);
+    if (raw) {
+      try {
+        const parsed = JSON.parse(raw);
+        if (Array.isArray(parsed)) return parsed;
+      } catch (e) {}
+    }
+
+    return [];
   }
 }
 
