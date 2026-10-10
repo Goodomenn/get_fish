@@ -81,23 +81,25 @@ export default function Footer({ onOpenBookTable, onNavigate, currentPage, hasEv
           </div>
         </div>
 
-        {/* Map Container - 100% Clean & Unobstructed */}
-        <div className="relative w-full h-[320px] sm:h-[380px] md:h-[440px] bg-[#07131f] overflow-hidden">
-          {/* Embedded Map */}
-          <iframe
-            key={activeBranch.id}
-            title={`${activeBranch.name} Location Map`}
-            src={activeBranch.mapEmbedUrl}
-            className="w-full h-full border-0 filter invert-[92%] hue-rotate-180 contrast-[1.15] brightness-[0.82] opacity-90 hover:opacity-100 transition-opacity duration-300"
-            loading="lazy"
-            allowFullScreen=""
-            referrerPolicy="no-referrer-when-downgrade"
-          />
+        {/* Map Container - Centered with Left & Right Padding */}
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-10 py-6 sm:py-8">
+          <div className="relative w-full h-[320px] sm:h-[380px] md:h-[440px] bg-[#07131f] rounded-2xl sm:rounded-3xl border border-slate-800/90 shadow-2xl overflow-hidden ring-1 ring-gold-500/10">
+            {/* Embedded Map */}
+            <iframe
+              key={activeBranch.id}
+              title={`${activeBranch.name} Location Map`}
+              src={activeBranch.mapEmbedUrl}
+              className="w-full h-full border-0 filter invert-[92%] hue-rotate-180 contrast-[1.15] brightness-[0.82] opacity-90 hover:opacity-100 transition-opacity duration-300"
+              loading="lazy"
+              allowFullScreen=""
+              referrerPolicy="no-referrer-when-downgrade"
+            />
 
-          {/* Discreet live venue tag at bottom-right corner of map */}
-          <div className="absolute bottom-3 right-4 z-10 hidden sm:flex items-center space-x-2 px-3 py-1 bg-[#050e17]/85 backdrop-blur-md border border-slate-800 rounded-lg text-[10px] text-slate-400 font-mono pointer-events-none">
-            <span className="w-1.5 h-1.5 rounded-full bg-gold-400"></span>
-            <span>{activeBranch.title}</span>
+            {/* Discreet live venue tag at bottom-right corner of map */}
+            <div className="absolute bottom-3 right-4 z-10 hidden sm:flex items-center space-x-2 px-3 py-1 bg-[#050e17]/85 backdrop-blur-md border border-slate-800 rounded-lg text-[10px] text-slate-400 font-mono pointer-events-none">
+              <span className="w-1.5 h-1.5 rounded-full bg-gold-400"></span>
+              <span>{activeBranch.title}</span>
+            </div>
           </div>
         </div>
 
