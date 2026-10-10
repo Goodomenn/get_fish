@@ -758,12 +758,10 @@ class ApiService {
     // A. Firestore Cloud Database
     if (this.isFirestoreAvailable) {
       try {
-        const snap = await withTimeout(getDocs(collection(db, 'events')), 2500, 'Events fetch');
-        if (!snap.empty) {
-          const list = snap.docs.map((d) => ({ id: d.id, ...d.data() }));
-          localStorage.setItem(LOCAL_STORAGE_EVENTS, JSON.stringify(list));
-          return list;
-        }
+        const snap = await withTimeout(getDocs(collection(db, 'events')), 4000, 'Events fetch');
+        const list = snap.docs.map((d) => ({ id: d.id, ...d.data() }));
+        localStorage.setItem(LOCAL_STORAGE_EVENTS, JSON.stringify(list));
+        return list;
       } catch (err) {
         console.warn('[Firestore] Events fetch notice:', err.message);
       }
@@ -776,10 +774,8 @@ class ApiService {
         const data = await res.json();
         if (Array.isArray(data)) {
           this.isBackendAvailable = true;
-          if (data.length > 0) {
-            localStorage.setItem(LOCAL_STORAGE_EVENTS, JSON.stringify(data));
-            return data;
-          }
+          localStorage.setItem(LOCAL_STORAGE_EVENTS, JSON.stringify(data));
+          return data;
         }
       }
     } catch (err) {}
