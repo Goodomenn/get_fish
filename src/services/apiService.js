@@ -758,7 +758,7 @@ class ApiService {
     // A. Firestore Cloud Database
     if (this.isFirestoreAvailable) {
       try {
-        const snap = await withTimeout(getDocs(collection(db, 'events')), 4000, 'Events fetch');
+        const snap = await withTimeout(getDocs(collection(db, 'events')), 8000, 'Events fetch');
         const list = snap.docs.map((d) => ({ id: d.id, ...d.data() }));
         localStorage.setItem(LOCAL_STORAGE_EVENTS, JSON.stringify(list));
         return list;
