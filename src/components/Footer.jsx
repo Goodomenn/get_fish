@@ -13,7 +13,7 @@ import {
 import { RESTAURANT_INFO, RESTAURANT_BRANCHES } from '../data/restaurantData';
 
 export default function Footer({ onOpenBookTable, onNavigate, currentPage, hasEvents = false }) {
-  const [selectedBranchId, setSelectedBranchId] = useState('pier-24');
+  const [selectedBranchId, setSelectedBranchId] = useState(RESTAURANT_BRANCHES[0]?.id || 'bahir-dar');
   const activeBranch = RESTAURANT_BRANCHES.find(b => b.id === selectedBranchId) || RESTAURANT_BRANCHES[0];
 
   // Hide the map section on the menu page for a cleaner experience
@@ -45,16 +45,16 @@ export default function Footer({ onOpenBookTable, onNavigate, currentPage, hasEv
       {/* 1. Interactive Harbor Map & Docking Section — hidden on menu page */}
       {showMap && (
       <div id="harbor-map" className="border-b border-slate-800/80 bg-[#050e17] relative">
-        {/* Top Header Strip with 3 Branch Tabs */}
+        {/* Top Header Strip with 2 Branch Tabs */}
         <div className="max-w-7xl mx-auto px-6 sm:px-10 py-5 border-b border-slate-800/60">
           <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-4">
             <div className="space-y-1">
               <div className="flex items-center space-x-2 text-gold-400 font-serif text-xs uppercase tracking-widest">
                 <Compass className="w-3.5 h-3.5 text-gold-400" />
-                <span>3 Waterfront Flagships</span>
+                <span>{RESTAURANT_BRANCHES.length} Flagship Locations</span>
               </div>
               <h3 className="font-serif text-xl sm:text-2xl text-white tracking-wide uppercase">
-                Find Us on the Waterfront
+                Find Us Across Ethiopia
               </h3>
             </div>
 

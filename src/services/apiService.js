@@ -46,10 +46,10 @@ export const DEFAULT_LOCATIONS = [
     branchId: 'addis-summit',
     name: 'Addis Ababa - Summit (አዲስ አበባ ሰሚት)',
     city: 'Addis Ababa • Summit',
-    desc: 'Behind Chanoli • Sizzling Fish Tibs, Fish Lebleb & family dining',
+    desc: 'Geach Fish House (ጌትሽ ዓሳ ቤት) • Behind Chanoli • Sizzling Fish Tibs, Fish Lebleb & family dining',
     badge: 'Summit Branch',
-    address: 'Summit Area, Behind Chanoli, Addis Ababa',
-    phone: '+251 91 122 3344',
+    address: 'Geach Fish House (ጌትሽ ዓሳ ቤት), Summit Area, Behind Chanoli, Addis Ababa',
+    phone: '+251 97 309 5555',
     email: 'summit@gechfish-restaurant.com',
     hours: 'Daily: 11:30 AM – 11:00 PM'
   }
