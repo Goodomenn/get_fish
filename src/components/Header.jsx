@@ -120,7 +120,7 @@ export default function Header({
             aria-label="Order Ticket"
           >
             <ShoppingBag className="w-4 h-4 text-gold-400" />
-            <span className="hidden xl:inline font-serif text-xs tracking-wider uppercase text-slate-200">Ticket</span>
+            <span className="hidden xl:inline font-serif text-xs tracking-wider uppercase text-slate-200">Cart</span>
             {cartCount > 0 && (
               <span className="w-4 h-4 rounded-full bg-gold-500 text-slate-950 font-bold text-[10px] flex items-center justify-center -mr-1">
                 {cartCount}
