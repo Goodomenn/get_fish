@@ -12,11 +12,18 @@ export default function BookTableModal({
   onClose,
   onBookingCompleted,
   initialSeatingArea = 'Bahir Dar Flagship',
-  initialBranch = 'bahir-dar'
+  initialBranch = 'bahir-dar',
+  branches = null
 }) {
   if (!isOpen) return null;
 
-  const [locations, setLocations] = useState(DEFAULT_LOCATIONS);
+  const [locations, setLocations] = useState(() => (Array.isArray(branches) && branches.length > 0 ? branches : DEFAULT_LOCATIONS));
+
+  useEffect(() => {
+    if (Array.isArray(branches) && branches.length > 0) {
+      setLocations(branches);
+    }
+  }, [branches]);
 
   useEffect(() => {
     let isMounted = true;
@@ -38,8 +45,7 @@ export default function BookTableModal({
     };
   }, []);
 
-  const defaultBranch = RESTAURANT_BRANCHES.find(b => b.id === initialBranch) || RESTAURANT_BRANCHES[0];
-  const defaultLoc = locations.find(l => l.branchId === initialBranch || l.id === initialSeatingArea) || locations[0] || DEFAULT_LOCATIONS[0];
+  const defaultLoc = locations.find(l => l.id === initialBranch || l.branchId === initialBranch || l.id === initialSeatingArea || l.name === initialSeatingArea) || locations[0] || DEFAULT_LOCATIONS[0];
 
   const [form, setForm] = useState({
     guestName: '',
@@ -48,15 +54,15 @@ export default function BookTableModal({
     partySize: 2,
     date: 'Tonight',
     time: '19:30',
-    branch: defaultBranch?.name || defaultLoc.name,
-    seatingArea: defaultLoc.id,
+    branch: defaultLoc?.name || 'Bahir Dar Flagship',
+    seatingArea: defaultLoc?.id || 'bahir-dar',
     tableNumber: '',
     notes: ''
   });
 
   useEffect(() => {
     if (initialSeatingArea) {
-      const match = locations.find(l => l.id === initialSeatingArea || l.branchId === initialSeatingArea);
+      const match = locations.find(l => l.id === initialSeatingArea || l.branchId === initialSeatingArea || l.name === initialSeatingArea);
       if (match) {
         setForm(prev => ({ ...prev, seatingArea: match.id, branch: match.name }));
       }
@@ -65,7 +71,7 @@ export default function BookTableModal({
 
   useEffect(() => {
     if (initialBranch) {
-      const match = locations.find(l => l.branchId === initialBranch || l.id === initialBranch);
+      const match = locations.find(l => l.branchId === initialBranch || l.id === initialBranch || l.name === initialBranch);
       if (match) {
         setForm(prev => ({ ...prev, seatingArea: match.id, branch: match.name }));
       }

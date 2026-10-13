@@ -30,28 +30,42 @@ const LOCAL_STORAGE_EVENTS = 'seaclub_events_v2';
 
 export const DEFAULT_LOCATIONS = [
   {
-    id: 'Bahir Dar Flagship',
+    id: 'bahir-dar',
     branchId: 'bahir-dar',
     name: 'Bahir Dar Flagship (ባህር ዳር)',
-    city: 'Bahir Dar • Kebele 13',
-    desc: 'Near St. Michael Church • Lake Tana waterfront dining & fresh daily catch',
+    city: 'Bahir Dar, Ethiopia',
+    title: 'Gech Fish Lake Tana Flagship (ጌች ዓሳ)',
+    tagline: 'Fresh Lake Tana Catch & Waterfront Dining',
     badge: 'Lake Tana Flagship',
     address: 'Kebele 13, Near St. Michael Church, Bahir Dar',
+    desc: 'Near St. Michael Church • Lake Tana waterfront dining & fresh daily catch',
+    description: 'Our founding flagship located in Bahir Dar Kebele 13 near St. Michael Church. Enjoy the freshest Lake Tana fish, authentic Fish Lebleb, whole roasted fish, and pleasant open-air dining.',
     phone: '+251 91 800 1234',
     email: 'bahirdar@gechfish-restaurant.com',
-    hours: 'Daily: 11:30 AM – 11:00 PM'
+    hours: 'Daily: 11:30 AM – 11:00 PM',
+    image: 'https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=900&q=80',
+    mapEmbedUrl: 'https://maps.google.com/maps?q=Bahir%20Dar%20Ethiopia&t=&z=14&ie=UTF8&iwloc=&output=embed',
+    directionsUrl: 'https://www.google.com/maps/dir/?api=1&destination=Bahir+Dar+Ethiopia',
+    highlights: ['Fresh Lake Tana Catch', 'Authentic Fish Lebleb', 'Open-air Lakeside Dining', 'Traditional Hospitality']
   },
   {
-    id: 'Addis Ababa - Summit',
+    id: 'addis-summit',
     branchId: 'addis-summit',
-    name: 'Addis Ababa - Summit (አዲስ አበባ ሰሚት)',
-    city: 'Addis Ababa • Summit',
-    desc: 'Geach Fish House (ጌትሽ ዓሳ ቤት) • Behind Chanoli • Sizzling Fish Tibs, Fish Lebleb & family dining',
+    name: 'Addis Ababa - Summit (ሰሚት)',
+    city: 'Addis Ababa, Ethiopia',
+    title: 'Gech Fish House - Summit (ጌትሽ ዓሳ ቤት)',
+    tagline: 'Authentic Fish Tibs, Lebleb & Family Dining',
     badge: 'Summit Branch',
     address: 'Geach Fish House (ጌትሽ ዓሳ ቤት), Summit Area, Behind Chanoli, Addis Ababa',
+    desc: 'Geach Fish House (ጌትሽ ዓሳ ቤት) • Behind Chanoli • Sizzling Fish Tibs, Fish Lebleb & family dining',
+    description: 'Our beloved capital city location at Geach Fish House in Summit behind Chanoli. Known across Addis Ababa for sizzling Fish Tibs, rich Fish Lebleb, Fish Combo platters, and warm hospitable dining.',
     phone: '+251 97 309 5555',
     email: 'summit@gechfish-restaurant.com',
-    hours: 'Daily: 11:30 AM – 11:00 PM'
+    hours: 'Daily: 11:30 AM – 11:00 PM',
+    image: 'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=900&q=80',
+    mapEmbedUrl: 'https://maps.google.com/maps?q=Geach%20Fish%20House%20%E1%8C%8C%E1%89%B5%E1%88%BD%20%E1%8B%93%E1%88%B3%20%E1%89%A4%E1%89%B5&t=&z=17&ie=UTF8&iwloc=&output=embed',
+    directionsUrl: 'https://share.google/8BpubzRpxfg65kfTH',
+    highlights: ['Sizzling Fish Tibs', 'Special Fish Combo Platters', 'Warm Family Seating', 'Direct Delivery Service']
   }
 ];
 
@@ -161,7 +175,21 @@ class ApiService {
         console.warn('[Firestore] Events listener notice:', err.message);
       });
 
-      this.firestoreUnsubscribes.push(unsubDishes, unsubRes, unsubSpots, unsubEvents);
+      // 5. Locations Real-time Listener
+      const unsubLocations = onSnapshot(collection(db, 'locations'), (snapshot) => {
+        if (!snapshot.empty) {
+          const list = snapshot.docs.map((docSnap) => ({
+            id: docSnap.id,
+            ...docSnap.data()
+          }));
+          localStorage.setItem(LOCAL_STORAGE_LOCATIONS, JSON.stringify(list));
+          this.notifySubscribers();
+        }
+      }, (err) => {
+        console.warn('[Firestore] Locations listener notice:', err.message);
+      });
+
+      this.firestoreUnsubscribes.push(unsubDishes, unsubRes, unsubSpots, unsubEvents, unsubLocations);
     } catch (err) {
       console.warn('[Firestore] Notice attaching cloud listeners:', err.message);
     }
@@ -409,6 +437,21 @@ class ApiService {
   }
 
   async getLocations() {
+    // A. Firestore Cloud Database
+    if (this.isFirestoreAvailable) {
+      try {
+        const snap = await withTimeout(getDocs(collection(db, 'locations')), 8000, 'Locations fetch');
+        if (!snap.empty) {
+          const list = snap.docs.map((d) => ({ id: d.id, ...d.data() }));
+          localStorage.setItem(LOCAL_STORAGE_LOCATIONS, JSON.stringify(list));
+          return list;
+        }
+      } catch (err) {
+        console.warn('[Firestore] Locations fetch notice:', err.message);
+      }
+    }
+
+    // B. Backend Server
     if (this.isBackendAvailable) {
       try {
         const res = await fetch(`${BACKEND_URL}/locations`);
@@ -424,6 +467,7 @@ class ApiService {
       }
     }
 
+    // C. Local Storage Cache
     const raw = localStorage.getItem(LOCAL_STORAGE_LOCATIONS);
     if (raw) {
       try {

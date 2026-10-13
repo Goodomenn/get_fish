@@ -11,7 +11,8 @@ import {
   ChevronDown
 } from 'lucide-react';
 
-export default function ContactsSection({ onOpenBookTable, showToast }) {
+export default function ContactsSection({ onOpenBookTable, showToast, branches = RESTAURANT_BRANCHES }) {
+  const branchList = Array.isArray(branches) && branches.length > 0 ? branches : RESTAURANT_BRANCHES;
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -203,9 +204,9 @@ export default function ContactsSection({ onOpenBookTable, showToast }) {
                   Direct Branch Contact Lines (የቅርንጫፎች ስልክ ቁጥሮች)
                 </span>
                 <div className="space-y-3">
-                  {RESTAURANT_BRANCHES.map(b => (
+                  {branchList.map(b => (
                     <div
-                      key={b.id}
+                      key={b.id || b.branchId}
                       className="p-4 sm:p-5 bg-[#071421] border border-slate-800/90 hover:border-gold-500/50 rounded-2xl flex flex-col sm:flex-row sm:items-center justify-between gap-3 shadow-lg transition duration-200 group"
                     >
                       <div className="space-y-1">
@@ -213,15 +214,17 @@ export default function ContactsSection({ onOpenBookTable, showToast }) {
                           {b.name}
                         </span>
                         <span className="text-xs sm:text-sm text-slate-300 block font-light">
-                          {b.city}
+                          {b.address || b.city}
                         </span>
                       </div>
-                      <a
-                        href={`tel:${b.phone}`}
-                        className="text-sm sm:text-base text-gold-300 hover:text-white font-mono font-bold tracking-wider transition whitespace-nowrap bg-gold-500/10 border border-gold-500/30 px-3.5 py-1.5 rounded-xl self-start sm:self-auto hover:bg-gold-500/20"
-                      >
-                        {b.phone}
-                      </a>
+                      {b.phone && (
+                        <a
+                          href={`tel:${b.phone}`}
+                          className="text-sm sm:text-base text-gold-300 hover:text-white font-mono font-bold tracking-wider transition whitespace-nowrap bg-gold-500/10 border border-gold-500/30 px-3.5 py-1.5 rounded-xl self-start sm:self-auto hover:bg-gold-500/20"
+                        >
+                          {b.phone}
+                        </a>
+                      )}
                     </div>
                   ))}
                 </div>

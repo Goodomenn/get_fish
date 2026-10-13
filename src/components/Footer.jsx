@@ -12,9 +12,22 @@ import {
 } from 'lucide-react';
 import { RESTAURANT_INFO, RESTAURANT_BRANCHES } from '../data/restaurantData';
 
-export default function Footer({ onOpenBookTable, onNavigate, currentPage, hasEvents = false }) {
-  const [selectedBranchId, setSelectedBranchId] = useState(RESTAURANT_BRANCHES[0]?.id || 'bahir-dar');
-  const activeBranch = RESTAURANT_BRANCHES.find(b => b.id === selectedBranchId) || RESTAURANT_BRANCHES[0];
+export default function Footer({
+  onOpenBookTable,
+  onNavigate,
+  currentPage,
+  hasEvents = false,
+  branches = RESTAURANT_BRANCHES
+}) {
+  const branchList = Array.isArray(branches) && branches.length > 0 ? branches : RESTAURANT_BRANCHES;
+  const [selectedBranchId, setSelectedBranchId] = useState(branchList[0]?.id || 'bahir-dar');
+  const activeBranch = branchList.find(b => b.id === selectedBranchId || b.branchId === selectedBranchId) || branchList[0];
+
+  useEffect(() => {
+    if (!branchList.some(b => b.id === selectedBranchId || b.branchId === selectedBranchId)) {
+      setSelectedBranchId(branchList[0]?.id || branchList[0]?.branchId || 'bahir-dar');
+    }
+  }, [branchList, selectedBranchId]);
 
   // Hide the map section on the menu page for a cleaner experience
   const showMap = currentPage !== 'menu';
@@ -36,6 +49,14 @@ export default function Footer({ onOpenBookTable, onNavigate, currentPage, hasEv
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
+  const mapEmbedUrl = activeBranch.mapEmbedUrl || `https://maps.google.com/maps?q=${encodeURIComponent(activeBranch.address || activeBranch.city || activeBranch.name)}&t=&z=15&ie=UTF8&iwloc=&output=embed`;
+  const directionsUrl = activeBranch.directionsUrl || (activeBranch.googleMapsUrl ? activeBranch.googleMapsUrl : `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(activeBranch.address || activeBranch.name)}`);
+  const branchTitle = activeBranch.title || activeBranch.name;
+  const branchBadge = activeBranch.badge || 'Branch';
+  const branchAddress = activeBranch.address || activeBranch.city || 'Ethiopia';
+  const carArrival = activeBranch.arrival?.car || 'Convenient Street & Dedicated Parking';
+  const yachtArrival = activeBranch.arrival?.yacht || activeBranch.arrival?.car || 'Convenient Parking & Easy Access';
+
   return (
     <footer className="bg-[#030910] text-slate-300 border-t border-slate-800/80 relative overflow-hidden select-none">
       {/* Subtle Background Ambience Glow */}
@@ -45,27 +66,28 @@ export default function Footer({ onOpenBookTable, onNavigate, currentPage, hasEv
       {/* 1. Interactive Harbor Map & Docking Section — hidden on menu page */}
       {showMap && (
       <div id="harbor-map" className="border-b border-slate-800/80 bg-[#050e17] relative">
-        {/* Top Header Strip with 2 Branch Tabs */}
+        {/* Top Header Strip with Branch Tabs */}
         <div className="max-w-7xl mx-auto px-6 sm:px-10 py-5 border-b border-slate-800/60">
           <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-4">
             <div className="space-y-1">
               <div className="flex items-center space-x-2 text-gold-400 font-serif text-xs uppercase tracking-widest">
                 <Compass className="w-3.5 h-3.5 text-gold-400" />
-                <span>{RESTAURANT_BRANCHES.length} Flagship Locations</span>
+                <span>{branchList.length} Flagship Locations</span>
               </div>
               <h3 className="font-serif text-xl sm:text-2xl text-white tracking-wide uppercase">
                 Find Us Across Ethiopia
               </h3>
             </div>
 
-            {/* 3 Locations Switcher Tabs */}
+            {/* Locations Switcher Tabs */}
             <div className="flex flex-wrap items-center gap-2">
-              {RESTAURANT_BRANCHES.map((b) => {
-                const isSelected = b.id === selectedBranchId;
+              {branchList.map((b) => {
+                const bId = b.id || b.branchId;
+                const isSelected = bId === selectedBranchId;
                 return (
                   <button
-                    key={b.id}
-                    onClick={() => setSelectedBranchId(b.id)}
+                    key={bId}
+                    onClick={() => setSelectedBranchId(bId)}
                     className={`px-3.5 py-2 rounded-xl font-serif text-xs uppercase tracking-wider transition cursor-pointer flex items-center space-x-2 ${
                       isSelected
                         ? 'bg-gradient-to-r from-gold-600 to-gold-500 text-slate-950 font-bold shadow-lg ring-1 ring-gold-400'
@@ -86,9 +108,9 @@ export default function Footer({ onOpenBookTable, onNavigate, currentPage, hasEv
           <div className="relative w-full h-[320px] sm:h-[380px] md:h-[440px] bg-[#07131f] rounded-2xl sm:rounded-3xl border border-slate-800/90 shadow-2xl overflow-hidden ring-1 ring-gold-500/10">
             {/* Embedded Map */}
             <iframe
-              key={activeBranch.id}
+              key={activeBranch.id || activeBranch.branchId}
               title={`${activeBranch.name} Location Map`}
-              src={activeBranch.mapEmbedUrl}
+              src={mapEmbedUrl}
               className="w-full h-full border-0 filter invert-[92%] hue-rotate-180 contrast-[1.15] brightness-[0.82] opacity-90 hover:opacity-100 transition-opacity duration-300"
               loading="lazy"
               allowFullScreen=""
@@ -98,7 +120,7 @@ export default function Footer({ onOpenBookTable, onNavigate, currentPage, hasEv
             {/* Discreet live venue tag at bottom-right corner of map */}
             <div className="absolute bottom-3 right-4 z-10 hidden sm:flex items-center space-x-2 px-3 py-1 bg-[#050e17]/85 backdrop-blur-md border border-slate-800 rounded-lg text-[10px] text-slate-400 font-mono pointer-events-none">
               <span className="w-1.5 h-1.5 rounded-full bg-gold-400"></span>
-              <span>{activeBranch.title}</span>
+              <span>{branchTitle}</span>
             </div>
           </div>
         </div>
@@ -115,10 +137,10 @@ export default function Footer({ onOpenBookTable, onNavigate, currentPage, hasEv
               <div className="space-y-1">
                 <div className="flex flex-wrap items-center justify-center sm:justify-start gap-2.5">
                   <h4 className="font-serif text-base sm:text-lg text-white font-bold tracking-wide">
-                    {activeBranch.title}
+                    {branchTitle}
                   </h4>
                   <span className="inline-flex items-center px-2.5 py-0.5 rounded-full bg-gold-500/10 border border-gold-500/30 text-gold-300 font-serif text-[10px] uppercase tracking-widest">
-                    {activeBranch.badge}
+                    {branchBadge}
                   </span>
                   <span className="text-[10px] text-emerald-400 font-mono tracking-wider flex items-center">
                     <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse inline-block mr-1"></span>
@@ -126,12 +148,12 @@ export default function Footer({ onOpenBookTable, onNavigate, currentPage, hasEv
                   </span>
                 </div>
                 <p className="text-xs text-slate-300 font-light">
-                  {activeBranch.address}
+                  {branchAddress}
                 </p>
                 <div className="flex flex-wrap items-center justify-center sm:justify-start gap-x-4 gap-y-1 text-[11px] text-slate-400 pt-0.5">
-                  <span><strong>Arriving by Car:</strong> {activeBranch.arrival.car}</span>
+                  <span><strong>Arriving by Car:</strong> {carArrival}</span>
                   <span className="hidden sm:inline text-slate-700">•</span>
-                  <span><strong>Arriving by Yacht:</strong> {activeBranch.arrival.yacht}</span>
+                  <span><strong>Arriving by Yacht:</strong> {yachtArrival}</span>
                 </div>
               </div>
             </div>
@@ -139,7 +161,7 @@ export default function Footer({ onOpenBookTable, onNavigate, currentPage, hasEv
             {/* Right: Navigate Here & Reserve Table Buttons */}
             <div className="flex flex-wrap items-center justify-center gap-3 shrink-0 w-full sm:w-auto">
               <a
-                href={activeBranch.directionsUrl}
+                href={directionsUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex-1 sm:flex-initial inline-flex items-center justify-center space-x-2 px-6 py-3 bg-gradient-to-r from-gold-600 to-gold-500 hover:from-gold-500 hover:to-gold-400 text-slate-950 font-serif font-bold text-xs uppercase tracking-wider rounded-xl transition duration-200 shadow-lg cursor-pointer active:scale-95"
@@ -150,7 +172,7 @@ export default function Footer({ onOpenBookTable, onNavigate, currentPage, hasEv
               </a>
 
               <button
-                onClick={() => onOpenBookTable && onOpenBookTable(activeBranch.id)}
+                onClick={() => onOpenBookTable && onOpenBookTable(activeBranch.id || activeBranch.branchId)}
                 className="flex-1 sm:flex-initial inline-flex items-center justify-center space-x-2 px-6 py-3 bg-[#0a1c2e] hover:bg-[#0f2842] border border-gold-500/40 hover:border-gold-400 text-gold-300 hover:text-gold-200 font-serif font-bold text-xs uppercase tracking-wider rounded-xl transition duration-200 shadow-lg cursor-pointer active:scale-95"
               >
                 <ArrowRight className="w-3.5 h-3.5" />

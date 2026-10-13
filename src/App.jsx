@@ -12,7 +12,7 @@ import BookTableModal from './components/BookTableModal';
 import DishDetailModal from './components/DishDetailModal';
 import CartDrawer from './components/CartDrawer';
 import { apiService } from './services/apiService';
-import { DEFAULT_SPOTS } from './data/restaurantData';
+import { DEFAULT_SPOTS, RESTAURANT_BRANCHES } from './data/restaurantData';
 import { CheckCircle2 } from 'lucide-react';
 
 export default function App() {
@@ -27,6 +27,7 @@ export default function App() {
   const [categories, setCategories] = useState([]);
   const [spots, setSpots] = useState(DEFAULT_SPOTS);
   const [events, setEvents] = useState([]);
+  const [branches, setBranches] = useState(RESTAURANT_BRANCHES);
   const [loading, setLoading] = useState(true);
   const [isScrolled, setIsScrolled] = useState(false);
 
@@ -107,7 +108,11 @@ export default function App() {
 
   const handleOpenBookTableWithArea = (areaOrBranch = 'Bahir Dar Flagship') => {
     if (typeof areaOrBranch === 'string') {
-      if (['bahir-dar', 'addis-summit', 'pier-24', 'carmel-cove', 'newport-harbor'].includes(areaOrBranch)) {
+      const match = branches.find(b => b.id === areaOrBranch || b.branchId === areaOrBranch || b.name?.toLowerCase() === areaOrBranch.toLowerCase());
+      if (match) {
+        setSelectedBranch(match.id || match.branchId);
+        setSelectedSeatingArea(match.name || match.id);
+      } else if (['bahir-dar', 'addis-summit'].includes(areaOrBranch)) {
         const branchKey = areaOrBranch === 'addis-summit' ? 'addis-summit' : 'bahir-dar';
         setSelectedBranch(branchKey);
         setSelectedSeatingArea(branchKey === 'addis-summit' ? 'Addis Ababa - Summit' : 'Bahir Dar Flagship');
@@ -117,17 +122,19 @@ export default function App() {
     } else if (typeof areaOrBranch === 'object' && areaOrBranch !== null) {
       if (areaOrBranch.area) setSelectedSeatingArea(areaOrBranch.area);
       if (areaOrBranch.branchId) setSelectedBranch(areaOrBranch.branchId);
+      if (areaOrBranch.name) setSelectedSeatingArea(areaOrBranch.name);
     }
     setIsBookTableOpen(true);
   };
 
   const loadMenuData = async () => {
     try {
-      const [list, catList, spotList, eventList] = await Promise.all([
+      const [list, catList, spotList, eventList, branchList] = await Promise.all([
         apiService.getDishes(),
         apiService.getCategories(),
         apiService.getSpots(),
-        apiService.getEvents()
+        apiService.getEvents(),
+        apiService.getLocations()
       ]);
       setDishes(list);
       setCategories(catList);
@@ -135,6 +142,9 @@ export default function App() {
         setSpots(spotList);
       }
       setEvents(Array.isArray(eventList) ? eventList : []);
+      if (Array.isArray(branchList) && branchList.length > 0) {
+        setBranches(branchList);
+      }
     } catch (err) {
       console.error('Failed to load menu data:', err);
     } finally {
@@ -239,6 +249,7 @@ export default function App() {
             currentPage={currentPage}
             onNavigate={handleNavigate}
             spots={spots}
+            branches={branches}
           />
         )}
 
@@ -344,6 +355,7 @@ export default function App() {
             <ContactsSection
               onOpenBookTable={() => handleOpenBookTableWithArea('Ocean Terrace')}
               showToast={showToast}
+              branches={branches}
             />
           </div>
         )}
@@ -355,6 +367,7 @@ export default function App() {
         onNavigate={handleNavigate}
         currentPage={currentPage}
         hasEvents={events.length > 0}
+        branches={branches}
       />
 
       {/* Modals & Drawers */}
@@ -364,6 +377,7 @@ export default function App() {
         onBookingCompleted={handleBookingCompleted}
         initialSeatingArea={selectedSeatingArea}
         initialBranch={selectedBranch}
+        branches={branches}
       />
 
       <DishDetailModal
