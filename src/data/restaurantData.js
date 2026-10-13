@@ -36,12 +36,12 @@ export const DEFAULT_SPOTS = [
 export const RESTAURANT_BRANCHES = [
   {
     id: 'bahir-dar',
-    name: 'Bahir Dar Flagship (ባህር ዳር)',
+    name: 'Bahir Dar Flagship • Branch 1 (ባህር ዳር 1)',
     city: 'Bahir Dar, Ethiopia',
-    title: 'Gech Fish Lake Tana Flagship (ጌች ዓሳ)',
+    title: 'Gech Fresh Fish Restaurant | ጌች ትኩስ ዓሳ ቤት (Branch #1)',
     tagline: 'Fresh Lake Tana Catch & Waterfront Dining',
-    badge: 'Lake Tana Flagship',
-    address: 'Kebele 13, Near St. Michael Church, Bahir Dar',
+    badge: 'Flagship • Branch 01',
+    address: 'Kebele 13, Near St. Michael Church, Lake Tana Shore, Bahir Dar',
     phone: '+251 91 800 1234',
     email: 'bahirdar@gechfish-restaurant.com',
     hours: {
@@ -53,9 +53,9 @@ export const RESTAURANT_BRANCHES = [
       car: 'Dedicated Restaurant Parking at Kebele 13',
       yacht: 'Lake Tana Shore Access / Boat Point'
     },
-    coordinates: '11°35\'38"N 37°23\'24"E',
-    mapEmbedUrl: 'https://maps.google.com/maps?q=Bahir%20Dar%20Ethiopia&t=&z=14&ie=UTF8&iwloc=&output=embed',
-    directionsUrl: 'https://www.google.com/maps/dir/?api=1&destination=Bahir+Dar+Ethiopia',
+    coordinates: '11.6097672, 37.3772904',
+    mapEmbedUrl: 'https://maps.google.com/maps?q=11.6097672,37.3772904&t=&z=17&ie=UTF8&iwloc=&output=embed',
+    directionsUrl: 'https://maps.app.goo.gl/rGYdxK5e3qaLqCK79',
     image: 'https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=900&q=80',
     description: 'Our founding flagship located in Bahir Dar Kebele 13 near St. Michael Church. Enjoy the freshest Lake Tana fish, authentic Fish Lebleb, whole roasted fish, and pleasant open-air dining.',
     highlights: ['Lake Tana Fresh Daily Fish', 'Signature Fish Lebleb', 'Outdoor Garden & Breeze', 'Live Fish Grilling Station']
@@ -66,7 +66,7 @@ export const RESTAURANT_BRANCHES = [
     city: 'Addis Ababa, Ethiopia',
     title: 'Gech Fish House - Summit (ጌትሽ ዓሳ ቤት)',
     tagline: 'Authentic Fish Tibs, Lebleb & Family Dining',
-    badge: 'Summit Branch',
+    badge: 'Summit Branch • Branch 02',
     address: 'Geach Fish House (ጌትሽ ዓሳ ቤት), Summit Area, Behind Chanoli, Addis Ababa',
     phone: '+251 97 309 5555',
     email: 'summit@gechfish-restaurant.com',
@@ -85,6 +85,32 @@ export const RESTAURANT_BRANCHES = [
     image: 'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=900&q=80',
     description: 'Our beloved capital city location at Geach Fish House in Summit behind Chanoli. Known across Addis Ababa for sizzling Fish Tibs, rich Fish Lebleb, Fish Combo platters, and warm hospitable dining.',
     highlights: ['Signature Fish Lebleb & Tibs', 'Special Fish Combos', 'Spacious Family Seating', 'VIP Dining Area']
+  },
+  {
+    id: 'bahir-dar-3',
+    name: 'Bahir Dar Branch #3 (ባህር ዳር 3)',
+    city: 'Bahir Dar, Ethiopia',
+    title: 'Gech Fish Bahir Dar Branch #3 (ጌች ዓሳ ቅርንጫፍ 3)',
+    tagline: 'Fresh Fish Cuisine & Warm Neighborhood Hospitality',
+    badge: 'Branch 03',
+    address: 'Bahir Dar, Ethiopia (Near GPS 11.580400, 37.368497)',
+    phone: '+251 91 800 1234',
+    email: 'bahirdar3@gechfish-restaurant.com',
+    hours: {
+      lunch: 'Daily: 11:30 AM – 4:00 PM',
+      dinner: 'Daily: 5:00 PM – 11:00 PM',
+      rawBar: 'Kitchen: 10:00 AM – Late'
+    },
+    arrival: {
+      car: 'Convenient Street & Nearby Parking',
+      yacht: 'Bahir Dar City Road Access'
+    },
+    coordinates: '11.580400, 37.368497',
+    mapEmbedUrl: 'https://maps.google.com/maps?q=11.580400,37.368497&t=&z=17&ie=UTF8&iwloc=&output=embed',
+    directionsUrl: 'https://maps.app.goo.gl/LSxJLyXz9E5Aj8Pt9',
+    image: 'https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=900&q=80',
+    description: 'Our vibrant Bahir Dar Branch #3 welcoming guests with freshly caught Lake Tana fish, traditional seasonings, fish tibs, fish lebleb, and friendly service.',
+    highlights: ['Fresh Fish Specials', 'Sizzling Fish Tibs', 'Cozy Atmosphere', 'Dine-In & Takeaway']
   }
 ];
 
@@ -93,8 +119,8 @@ export const RESTAURANT_INFO = {
   fullName: 'Gech Fish Restaurant (ጌች ዓሳ)',
   tagline: 'Delicious fresh fish and authentic dining',
   subHeading: 'ጌች አሳ • fresh fish',
-  address: 'Bahir Dar (Kebele 13) & Addis Ababa (Summit, Behind Chanoli)',
-  phone: '+251 91 800 1234 / +251 91 122 3344',
+  address: 'Bahir Dar (Branch 1 & Branch 3) & Addis Ababa (Summit, Behind Chanoli)',
+  phone: '+251 91 800 1234 / +251 97 309 5555',
   email: 'reservations@gechfish-restaurant.com',
   branches: RESTAURANT_BRANCHES,
   hours: {

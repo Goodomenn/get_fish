@@ -32,21 +32,26 @@ export const DEFAULT_LOCATIONS = [
   {
     id: 'bahir-dar',
     branchId: 'bahir-dar',
-    name: 'Bahir Dar Flagship (ባህር ዳር)',
+    name: 'Bahir Dar Flagship • Branch 1 (ባህር ዳር 1)',
     city: 'Bahir Dar, Ethiopia',
-    title: 'Gech Fish Lake Tana Flagship (ጌች ዓሳ)',
+    title: 'Gech Fresh Fish Restaurant | ጌች ትኩስ ዓሳ ቤት (Branch #1)',
     tagline: 'Fresh Lake Tana Catch & Waterfront Dining',
-    badge: 'Lake Tana Flagship',
-    address: 'Kebele 13, Near St. Michael Church, Bahir Dar',
-    desc: 'Near St. Michael Church • Lake Tana waterfront dining & fresh daily catch',
+    badge: 'Flagship • Branch 01',
+    address: 'Kebele 13, Near St. Michael Church, Lake Tana Shore, Bahir Dar',
+    desc: 'Lake Tana waterfront dining, fresh daily catch & authentic Fish Lebleb',
     description: 'Our founding flagship located in Bahir Dar Kebele 13 near St. Michael Church. Enjoy the freshest Lake Tana fish, authentic Fish Lebleb, whole roasted fish, and pleasant open-air dining.',
     phone: '+251 91 800 1234',
     email: 'bahirdar@gechfish-restaurant.com',
     hours: 'Daily: 11:30 AM – 11:00 PM',
     image: 'https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=900&q=80',
-    mapEmbedUrl: 'https://maps.google.com/maps?q=Bahir%20Dar%20Ethiopia&t=&z=14&ie=UTF8&iwloc=&output=embed',
-    directionsUrl: 'https://www.google.com/maps/dir/?api=1&destination=Bahir+Dar+Ethiopia',
-    highlights: ['Fresh Lake Tana Catch', 'Authentic Fish Lebleb', 'Open-air Lakeside Dining', 'Traditional Hospitality']
+    mapEmbedUrl: 'https://maps.google.com/maps?q=11.6097672,37.3772904&t=&z=17&ie=UTF8&iwloc=&output=embed',
+    directionsUrl: 'https://maps.app.goo.gl/rGYdxK5e3qaLqCK79',
+    coordinates: '11.6097672, 37.3772904',
+    highlights: ['Lake Tana Fresh Daily Fish', 'Signature Fish Lebleb', 'Outdoor Garden & Breeze', 'Live Fish Grilling Station'],
+    arrival: {
+      car: 'Dedicated Restaurant Parking at Kebele 13',
+      yacht: 'Lake Tana Shore Access / Boat Point'
+    }
   },
   {
     id: 'addis-summit',
@@ -55,7 +60,7 @@ export const DEFAULT_LOCATIONS = [
     city: 'Addis Ababa, Ethiopia',
     title: 'Gech Fish House - Summit (ጌትሽ ዓሳ ቤት)',
     tagline: 'Authentic Fish Tibs, Lebleb & Family Dining',
-    badge: 'Summit Branch',
+    badge: 'Summit Branch • Branch 02',
     address: 'Geach Fish House (ጌትሽ ዓሳ ቤት), Summit Area, Behind Chanoli, Addis Ababa',
     desc: 'Geach Fish House (ጌትሽ ዓሳ ቤት) • Behind Chanoli • Sizzling Fish Tibs, Fish Lebleb & family dining',
     description: 'Our beloved capital city location at Geach Fish House in Summit behind Chanoli. Known across Addis Ababa for sizzling Fish Tibs, rich Fish Lebleb, Fish Combo platters, and warm hospitable dining.',
@@ -65,7 +70,36 @@ export const DEFAULT_LOCATIONS = [
     image: 'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=900&q=80',
     mapEmbedUrl: 'https://maps.google.com/maps?q=Geach%20Fish%20House%20%E1%8C%8C%E1%89%B5%E1%88%BD%20%E1%8B%93%E1%88%B3%20%E1%89%A4%E1%89%B5&t=&z=17&ie=UTF8&iwloc=&output=embed',
     directionsUrl: 'https://share.google/8BpubzRpxfg65kfTH',
-    highlights: ['Sizzling Fish Tibs', 'Special Fish Combo Platters', 'Warm Family Seating', 'Direct Delivery Service']
+    coordinates: '9°00\'41.6"N 38°51\'02.5"E',
+    highlights: ['Signature Fish Lebleb & Tibs', 'Special Fish Combos', 'Spacious Family Seating', 'VIP Dining Area'],
+    arrival: {
+      car: 'Convenient Parking behind Chanoli',
+      yacht: 'Summit Main Road Access'
+    }
+  },
+  {
+    id: 'bahir-dar-3',
+    branchId: 'bahir-dar-3',
+    name: 'Bahir Dar Branch #3 (ባህር ዳር 3)',
+    city: 'Bahir Dar, Ethiopia',
+    title: 'Gech Fish Bahir Dar Branch #3 (ጌች ዓሳ ቅርንጫፍ 3)',
+    tagline: 'Fresh Fish Cuisine & Warm Neighborhood Hospitality',
+    badge: 'Branch 03',
+    address: 'Bahir Dar, Ethiopia (Near GPS 11.580400, 37.368497)',
+    desc: 'Freshly fried daily fish, rich fish soup, fish tibs and relaxed dining in Bahir Dar',
+    description: 'Our vibrant Bahir Dar Branch #3 welcoming guests with freshly caught Lake Tana fish, traditional seasonings, fish tibs, fish lebleb, and friendly service.',
+    phone: '+251 91 800 1234',
+    email: 'bahirdar3@gechfish-restaurant.com',
+    hours: 'Daily: 11:30 AM – 11:00 PM',
+    image: 'https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=900&q=80',
+    mapEmbedUrl: 'https://maps.google.com/maps?q=11.580400,37.368497&t=&z=17&ie=UTF8&iwloc=&output=embed',
+    directionsUrl: 'https://maps.app.goo.gl/LSxJLyXz9E5Aj8Pt9',
+    coordinates: '11.580400, 37.368497',
+    highlights: ['Fresh Fish Specials', 'Sizzling Fish Tibs', 'Cozy Atmosphere', 'Dine-In & Takeaway'],
+    arrival: {
+      car: 'Convenient Street & Nearby Parking',
+      yacht: 'Bahir Dar City Road Access'
+    }
   }
 ];
 
@@ -182,6 +216,7 @@ class ApiService {
             id: docSnap.id,
             ...docSnap.data()
           }));
+          list.sort((a, b) => (a.order || 99) - (b.order || 99));
           localStorage.setItem(LOCAL_STORAGE_LOCATIONS, JSON.stringify(list));
           this.notifySubscribers();
         }
@@ -443,6 +478,7 @@ class ApiService {
         const snap = await withTimeout(getDocs(collection(db, 'locations')), 8000, 'Locations fetch');
         if (!snap.empty) {
           const list = snap.docs.map((d) => ({ id: d.id, ...d.data() }));
+          list.sort((a, b) => (a.order || 99) - (b.order || 99));
           localStorage.setItem(LOCAL_STORAGE_LOCATIONS, JSON.stringify(list));
           return list;
         }
