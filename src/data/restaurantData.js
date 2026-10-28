@@ -108,7 +108,13 @@ export const RESTAURANT_BRANCHES = [
     coordinates: '11.580400, 37.368497',
     mapEmbedUrl: 'https://maps.google.com/maps?q=11.580400,37.368497&t=&z=17&ie=UTF8&iwloc=&output=embed',
     directionsUrl: 'https://maps.app.goo.gl/LSxJLyXz9E5Aj8Pt9',
-    image: 'https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=900&q=80',
+    image: '/branches/branch3-1.jpg',
+    images: [
+      '/branches/branch3-1.jpg',
+      '/branches/branch3-2.jpg',
+      '/branches/branch3-3.jpg',
+      '/branches/branch3-4.jpg'
+    ],
     description: 'Our vibrant Bahir Dar Branch #3 welcoming guests with freshly caught Lake Tana fish, traditional seasonings, fish tibs, fish lebleb, and friendly service.',
     highlights: ['Fresh Fish Specials', 'Sizzling Fish Tibs', 'Cozy Atmosphere', 'Dine-In & Takeaway']
   }

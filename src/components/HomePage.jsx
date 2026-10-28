@@ -19,6 +19,160 @@ import {
 } from 'lucide-react';
 import { RESTAURANT_DISHES, RESTAURANT_INFO, RESTAURANT_BRANCHES, DEFAULT_SPOTS } from '../data/restaurantData';
 
+const resolveAssetUrl = (url) => {
+  if (!url) return '';
+  if (url.startsWith('http://') || url.startsWith('https://') || url.startsWith('data:')) {
+    return url;
+  }
+  const base = import.meta.env.BASE_URL || '/';
+  const cleanPath = url.startsWith('/') ? url.slice(1) : url;
+  return `${base}${cleanPath}`;
+};
+
+function BranchSlideshowImage({
+  branch,
+  branchName,
+  branchBadge,
+  branchCity,
+  idx
+}) {
+  const defaultBahirDar3Images = [
+    '/branches/branch3-1.jpg',
+    '/branches/branch3-2.jpg',
+    '/branches/branch3-3.jpg',
+    '/branches/branch3-4.jpg'
+  ];
+
+  const rawImages = (Array.isArray(branch.images) && branch.images.length > 0)
+    ? branch.images
+    : ((branch.id === 'bahir-dar-3' || branch.branchId === 'bahir-dar-3')
+      ? defaultBahirDar3Images
+      : [branch.image || 'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=900&q=80']);
+
+  const images = rawImages.map(resolveAssetUrl);
+  const hasMultiple = images.length > 1;
+
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [isPaused, setIsPaused] = useState(false);
+
+  useEffect(() => {
+    if (!hasMultiple || isPaused) return;
+    const interval = setInterval(() => {
+      setCurrentIndex((prev) => (prev + 1) % images.length);
+    }, 3000); // 3 seconds automatic slideshow
+
+    return () => clearInterval(interval);
+  }, [hasMultiple, isPaused, images.length]);
+
+  const handlePrev = (e) => {
+    e.stopPropagation();
+    setCurrentIndex((prev) => (prev - 1 + images.length) % images.length);
+  };
+
+  const handleNext = (e) => {
+    e.stopPropagation();
+    setCurrentIndex((prev) => (prev + 1) % images.length);
+  };
+
+  return (
+    <div
+      className="relative md:w-5/12 lg:w-1/2 min-h-[280px] sm:min-h-[320px] overflow-hidden select-none group/slide"
+      onMouseEnter={() => setIsPaused(true)}
+      onMouseLeave={() => setIsPaused(false)}
+    >
+      {/* Slides (Stacked Images with Smooth Crossfade) */}
+      {images.map((imgSrc, i) => (
+        <img
+          key={i}
+          src={imgSrc}
+          alt={`${branchName} - Photo ${i + 1}`}
+          className={`absolute inset-0 w-full h-full object-cover transition-all duration-700 ease-in-out ${
+            i === currentIndex
+              ? 'opacity-100 scale-100 z-0'
+              : 'opacity-0 scale-105 pointer-events-none'
+          }`}
+          loading={i === 0 ? 'eager' : 'lazy'}
+        />
+      ))}
+
+      {/* Dark Ambiance Vignette Gradients */}
+      <div className="absolute inset-0 bg-gradient-to-t md:bg-gradient-to-r from-transparent via-[#050e17]/30 to-[#050e17] opacity-90 z-10 pointer-events-none" />
+
+      {/* Top Badges */}
+      <div className="absolute top-4 left-4 right-4 flex items-center justify-between z-20 pointer-events-none">
+        <span className="px-3 py-1 bg-[#050e17]/85 backdrop-blur-md border border-gold-500/40 text-gold-300 text-[10px] font-serif uppercase tracking-widest rounded-full font-bold shadow-lg">
+          {branchBadge}
+        </span>
+        <div className="flex items-center space-x-1.5">
+          {hasMultiple && (
+            <span className="px-2 py-0.5 bg-black/75 backdrop-blur-md border border-gold-400/40 text-gold-300 text-[9px] font-mono rounded-full flex items-center space-x-1 shadow-md">
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+              <span>{currentIndex + 1}/{images.length}</span>
+            </span>
+          )}
+          <span className="px-2.5 py-1 bg-black/60 backdrop-blur-md text-slate-300 text-[10px] font-mono rounded-full">
+            Branch 0{idx + 1}
+          </span>
+        </div>
+      </div>
+
+      {/* Navigation Arrows for Slideshow (visible on hover) */}
+      {hasMultiple && (
+        <>
+          <button
+            type="button"
+            onClick={handlePrev}
+            className="absolute left-3 top-1/2 -translate-y-1/2 z-20 w-8 h-8 rounded-full bg-black/65 hover:bg-gold-500 hover:text-black text-white/90 border border-white/10 flex items-center justify-center transition-all opacity-0 group-hover/slide:opacity-100 shadow-xl cursor-pointer"
+            aria-label="Previous image"
+          >
+            <ChevronLeft className="w-4 h-4" />
+          </button>
+          <button
+            type="button"
+            onClick={handleNext}
+            className="absolute right-3 top-1/2 -translate-y-1/2 z-20 w-8 h-8 rounded-full bg-black/65 hover:bg-gold-500 hover:text-black text-white/90 border border-white/10 flex items-center justify-center transition-all opacity-0 group-hover/slide:opacity-100 shadow-xl cursor-pointer"
+            aria-label="Next image"
+          >
+            <ChevronRight className="w-4 h-4" />
+          </button>
+        </>
+      )}
+
+      {/* Bottom Dot Indicators */}
+      {hasMultiple && (
+        <div className="absolute bottom-14 md:bottom-4 left-4 z-20 flex items-center space-x-1.5 px-2.5 py-1 rounded-full bg-black/60 backdrop-blur-md border border-white/10 shadow-lg">
+          {images.map((_, dotIdx) => (
+            <button
+              key={dotIdx}
+              type="button"
+              onClick={(e) => {
+                e.stopPropagation();
+                setCurrentIndex(dotIdx);
+              }}
+              className={`h-1.5 rounded-full transition-all duration-300 cursor-pointer ${
+                dotIdx === currentIndex
+                  ? 'w-5 bg-gold-400'
+                  : 'w-1.5 bg-white/40 hover:bg-white/70'
+              }`}
+              aria-label={`Slide ${dotIdx + 1}`}
+            />
+          ))}
+        </div>
+      )}
+
+      {/* City and Title overlay on small screens */}
+      <div className="absolute bottom-4 left-4 right-4 md:hidden z-20 pointer-events-none">
+        <span className="text-xs text-gold-300 font-serif italic block">
+          {branchCity}
+        </span>
+        <h3 className="font-serif text-xl text-white font-bold tracking-wide uppercase">
+          {branchName}
+        </h3>
+      </div>
+    </div>
+  );
+}
+
 export default function HomePage({
   onOpenMenu,
   onOpenDish,
@@ -477,35 +631,14 @@ export default function HomePage({
                   key={branchId}
                   className="bg-[#050e17] border border-slate-800/90 hover:border-gold-500/40 rounded-3xl overflow-hidden transition-all duration-300 group hover:-translate-y-1 shadow-2xl flex flex-col md:flex-row items-stretch"
                 >
-                  {/* Branch Photo */}
-                  <div className="relative md:w-5/12 lg:w-1/2 min-h-[260px] sm:min-h-[300px] overflow-hidden">
-                    <img
-                      src={branchImage}
-                      alt={branchName}
-                      className="w-full h-full object-cover group-hover:scale-105 transition duration-700"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t md:bg-gradient-to-r from-transparent via-[#050e17]/30 to-[#050e17] opacity-90" />
-                    
-                    {/* Top Badges */}
-                    <div className="absolute top-4 left-4 right-4 flex items-center justify-between">
-                      <span className="px-3 py-1 bg-[#050e17]/85 backdrop-blur-md border border-gold-500/40 text-gold-300 text-[10px] font-serif uppercase tracking-widest rounded-full font-bold">
-                        {branchBadge}
-                      </span>
-                      <span className="px-2.5 py-1 bg-black/60 backdrop-blur-md text-slate-300 text-[10px] font-mono rounded-full">
-                        Branch 0{idx + 1}
-                      </span>
-                    </div>
-
-                    {/* City and Title overlay on small screens */}
-                    <div className="absolute bottom-4 left-4 right-4 md:hidden">
-                      <span className="text-xs text-gold-300 font-serif italic block">
-                        {branchCity}
-                      </span>
-                      <h3 className="font-serif text-xl text-white font-bold tracking-wide uppercase">
-                        {branchName}
-                      </h3>
-                    </div>
-                  </div>
+                  {/* Branch Photo / Automatic Slideshow */}
+                  <BranchSlideshowImage
+                    branch={branch}
+                    branchName={branchName}
+                    branchBadge={branchBadge}
+                    branchCity={branchCity}
+                    idx={idx}
+                  />
 
                   {/* Branch Details & Actions */}
                   <div className="p-6 sm:p-8 md:w-7/12 lg:w-1/2 flex flex-col justify-between space-y-6">
