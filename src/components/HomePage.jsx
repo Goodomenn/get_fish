@@ -18,7 +18,10 @@ import {
   BookOpen,
   Play,
   Pause,
-  Film
+  Film,
+  Volume2,
+  VolumeX,
+  RotateCcw
 } from 'lucide-react';
 import { RESTAURANT_DISHES, RESTAURANT_INFO, RESTAURANT_BRANCHES, DEFAULT_SPOTS } from '../data/restaurantData';
 
@@ -181,25 +184,75 @@ function BranchSlideshowImage({
 
 function RestaurantVideoSection() {
   const [isPlaying, setIsPlaying] = useState(false);
+  const [isMuted, setIsMuted] = useState(true);
   const videoRef = useRef(null);
+  const sectionRef = useRef(null);
 
   // Cloud Firebase Storage URL or local fallback to /videos/ti-be.mp4
   const videoSrc = import.meta.env.VITE_RESTAURANT_VIDEO_URL || resolveAssetUrl('/videos/ti-be.mp4');
   const posterSrc = resolveAssetUrl('/branches/branch3-2.jpg');
 
+  // Automatic scroll-triggered play & loop
+  useEffect(() => {
+    const video = videoRef.current;
+    const section = sectionRef.current;
+    if (!video || !section) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            // Browsers allow autoplay on scroll when muted
+            video.muted = isMuted;
+            const playPromise = video.play();
+            if (playPromise !== undefined) {
+              playPromise
+                .then(() => setIsPlaying(true))
+                .catch(() => {
+                  // Fallback: ensure muted and retry if browser required user gesture
+                  video.muted = true;
+                  setIsMuted(true);
+                  video.play().then(() => setIsPlaying(true)).catch(() => {});
+                });
+            }
+          } else {
+            video.pause();
+            setIsPlaying(false);
+          }
+        });
+      },
+      {
+        threshold: 0.25 // Starts playing when 25% of the video section enters viewport
+      }
+    );
+
+    observer.observe(section);
+
+    return () => {
+      observer.disconnect();
+    };
+  }, [isMuted]);
+
   const handleTogglePlay = () => {
     if (!videoRef.current) return;
     if (videoRef.current.paused) {
-      videoRef.current.play();
-      setIsPlaying(true);
+      videoRef.current.play().then(() => setIsPlaying(true)).catch(() => {});
     } else {
       videoRef.current.pause();
       setIsPlaying(false);
     }
   };
 
+  const handleToggleMute = (e) => {
+    e.stopPropagation();
+    if (!videoRef.current) return;
+    const nextMuted = !videoRef.current.muted;
+    videoRef.current.muted = nextMuted;
+    setIsMuted(nextMuted);
+  };
+
   return (
-    <section className="py-20 sm:py-24 bg-[#071421] relative border-t border-slate-800">
+    <section ref={sectionRef} className="py-20 sm:py-24 bg-[#071421] relative border-t border-slate-800">
       <div className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-12">
         {/* Centered Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-10 sm:mb-14 space-y-3">
@@ -217,14 +270,19 @@ function RestaurantVideoSection() {
 
         {/* Video Player in Center with Left & Right Margins */}
         <div className="max-w-4xl mx-auto px-2 sm:px-4">
-          <div className="relative rounded-3xl overflow-hidden border border-gold-500/40 bg-[#050e17] shadow-[0_20px_50px_rgba(0,0,0,0.85),0_0_35px_rgba(212,175,55,0.15)] group">
+          <div
+            onClick={handleTogglePlay}
+            className="relative rounded-3xl overflow-hidden border border-gold-500/40 bg-[#050e17] shadow-[0_20px_50px_rgba(0,0,0,0.85),0_0_35px_rgba(212,175,55,0.15)] group cursor-pointer select-none"
+          >
             <video
               ref={videoRef}
               src={videoSrc}
               poster={posterSrc}
-              controls
+              loop
+              muted={isMuted}
+              autoPlay
               playsInline
-              preload="metadata"
+              preload="auto"
               onPlay={() => setIsPlaying(true)}
               onPause={() => setIsPlaying(false)}
               className="w-full aspect-video max-h-[560px] object-contain bg-[#030911] block"
@@ -232,11 +290,38 @@ function RestaurantVideoSection() {
               Your browser does not support the video tag.
             </video>
 
-            {/* Ambient Play Overlay (visible when paused) */}
+            {/* Top Bar Badges */}
+            <div className="absolute top-4 left-4 right-4 flex items-center justify-between z-20 pointer-events-none">
+              <span className="px-3 py-1 bg-black/80 backdrop-blur-md border border-gold-500/40 text-gold-300 text-[10px] font-mono uppercase tracking-widest rounded-full font-bold flex items-center space-x-1.5 shadow-lg">
+                <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                <span>Auto-Looping Tour</span>
+              </span>
+
+              {/* Sound Toggle Button (interactive) */}
+              <button
+                type="button"
+                onClick={handleToggleMute}
+                className="pointer-events-auto px-3 py-1.5 rounded-full bg-black/80 hover:bg-gold-500 hover:text-slate-950 text-gold-300 border border-gold-500/40 backdrop-blur-md flex items-center space-x-1.5 transition-all text-xs font-serif shadow-xl cursor-pointer"
+                aria-label={isMuted ? "Unmute sound" : "Mute sound"}
+              >
+                {isMuted ? (
+                  <>
+                    <VolumeX className="w-3.5 h-3.5" />
+                    <span className="text-[11px] font-sans font-medium">Unmute Sound</span>
+                  </>
+                ) : (
+                  <>
+                    <Volume2 className="w-3.5 h-3.5 text-emerald-400" />
+                    <span className="text-[11px] font-sans font-medium">Sound Active</span>
+                  </>
+                )}
+              </button>
+            </div>
+
+            {/* Ambient Play Overlay (only when paused) */}
             {!isPlaying && (
               <div
-                onClick={handleTogglePlay}
-                className="absolute inset-0 bg-black/40 backdrop-blur-[2px] flex flex-col items-center justify-center cursor-pointer transition-all duration-300 hover:bg-black/30 group/play"
+                className="absolute inset-0 bg-black/45 backdrop-blur-[2px] flex flex-col items-center justify-center transition-all duration-300 group/play"
               >
                 <div className="w-20 h-20 sm:w-24 sm:h-24 rounded-full bg-gold-500/90 hover:bg-gold-400 text-slate-950 flex items-center justify-center shadow-[0_0_35px_rgba(212,175,55,0.7)] transition-all transform group-hover/play:scale-110 active:scale-95">
                   <Play className="w-9 h-9 sm:w-11 sm:h-11 ml-1 fill-current" />
@@ -244,7 +329,7 @@ function RestaurantVideoSection() {
                 <div className="mt-4 flex items-center space-x-2 bg-black/75 px-4 py-1.5 rounded-full border border-gold-500/30 backdrop-blur-sm shadow-xl">
                   <Film className="w-3.5 h-3.5 text-gold-400" />
                   <span className="font-serif text-xs uppercase tracking-[0.2em] text-gold-200 font-bold">
-                    Watch Experience Tour
+                    Click to Play
                   </span>
                 </div>
               </div>
