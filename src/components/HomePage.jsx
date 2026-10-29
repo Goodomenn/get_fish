@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import Hero from './Hero';
 import {
   Fish,
@@ -15,7 +15,10 @@ import {
   MapPin,
   ArrowRight,
   Plus,
-  BookOpen
+  BookOpen,
+  Play,
+  Pause,
+  Film
 } from 'lucide-react';
 import { RESTAURANT_DISHES, RESTAURANT_INFO, RESTAURANT_BRANCHES, DEFAULT_SPOTS } from '../data/restaurantData';
 
@@ -176,6 +179,99 @@ function BranchSlideshowImage({
   );
 }
 
+function RestaurantVideoSection() {
+  const [isPlaying, setIsPlaying] = useState(false);
+  const videoRef = useRef(null);
+
+  // Cloud Firebase Storage URL or local fallback to /videos/gech2.mp4
+  const videoSrc = import.meta.env.VITE_RESTAURANT_VIDEO_URL || resolveAssetUrl('/videos/gech2.mp4');
+  const posterSrc = resolveAssetUrl('/branches/branch3-2.jpg');
+
+  const handleTogglePlay = () => {
+    if (!videoRef.current) return;
+    if (videoRef.current.paused) {
+      videoRef.current.play();
+      setIsPlaying(true);
+    } else {
+      videoRef.current.pause();
+      setIsPlaying(false);
+    }
+  };
+
+  return (
+    <section className="py-20 sm:py-24 bg-[#071421] relative border-t border-slate-800">
+      <div className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-12">
+        {/* Centered Section Header */}
+        <div className="text-center max-w-3xl mx-auto mb-10 sm:mb-14 space-y-3">
+          <span className="font-serif italic text-gold-300 text-lg tracking-wider block">
+            the dining experience
+          </span>
+          <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl text-white tracking-tight uppercase">
+            EXPERIENCE GECH FISH IN MOTION
+          </h2>
+          <div className="w-16 h-0.5 bg-gold-500/70 mx-auto mt-3" />
+          <p className="text-xs sm:text-sm text-slate-300 font-light leading-relaxed max-w-2xl mx-auto pt-1">
+            Immerse yourself in the authentic flavors, warm Ethiopian hospitality, and fresh Lake Tana catch that define our culinary experience.
+          </p>
+        </div>
+
+        {/* Video Player in Center with Left & Right Margins */}
+        <div className="max-w-4xl mx-auto px-2 sm:px-4">
+          <div className="relative rounded-3xl overflow-hidden border border-gold-500/40 bg-[#050e17] shadow-[0_20px_50px_rgba(0,0,0,0.85),0_0_35px_rgba(212,175,55,0.15)] group">
+            <video
+              ref={videoRef}
+              src={videoSrc}
+              poster={posterSrc}
+              controls
+              playsInline
+              preload="metadata"
+              onPlay={() => setIsPlaying(true)}
+              onPause={() => setIsPlaying(false)}
+              className="w-full aspect-video object-cover bg-black block"
+            >
+              Your browser does not support the video tag.
+            </video>
+
+            {/* Ambient Play Overlay (visible when paused) */}
+            {!isPlaying && (
+              <div
+                onClick={handleTogglePlay}
+                className="absolute inset-0 bg-black/40 backdrop-blur-[2px] flex flex-col items-center justify-center cursor-pointer transition-all duration-300 hover:bg-black/30 group/play"
+              >
+                <div className="w-20 h-20 sm:w-24 sm:h-24 rounded-full bg-gold-500/90 hover:bg-gold-400 text-slate-950 flex items-center justify-center shadow-[0_0_35px_rgba(212,175,55,0.7)] transition-all transform group-hover/play:scale-110 active:scale-95">
+                  <Play className="w-9 h-9 sm:w-11 sm:h-11 ml-1 fill-current" />
+                </div>
+                <div className="mt-4 flex items-center space-x-2 bg-black/75 px-4 py-1.5 rounded-full border border-gold-500/30 backdrop-blur-sm shadow-xl">
+                  <Film className="w-3.5 h-3.5 text-gold-400" />
+                  <span className="font-serif text-xs uppercase tracking-[0.2em] text-gold-200 font-bold">
+                    Watch Experience Tour
+                  </span>
+                </div>
+              </div>
+            )}
+          </div>
+
+          {/* Highlights Strip Underneath */}
+          <div className="mt-8 grid grid-cols-1 sm:grid-cols-3 gap-4 text-center">
+            <div className="bg-[#050e17]/80 border border-slate-800/90 rounded-2xl p-4">
+              <span className="text-gold-400 font-serif font-bold text-xs uppercase tracking-wider block">Daily Fresh Catch</span>
+              <span className="text-[11px] text-slate-400 mt-0.5 block">Sustainably sourced Lake Tana fish</span>
+            </div>
+            <div className="bg-[#050e17]/80 border border-slate-800/90 rounded-2xl p-4">
+              <span className="text-gold-400 font-serif font-bold text-xs uppercase tracking-wider block">Authentic Ambiance</span>
+              <span className="text-[11px] text-slate-400 mt-0.5 block">Warm woodwork & modern lakeside vibe</span>
+            </div>
+            <div className="bg-[#050e17]/80 border border-slate-800/90 rounded-2xl p-4">
+              <span className="text-gold-400 font-serif font-bold text-xs uppercase tracking-wider block">Live Kitchen Stations</span>
+              <span className="text-[11px] text-slate-400 mt-0.5 block">Freshly grilled fish tibs & lebleb</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
 export default function HomePage({
   onOpenMenu,
   onOpenDish,
@@ -232,10 +328,6 @@ export default function HomePage({
     return () => clearInterval(timer);
   }, [criticReviews.length]);
 
-  // Curated Signature Dishes to display on the Home Page
-  const featuredDishes = RESTAURANT_DISHES.filter(
-    (d) => d.badge === "Chef's Masterpiece" || d.badge === 'Signature Platter' || d.badge === 'Best Seller' || d.id === 'dish-4' || d.id === 'dish-6' || d.id === 'dish-7'
-  ).slice(0, 6);
 
   // Dining Spaces (Dynamically fetched from Database / Firestore)
   const atmospheres = Array.isArray(spots) && spots.length > 0 ? spots : DEFAULT_SPOTS;
@@ -416,121 +508,8 @@ export default function HomePage({
         </div>
       </section>
 
-      {/* 5. CHEF'S SIGNATURE FISH SPECIALTIES */}
-      <section className="py-24 bg-[#071421] relative border-t border-slate-800">
-        <div className="max-w-7xl mx-auto px-6 sm:px-10">
-          <div className="flex flex-col md:flex-row md:items-end justify-between mb-14">
-            <div>
-              <span className="font-serif italic text-gold-300 text-lg tracking-wider block">
-                the culinary collection
-              </span>
-              <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl text-white tracking-tight uppercase mt-1">
-                CHEF'S SIGNATURE FISH SPECIALTIES
-              </h2>
-              <div className="w-16 h-0.5 bg-gold-500/70 mt-3" />
-            </div>
-
-            <button
-              onClick={() => onNavigate('menu')}
-              className="mt-6 md:mt-0 inline-flex items-center space-x-2 text-xs font-serif tracking-[0.2em] uppercase text-gold-300 hover:text-white border-b border-gold-500/60 pb-1 transition group"
-            >
-              <span>View All 20+ Creations</span>
-              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition" />
-            </button>
-          </div>
-
-          {/* Dishes Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {featuredDishes.map((dish) => (
-              <div
-                key={dish.id}
-                className="bg-[#050e17] border border-slate-800 hover:border-gold-500/50 rounded-2xl overflow-hidden transition-all duration-500 flex flex-col group hover:-translate-y-1 shadow-2xl relative"
-              >
-                {/* Circular Dish Plate Header Container */}
-                <div
-                  onClick={() => onOpenDish(dish)}
-                  className="relative p-6 flex items-center justify-center cursor-pointer bg-gradient-to-b from-[#091b2c]/60 to-transparent overflow-hidden"
-                >
-                  {/* Subtle plate glow */}
-                  <div className="w-48 h-48 sm:w-52 sm:h-52 rounded-full relative p-2 bg-gradient-to-br from-[#0e2742] via-[#081829] to-[#030911] border-4 border-[#071626] ring-1 ring-gold-500/35 shadow-[0_18px_40px_rgba(0,0,0,0.9),0_0_25px_rgba(212,175,55,0.12)] flex items-center justify-center transition-transform duration-700 group-hover:scale-105">
-                    
-                    {/* Inner plate image */}
-                    <div className="w-full h-full rounded-full overflow-hidden relative shadow-inner bg-slate-900">
-                      {dish.image ? (
-                        <img
-                          src={dish.image}
-                          alt={dish.name}
-                          className="w-full h-full object-cover rounded-full group-hover:scale-110 transition-transform duration-700 ease-out"
-                        />
-                      ) : (
-                        <div className="w-full h-full rounded-full flex flex-col items-center justify-center bg-gradient-to-br from-[#0c233c] to-[#040e17] text-center p-3">
-                          <span className="font-serif italic text-gold-300 text-xs">{dish.name}</span>
-                        </div>
-                      )}
-                      {/* Glaze highlight */}
-                      <div className="absolute inset-0 bg-gradient-to-tr from-black/40 via-transparent to-white/10 pointer-events-none rounded-full" />
-                    </div>
-
-                    {/* Attached Gold Price Badge (Reference Style) */}
-                    <div className="absolute -right-3 top-1/2 -translate-y-1/2 z-20">
-                      <div className="bg-gradient-to-r from-amber-400 via-amber-300 to-gold-400 text-slate-950 font-serif font-bold text-xs px-3 py-1 rounded shadow-xl tracking-wider border border-amber-200/90 whitespace-nowrap">
-                        {typeof dish.price === 'number' ? dish.price.toLocaleString() : dish.price} ETB
-                      </div>
-                    </div>
-                  </div>
-
-                  {dish.badge && (
-                    <span className="absolute top-4 left-4 bg-[#091b2c]/90 border border-gold-500/40 text-gold-300 px-3 py-1 rounded-full text-[10px] font-serif uppercase tracking-wider backdrop-blur-sm shadow">
-                      {dish.badge}
-                    </span>
-                  )}
-                </div>
-
-                {/* Content */}
-                <div className="p-6 flex-1 flex flex-col justify-between space-y-4">
-                  <div>
-                    <span className="text-[11px] font-serif italic text-gold-400 block mb-1">
-                      {dish.frenchName || dish.category}
-                    </span>
-                    <h3
-                      onClick={() => onOpenDish(dish)}
-                      className="font-serif text-lg sm:text-xl text-white group-hover:text-gold-300 transition cursor-pointer line-clamp-1"
-                    >
-                      {dish.name}
-                    </h3>
-                    <p className="text-xs text-slate-300/80 font-light mt-2 line-clamp-2 leading-relaxed">
-                      {dish.description}
-                    </p>
-                  </div>
-
-                  {dish.pairingWine && (
-                    <div className="bg-[#071421] p-2.5 rounded-lg border border-slate-800 text-[11px] text-slate-300 flex items-center space-x-2">
-                      <Wine className="w-3.5 h-3.5 text-gold-400 shrink-0" />
-                      <span className="truncate italic">Pairing: {dish.pairingWine}</span>
-                    </div>
-                  )}
-
-                  <div className="flex items-center space-x-3 pt-2">
-                    <button
-                      onClick={() => onAddToCart(dish)}
-                      className="flex-1 py-2.5 bg-gold-500 hover:bg-gold-400 text-slate-950 font-serif text-xs font-bold tracking-wider uppercase rounded-lg transition flex items-center justify-center space-x-1 shadow-md active:scale-95 cursor-pointer"
-                    >
-                      <Plus className="w-3.5 h-3.5" />
-                      <span>Add to Ticket</span>
-                    </button>
-                    <button
-                      onClick={() => onOpenDish(dish)}
-                      className="px-3.5 py-2.5 border border-slate-700 hover:border-gold-400 text-slate-300 hover:text-white rounded-lg text-xs font-serif transition cursor-pointer"
-                    >
-                      Details
-                    </button>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+      {/* 5. RESTAURANT VIDEO EXPERIENCE (CENTERED WITH HORIZONTAL MARGINS) */}
+      <RestaurantVideoSection />
 
       {/* 6. FOUR UNIQUE DINING SALONS */}
       <section className="py-24 bg-[#050e17] relative border-t border-slate-800">
