@@ -121,6 +121,17 @@ const withTimeout = (promise, ms = 8000, label = 'Firestore operation') =>
     )
   ]);
 
+// Safe LocalStorage wrapper: protects against quota exceeded errors
+const safeSetLocalStorage = (key, value) => {
+  if (typeof window === 'undefined') return;
+  try {
+    const serialized = typeof value === 'string' ? value : JSON.stringify(value);
+    localStorage.setItem(key, serialized);
+  } catch (err) {
+    console.warn(`[LocalStorage] Quota warning for ${key}:`, err.message);
+  }
+};
+
 class ApiService {
   constructor() {
     this.isBackendAvailable = false;
@@ -171,7 +182,7 @@ class ApiService {
             id: docSnap.id,
             ...docSnap.data()
           }));
-          localStorage.setItem(LOCAL_STORAGE_DISHES, JSON.stringify(list));
+          safeSetLocalStorage(LOCAL_STORAGE_DISHES, list);
           this.notifySubscribers();
         }
       }, (err) => {
@@ -185,7 +196,7 @@ class ApiService {
             id: docSnap.id,
             ...docSnap.data()
           }));
-          localStorage.setItem(LOCAL_STORAGE_RESERVATIONS, JSON.stringify(list));
+          safeSetLocalStorage(LOCAL_STORAGE_RESERVATIONS, list);
           this.notifySubscribers();
         }
       }, (err) => {
@@ -199,7 +210,7 @@ class ApiService {
             id: docSnap.id,
             ...docSnap.data()
           }));
-          localStorage.setItem(LOCAL_STORAGE_SPOTS, JSON.stringify(list));
+          safeSetLocalStorage(LOCAL_STORAGE_SPOTS, list);
           this.notifySubscribers();
         }
       }, (err) => {
@@ -212,7 +223,7 @@ class ApiService {
           id: docSnap.id,
           ...docSnap.data()
         }));
-        localStorage.setItem(LOCAL_STORAGE_EVENTS, JSON.stringify(list));
+        safeSetLocalStorage(LOCAL_STORAGE_EVENTS, list);
         this.notifySubscribers();
       }, (err) => {
         console.warn('[Firestore] Events listener notice:', err.message);
@@ -226,7 +237,7 @@ class ApiService {
             ...docSnap.data()
           }));
           list.sort((a, b) => (a.order || 99) - (b.order || 99));
-          localStorage.setItem(LOCAL_STORAGE_LOCATIONS, JSON.stringify(list));
+          safeSetLocalStorage(LOCAL_STORAGE_LOCATIONS, list);
           this.notifySubscribers();
         }
       }, (err) => {
@@ -404,7 +415,7 @@ class ApiService {
         const data = await res.json();
         if (Array.isArray(data) && data.length >= RESTAURANT_DISHES.length) {
           this.isBackendAvailable = true;
-          localStorage.setItem(LOCAL_STORAGE_DISHES, JSON.stringify(data));
+          safeSetLocalStorage(LOCAL_STORAGE_DISHES, data);
           return data;
         }
       }
@@ -419,7 +430,7 @@ class ApiService {
         const snapshot = await withTimeout(getDocs(dishesRef), 8000, 'Dishes fetch');
         if (!snapshot.empty) {
           const list = snapshot.docs.map((d) => ({ id: d.id, ...d.data() }));
-          localStorage.setItem(LOCAL_STORAGE_DISHES, JSON.stringify(list));
+          safeSetLocalStorage(LOCAL_STORAGE_DISHES, list);
           return list;
         } else {
           await this.seedInitialFirestoreDishes();
@@ -440,7 +451,7 @@ class ApiService {
       } catch (e) {}
     }
 
-    localStorage.setItem(LOCAL_STORAGE_DISHES, JSON.stringify(RESTAURANT_DISHES));
+    safeSetLocalStorage(LOCAL_STORAGE_DISHES, RESTAURANT_DISHES);
     return RESTAURANT_DISHES;
   }
 
