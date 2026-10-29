@@ -96,7 +96,10 @@ export const DEFAULT_LOCATIONS = [
       '/branches/branch3-1.jpg',
       '/branches/branch3-2.jpg',
       '/branches/branch3-3.jpg',
-      '/branches/branch3-4.jpg'
+      '/branches/branch3-4.jpg',
+      '/branches/branch3-5.jpg',
+      '/branches/branch3-6.jpg',
+      '/branches/branch3-7.jpg'
     ],
     mapEmbedUrl: 'https://maps.google.com/maps?q=11.580400,37.368497&t=&z=17&ie=UTF8&iwloc=&output=embed',
     directionsUrl: 'https://maps.app.goo.gl/LSxJLyXz9E5Aj8Pt9',

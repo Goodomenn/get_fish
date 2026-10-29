@@ -113,7 +113,10 @@ export const RESTAURANT_BRANCHES = [
       '/branches/branch3-1.jpg',
       '/branches/branch3-2.jpg',
       '/branches/branch3-3.jpg',
-      '/branches/branch3-4.jpg'
+      '/branches/branch3-4.jpg',
+      '/branches/branch3-5.jpg',
+      '/branches/branch3-6.jpg',
+      '/branches/branch3-7.jpg'
     ],
     description: 'Our vibrant Bahir Dar Branch #3 welcoming guests with freshly caught Lake Tana fish, traditional seasonings, fish tibs, fish lebleb, and friendly service.',
     highlights: ['Fresh Fish Specials', 'Sizzling Fish Tibs', 'Cozy Atmosphere', 'Dine-In & Takeaway']
