@@ -183,8 +183,8 @@ function RestaurantVideoSection() {
   const [isPlaying, setIsPlaying] = useState(false);
   const videoRef = useRef(null);
 
-  // Cloud Firebase Storage URL or local fallback to /videos/gech2.mp4
-  const videoSrc = import.meta.env.VITE_RESTAURANT_VIDEO_URL || resolveAssetUrl('/videos/gech2.mp4');
+  // Cloud Firebase Storage URL or local fallback to /videos/ti-be.mp4
+  const videoSrc = import.meta.env.VITE_RESTAURANT_VIDEO_URL || resolveAssetUrl('/videos/ti-be.mp4');
   const posterSrc = resolveAssetUrl('/branches/branch3-2.jpg');
 
   const handleTogglePlay = () => {
@@ -227,7 +227,7 @@ function RestaurantVideoSection() {
               preload="metadata"
               onPlay={() => setIsPlaying(true)}
               onPause={() => setIsPlaying(false)}
-              className="w-full aspect-video object-cover bg-black block"
+              className="w-full aspect-video max-h-[560px] object-contain bg-[#030911] block"
             >
               Your browser does not support the video tag.
             </video>

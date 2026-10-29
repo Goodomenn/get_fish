@@ -7,7 +7,5 @@ dist-ssr
 .DS_Store
 *.log
 .env
-*.mp4
-*.webm
-*.mov
-public/videos/
+# Ignore heavy raw video files > 50MB
+*gech2*.mp4
