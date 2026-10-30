@@ -189,7 +189,7 @@ export default function CartDrawer({
                 <div className="flex-1 min-w-0">
                   <h4 className="font-serif text-sm font-medium text-white truncate">{item.name}</h4>
                   <div className="font-serif text-gold-300 font-bold text-sm mt-0.5">
-                    {item.price * item.quantity} $
+                    {item.price * item.quantity} ETB
                   </div>
                 </div>
 
@@ -387,17 +387,17 @@ export default function CartDrawer({
             <div className="space-y-1.5 text-slate-400 pt-1 border-t border-slate-800">
               <div className="flex justify-between">
                 <span>Food & Wine Subtotal:</span>
-                <span className="font-serif font-bold text-slate-200">{subtotal.toFixed(2)} $</span>
+                <span className="font-serif font-bold text-slate-200">{subtotal.toFixed(2)} ETB</span>
               </div>
               {orderType === 'Table Service' && (
                 <div className="flex justify-between">
                   <span>Maitre & Sommelier Service (10%):</span>
-                  <span className="font-serif text-gold-300">{serviceCharge.toFixed(2)} $</span>
+                  <span className="font-serif text-gold-300">{serviceCharge.toFixed(2)} ETB</span>
                 </div>
               )}
               <div className="flex justify-between text-base font-serif font-bold text-white pt-2 border-t border-slate-800">
                 <span>Total Ticket:</span>
-                <span className="text-gold-300 text-xl">{total.toFixed(2)} $</span>
+                <span className="text-gold-300 text-xl">{total.toFixed(2)} ETB</span>
               </div>
             </div>
 

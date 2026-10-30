@@ -136,14 +136,14 @@ export default function Hero({
         <div
           onClick={() => (onOpenDish ? onOpenDish('dish-fish-7') : handleNav('menu'))}
           className="absolute left-[45%] top-[72%] z-20 cursor-pointer group text-left select-text"
-          title="Explore Grilled Fish Fillet (28 $)"
+          title="Explore Grilled Fish Fillet (28 ETB)"
         >
           <div className="font-serif text-white text-[11px] sm:text-base lg:text-lg font-normal tracking-wide group-hover:text-gold-300 transition drop-shadow">
             Grilled Fish Fillet
           </div>
           <div className="w-8 sm:w-14 h-[1.5px] sm:h-0.5 bg-gold-400 my-0.5 sm:my-1 group-hover:w-full transition-all duration-300" />
           <div className="font-serif text-slate-200 text-[10px] sm:text-base lg:text-lg font-light group-hover:text-gold-200 transition drop-shadow">
-            28 $
+            28 ETB
           </div>
         </div>
 
@@ -160,14 +160,14 @@ export default function Hero({
         <div
           onClick={() => (onOpenDish ? onOpenDish('dish-48') : handleNav('menu'))}
           className="absolute left-[2%] bottom-[3%] z-20 cursor-pointer group text-left select-text"
-          title="View Fresh Fish Salad (18 $)"
+          title="View Fresh Fish Salad (18 ETB)"
         >
           <div className="font-serif text-white text-[10px] sm:text-sm font-normal tracking-wide group-hover:text-gold-300 transition drop-shadow">
             Fresh Fish Salad
           </div>
           <div className="w-6 sm:w-10 h-[1.5px] bg-gold-400 my-0.5 group-hover:w-full transition-all duration-300" />
           <div className="font-serif text-slate-200 text-[9px] sm:text-xs font-light group-hover:text-gold-200 transition">
-            18 $
+            18 ETB
           </div>
         </div>
 

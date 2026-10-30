@@ -60,7 +60,7 @@ export default function DishDetailModal({ dish, onClose, onAddToCart }) {
               </div>
 
               <div className="text-3xl font-serif text-gold-300 font-bold">
-                {dish.price} $
+                {dish.price} ETB
                 {dish.priceNote && (
                   <span className="text-xs text-slate-400 font-sans font-normal ml-2">
                     ({dish.priceNote})
@@ -135,7 +135,7 @@ export default function DishDetailModal({ dish, onClose, onAddToCart }) {
               className="inline-flex items-center space-x-2 px-6 py-3 bg-gradient-to-r from-gold-600 to-gold-500 hover:from-gold-500 hover:to-gold-400 text-slate-950 font-serif font-bold text-xs uppercase tracking-[0.2em] rounded-xl shadow-lg transition"
             >
               <Plus className="w-4 h-4" />
-              <span>Add to Table Order - {dish.price} $</span>
+              <span>Add to Table Order - {dish.price} ETB</span>
             </button>
           </div>
         </div>

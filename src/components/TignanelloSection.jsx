@@ -54,7 +54,7 @@ export default function TignanelloSection({ onAddToCart, onOpenDishDetail }) {
 
               <div className="flex items-baseline space-x-3">
                 <span className="font-serif text-3xl text-gold-300 font-bold">
-                  300 $
+                  300 ETB
                 </span>
                 <span className="text-xs text-slate-400 uppercase tracking-widest font-serif">
                   / Bottle 750ml • Tenuta Tignanello 2019
@@ -101,7 +101,7 @@ export default function TignanelloSection({ onAddToCart, onOpenDishDetail }) {
                 >
                   <div className="flex justify-between items-center mb-1">
                     <span className="font-serif text-xs font-bold uppercase text-gold-300">Full Bottle (750ml)</span>
-                    <span className="font-serif text-xs font-bold text-white">300 $</span>
+                    <span className="font-serif text-xs font-bold text-white">300 ETB</span>
                   </div>
                   <span className="text-[10px] text-slate-400 block">Sommelier table decanter service</span>
                 </button>
@@ -117,7 +117,7 @@ export default function TignanelloSection({ onAddToCart, onOpenDishDetail }) {
                 >
                   <div className="flex justify-between items-center mb-1">
                     <span className="font-serif text-xs font-bold uppercase text-gold-300">By The Glass (150ml)</span>
-                    <span className="font-serif text-xs font-bold text-white">60 $</span>
+                    <span className="font-serif text-xs font-bold text-white">60 ETB</span>
                   </div>
                   <span className="text-[10px] text-slate-400 block">Poured via Coravin preservation</span>
                 </button>
@@ -169,7 +169,7 @@ export default function TignanelloSection({ onAddToCart, onOpenDishDetail }) {
                 ) : (
                   <>
                     <Plus className="w-4 h-4" />
-                    <span>Add to Ticket • ${currentTotal.toFixed(2)}</span>
+                    <span>Add to Ticket • {currentTotal.toFixed(2)} ETB</span>
                   </>
                 )}
               </button>
@@ -193,7 +193,7 @@ export default function TignanelloSection({ onAddToCart, onOpenDishDetail }) {
                 </span>
                 <div className="w-14 h-0.5 bg-gold-400 my-2 ml-auto" />
                 <span className="font-serif text-gold-300 text-lg sm:text-xl font-bold block">
-                  300 $
+                  300 ETB
                 </span>
               </div>
 

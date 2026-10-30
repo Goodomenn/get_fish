@@ -73,7 +73,7 @@ export default function WineSection({ onAddToCart, onOpenDishDetail }) {
               <div className="pt-4 border-t border-slate-800 flex items-center justify-between">
                 <div>
                   <span className="text-[10px] uppercase text-slate-400 block">Cellar Bottle</span>
-                  <span className="font-serif text-2xl text-gold-300 font-bold">{wine.price} $</span>
+                  <span className="font-serif text-2xl text-gold-300 font-bold">{wine.price} ETB</span>
                 </div>
 
                 <button

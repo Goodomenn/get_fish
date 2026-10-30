@@ -56,7 +56,7 @@ export default function DressedOystersSection({ onAddToCart, onOpenDishDetail })
                 </span>
                 <div className="w-14 h-0.5 bg-gold-400 my-2" />
                 <span className="font-serif text-gold-300 text-lg sm:text-xl font-bold block">
-                  25 $
+                  25 ETB
                 </span>
               </div>
 
@@ -109,7 +109,7 @@ export default function DressedOystersSection({ onAddToCart, onOpenDishDetail })
               
               <div className="flex items-baseline space-x-3">
                 <span className="font-serif text-3xl text-gold-300 font-bold">
-                  25 $
+                  25 ETB
                 </span>
                 <span className="text-xs text-slate-400 uppercase tracking-widest font-serif">
                   / Half Dozen Platter
@@ -140,7 +140,7 @@ export default function DressedOystersSection({ onAddToCart, onOpenDishDetail })
                 >
                   <div className="flex justify-between items-center mb-1">
                     <span className="font-serif text-xs font-bold uppercase text-gold-300">Half Dozen (6 pcs)</span>
-                    <span className="font-serif text-xs font-bold text-white">25 $</span>
+                    <span className="font-serif text-xs font-bold text-white">25 ETB</span>
                   </div>
                   <span className="text-[10px] text-slate-400 block">Classic ice platter with mignonette</span>
                 </button>
@@ -156,7 +156,7 @@ export default function DressedOystersSection({ onAddToCart, onOpenDishDetail })
                 >
                   <div className="flex justify-between items-center mb-1">
                     <span className="font-serif text-xs font-bold uppercase text-gold-300">Imperial Dozen (12 pcs)</span>
-                    <span className="font-serif text-xs font-bold text-white">65 $</span>
+                    <span className="font-serif text-xs font-bold text-white">65 ETB</span>
                   </div>
                   <span className="text-[10px] text-slate-400 block">Includes 10g Oscietra Caviar</span>
                 </button>
@@ -208,7 +208,7 @@ export default function DressedOystersSection({ onAddToCart, onOpenDishDetail })
                 ) : (
                   <>
                     <Plus className="w-4 h-4" />
-                    <span>Add to Ticket • ${currentTotal.toFixed(2)}</span>
+                    <span>Add to Ticket • {currentTotal.toFixed(2)} ETB</span>
                   </>
                 )}
               </button>

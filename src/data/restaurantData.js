@@ -3439,7 +3439,7 @@ export const UPCOMING_EVENTS = [
     title: 'Oysters & Champagne Masterclass',
     date: 'Every Thursday Evening',
     time: '18:00 – 20:30',
-    price: '$120 per guest',
+    price: '120 ETB per guest',
     description: 'Executive Chef guided shucking experience tasting 6 distinct oceanic oyster varieties paired with Grand Cru champagnes.',
     tag: 'Tasting Experience'
   },
@@ -3448,7 +3448,7 @@ export const UPCOMING_EVENTS = [
     title: 'Super Tuscan Wine Maker Gala',
     date: 'Next Saturday, Oct 14',
     time: '19:00 – 22:30',
-    price: '$280 per guest',
+    price: '280 ETB per guest',
     description: 'A 5-course wild fish gastronomic dinner with special vertical vintages presented by Marchesi Antinori sommeliers.',
     tag: 'Exclusive Evening'
   },
