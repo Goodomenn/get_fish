@@ -56,7 +56,12 @@ export const RESTAURANT_BRANCHES = [
     coordinates: '11.6097672, 37.3772904',
     mapEmbedUrl: 'https://maps.google.com/maps?q=11.6097672,37.3772904&t=&z=17&ie=UTF8&iwloc=&output=embed',
     directionsUrl: 'https://maps.app.goo.gl/rGYdxK5e3qaLqCK79',
-    image: 'https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=900&q=80',
+    image: '/branches/branch1-1.jpg',
+    images: [
+      '/branches/branch1-1.jpg',
+      '/branches/branch1-2.jpg',
+      '/branches/branch1-3.png'
+    ],
     description: 'Our founding flagship located in Bahir Dar Kebele 13 near St. Michael Church. Enjoy the freshest Lake Tana fish, authentic Fish Lebleb, whole roasted fish, and pleasant open-air dining.',
     highlights: ['Lake Tana Fresh Daily Fish', 'Signature Fish Lebleb', 'Outdoor Garden & Breeze', 'Live Fish Grilling Station']
   },

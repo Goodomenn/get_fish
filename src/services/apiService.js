@@ -43,7 +43,12 @@ export const DEFAULT_LOCATIONS = [
     phone: '+251 91 800 1234',
     email: 'bahirdar@gechfish-restaurant.com',
     hours: 'Daily: 11:30 AM – 11:00 PM',
-    image: 'https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=900&q=80',
+    image: '/branches/branch1-1.jpg',
+    images: [
+      '/branches/branch1-1.jpg',
+      '/branches/branch1-2.jpg',
+      '/branches/branch1-3.png'
+    ],
     mapEmbedUrl: 'https://maps.google.com/maps?q=11.6097672,37.3772904&t=&z=17&ie=UTF8&iwloc=&output=embed',
     directionsUrl: 'https://maps.app.goo.gl/rGYdxK5e3qaLqCK79',
     coordinates: '11.6097672, 37.3772904',

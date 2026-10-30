@@ -42,6 +42,12 @@ function BranchSlideshowImage({
   branchCity,
   idx
 }) {
+  const defaultFlagshipImages = [
+    '/branches/branch1-1.jpg',
+    '/branches/branch1-2.jpg',
+    '/branches/branch1-3.png'
+  ];
+
   const defaultSummitImages = [
     '/branches/branch2-1.jpg',
     '/branches/branch2-2.jpg',
@@ -58,6 +64,12 @@ function BranchSlideshowImage({
     '/branches/branch3-7.jpg'
   ];
 
+  const isFlagship = branch.id === 'bahir-dar' || 
+                     branch.branchId === 'bahir-dar' || 
+                     (branchName && (branchName.toLowerCase().includes('flagship') || branchName.toLowerCase().includes('1'))) ||
+                     (branchBadge && (branchBadge.toLowerCase().includes('flagship') || branchBadge.toLowerCase().includes('01'))) ||
+                     idx === 0;
+
   const isSummit = branch.id === 'addis-summit' || 
                    branch.branchId === 'addis-summit' || 
                    (branchName && branchName.toLowerCase().includes('summit')) ||
@@ -72,11 +84,13 @@ function BranchSlideshowImage({
 
   const rawImages = (Array.isArray(branch.images) && branch.images.length > 1)
     ? branch.images
-    : (isSummit
-      ? defaultSummitImages
-      : (isBahirDar3
-        ? defaultBahirDar3Images
-        : [branch.image || defaultSummitImages[0]]));
+    : (isFlagship
+      ? defaultFlagshipImages
+      : (isSummit
+        ? defaultSummitImages
+        : (isBahirDar3
+          ? defaultBahirDar3Images
+          : [branch.image || defaultFlagshipImages[0]])));
 
   const images = rawImages.map(resolveAssetUrl);
   const hasMultiple = images.length > 1;
