@@ -67,7 +67,12 @@ export const DEFAULT_LOCATIONS = [
     phone: '+251 97 309 5555',
     email: 'summit@gechfish-restaurant.com',
     hours: 'Daily: 11:30 AM – 11:00 PM',
-    image: 'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=900&q=80',
+    image: '/branches/branch2-1.jpg',
+    images: [
+      '/branches/branch2-1.jpg',
+      '/branches/branch2-2.jpg',
+      '/branches/branch2-3.jpg'
+    ],
     mapEmbedUrl: 'https://maps.google.com/maps?q=Geach%20Fish%20House%20%E1%8C%8C%E1%89%B5%E1%88%BD%20%E1%8B%93%E1%88%B3%20%E1%89%A4%E1%89%B5&t=&z=17&ie=UTF8&iwloc=&output=embed',
     directionsUrl: 'https://share.google/8BpubzRpxfg65kfTH',
     coordinates: '9°00\'41.6"N 38°51\'02.5"E',

@@ -42,6 +42,12 @@ function BranchSlideshowImage({
   branchCity,
   idx
 }) {
+  const defaultSummitImages = [
+    '/branches/branch2-1.jpg',
+    '/branches/branch2-2.jpg',
+    '/branches/branch2-3.jpg'
+  ];
+
   const defaultBahirDar3Images = [
     '/branches/branch3-1.jpg',
     '/branches/branch3-2.jpg',
@@ -52,11 +58,25 @@ function BranchSlideshowImage({
     '/branches/branch3-7.jpg'
   ];
 
-  const rawImages = (Array.isArray(branch.images) && branch.images.length > 0)
+  const isSummit = branch.id === 'addis-summit' || 
+                   branch.branchId === 'addis-summit' || 
+                   (branchName && branchName.toLowerCase().includes('summit')) ||
+                   (branchBadge && branchBadge.toLowerCase().includes('summit')) ||
+                   idx === 1;
+
+  const isBahirDar3 = branch.id === 'bahir-dar-3' || 
+                      branch.branchId === 'bahir-dar-3' || 
+                      (branchName && branchName.toLowerCase().includes('3')) ||
+                      (branchBadge && branchBadge.toLowerCase().includes('03')) ||
+                      idx === 2;
+
+  const rawImages = (Array.isArray(branch.images) && branch.images.length > 1)
     ? branch.images
-    : ((branch.id === 'bahir-dar-3' || branch.branchId === 'bahir-dar-3')
-      ? defaultBahirDar3Images
-      : [branch.image || 'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=900&q=80']);
+    : (isSummit
+      ? defaultSummitImages
+      : (isBahirDar3
+        ? defaultBahirDar3Images
+        : [branch.image || defaultSummitImages[0]]));
 
   const images = rawImages.map(resolveAssetUrl);
   const hasMultiple = images.length > 1;
